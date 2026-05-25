@@ -162,6 +162,11 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .tag-chip button:hover{color:var(--text);}
 .tag-inp{background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;flex:1;min-width:80px;padding:2px 0;}
 .tag-inp::placeholder{color:var(--muted);}
+/* Smart Link status indicator */
+.sl-status{display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;border-radius:8px;font-size:.72rem;margin-top:.4rem;}
+.sl-status.ok{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:#34d399;}
+.sl-status.empty{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;}
+.sl-status.loading{background:rgba(100,116,139,.08);border:1px solid rgba(100,116,139,.2);color:var(--muted);}
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px;}
@@ -200,7 +205,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
     </div>
   </nav>
   <div class="s-footer">
-    <div style="margin-bottom:.4rem">NothingSub v2.1</div>
+    <div style="margin-bottom:.4rem">NothingSub v2.2</div>
     <a onclick="openSite()">View Website</a>
   </div>
 </aside>
@@ -377,22 +382,36 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem">
           <div class="f"><label>Site Name</label><input value="NothingSub"></div>
           <div class="f"><label>Firebase Project</label><input value="nothingsub-bc4f8" readonly style="opacity:.6"></div>
+
+          <!-- ── SMART LINK SECTION ── -->
           <div class="f full">
             <label>Adsterra Smart Link (Global)</label>
             <input id="smartLinkInput" placeholder="https://your-adsterra-smartlink.com/...">
-            <span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">Download ခလုတ် နှိပ်တိုင်း Smart Link ကို New Tab မှာ ဖွင့်မည် — movie တင်တိုင်း ထည့်စရာမလို</span>
+            <!-- Status indicator: shows whether smart link is loaded/saved -->
+            <div class="sl-status loading" id="slStatus">
+              <span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span>
+              <span>Firestore မှ load နေသည်...</span>
+            </div>
+            <span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">
+              Download ခလုတ် နှိပ်တိုင်း Smart Link ကို New Tab မှာ ဖွင့်မည် — movie တင်တိုင်း ထည့်စရာမလို<br>
+              <strong style="color:var(--accent)">ဒီနေရာ save လုပ်ရင် user site ဘက် ချက်ချင်း အလုပ်လုပ်မည်</strong>
+            </span>
           </div>
+
           <div class="f full">
             <div style="background:rgba(240,180,41,.06);border:1px solid rgba(240,180,41,.2);border-radius:10px;padding:.9rem 1rem;font-size:.78rem;line-height:1.7;color:var(--muted)">
               <strong style="color:var(--accent)">Download Flow:</strong><br>
-              User clicks Download &rarr; Smart Link opens (New Tab) + File link opens (New Tab) simultaneously<br>
-              Smart Link is global — set once here, applies to all movies automatically
+              User clicks Download → Smart Link opens (New Tab) + File link opens (New Tab) simultaneously<br>
+              Smart Link is global — set once here, applies to all movies automatically<br>
+              <strong style="color:var(--green)">✓ Popup blocker bypass:</strong> Both tabs open directly from click event
             </div>
           </div>
+
           <div class="f full"><label>Site URL</label><input id="siteUrl" placeholder="nothingsub.html or https://..."></div>
         </div>
         <button onclick="saveSettings()" style="margin-top:1rem;background:var(--accent);border:none;color:#000;padding:.6rem 1.4rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;font-size:.84rem;">Save Settings</button>
-        <span id="settingOk" style="margin-left:.8rem;font-size:.8rem;color:var(--green);display:none">Saved!</span>
+        <span id="settingOk" style="margin-left:.8rem;font-size:.8rem;color:var(--green);display:none">✓ Saved to Firestore!</span>
+        <span id="settingErr" style="margin-left:.8rem;font-size:.8rem;color:var(--red);display:none" id="settingErr"></span>
       </div>
     </div>
 
@@ -515,6 +534,37 @@ const CATS=['Japanese','Korean','Chinese','English','Spanish','Turkish','4K','2K
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
 let movies=[], analytics=[], pendingDelId=null;
+
+// ── Smart Link status indicator ──
+function setSlStatus(state, msg){
+  const el=document.getElementById('slStatus');
+  if(!el)return;
+  el.className='sl-status '+state;
+  el.innerHTML = state==='loading'
+    ? `<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`
+    : `<span>${msg}</span>`;
+}
+
+// ── Load Smart Link from Firestore on page open ──
+(async()=>{
+  setSlStatus('loading','Firestore မှ load နေသည်...');
+  try{
+    const snap=await getDoc(doc(db,'settings','global'));
+    if(snap.exists()&&snap.data().smartLink){
+      const sl=snap.data().smartLink;
+      document.getElementById('smartLinkInput').value=sl;
+      setSlStatus('ok','✓ Firestore မှ load အောင်မြင် — Smart Link active');
+    } else {
+      const saved=localStorage.getItem('ns_smartLink')||'';
+      if(saved) document.getElementById('smartLinkInput').value=saved;
+      setSlStatus('empty', saved ? '⚠ LocalStorage မှသာ load (Firestore မရှိ) — Save သောကြောင့် Firestore ထဲ ထည့်ပါ' : '✗ Smart Link မရှိသေးပါ — ထည့်ပြီး Save လုပ်ပါ');
+    }
+  }catch(e){
+    const saved=localStorage.getItem('ns_smartLink')||'';
+    if(saved) document.getElementById('smartLinkInput').value=saved;
+    setSlStatus('empty','⚠ Firestore connect မရ — LocalStorage fallback: '+(saved?'ရှိ':'မရှိ'));
+  }
+})();
 
 function initCatGrid(gridId,hiddenId,selected=[]){
   const grid=document.getElementById(gridId);if(!grid)return;
@@ -678,23 +728,54 @@ window._del=function(id,title){pendingDelId=id;document.getElementById('confMsg'
 window.doDel=async function(){if(!pendingDelId)return;try{await deleteDoc(doc(db,'movies',pendingDelId));}catch(e){alert('Error: '+e.message);}confClose();};
 
 window.openSite=function(){const url=localStorage.getItem('ns_siteUrl')||'nothingsub.html';window.open(url+'?v='+Date.now(),'_blank');};
+
+// ── FIXED saveSettings — proper validation + error display ──
 window.saveSettings=async function(){
-  const url=document.getElementById('siteUrl').value.trim();if(url)localStorage.setItem('ns_siteUrl',url);
+  const url=document.getElementById('siteUrl').value.trim();
+  if(url) localStorage.setItem('ns_siteUrl',url);
+
   const sl=document.getElementById('smartLinkInput').value.trim();
+  const okEl=document.getElementById('settingOk');
+  const errEl=document.getElementById('settingErr');
+  okEl.style.display='none';errEl.style.display='none';
+
+  // Validate smart link
+  if(sl && !sl.startsWith('http')){
+    errEl.textContent='✗ Smart Link URL မှားနေသည် — http:// or https:// နှင့် စတင်ရမည်';
+    errEl.style.display='inline';
+    return;
+  }
+
+  setSlStatus('loading','Firestore သို့ save နေသည်...');
   try{
-    await setDoc(doc(db,'settings','global'),{smartLink:sl},{merge:true});
-    if(sl)localStorage.setItem('ns_smartLink',sl);
-  }catch(e){console.error('Settings save error:',e);}
-  const ok=document.getElementById('settingOk');ok.style.display='inline';setTimeout(()=>ok.style.display='none',2000);
+    // Save to Firestore — this is what index.html reads
+    await setDoc(doc(db,'settings','global'),{smartLink:sl||''},{merge:true});
+    // Also save to localStorage as backup
+    if(sl) localStorage.setItem('ns_smartLink',sl);
+    else localStorage.removeItem('ns_smartLink');
+
+    okEl.style.display='inline';
+    setTimeout(()=>okEl.style.display='none',3000);
+
+    if(sl){
+      setSlStatus('ok','✓ Firestore save အောင်မြင် — User site download button တွေ အပ်ဒိတ်ပြီး');
+    } else {
+      setSlStatus('empty','✗ Smart Link ဖျက်လိုက်သည် — User site download button မှာ ad မပွင့်တော့ပါ');
+    }
+  }catch(e){
+    errEl.textContent='✗ Firestore error: '+e.message;
+    errEl.style.display='inline';
+    setSlStatus('empty','✗ Save မအောင်မြင် — '+e.message);
+    // Fallback to localStorage only
+    if(sl) localStorage.setItem('ns_smartLink',sl);
+  }
 };
-// Load saved settings
+
+// Load saved settings on start
 (async()=>{
-  const savedUrl=localStorage.getItem('ns_siteUrl');if(savedUrl)document.getElementById('siteUrl').value=savedUrl;
-  try{
-    const snap=await getDoc(doc(db,'settings','global'));
-    if(snap.exists()&&snap.data().smartLink){document.getElementById('smartLinkInput').value=snap.data().smartLink;}
-    else{const savedSL=localStorage.getItem('ns_smartLink');if(savedSL)document.getElementById('smartLinkInput').value=savedSL;}
-  }catch{const savedSL=localStorage.getItem('ns_smartLink');if(savedSL)document.getElementById('smartLinkInput').value=savedSL;}
+  const savedUrl=localStorage.getItem('ns_siteUrl');
+  if(savedUrl) document.getElementById('siteUrl').value=savedUrl;
+  // Smart Link is loaded in the separate async block above
 })();
 
 function showMsg(id,text,type){const el=document.getElementById(id);el.textContent=text;el.className='mo-msg '+type;}
