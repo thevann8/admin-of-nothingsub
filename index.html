@@ -152,6 +152,21 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .toggle-opt{padding:.4rem .9rem;cursor:pointer;font-size:.76rem;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:none;color:var(--muted);transition:all .2s;}
 .toggle-opt.on-pub{background:rgba(16,185,129,.15);color:#34d399;}
 .toggle-opt.on-prv{background:rgba(100,116,139,.15);color:#94a3b8;}
+
+/* ── SUBTITLE TYPE TOGGLE ── */
+.toggle-opt.on-mm{background:rgba(239,68,68,.15);color:#fc8181;}
+.toggle-opt.on-th{background:rgba(59,130,246,.15);color:#60a5fa;}
+.toggle-opt.on-both{background:rgba(240,180,41,.15);color:var(--accent);}
+
+.sub-type-hint{
+  grid-column:1/-1;
+  font-size:.64rem;color:var(--muted);
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:.55rem .8rem;
+  line-height:1.6;
+}
+.sub-type-hint strong{color:var(--text);font-weight:600;}
+
 .mo-btn{grid-column:1/-1;background:linear-gradient(135deg,#f0b429,#d4a03a);border:none;color:#000;padding:.72rem;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;cursor:pointer;transition:opacity .2s;}
 .mo-btn:hover{opacity:.88;}
 .mo-btn:disabled{opacity:.5;cursor:not-allowed;}
@@ -294,7 +309,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       </div>
       <div class="table-card">
         <div class="table-head"><h3>Latest Movies</h3><span>Real-time</span></div>
-        <table><thead><tr><th>#</th><th>Title</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub</th><th>Date</th></tr></thead>
+        <table><thead><tr><th>#</th><th>Title</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub Type</th><th>Date</th></tr></thead>
         <tbody id="latestTbl"><tr><td colspan="7" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
     </div>
@@ -351,7 +366,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="btn-add" onclick="openAdd()">+ Movie</button>
       </div>
       <div class="mv-table">
-        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub</th><th>Actions</th></tr></thead>
+        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub Type</th><th>Actions</th></tr></thead>
         <tbody id="mvTbody"><tr><td colspan="8" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
     </div>
@@ -366,10 +381,29 @@ tr:hover td{background:rgba(240,180,41,.02);}
           <div class="f"><label>Quality</label><select id="pQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
           <div class="f full"><label>Categories</label><div class="cat-grid" id="pCatGrid"></div><input type="hidden" id="pGenre"></div>
           <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="pPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+
+          <!-- ══ SUBTITLE TYPE SELECTOR ══ -->
+          <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
+          <div class="status-toggle full">
+            <label>Subtitle:</label>
+            <div class="toggle-wrap">
+              <button class="toggle-opt on-mm" id="pSubMM"   onclick="setPSubType('mm')">🇲🇲 MM Only</button>
+              <button class="toggle-opt"        id="pSubTH"   onclick="setPSubType('th')">🇹🇭 TH Only</button>
+              <button class="toggle-opt"        id="pSubBoth" onclick="setPSubType('both')">🌐 Both</button>
+            </div>
+            <input type="hidden" id="pSubtitleType" value="mm">
+          </div>
+          <div class="sub-type-hint">
+            <strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်။ MM filter မှာသာ ပြမည်<br>
+            <strong>TH Only</strong> — Thai Subtitle သာပါသည်။ TH filter မှာသာ ပြမည်<br>
+            <strong>Both</strong> — MM + TH Subtitle နှစ်ခုလုံးပါသည်။ filter အားလုံးမှာ ပြမည်
+          </div>
+
           <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
           <div class="f full"><label>Actors</label><div class="tags-wrap" id="pActorsWrap" onclick="document.getElementById('pActorInp').focus()"><input class="tag-inp" id="pActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="pActors"></div>
           <div class="f full"><label>Actresses</label><div class="tags-wrap" id="pActressesWrap" onclick="document.getElementById('pActressInp').focus()"><input class="tag-inp" id="pActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="pActresses"></div>
           <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="pStatusPub" onclick="setPStatus('public')">Public</button><button class="toggle-opt" id="pStatusPrv" onclick="setPStatus('private')">Private</button></div><input type="hidden" id="pStatus" value="public"></div>
+
           <div class="form-section"><div class="form-section-label">Myanmar Subtitle Links</div></div>
           <div class="f full"><label>MM Sub — Streamtape</label><input id="pMmStream" placeholder="https://streamtape.com/v/..."></div>
           <div class="f full"><label>MM Sub — Mega</label><input id="pMmMega" placeholder="https://mega.nz/..."></div>
@@ -438,6 +472,24 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f"><label>Quality</label><select id="aQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
       <div class="f full"><label>Categories</label><div class="cat-grid" id="aCatGrid"></div><input type="hidden" id="aGenre"></div>
       <div class="f full"><label>Poster URL (16:9)</label><input id="aPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+
+      <!-- ══ SUBTITLE TYPE SELECTOR ══ -->
+      <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
+      <div class="status-toggle full">
+        <label>Subtitle:</label>
+        <div class="toggle-wrap">
+          <button class="toggle-opt on-mm" id="aSubMM"   onclick="setSubType('mm')">🇲🇲 MM Only</button>
+          <button class="toggle-opt"        id="aSubTH"   onclick="setSubType('th')">🇹🇭 TH Only</button>
+          <button class="toggle-opt"        id="aSubBoth" onclick="setSubType('both')">🌐 Both</button>
+        </div>
+        <input type="hidden" id="aSubtitleType" value="mm">
+      </div>
+      <div class="sub-type-hint">
+        <strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br>
+        <strong>TH Only</strong> — Thai Subtitle သာပါသည်<br>
+        <strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်
+      </div>
+
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap" onclick="document.getElementById('aActorInp').focus()"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap" onclick="document.getElementById('aActressInp').focus()"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
@@ -468,6 +520,24 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f"><label>Quality</label><select id="eQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
       <div class="f full"><label>Categories</label><div class="cat-grid" id="eCatGrid"></div><input type="hidden" id="eGenre"></div>
       <div class="f full"><label>Poster URL</label><input id="ePoster"></div>
+
+      <!-- ══ SUBTITLE TYPE SELECTOR ══ -->
+      <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
+      <div class="status-toggle full">
+        <label>Subtitle:</label>
+        <div class="toggle-wrap">
+          <button class="toggle-opt on-mm" id="eSubMM"   onclick="setEditSubType('mm')">🇲🇲 MM Only</button>
+          <button class="toggle-opt"        id="eSubTH"   onclick="setEditSubType('th')">🇹🇭 TH Only</button>
+          <button class="toggle-opt"        id="eSubBoth" onclick="setEditSubType('both')">🌐 Both</button>
+        </div>
+        <input type="hidden" id="eSubtitleType" value="mm">
+      </div>
+      <div class="sub-type-hint">
+        <strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br>
+        <strong>TH Only</strong> — Thai Subtitle သာပါသည်<br>
+        <strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်
+      </div>
+
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="eActorsWrap" onclick="document.getElementById('eActorInp').focus()"><input class="tag-inp" id="eActorInp" placeholder="Actor name..."></div><input type="hidden" id="eActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eActressesWrap" onclick="document.getElementById('eActressInp').focus()"><input class="tag-inp" id="eActressInp" placeholder="Actress name..."></div><input type="hidden" id="eActresses"></div>
@@ -593,10 +663,23 @@ function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))re
 function hasMM(m){return(m.mmStream&&m.mmStream!=='#')||(m.mmMega&&m.mmMega!=='#');}
 function hasTH(m){return(m.thStream&&m.thStream!=='#')||(m.thMega&&m.thMega!=='#');}
 
+// ── SUBTITLE TYPE BADGE HELPER ──
+function subTypeBadge(m){
+  const st=m.subtitleType||'';
+  if(st==='mm')  return '<span class="sb sb-mm">🇲🇲 MM</span>';
+  if(st==='th')  return '<span class="sb sb-th">🇹🇭 TH</span>';
+  if(st==='both')return '<span class="sb sb-mm">🇲🇲</span><span class="sb sb-th">🇹🇭</span>';
+  // fallback: detect from links
+  const mm=hasMM(m),th=hasTH(m);
+  return (mm?'<span class="sb sb-mm">MM</span>':'')+(th?'<span class="sb sb-th">TH</span>':'');
+}
+
 function updateMovieStats(){
   const total=movies.length,pub=movies.filter(m=>m.status!=='private').length,prv=movies.filter(m=>m.status==='private').length;
-  const mm=movies.filter(m=>hasMM(m)).length,th=movies.filter(m=>hasTH(m)).length;
-  const both=movies.filter(m=>hasMM(m)&&hasTH(m)).length,none=movies.filter(m=>!hasMM(m)&&!hasTH(m)).length;
+  const mm=movies.filter(m=>m.subtitleType==='mm'||(m.subtitleType==='both')||(!m.subtitleType&&hasMM(m))).length;
+  const th=movies.filter(m=>m.subtitleType==='th'||(m.subtitleType==='both')||(!m.subtitleType&&hasTH(m))).length;
+  const both=movies.filter(m=>m.subtitleType==='both'||(!m.subtitleType&&hasMM(m)&&hasTH(m))).length;
+  const none=movies.filter(m=>!hasMM(m)&&!hasTH(m)&&!m.subtitleType).length;
   ['s-total','s-public','s-private','s-mm'].forEach((id,i)=>document.getElementById(id).textContent=[total,pub,prv,mm][i]);
   ['sb-mm','sb-th','sb-both','sb-none'].forEach((id,i)=>document.getElementById(id).textContent=[mm,th,both,none][i]);
   document.getElementById('catLbl').textContent=total+' movies';
@@ -607,7 +690,7 @@ function updateMovieStats(){
   const qc={};QUALS.forEach(q=>qc[q]=0);movies.forEach(m=>{if(qc[m.quality]!==undefined)qc[m.quality]++;});
   const qMax=Math.max(...Object.values(qc),1);
   document.getElementById('qualChart').innerHTML=QUALS.map(q=>`<div class="bh-item"><div class="bh-label">${q}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(qc[q]/qMax)*100}%;background:var(--blue)"></div></div><div class="bh-val">${qc[q]}</div></div>`).join('');
-  document.getElementById('latestTbl').innerHTML=movies.length?movies.slice(0,8).map((m,i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${m.title||''}</strong></td><td>${m.genre||''}</td><td>${m.quality||''}</td><td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td><td><div class="sub-bs">${hasMM(m)?'<span class="sb sb-mm">MM</span>':''}${hasTH(m)?'<span class="sb sb-th">TH</span>':''}</div></td><td style="font-size:.7rem;color:var(--muted)">${m.createdAt?.toDate?m.createdAt.toDate().toLocaleDateString('en-GB'):'-'}</td></tr>`).join(''):'<tr><td colspan="7" class="empty-tbl">No movies yet</td></tr>';
+  document.getElementById('latestTbl').innerHTML=movies.length?movies.slice(0,8).map((m,i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${m.title||''}</strong></td><td>${m.genre||''}</td><td>${m.quality||''}</td><td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td><td><div class="sub-bs">${subTypeBadge(m)}</div></td><td style="font-size:.7rem;color:var(--muted)">${m.createdAt?.toDate?m.createdAt.toDate().toLocaleDateString('en-GB'):'-'}</td></tr>`).join(''):'<tr><td colspan="7" class="empty-tbl">No movies yet</td></tr>';
 }
 
 function updateAnalytics(){
@@ -672,6 +755,34 @@ function initAddModal(){initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWra
 function v(id){const el=document.getElementById(id);return el?(el.value.trim()||'#'):'#';}
 function sv(id,val){const el=document.getElementById(id);if(el)el.value=(val==='#'?'':val||'');}
 
+// ══════════════════════════════════════
+// SUBTITLE TYPE TOGGLE FUNCTIONS
+// ══════════════════════════════════════
+
+// Post Movie page
+window.setPSubType=function(s){
+  document.getElementById('pSubtitleType').value=s;
+  document.getElementById('pSubMM').className  ='toggle-opt'+(s==='mm'  ?' on-mm'  :'');
+  document.getElementById('pSubTH').className  ='toggle-opt'+(s==='th'  ?' on-th'  :'');
+  document.getElementById('pSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');
+};
+
+// Add modal
+window.setSubType=function(s){
+  document.getElementById('aSubtitleType').value=s;
+  document.getElementById('aSubMM').className  ='toggle-opt'+(s==='mm'  ?' on-mm'  :'');
+  document.getElementById('aSubTH').className  ='toggle-opt'+(s==='th'  ?' on-th'  :'');
+  document.getElementById('aSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');
+};
+
+// Edit modal
+window.setEditSubType=function(s){
+  document.getElementById('eSubtitleType').value=s;
+  document.getElementById('eSubMM').className  ='toggle-opt'+(s==='mm'  ?' on-mm'  :'');
+  document.getElementById('eSubTH').className  ='toggle-opt'+(s==='th'  ?' on-th'  :'');
+  document.getElementById('eSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');
+};
+
 async function saveMovie(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'Saved!','ok');onSuccess();}
@@ -682,18 +793,20 @@ async function saveMovie(data,msgId,btnId,btnTxt,onSuccess){
 window.doPost=async function(){
   const title=document.getElementById('pTitle').value.trim();if(!title){showMsg('postMsg','Add title','err');return;}
   const cats=getCats('pGenre');
-  await saveMovie({title,year:parseInt(document.getElementById('pYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('pQuality').value,poster:document.getElementById('pPoster').value.trim()||'',status:document.getElementById('pStatus').value,actors:getTags('pActors'),actresses:getTags('pActresses'),mmStream:v('pMmStream'),mmMega:v('pMmMega'),thStream:v('pThStream'),thMega:v('pThMega'),descMM:document.getElementById('pDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('pDescTH').value.trim()||''},'postMsg','postBtn','Post Movie',()=>{
+  const subtitleType=document.getElementById('pSubtitleType').value||'mm';
+  await saveMovie({title,year:parseInt(document.getElementById('pYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('pQuality').value,poster:document.getElementById('pPoster').value.trim()||'',status:document.getElementById('pStatus').value,subtitleType,actors:getTags('pActors'),actresses:getTags('pActresses'),mmStream:v('pMmStream'),mmMega:v('pMmMega'),thStream:v('pThStream'),thMega:v('pThMega'),descMM:document.getElementById('pDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('pDescTH').value.trim()||''},'postMsg','postBtn','Post Movie',()=>{
     ['pTitle','pYear','pPoster','pMmStream','pMmMega','pThStream','pThMega','pDescMM','pDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-    initCatGrid('pCatGrid','pGenre',[]);initTags('pActorsWrap','pActorInp','pActors',[]);initTags('pActressesWrap','pActressInp','pActresses',[]);setPStatus('public');
+    initCatGrid('pCatGrid','pGenre',[]);initTags('pActorsWrap','pActorInp','pActors',[]);initTags('pActressesWrap','pActressInp','pActresses',[]);setPStatus('public');setPSubType('mm');
   });
 };
 
 window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Add title','err');return;}
   const cats=getCats('aGenre');
-  await saveMovie({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,actors:getTags('aActors'),actresses:getTags('aActresses'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thStream:v('aThStream'),thMega:v('aThMega'),descMM:document.getElementById('aDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
+  const subtitleType=document.getElementById('aSubtitleType').value||'mm';
+  await saveMovie({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType,actors:getTags('aActors'),actresses:getTags('aActresses'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thStream:v('aThStream'),thMega:v('aThMega'),descMM:document.getElementById('aDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
     ['aTitle','aYear','aPoster','aMmStream','aMmMega','aThStream','aThMega','aDescMM','aDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-    initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');
+    initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
   });
 };
@@ -703,6 +816,7 @@ window._edit=function(id){
   document.getElementById('eId').value=m.id;document.getElementById('eTitle').value=m.title||'';document.getElementById('eYear').value=m.year||'';
   document.getElementById('eQuality').value=m.quality||'1080p';document.getElementById('ePoster').value=m.poster||'';
   setEditStatus(m.status||'public');
+  setEditSubType(m.subtitleType||'mm');  // ← populate subtitle type
   initCatGrid('eCatGrid','eGenre',m.genres||(m.genre?[m.genre]:[]));
   initTags('eActorsWrap','eActorInp','eActors',m.actors||[]);initTags('eActressesWrap','eActressInp','eActresses',m.actresses||[]);
   sv('eMmStream',m.mmStream);sv('eMmMega',m.mmMega);sv('eThStream',m.thStream);sv('eThMega',m.thMega);
@@ -713,9 +827,11 @@ window._edit=function(id){
 window.doEdit=async function(){
   const id=document.getElementById('eId').value,title=document.getElementById('eTitle').value.trim();
   if(!id||!title){showMsg('editMsg','Add title','err');return;}
-  const cats=getCats('eGenre'),btn=document.getElementById('editBtn');btn.disabled=true;btn.textContent='Saving...';
+  const cats=getCats('eGenre');
+  const subtitleType=document.getElementById('eSubtitleType').value||'mm';
+  const btn=document.getElementById('editBtn');btn.disabled=true;btn.textContent='Saving...';
   try{
-    await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,actors:getTags('eActors'),actresses:getTags('eActresses'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thStream:v('eThStream'),thMega:v('eThMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
+    await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,subtitleType,actors:getTags('eActors'),actresses:getTags('eActresses'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thStream:v('eThStream'),thMega:v('eThMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
     showMsg('editMsg','Changes saved!','ok');setTimeout(()=>moClose('moEdit'),1500);
   }catch(e){showMsg('editMsg','Error: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent='Save Changes';}
@@ -740,7 +856,6 @@ window.renderMvTable=function(){
   const show=movies.filter(m=>!q||(m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q)));
   const tb=document.getElementById('mvTbody');
   if(!show.length){tb.innerHTML='<tr><td colspan="8" class="empty-tbl">No movies found</td></tr>';return;}
-  // Build rows — use data-id on buttons to avoid string escaping issues
   tb.innerHTML=show.map(m=>{
     const safeTitle=(m.title||'').replace(/"/g,'&quot;');
     return `<tr>
@@ -750,7 +865,7 @@ window.renderMvTable=function(){
       <td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td>
       <td>${m.quality||''}</td>
       <td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td>
-      <td><div class="sub-bs">${hasMM(m)?'<span class="sb sb-mm">MM</span>':''}${hasTH(m)?'<span class="sb sb-th">TH</span>':''}</div></td>
+      <td><div class="sub-bs">${subTypeBadge(m)}</div></td>
       <td><div class="acts">
         <button class="btn-e" data-id="${m.id}" onclick="window._edit(this.dataset.id)">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
