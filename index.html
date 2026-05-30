@@ -706,7 +706,7 @@ function updateAnalytics(){
   const dls=analytics.filter(e=>e.type==='download_click').length,searches=analytics.filter(e=>e.type==='search').length;
   const sessions=uniqueSessions(analytics),totalSess=sessions.length;
   const mobileSess=sessions.filter(e=>e.isMobile===true).length,desktopSess=sessions.filter(e=>e.isMobile===false).length;
-  document.getElementById('s-views').textContent=views;document.getElementById('s-dl').textContent=dls;
+  const svEl=document.getElementById('s-views');if(svEl)svEl.textContent=views; const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=dls;
   const mmUsers=sessions.filter(e=>e.lang==='mm').length; const thUsers=sessions.filter(e=>e.lang==='th').length; ['a-views','a-clicks','a-dl','a-search','a-sessions','a-mobile','a-desktop','a-mm-users','a-th-users'].forEach((id,i)=>document.getElementById(id).textContent=[views,clicks,dls,searches,totalSess,mobileSess,desktopSess,mmUsers,thUsers][i]);
   const lc={mm:0,th:0,en:0};sessions.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});
   const lMax=Math.max(...Object.values(lc),1);
