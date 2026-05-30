@@ -694,7 +694,7 @@ function updateAnalytics(){
   const sessions=uniqueSessions(analytics),totalSess=sessions.length;
   const mobileSess=sessions.filter(e=>e.isMobile===true).length,desktopSess=sessions.filter(e=>e.isMobile===false).length;
   const svEl=document.getElementById('s-views');if(svEl)svEl.textContent=views; const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=dls;
-  const mmUsers=sessions.filter(e=>e.lang==='mm').length; const thUsers=sessions.filter(e=>e.lang==='th').length; ['a-views','a-clicks','a-dl','a-search','a-sessions','a-mobile','a-desktop','a-mm-users','a-th-users'].forEach((id,i)=>document.getElementById(id).textContent=[views,clicks,dls,searches,totalSess,mobileSess,desktopSess,mmUsers,thUsers][i]);
+  const mmUsers=sessions.filter(e=>e.lang==='mm').length; const thUsers=sessions.filter(e=>e.lang==='th').length; ['a-views','a-clicks','a-search','a-mobile','a-desktop','a-mm-users','a-th-users'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=[views,clicks,searches,mobileSess,desktopSess,mmUsers,thUsers][i];});
   const lc={mm:0,th:0,en:0};sessions.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});
   const lMax=Math.max(...Object.values(lc),1);
   document.getElementById('langChart').innerHTML=Object.entries({mm:'Myanmar',th:'Thai',en:'English'}).map(([k,lbl])=>`<div class="bh-item"><div class="bh-label">${lbl}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#a78bfa'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
@@ -703,13 +703,10 @@ function updateAnalytics(){
   const sClr={mmStream:'#fc8181',mmMega:'#e53e3e',thStream:'#60a5fa',thMega:'#3b82f6'},sLbl={mmStream:'MM Streamtape',mmMega:'MM Mega',thStream:'TH Streamtape',thMega:'TH Mega'};
   document.getElementById('dlChart').innerHTML=Object.entries(sc).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('');
   const typeMap={pageview:{l:'Viewed page',k:'v'},movie_click:{l:'Clicked movie',k:'c'},download_click:{l:'Downloaded',k:'d'},search:{l:'Searched',k:'c'}};
-  document.getElementById('feedCnt').textContent=analytics.length+' events';
-  document.getElementById('liveFeed').innerHTML=analytics.slice(0,10).length?analytics.slice(0,10).map(e=>{const tm=typeMap[e.type]||{l:e.type,k:'v'};return`<div class="fi"><span style="font-size:.8rem">${{mm:'🇲🇲',th:'🇹🇭',en:'🌐'}[e.lang]||'🌐'}</span><div class="fi-info"><div class="fi-act">${tm.l}</div><div class="fi-mv">${e.movieTitle||e.query||e.page||'-'}</div></div><span class="fi-tp ${tm.k}">${e.type}</span><span class="fi-t">${e.isMobile?'Mobile':'Desktop'}</span></div>`;}).join(''):'<div class="empty-tbl" style="font-size:.78rem">No data yet</div>';
   const mc={},md={};
   analytics.filter(e=>e.type==='movie_click').forEach(e=>{if(e.movieTitle)mc[e.movieTitle]=(mc[e.movieTitle]||0)+1;});
   analytics.filter(e=>e.type==='download_click').forEach(e=>{if(e.movieTitle)md[e.movieTitle]=(md[e.movieTitle]||0)+1;});
   const top=Object.entries(mc).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  document.getElementById('topClickTbl').innerHTML=top.length?top.map(([t,c],i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${t}</strong></td><td>${c}</td><td>${md[t]||0}</td></tr>`).join(''):'<tr><td colspan="4" class="empty-tbl">No data yet</td></tr>';
   const countryMap={},cityMap={};
   sessions.forEach(e=>{if(e.country)countryMap[e.country]=(countryMap[e.country]||0)+1;if(e.city)cityMap[e.city]=(cityMap[e.city]||0)+1;});
   const locTotal=Object.values(countryMap).reduce((a,b)=>a+b,0);
