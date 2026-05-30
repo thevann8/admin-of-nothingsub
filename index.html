@@ -616,6 +616,17 @@ function initAdmin(){
   loadSettings();
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
+  
+  // Real stats from stats collection
+  const today=new Date().toISOString().slice(0,10);
+  onSnapshot(doc(db,'stats',today),snap=>{
+    if(snap.exists()){
+      const d=snap.data();
+      const svEl=document.getElementById('s-views');if(svEl)svEl.textContent=d.pageviews||0;
+      const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=d.downloads||0;
+    }
+  });
+  
   tick();setInterval(tick,1000);
 }
 
