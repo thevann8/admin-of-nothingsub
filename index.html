@@ -405,9 +405,11 @@ tr:hover td{background:rgba(240,180,41,.02);}
           <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="pStatusPub" onclick="setPStatus('public')">Public</button><button class="toggle-opt" id="pStatusPrv" onclick="setPStatus('private')">Private</button></div><input type="hidden" id="pStatus" value="public"></div>
 
           <div class="form-section"><div class="form-section-label">Myanmar Subtitle Links</div></div>
+          <div class="f full"><label>MM Sub — Telegram (တိုက်ရိုက်ကြည့်ရန်)</label><input id="pMmTelegram" placeholder="https://t.me/c/... သို့မဟုတ် https://t.me/NothingSub/..."></div>
           <div class="f full"><label>MM Sub — Streamtape</label><input id="pMmStream" placeholder="https://streamtape.com/v/..."></div>
           <div class="f full"><label>MM Sub — Mega</label><input id="pMmMega" placeholder="https://mega.nz/..."></div>
           <div class="form-section"><div class="form-section-label">Thai Subtitle Links</div></div>
+          <div class="f full"><label>TH Sub — Telegram (ดูออนไลน์)</label><input id="pThTelegram" placeholder="https://t.me/c/... หรือ https://t.me/NothingSub/..."></div>
           <div class="f full"><label>TH Sub — Streamtape</label><input id="pThStream" placeholder="https://streamtape.com/v/..."></div>
           <div class="f full"><label>TH Sub — Mega</label><input id="pThMega" placeholder="https://mega.nz/..."></div>
           <div class="form-section"><div class="form-section-label">Synopsis</div></div>
@@ -495,9 +497,11 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap" onclick="document.getElementById('aActressInp').focus()"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
       <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="statusPub" onclick="setStatus('public')">Public</button><button class="toggle-opt" id="statusPrv" onclick="setStatus('private')">Private</button></div><input type="hidden" id="aStatus" value="public"></div>
       <div class="form-section"><div class="form-section-label">Myanmar Subtitle Links</div></div>
+      <div class="f full"><label>MM Telegram (တိုက်ရိုက်ကြည့်ရန်)</label><input id="aMmTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>MM Streamtape</label><input id="aMmStream" placeholder="https://streamtape.com/v/..."></div>
       <div class="f full"><label>MM Mega</label><input id="aMmMega" placeholder="https://mega.nz/..."></div>
       <div class="form-section"><div class="form-section-label">Thai Subtitle Links</div></div>
+      <div class="f full"><label>TH Telegram (ดูออนไลน์)</label><input id="aThTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>TH Streamtape</label><input id="aThStream" placeholder="https://streamtape.com/v/..."></div>
       <div class="f full"><label>TH Mega</label><input id="aThMega" placeholder="https://mega.nz/..."></div>
       <div class="form-section"><div class="form-section-label">Synopsis</div></div>
@@ -543,9 +547,11 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eActressesWrap" onclick="document.getElementById('eActressInp').focus()"><input class="tag-inp" id="eActressInp" placeholder="Actress name..."></div><input type="hidden" id="eActresses"></div>
       <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt" id="eStatusPub" onclick="setEditStatus('public')">Public</button><button class="toggle-opt" id="eStatusPrv" onclick="setEditStatus('private')">Private</button></div><input type="hidden" id="eStatus" value="public"></div>
       <div class="form-section"><div class="form-section-label">Myanmar Sub Links</div></div>
+      <div class="f full"><label>MM Telegram</label><input id="eMmTelegram"></div>
       <div class="f full"><label>MM Streamtape</label><input id="eMmStream"></div>
       <div class="f full"><label>MM Mega</label><input id="eMmMega"></div>
       <div class="form-section"><div class="form-section-label">Thai Sub Links</div></div>
+      <div class="f full"><label>TH Telegram</label><input id="eThTelegram"></div>
       <div class="f full"><label>TH Streamtape</label><input id="eThStream"></div>
       <div class="f full"><label>TH Mega</label><input id="eThMega"></div>
       <div class="form-section"><div class="form-section-label">Synopsis</div></div>
@@ -660,8 +666,8 @@ window.saveSettings=async function(){
 };
 
 function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))return PROXY+encodeURIComponent(url)+'&w=96&h=54&fit=cover&output=webp';return url;}
-function hasMM(m){return(m.mmStream&&m.mmStream!=='#')||(m.mmMega&&m.mmMega!=='#');}
-function hasTH(m){return(m.thStream&&m.thStream!=='#')||(m.thMega&&m.thMega!=='#');}
+function hasMM(m){return(m.mmTelegram&&m.mmTelegram!=='#')||(m.mmStream&&m.mmStream!=='#')||(m.mmMega&&m.mmMega!=='#');}
+function hasTH(m){return(m.thTelegram&&m.thTelegram!=='#')||(m.thStream&&m.thStream!=='#')||(m.thMega&&m.thMega!=='#');}
 
 // ── SUBTITLE TYPE BADGE HELPER ──
 function subTypeBadge(m){
@@ -794,8 +800,8 @@ window.doPost=async function(){
   const title=document.getElementById('pTitle').value.trim();if(!title){showMsg('postMsg','Add title','err');return;}
   const cats=getCats('pGenre');
   const subtitleType=document.getElementById('pSubtitleType').value||'mm';
-  await saveMovie({title,year:parseInt(document.getElementById('pYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('pQuality').value,poster:document.getElementById('pPoster').value.trim()||'',status:document.getElementById('pStatus').value,subtitleType,actors:getTags('pActors'),actresses:getTags('pActresses'),mmStream:v('pMmStream'),mmMega:v('pMmMega'),thStream:v('pThStream'),thMega:v('pThMega'),descMM:document.getElementById('pDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('pDescTH').value.trim()||''},'postMsg','postBtn','Post Movie',()=>{
-    ['pTitle','pYear','pPoster','pMmStream','pMmMega','pThStream','pThMega','pDescMM','pDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  await saveMovie({title,year:parseInt(document.getElementById('pYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('pQuality').value,poster:document.getElementById('pPoster').value.trim()||'',status:document.getElementById('pStatus').value,subtitleType,actors:getTags('pActors'),actresses:getTags('pActresses'),mmTelegram:v('pMmTelegram'),mmStream:v('pMmStream'),mmMega:v('pMmMega'),thTelegram:v('pThTelegram'),thStream:v('pThStream'),thMega:v('pThMega'),descMM:document.getElementById('pDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('pDescTH').value.trim()||''},'postMsg','postBtn','Post Movie',()=>{
+    ['pTitle','pYear','pPoster','pMmTelegram','pMmStream','pMmMega','pThTelegram','pThStream','pThMega','pDescMM','pDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});;
     initCatGrid('pCatGrid','pGenre',[]);initTags('pActorsWrap','pActorInp','pActors',[]);initTags('pActressesWrap','pActressInp','pActresses',[]);setPStatus('public');setPSubType('mm');
   });
 };
@@ -804,8 +810,8 @@ window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Add title','err');return;}
   const cats=getCats('aGenre');
   const subtitleType=document.getElementById('aSubtitleType').value||'mm';
-  await saveMovie({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType,actors:getTags('aActors'),actresses:getTags('aActresses'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thStream:v('aThStream'),thMega:v('aThMega'),descMM:document.getElementById('aDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
-    ['aTitle','aYear','aPoster','aMmStream','aMmMega','aThStream','aThMega','aDescMM','aDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  await saveMovie({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType,actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thMega:v('aThMega'),descMM:document.getElementById('aDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
+    ['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmMega','aThTelegram','aThStream','aThMega','aDescMM','aDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
     initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
   });
@@ -819,7 +825,7 @@ window._edit=function(id){
   setEditSubType(m.subtitleType||'mm');  // ← populate subtitle type
   initCatGrid('eCatGrid','eGenre',m.genres||(m.genre?[m.genre]:[]));
   initTags('eActorsWrap','eActorInp','eActors',m.actors||[]);initTags('eActressesWrap','eActressInp','eActresses',m.actresses||[]);
-  sv('eMmStream',m.mmStream);sv('eMmMega',m.mmMega);sv('eThStream',m.thStream);sv('eThMega',m.thMega);
+  sv('eMmTelegram',m.mmTelegram);sv('eMmStream',m.mmStream);sv('eMmMega',m.mmMega);sv('eThTelegram',m.thTelegram);sv('eThStream',m.thStream);sv('eThMega',m.thMega);
   document.getElementById('eDescMM').value=m.descMM||'';document.getElementById('eDescTH').value=m.descTH||'';
   document.getElementById('moEdit').classList.add('open');
 };
@@ -831,7 +837,7 @@ window.doEdit=async function(){
   const subtitleType=document.getElementById('eSubtitleType').value||'mm';
   const btn=document.getElementById('editBtn');btn.disabled=true;btn.textContent='Saving...';
   try{
-    await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,subtitleType,actors:getTags('eActors'),actresses:getTags('eActresses'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thStream:v('eThStream'),thMega:v('eThMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
+    await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,subtitleType,actors:getTags('eActors'),actresses:getTags('eActresses'),mmTelegram:v('eMmTelegram'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thTelegram:v('eThTelegram'),thStream:v('eThStream'),thMega:v('eThMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
     showMsg('editMsg','Changes saved!','ok');setTimeout(()=>moClose('moEdit'),1500);
   }catch(e){showMsg('editMsg','Error: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent='Save Changes';}
