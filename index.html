@@ -294,7 +294,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="sc b"><div class="sc-label">Public</div><div class="sc-val b" id="s-public"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc p"><div class="sc-label">Private</div><div class="sc-val p" id="s-private"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc y"><div class="sc-label">Myanmar Sub</div><div class="sc-val y" id="s-mm"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
-        <div class="sc o"><div class="sc-label">Page Views</div><div class="sc-val o" id="s-views"><span class="spin-sm"></span></div><div class="sc-note live">Analytics</div></div>
+        <div class="sc b"><div class="sc-label">Thai Sub</div><div class="sc-val b" id="s-th"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc r"><div class="sc-label">Downloads</div><div class="sc-val r" id="s-dl"><span class="spin-sm"></span></div><div class="sc-note live">Analytics</div></div>
       </div>
       <div class="two-col">
@@ -325,6 +325,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="sc o"><div class="sc-label">Unique Sessions</div><div class="sc-val o" id="a-sessions"><span class="spin-sm"></span></div><div class="sc-note live">by sessionId</div></div>
         <div class="sc r"><div class="sc-label">Mobile</div><div class="sc-val r" id="a-mobile"><span class="spin-sm"></span></div><div class="sc-note live">unique sessions</div></div>
         <div class="sc b"><div class="sc-label">Desktop</div><div class="sc-val b" id="a-desktop"><span class="spin-sm"></span></div><div class="sc-note live">unique sessions</div></div>
+        <div class="sc r"><div class="sc-label">MM Sub Users</div><div class="sc-val r" id="a-mm-users"><span class="spin-sm"></span></div><div class="sc-note live">lang=mm sessions</div></div>
+        <div class="sc b"><div class="sc-label">TH Sub Users</div><div class="sc-val b" id="a-th-users"><span class="spin-sm"></span></div><div class="sc-note live">lang=th sessions</div></div>
       </div>
       <div class="two-col">
         <div class="chart-card"><div class="chart-top"><h3>Language Usage</h3><span>Unique sessions</span></div><div class="bar-h" id="langChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
@@ -686,7 +688,7 @@ function updateMovieStats(){
   const th=movies.filter(m=>m.subtitleType==='th'||(m.subtitleType==='both')||(!m.subtitleType&&hasTH(m))).length;
   const both=movies.filter(m=>m.subtitleType==='both'||(!m.subtitleType&&hasMM(m)&&hasTH(m))).length;
   const none=movies.filter(m=>!hasMM(m)&&!hasTH(m)&&!m.subtitleType).length;
-  ['s-total','s-public','s-private','s-mm'].forEach((id,i)=>document.getElementById(id).textContent=[total,pub,prv,mm][i]);
+  ['s-total','s-public','s-private','s-mm','s-th'].forEach((id,i)=>document.getElementById(id).textContent=[total,pub,prv,mm,th][i]);
   ['sb-mm','sb-th','sb-both','sb-none'].forEach((id,i)=>document.getElementById(id).textContent=[mm,th,both,none][i]);
   document.getElementById('catLbl').textContent=total+' movies';
   const cc={};CATS.forEach(c=>cc[c]=0);
@@ -705,7 +707,7 @@ function updateAnalytics(){
   const sessions=uniqueSessions(analytics),totalSess=sessions.length;
   const mobileSess=sessions.filter(e=>e.isMobile===true).length,desktopSess=sessions.filter(e=>e.isMobile===false).length;
   document.getElementById('s-views').textContent=views;document.getElementById('s-dl').textContent=dls;
-  ['a-views','a-clicks','a-dl','a-search','a-sessions','a-mobile','a-desktop'].forEach((id,i)=>document.getElementById(id).textContent=[views,clicks,dls,searches,totalSess,mobileSess,desktopSess][i]);
+  const mmUsers=sessions.filter(e=>e.lang==='mm').length; const thUsers=sessions.filter(e=>e.lang==='th').length; ['a-views','a-clicks','a-dl','a-search','a-sessions','a-mobile','a-desktop','a-mm-users','a-th-users'].forEach((id,i)=>document.getElementById(id).textContent=[views,clicks,dls,searches,totalSess,mobileSess,desktopSess,mmUsers,thUsers][i]);
   const lc={mm:0,th:0,en:0};sessions.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});
   const lMax=Math.max(...Object.values(lc),1);
   document.getElementById('langChart').innerHTML=Object.entries({mm:'Myanmar',th:'Thai',en:'English'}).map(([k,lbl])=>`<div class="bh-item"><div class="bh-label">${lbl}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#a78bfa'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
