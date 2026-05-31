@@ -9,12 +9,9 @@
 :root{--bg:#07090d;--surface:#0d1117;--card:#111820;--border:#1c2530;--accent:#f0b429;--text:#edf2f7;--muted:#64748b;--green:#10b981;--blue:#3b82f6;--red:#ef4444;--purple:#8b5cf6;--orange:#f97316;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
-
-/* LOGIN */
 #loginPage{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;background:radial-gradient(ellipse at 50% 0%,rgba(240,180,41,0.07) 0%,transparent 60%);}
 .login-box{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:2.5rem 2rem;width:100%;max-width:380px;box-shadow:0 40px 80px rgba(0,0,0,0.6);animation:popIn .4s cubic-bezier(.34,1.56,.64,1);}
 @keyframes popIn{from{opacity:0;transform:scale(.92) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
-.login-logo{display:flex;align-items:center;gap:.7rem;justify-content:center;margin-bottom:1.8rem;}
 .login-title{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);text-align:center;margin-bottom:1.8rem;font-weight:600;}
 .login-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem;}
 .login-field label{font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
@@ -26,8 +23,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .login-btn:disabled{opacity:.5;cursor:not-allowed;}
 .login-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#f87171;border-radius:8px;padding:.6rem .8rem;font-size:.78rem;text-align:center;margin-top:.7rem;display:none;}
 .login-err.show{display:block;}
-
-/* ADMIN APP */
 #adminApp{display:none;flex-direction:row;}
 #adminApp.show{display:flex;}
 .sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;}
@@ -81,16 +76,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .sub-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;display:block;margin-bottom:.15rem;}
 .sub-num.mm{color:#fc8181;}.sub-num.th{color:#60a5fa;}.sub-num.both{color:var(--accent);}.sub-num.none{color:var(--muted);}
 .sub-lbl{font-size:.64rem;color:var(--muted);}
-.feed-list{display:flex;flex-direction:column;gap:.4rem;max-height:200px;overflow-y:auto;}
-.fi{display:flex;align-items:center;gap:.7rem;padding:.44rem .6rem;background:var(--surface);border-radius:8px;font-size:.74rem;}
-.fi-info{flex:1;min-width:0;}
-.fi-act{color:var(--muted);font-size:.66rem;}
-.fi-mv{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.fi-t{font-size:.6rem;color:var(--muted);}
-.fi-tp{font-size:.56rem;padding:2px 5px;border-radius:4px;}
-.fi-tp.v{background:rgba(59,130,246,.15);color:#60a5fa;}
-.fi-tp.d{background:rgba(16,185,129,.15);color:#34d399;}
-.fi-tp.c{background:rgba(240,180,41,.15);color:#f0b429;}
 .table-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.2rem;}
 .table-head{padding:.9rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .table-head h3{font-size:.82rem;font-weight:600;}
@@ -152,21 +137,11 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .toggle-opt{padding:.4rem .9rem;cursor:pointer;font-size:.76rem;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:none;color:var(--muted);transition:all .2s;}
 .toggle-opt.on-pub{background:rgba(16,185,129,.15);color:#34d399;}
 .toggle-opt.on-prv{background:rgba(100,116,139,.15);color:#94a3b8;}
-
-/* ── SUBTITLE TYPE TOGGLE ── */
 .toggle-opt.on-mm{background:rgba(239,68,68,.15);color:#fc8181;}
 .toggle-opt.on-th{background:rgba(59,130,246,.15);color:#60a5fa;}
 .toggle-opt.on-both{background:rgba(240,180,41,.15);color:var(--accent);}
-
-.sub-type-hint{
-  grid-column:1/-1;
-  font-size:.64rem;color:var(--muted);
-  background:var(--card);border:1px solid var(--border);
-  border-radius:8px;padding:.55rem .8rem;
-  line-height:1.6;
-}
+.sub-type-hint{grid-column:1/-1;font-size:.64rem;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.55rem .8rem;line-height:1.6;}
 .sub-type-hint strong{color:var(--text);font-weight:600;}
-
 .mo-btn{grid-column:1/-1;background:linear-gradient(135deg,#f0b429,#d4a03a);border:none;color:#000;padding:.72rem;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;cursor:pointer;transition:opacity .2s;}
 .mo-btn:hover{opacity:.88;}
 .mo-btn:disabled{opacity:.5;cursor:not-allowed;}
@@ -204,6 +179,22 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .soc-lbl svg{width:13px;height:13px;fill:currentColor;opacity:.7;}
 .soc-row input{background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;flex:1;padding:.1rem 0;}
 .soc-row input::placeholder{color:var(--muted);}
+/* DATE FILTER */
+.date-filter{display:flex;gap:.35rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center;}
+.date-filter-label{font-size:.66rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-right:.2rem;}
+.df-btn{padding:.32rem .8rem;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.74rem;font-weight:600;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.df-btn:hover{border-color:var(--accent);color:var(--accent);}
+.df-btn.on{background:var(--accent);border-color:var(--accent);color:#000;}
+/* REAL STATS GRID */
+.rs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem;margin-bottom:1.4rem;}
+.rsc{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.2rem;position:relative;overflow:hidden;}
+.rsc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.rsc.g::before{background:var(--green);}.rsc.b::before{background:var(--blue);}.rsc.y::before{background:var(--accent);}.rsc.p::before{background:var(--purple);}.rsc.r::before{background:var(--red);}.rsc.o::before{background:var(--orange);}
+.rsc-label{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:.3rem;}
+.rsc-val{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:1px;line-height:1;margin-bottom:.1rem;}
+.rsc-val.g{color:var(--green);}.rsc-val.b{color:var(--blue);}.rsc-val.y{color:var(--accent);}.rsc-val.p{color:var(--purple);}.rsc-val.r{color:var(--red);}.rsc-val.o{color:var(--orange);}
+.rsc-note{font-size:.6rem;color:var(--muted);}
+.divider-label{font-size:.63rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:.6rem 0 .8rem;border-top:1px solid var(--border);margin-top:.4rem;margin-bottom:.2rem;}
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px;}
@@ -211,32 +202,24 @@ tr:hover td{background:rgba(240,180,41,.02);}
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
 <div id="loginPage">
   <div class="login-box">
-    <div class="login-logo" style="flex-direction:column;gap:.4rem;">
+    <div style="text-align:center;margin-bottom:1.8rem;">
       <div style="position:relative;display:inline-flex;align-items:center;padding:.38rem .7rem .38rem .6rem;">
         <div style="position:absolute;inset:0;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;border-top:2.5px solid transparent;border-right:2.5px solid transparent;border-radius:14px;pointer-events:none;"></div>
         <div style="position:absolute;top:0;left:36%;right:0;bottom:26%;border-top:2.5px solid #f0b429;border-right:2.5px solid #f0b429;border-bottom:2.5px solid transparent;border-left:2.5px solid transparent;border-radius:0 14px 0 0;pointer-events:none;"></div>
         <span style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.9rem;letter-spacing:.05em;color:#fff;line-height:1;position:relative;">NOTHING</span><span style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.9rem;letter-spacing:.05em;color:#f0b429;line-height:1;position:relative;">SUB</span>
       </div>
-      <div style="font-size:.55rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;">Admin Dashboard</div>
+      <div style="font-size:.55rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:.3rem;">Admin Dashboard</div>
     </div>
     <div class="login-title">Sign in to continue</div>
-    <div class="login-field">
-      <label>Email</label>
-      <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email">
-    </div>
-    <div class="login-field">
-      <label>Password</label>
-      <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
-    </div>
+    <div class="login-field"><label>Email</label><input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email"></div>
+    <div class="login-field"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="login-btn" id="loginBtn" onclick="doLogin()">Login</button>
     <div class="login-err" id="loginErr"></div>
   </div>
 </div>
 
-<!-- ADMIN APP -->
 <div id="adminApp">
 <aside class="sidebar">
   <div class="s-logo-wrap">
@@ -249,26 +232,16 @@ tr:hover td{background:rgba(240,180,41,.02);}
   </div>
   <nav class="sidebar-nav">
     <div class="nav-sec">Overview</div>
-    <div class="nav-item on" onclick="showPg('dashboard',this)">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard
-    </div>
-    <div class="nav-item" onclick="showPg('analytics',this)">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Analytics
-    </div>
+    <div class="nav-item on" onclick="showPg('dashboard',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+    <div class="nav-item" onclick="showPg('analytics',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Analytics</div>
     <div class="nav-sec">Content</div>
-    <div class="nav-item" onclick="showPg('movies',this)">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20"/></svg>Movies
-    </div>
-    <div class="nav-item" onclick="showPg('post',this)">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Post Movie
-    </div>
+    <div class="nav-item" onclick="showPg('movies',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20"/></svg>Movies</div>
+    <div class="nav-item" onclick="showPg('post',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Post Movie</div>
     <div class="nav-sec">System</div>
-    <div class="nav-item" onclick="showPg('settings',this)">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings
-    </div>
+    <div class="nav-item" onclick="showPg('settings',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
   </nav>
   <div class="s-footer">
-    <div style="margin-bottom:.4rem">NothingSub v2.5</div>
+    <div style="margin-bottom:.4rem">NothingSub v2.6</div>
     <a onclick="openSite()">View Site</a>
     <span class="s-logout" onclick="doLogout()">Logout</span>
   </div>
@@ -280,9 +253,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="tb-sp"></div>
     <span class="tb-time" id="tbTime"></span>
     <div class="tb-user">● <span id="tbUserEmail">-</span></div>
-    <button class="visit-btn" onclick="openSite()">
-      <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Site
-    </button>
+    <button class="visit-btn" onclick="openSite()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Site</button>
   </div>
   <div class="content">
 
@@ -295,7 +266,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="sc p"><div class="sc-label">Private</div><div class="sc-val p" id="s-private"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc y"><div class="sc-label">Myanmar Sub</div><div class="sc-val y" id="s-mm"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc b"><div class="sc-label">Thai Sub</div><div class="sc-val b" id="s-th"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
-        <div class="sc r"><div class="sc-label">Downloads</div><div class="sc-val r" id="s-dl"><span class="spin-sm"></span></div><div class="sc-note live">Analytics</div></div>
+        <div class="sc r"><div class="sc-label">Downloads Today</div><div class="sc-val r" id="s-dl">-</div><div class="sc-note live">Real (stats)</div></div>
       </div>
       <div class="two-col">
         <div class="chart-card"><div class="chart-top"><h3>Movies by Category</h3><span id="catLbl">-</span></div><div class="bar-h" id="catChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
@@ -316,19 +287,33 @@ tr:hover td{background:rgba(240,180,41,.02);}
 
     <!-- ANALYTICS -->
     <div class="pg" id="pg-analytics">
-      <div class="live-badge"><div class="live-dot"></div>Firebase Analytics</div>
-      <div class="stats-grid">
-        <div class="sc g"><div class="sc-label">Page Views</div><div class="sc-val g" id="a-views"><span class="spin-sm"></span></div><div class="sc-note live">pageview events</div></div>
-        <div class="sc b"><div class="sc-label">Movie Clicks</div><div class="sc-val b" id="a-clicks"><span class="spin-sm"></span></div><div class="sc-note live">movie_click events</div></div>
-        <div class="sc p"><div class="sc-label">Searches</div><div class="sc-val p" id="a-search"><span class="spin-sm"></span></div><div class="sc-note live">search events</div></div>
-        <div class="sc r"><div class="sc-label">Mobile</div><div class="sc-val r" id="a-mobile"><span class="spin-sm"></span></div><div class="sc-note live">unique sessions</div></div>
-        <div class="sc b"><div class="sc-label">Desktop</div><div class="sc-val b" id="a-desktop"><span class="spin-sm"></span></div><div class="sc-note live">unique sessions</div></div>
-        <div class="sc r"><div class="sc-label">MM Sub Users</div><div class="sc-val r" id="a-mm-users"><span class="spin-sm"></span></div><div class="sc-note live">lang=mm sessions</div></div>
-        <div class="sc b"><div class="sc-label">TH Sub Users</div><div class="sc-val b" id="a-th-users"><span class="spin-sm"></span></div><div class="sc-note live">lang=th sessions</div></div>
+      <div class="live-badge"><div class="live-dot"></div>Real Data — stats collection (Unlimited)</div>
+
+      <div class="date-filter">
+        <span class="date-filter-label">ကြည့်ချင်တဲ့ Period:</span>
+        <button class="df-btn on" onclick="setDateFilter('today',this)">Today</button>
+        <button class="df-btn" onclick="setDateFilter('7',this)">7 Days</button>
+        <button class="df-btn" onclick="setDateFilter('30',this)">30 Days</button>
+        <button class="df-btn" onclick="setDateFilter('365',this)">1 Year</button>
+        <button class="df-btn" onclick="setDateFilter('all',this)">All Time</button>
       </div>
+
+      <div class="rs-grid">
+        <div class="rsc g"><div class="rsc-label">Page Views</div><div class="rsc-val g" id="rs-views">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc b"><div class="rsc-label">Movie Clicks</div><div class="rsc-val b" id="rs-clicks">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc y"><div class="rsc-label">Downloads</div><div class="rsc-val y" id="rs-downloads">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc r"><div class="rsc-label">Mobile Users</div><div class="rsc-val r" id="rs-mobile">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc b"><div class="rsc-label">Desktop Users</div><div class="rsc-val b" id="rs-desktop">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc r"><div class="rsc-label">🇲🇲 MM Sub Users</div><div class="rsc-val r" id="rs-mm">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc b"><div class="rsc-label">🇹🇭 TH Sub Users</div><div class="rsc-val b" id="rs-th">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc o"><div class="rsc-label">Total Events</div><div class="rsc-val o" id="rs-total">-</div><div class="rsc-note">All actions ✓</div></div>
+      </div>
+
+      <div class="divider-label">📍 Visitor Locations & Sources — Last 500 events</div>
+
       <div class="two-col">
-        <div class="chart-card"><div class="chart-top"><h3>Language Usage</h3><span>Unique sessions</span></div><div class="bar-h" id="langChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
-        <div class="chart-card"><div class="chart-top"><h3>Download Sources</h3><span>Streamtape vs Mega</span></div><div class="bar-h" id="dlChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
+        <div class="chart-card"><div class="chart-top"><h3>Language Usage</h3><span>Last 500 sessions</span></div><div class="bar-h" id="langChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
+        <div class="chart-card"><div class="chart-top"><h3>Download Sources</h3><span>Last 500 events</span></div><div class="bar-h" id="dlChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
       </div>
       <div class="chart-card">
         <div class="chart-top"><h3>Visitor Locations</h3><span id="locTotal">Live</span></div>
@@ -338,7 +323,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         </div>
       </div>
       <div class="table-card">
-        <div class="table-head"><h3>Movie View Counts</h3><span>movie_click only</span></div>
+        <div class="table-head"><h3>Movie View Counts</h3><span>Last 500 events</span></div>
         <table><thead><tr><th>#</th><th>Movie</th><th>Clicks</th><th>Downloads</th><th>DL Rate</th></tr></thead>
         <tbody id="movieViewsTbl"><tr><td colspan="5" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
@@ -347,10 +332,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <!-- MOVIES -->
     <div class="pg" id="pg-movies">
       <div class="toolbar">
-        <div class="m-srch">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input type="text" id="movieSrch" placeholder="Movie search..." oninput="renderMvTable()">
-        </div>
+        <div class="m-srch"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="movieSrch" placeholder="Movie search..." oninput="renderMvTable()"></div>
         <div style="flex:1"></div>
         <button class="btn-add" onclick="openAdd()">+ Movie</button>
       </div>
@@ -370,29 +352,13 @@ tr:hover td{background:rgba(240,180,41,.02);}
           <div class="f"><label>Quality</label><select id="pQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
           <div class="f full"><label>Categories</label><div class="cat-grid" id="pCatGrid"></div><input type="hidden" id="pGenre"></div>
           <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="pPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
-
-          <!-- ══ SUBTITLE TYPE SELECTOR ══ -->
           <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
-          <div class="status-toggle full">
-            <label>Subtitle:</label>
-            <div class="toggle-wrap">
-              <button class="toggle-opt on-mm" id="pSubMM"   onclick="setPSubType('mm')">🇲🇲 MM Only</button>
-              <button class="toggle-opt"        id="pSubTH"   onclick="setPSubType('th')">🇹🇭 TH Only</button>
-              <button class="toggle-opt"        id="pSubBoth" onclick="setPSubType('both')">🌐 Both</button>
-            </div>
-            <input type="hidden" id="pSubtitleType" value="mm">
-          </div>
-          <div class="sub-type-hint">
-            <strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်။ MM filter မှာသာ ပြမည်<br>
-            <strong>TH Only</strong> — Thai Subtitle သာပါသည်။ TH filter မှာသာ ပြမည်<br>
-            <strong>Both</strong> — MM + TH Subtitle နှစ်ခုလုံးပါသည်။ filter အားလုံးမှာ ပြမည်
-          </div>
-
+          <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-mm" id="pSubMM" onclick="setPSubType('mm')">🇲🇲 MM Only</button><button class="toggle-opt" id="pSubTH" onclick="setPSubType('th')">🇹🇭 TH Only</button><button class="toggle-opt" id="pSubBoth" onclick="setPSubType('both')">🌐 Both</button></div><input type="hidden" id="pSubtitleType" value="mm"></div>
+          <div class="sub-type-hint"><strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်။ MM filter မှာသာ ပြမည်<br><strong>TH Only</strong> — Thai Subtitle သာပါသည်။ TH filter မှာသာ ပြမည်<br><strong>Both</strong> — MM + TH Subtitle နှစ်ခုလုံးပါသည်။ filter အားလုံးမှာ ပြမည်</div>
           <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
           <div class="f full"><label>Actors</label><div class="tags-wrap" id="pActorsWrap" onclick="document.getElementById('pActorInp').focus()"><input class="tag-inp" id="pActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="pActors"></div>
           <div class="f full"><label>Actresses</label><div class="tags-wrap" id="pActressesWrap" onclick="document.getElementById('pActressInp').focus()"><input class="tag-inp" id="pActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="pActresses"></div>
           <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="pStatusPub" onclick="setPStatus('public')">Public</button><button class="toggle-opt" id="pStatusPrv" onclick="setPStatus('private')">Private</button></div><input type="hidden" id="pStatus" value="public"></div>
-
           <div class="form-section"><div class="form-section-label">Myanmar Subtitle Links</div></div>
           <div class="f full"><label>MM Sub — Telegram (တိုက်ရိုက်ကြည့်ရန်)</label><input id="pMmTelegram" placeholder="https://t.me/c/... သို့မဟုတ် https://t.me/NothingSub/..."></div>
           <div class="f full"><label>MM Sub — Streamtape</label><input id="pMmStream" placeholder="https://streamtape.com/v/..."></div>
@@ -415,27 +381,13 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="chart-card" style="max-width:620px">
         <div class="chart-top"><h3>Site Settings</h3><span>Saved to Firestore</span></div>
         <div style="display:flex;flex-direction:column;gap:1rem;margin-top:.8rem">
-          <div class="f">
-            <label>Adsterra Smart Link (Global)</label>
-            <input id="smartLinkInput" placeholder="https://your-adsterra-smartlink.com/...">
-            <div class="sl-status loading" id="slStatus"><span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>Loading...</span></div>
-            <span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">Download ခလုတ် နှိပ်တိုင်း Smart Link ဖွင့်မည် — movie တင်တိုင်း ထည့်စရာမလို</span>
-          </div>
+          <div class="f"><label>Adsterra Smart Link (Global)</label><input id="smartLinkInput" placeholder="https://your-adsterra-smartlink.com/..."><div class="sl-status loading" id="slStatus"><span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>Loading...</span></div><span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">Download ခလုတ် နှိပ်တိုင်း Smart Link ဖွင့်မည် — movie တင်တိုင်း ထည့်စရာမလို</span></div>
           <div class="f">
             <label style="color:var(--accent);font-size:.68rem;letter-spacing:1.5px;margin-bottom:.6rem">Social Links — Footer Icons</label>
             <div style="display:flex;flex-direction:column;gap:.45rem;">
-              <div class="soc-row">
-                <span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.01 9.47c-.148.666-.537.826-1.084.514l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.9l-2.95-.92c-.642-.2-.654-.642.136-.95l11.51-4.44c.533-.194 1.001.13.696.658z"/></svg>Telegram</span>
-                <input type="url" id="sTelegram" placeholder="https://t.me/NothingSub">
-              </div>
-              <div class="soc-row">
-                <span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.445 18.627 0 12 0S0 5.445 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</span>
-                <input type="url" id="sFacebook" placeholder="https://facebook.com/NothingSub">
-              </div>
-              <div class="soc-row">
-                <span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.66a8.32 8.32 0 0 0 4.83 1.54V6.75a4.85 4.85 0 0 1-1.06-.06z"/></svg>TikTok</span>
-                <input type="url" id="sTiktok" placeholder="https://tiktok.com/@NothingSub">
-              </div>
+              <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.01 9.47c-.148.666-.537.826-1.084.514l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.9l-2.95-.92c-.642-.2-.654-.642.136-.95l11.51-4.44c.533-.194 1.001.13.696.658z"/></svg>Telegram</span><input type="url" id="sTelegram" placeholder="https://t.me/NothingSub"></div>
+              <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.445 18.627 0 12 0S0 5.445 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</span><input type="url" id="sFacebook" placeholder="https://facebook.com/NothingSub"></div>
+              <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.66a8.32 8.32 0 0 0 4.83 1.54V6.75a4.85 4.85 0 0 1-1.06-.06z"/></svg>TikTok</span><input type="url" id="sTiktok" placeholder="https://tiktok.com/@NothingSub"></div>
             </div>
             <span style="font-size:.64rem;color:var(--muted);margin-top:.4rem;display:block">Link ထည့်ထားသော icon သာ footer မှာ show ဖြစ်မည်</span>
           </div>
@@ -463,24 +415,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f"><label>Quality</label><select id="aQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
       <div class="f full"><label>Categories</label><div class="cat-grid" id="aCatGrid"></div><input type="hidden" id="aGenre"></div>
       <div class="f full"><label>Poster URL (16:9)</label><input id="aPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
-
-      <!-- ══ SUBTITLE TYPE SELECTOR ══ -->
       <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
-      <div class="status-toggle full">
-        <label>Subtitle:</label>
-        <div class="toggle-wrap">
-          <button class="toggle-opt on-mm" id="aSubMM"   onclick="setSubType('mm')">🇲🇲 MM Only</button>
-          <button class="toggle-opt"        id="aSubTH"   onclick="setSubType('th')">🇹🇭 TH Only</button>
-          <button class="toggle-opt"        id="aSubBoth" onclick="setSubType('both')">🌐 Both</button>
-        </div>
-        <input type="hidden" id="aSubtitleType" value="mm">
-      </div>
-      <div class="sub-type-hint">
-        <strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br>
-        <strong>TH Only</strong> — Thai Subtitle သာပါသည်<br>
-        <strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်
-      </div>
-
+      <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-mm" id="aSubMM" onclick="setSubType('mm')">🇲🇲 MM Only</button><button class="toggle-opt" id="aSubTH" onclick="setSubType('th')">🇹🇭 TH Only</button><button class="toggle-opt" id="aSubBoth" onclick="setSubType('both')">🌐 Both</button></div><input type="hidden" id="aSubtitleType" value="mm"></div>
+      <div class="sub-type-hint"><strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br><strong>TH Only</strong> — Thai Subtitle သာပါသည်<br><strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်</div>
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap" onclick="document.getElementById('aActorInp').focus()"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap" onclick="document.getElementById('aActressInp').focus()"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
@@ -513,24 +450,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f"><label>Quality</label><select id="eQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
       <div class="f full"><label>Categories</label><div class="cat-grid" id="eCatGrid"></div><input type="hidden" id="eGenre"></div>
       <div class="f full"><label>Poster URL</label><input id="ePoster"></div>
-
-      <!-- ══ SUBTITLE TYPE SELECTOR ══ -->
       <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
-      <div class="status-toggle full">
-        <label>Subtitle:</label>
-        <div class="toggle-wrap">
-          <button class="toggle-opt on-mm" id="eSubMM"   onclick="setEditSubType('mm')">🇲🇲 MM Only</button>
-          <button class="toggle-opt"        id="eSubTH"   onclick="setEditSubType('th')">🇹🇭 TH Only</button>
-          <button class="toggle-opt"        id="eSubBoth" onclick="setEditSubType('both')">🌐 Both</button>
-        </div>
-        <input type="hidden" id="eSubtitleType" value="mm">
-      </div>
-      <div class="sub-type-hint">
-        <strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br>
-        <strong>TH Only</strong> — Thai Subtitle သာပါသည်<br>
-        <strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်
-      </div>
-
+      <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-mm" id="eSubMM" onclick="setEditSubType('mm')">🇲🇲 MM Only</button><button class="toggle-opt" id="eSubTH" onclick="setEditSubType('th')">🇹🇭 TH Only</button><button class="toggle-opt" id="eSubBoth" onclick="setEditSubType('both')">🌐 Both</button></div><input type="hidden" id="eSubtitleType" value="mm"></div>
+      <div class="sub-type-hint"><strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br><strong>TH Only</strong> — Thai Subtitle သာပါသည်<br><strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်</div>
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="eActorsWrap" onclick="document.getElementById('eActorInp').focus()"><input class="tag-inp" id="eActorInp" placeholder="Actor name..."></div><input type="hidden" id="eActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eActressesWrap" onclick="document.getElementById('eActressInp').focus()"><input class="tag-inp" id="eActressInp" placeholder="Actress name..."></div><input type="hidden" id="eActresses"></div>
@@ -562,7 +484,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore,collection,addDoc,updateDoc,deleteDoc,doc,query,orderBy,onSnapshot,serverTimestamp,limit,setDoc,getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore,collection,addDoc,updateDoc,deleteDoc,doc,query,orderBy,onSnapshot,serverTimestamp,limit,setDoc,getDoc,getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 const app=initializeApp({apiKey:"AIzaSyA4y_u0HsSs15ANQrasvCGpyQ57IF0jOvs",authDomain:"nothingsub-bc4f8.firebaseapp.com",projectId:"nothingsub-bc4f8",storageBucket:"nothingsub-bc4f8.firebasestorage.app",messagingSenderId:"603228016723",appId:"1:603228016723:web:3bd1bce763d046dc4a36a6"});
@@ -574,11 +496,71 @@ const CATS=['Japanese','Korean','Chinese','English','Spanish','Turkish','4K','2K
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
 let movies=[],analytics=[],pendingDelId=null;
+let allStatsDocs={};
+let curDateFilter='today';
 
 function uniqueSessions(events){const map=new Map();events.forEach(e=>{const k=e.sessionId||e.id;if(!map.has(k))map.set(k,e);});return[...map.values()];}
 function setSlStatus(state,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+state;el.innerHTML=state==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
 
-// ── AUTH ──
+// DATE HELPERS
+function getDateKey(d){return d.toISOString().slice(0,10);}
+function getPastDates(days){const dates=[];const now=new Date();for(let i=0;i<days;i++){const d=new Date(now);d.setDate(d.getDate()-i);dates.push(getDateKey(d));}return dates;}
+
+// DATE FILTER
+window.setDateFilter=function(period,btn){
+  curDateFilter=period;
+  document.querySelectorAll('.df-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderRealStats();
+};
+
+function renderRealStats(){
+  let dates=[];
+  const today=getDateKey(new Date());
+  if(curDateFilter==='today')dates=[today];
+  else if(curDateFilter==='7')dates=getPastDates(7);
+  else if(curDateFilter==='30')dates=getPastDates(30);
+  else if(curDateFilter==='365')dates=getPastDates(365);
+  else dates=Object.keys(allStatsDocs);
+
+  let views=0,clicks=0,downloads=0,mobile=0,desktop=0,mm=0,th=0,total=0;
+  dates.forEach(d=>{
+    const doc=allStatsDocs[d];
+    if(!doc)return;
+    views+=doc.pageviews||0;
+    clicks+=doc.movieClicks||0;
+    downloads+=doc.downloads||0;
+    mobile+=doc.mobile||0;
+    desktop+=doc.desktop||0;
+    mm+=doc.langMM||0;
+    th+=doc.langTH||0;
+    total+=doc.total||0;
+  });
+
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v.toLocaleString();};
+  set('rs-views',views);set('rs-clicks',clicks);set('rs-downloads',downloads);
+  set('rs-mobile',mobile);set('rs-desktop',desktop);set('rs-mm',mm);set('rs-th',th);set('rs-total',total);
+
+  // Dashboard Downloads Today
+  const todayDoc=allStatsDocs[today];
+  const sdEl=document.getElementById('s-dl');
+  if(sdEl)sdEl.textContent=(todayDoc?.downloads||0).toLocaleString();
+}
+
+async function loadAllStats(){
+  try{
+    const snap=await getDocs(collection(db,'stats'));
+    snap.forEach(d=>{allStatsDocs[d.id]={...d.data()};});
+    renderRealStats();
+    // Live update today
+    const today=getDateKey(new Date());
+    onSnapshot(doc(db,'stats',today),snap=>{
+      if(snap.exists()){allStatsDocs[today]={...snap.data()};renderRealStats();}
+    });
+  }catch(e){console.error('Stats error',e);}
+}
+
+// AUTH
 onAuthStateChanged(auth,user=>{
   if(user){
     document.getElementById('loginPage').style.display='none';
@@ -614,19 +596,9 @@ window.doLogout=async function(){if(!confirm('Logout လုပ်မလား?')
 
 function initAdmin(){
   loadSettings();
+  loadAllStats();
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
-  
-  // Real stats from stats collection
-  const today=new Date().toISOString().slice(0,10);
-  onSnapshot(doc(db,'stats',today),snap=>{
-    if(snap.exists()){
-      const d=snap.data();
-      const svEl=document.getElementById('s-views');if(svEl)svEl.textContent=d.pageviews||0;
-      const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=d.downloads||0;
-    }
-  });
-  
   tick();setInterval(tick,1000);
 }
 
@@ -661,7 +633,7 @@ window.saveSettings=async function(){
   try{
     await setDoc(doc(db,'settings','global'),{smartLink:sl||'',socialTelegram:telegram||'',socialFacebook:facebook||'',socialTiktok:tiktok||''},{merge:true});
     okEl.style.display='inline';setTimeout(()=>okEl.style.display='none',3000);
-    setSlStatus(sl?'ok':'empty',sl?'✓ Save အောင်မြင် — Social links updated':'Settings saved (no Smart Link)');
+    setSlStatus(sl?'ok':'empty',sl?'✓ Save အောင်မြင် — Social links updated':'Settings saved');
   }catch(e){errEl.textContent='✗ Error: '+e.message;errEl.style.display='inline';setSlStatus('empty','✗ Save မအောင်မြင်');}
 };
 
@@ -669,13 +641,11 @@ function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))re
 function hasMM(m){return(m.mmTelegram&&m.mmTelegram!=='#')||(m.mmStream&&m.mmStream!=='#')||(m.mmMega&&m.mmMega!=='#');}
 function hasTH(m){return(m.thTelegram&&m.thTelegram!=='#')||(m.thStream&&m.thStream!=='#')||(m.thMega&&m.thMega!=='#');}
 
-// ── SUBTITLE TYPE BADGE HELPER ──
 function subTypeBadge(m){
   const st=m.subtitleType||'';
-  if(st==='mm')  return '<span class="sb sb-mm">🇲🇲 MM</span>';
-  if(st==='th')  return '<span class="sb sb-th">🇹🇭 TH</span>';
+  if(st==='mm')return '<span class="sb sb-mm">🇲🇲 MM</span>';
+  if(st==='th')return '<span class="sb sb-th">🇹🇭 TH</span>';
   if(st==='both')return '<span class="sb sb-mm">🇲🇲</span><span class="sb sb-th">🇹🇭</span>';
-  // fallback: detect from links
   const mm=hasMM(m),th=hasTH(m);
   return (mm?'<span class="sb sb-mm">MM</span>':'')+(th?'<span class="sb sb-th">TH</span>':'');
 }
@@ -700,28 +670,21 @@ function updateMovieStats(){
 }
 
 function updateAnalytics(){
-  const views=analytics.filter(e=>e.type==='pageview').length,clicks=analytics.filter(e=>e.type==='movie_click').length;
-  const dls=analytics.filter(e=>e.type==='download_click').length,searches=analytics.filter(e=>e.type==='search').length;
-  const sessions=uniqueSessions(analytics),totalSess=sessions.length;
-  const mobileSess=sessions.filter(e=>e.isMobile===true).length,desktopSess=sessions.filter(e=>e.isMobile===false).length;
-  const svEl=document.getElementById('s-views');if(svEl)svEl.textContent=views; const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=dls;
-  const mmUsers=sessions.filter(e=>e.lang==='mm').length; const thUsers=sessions.filter(e=>e.lang==='th').length; ['a-views','a-clicks','a-search','a-mobile','a-desktop','a-mm-users','a-th-users'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=[views,clicks,searches,mobileSess,desktopSess,mmUsers,thUsers][i];});
+  const sessions=uniqueSessions(analytics);
   const lc={mm:0,th:0,en:0};sessions.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});
   const lMax=Math.max(...Object.values(lc),1);
   document.getElementById('langChart').innerHTML=Object.entries({mm:'Myanmar',th:'Thai',en:'English'}).map(([k,lbl])=>`<div class="bh-item"><div class="bh-label">${lbl}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#a78bfa'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
-  const sc={mmStream:0,mmMega:0,thStream:0,thMega:0};analytics.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
+  const sc={mmTelegram:0,mmStream:0,mmMega:0,thTelegram:0,thStream:0,thMega:0};
+  analytics.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
   const sMax=Math.max(...Object.values(sc),1);
-  const sClr={mmStream:'#fc8181',mmMega:'#e53e3e',thStream:'#60a5fa',thMega:'#3b82f6'},sLbl={mmStream:'MM Streamtape',mmMega:'MM Mega',thStream:'TH Streamtape',thMega:'TH Mega'};
-  document.getElementById('dlChart').innerHTML=Object.entries(sc).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('');
-  const typeMap={pageview:{l:'Viewed page',k:'v'},movie_click:{l:'Clicked movie',k:'c'},download_click:{l:'Downloaded',k:'d'},search:{l:'Searched',k:'c'}};
-  const mc={},md={};
-  analytics.filter(e=>e.type==='movie_click').forEach(e=>{if(e.movieTitle)mc[e.movieTitle]=(mc[e.movieTitle]||0)+1;});
-  analytics.filter(e=>e.type==='download_click').forEach(e=>{if(e.movieTitle)md[e.movieTitle]=(md[e.movieTitle]||0)+1;});
-  const top=Object.entries(mc).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const sClr={mmTelegram:'#29b6f6',mmStream:'#fc8181',mmMega:'#e53e3e',thTelegram:'#0891b2',thStream:'#60a5fa',thMega:'#3b82f6'};
+  const sLbl={mmTelegram:'MM Telegram',mmStream:'MM Stream',mmMega:'MM Mega',thTelegram:'TH Telegram',thStream:'TH Stream',thMega:'TH Mega'};
+  const dlRows=Object.entries(sc).filter(([k,n])=>n>0).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('');
+  document.getElementById('dlChart').innerHTML=dlRows||'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No downloads yet</div>';
   const countryMap={},cityMap={};
   sessions.forEach(e=>{if(e.country)countryMap[e.country]=(countryMap[e.country]||0)+1;if(e.city)cityMap[e.city]=(cityMap[e.city]||0)+1;});
   const locTotal=Object.values(countryMap).reduce((a,b)=>a+b,0);
-  document.getElementById('locTotal').textContent=locTotal?locTotal+' unique sessions':'Collecting...';
+  document.getElementById('locTotal').textContent=locTotal?locTotal+' sessions':'Collecting...';
   const LOC_C=['#f0b429','#3b82f6','#10b981','#8b5cf6','#ef4444','#f97316','#06b6d4','#ec4899'];
   const ce=Object.entries(countryMap).sort((a,b)=>b[1]-a[1]).slice(0,8),cMax=Math.max(...ce.map(e=>e[1]),1);
   document.getElementById('countryChart').innerHTML=ce.length?ce.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cMax)*100}%;background:${LOC_C[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No data</div>';
@@ -757,81 +720,47 @@ function getTags(hId){try{const v=document.getElementById(hId)?.value;return v?J
 function initAddModal(){initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);}
 function v(id){const el=document.getElementById(id);return el?(el.value.trim()||'#'):'#';}
 function sv(id,val){const el=document.getElementById(id);if(el)el.value=(val==='#'?'':val||'');}
-
-// ══════════════════════════════════════
-// SUBTITLE TYPE TOGGLE FUNCTIONS
-// ══════════════════════════════════════
-
-// Post Movie page
-window.setPSubType=function(s){
-  document.getElementById('pSubtitleType').value=s;
-  document.getElementById('pSubMM').className  ='toggle-opt'+(s==='mm'  ?' on-mm'  :'');
-  document.getElementById('pSubTH').className  ='toggle-opt'+(s==='th'  ?' on-th'  :'');
-  document.getElementById('pSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');
-};
-
-// Add modal
-window.setSubType=function(s){
-  document.getElementById('aSubtitleType').value=s;
-  document.getElementById('aSubMM').className  ='toggle-opt'+(s==='mm'  ?' on-mm'  :'');
-  document.getElementById('aSubTH').className  ='toggle-opt'+(s==='th'  ?' on-th'  :'');
-  document.getElementById('aSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');
-};
-
-// Edit modal
-window.setEditSubType=function(s){
-  document.getElementById('eSubtitleType').value=s;
-  document.getElementById('eSubMM').className  ='toggle-opt'+(s==='mm'  ?' on-mm'  :'');
-  document.getElementById('eSubTH').className  ='toggle-opt'+(s==='th'  ?' on-th'  :'');
-  document.getElementById('eSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');
-};
-
+window.setPSubType=function(s){document.getElementById('pSubtitleType').value=s;document.getElementById('pSubMM').className='toggle-opt'+(s==='mm'?' on-mm':'');document.getElementById('pSubTH').className='toggle-opt'+(s==='th'?' on-th':'');document.getElementById('pSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');};
+window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;document.getElementById('aSubMM').className='toggle-opt'+(s==='mm'?' on-mm':'');document.getElementById('aSubTH').className='toggle-opt'+(s==='th'?' on-th':'');document.getElementById('aSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');};
+window.setEditSubType=function(s){document.getElementById('eSubtitleType').value=s;document.getElementById('eSubMM').className='toggle-opt'+(s==='mm'?' on-mm':'');document.getElementById('eSubTH').className='toggle-opt'+(s==='th'?' on-th':'');document.getElementById('eSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');};
 async function saveMovie(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'Saved!','ok');onSuccess();}
   catch(e){showMsg(msgId,'Error: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent=btnTxt;}
 }
-
 window.doPost=async function(){
   const title=document.getElementById('pTitle').value.trim();if(!title){showMsg('postMsg','Add title','err');return;}
-  const cats=getCats('pGenre');
-  const subtitleType=document.getElementById('pSubtitleType').value||'mm';
+  const cats=getCats('pGenre');const subtitleType=document.getElementById('pSubtitleType').value||'mm';
   await saveMovie({title,year:parseInt(document.getElementById('pYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('pQuality').value,poster:document.getElementById('pPoster').value.trim()||'',status:document.getElementById('pStatus').value,subtitleType,actors:getTags('pActors'),actresses:getTags('pActresses'),mmTelegram:v('pMmTelegram'),mmStream:v('pMmStream'),mmMega:v('pMmMega'),thTelegram:v('pThTelegram'),thStream:v('pThStream'),thMega:v('pThMega'),descMM:document.getElementById('pDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('pDescTH').value.trim()||''},'postMsg','postBtn','Post Movie',()=>{
-    ['pTitle','pYear','pPoster','pMmTelegram','pMmStream','pMmMega','pThTelegram','pThStream','pThMega','pDescMM','pDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});;
+    ['pTitle','pYear','pPoster','pMmTelegram','pMmStream','pMmMega','pThTelegram','pThStream','pThMega','pDescMM','pDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
     initCatGrid('pCatGrid','pGenre',[]);initTags('pActorsWrap','pActorInp','pActors',[]);initTags('pActressesWrap','pActressInp','pActresses',[]);setPStatus('public');setPSubType('mm');
   });
 };
-
 window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Add title','err');return;}
-  const cats=getCats('aGenre');
-  const subtitleType=document.getElementById('aSubtitleType').value||'mm';
+  const cats=getCats('aGenre');const subtitleType=document.getElementById('aSubtitleType').value||'mm';
   await saveMovie({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType,actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thMega:v('aThMega'),descMM:document.getElementById('aDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
     ['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmMega','aThTelegram','aThStream','aThMega','aDescMM','aDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
     initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
   });
 };
-
 window._edit=function(id){
   const m=movies.find(x=>x.id===id);if(!m)return;
   document.getElementById('eId').value=m.id;document.getElementById('eTitle').value=m.title||'';document.getElementById('eYear').value=m.year||'';
   document.getElementById('eQuality').value=m.quality||'1080p';document.getElementById('ePoster').value=m.poster||'';
-  setEditStatus(m.status||'public');
-  setEditSubType(m.subtitleType||'mm');  // ← populate subtitle type
+  setEditStatus(m.status||'public');setEditSubType(m.subtitleType||'mm');
   initCatGrid('eCatGrid','eGenre',m.genres||(m.genre?[m.genre]:[]));
   initTags('eActorsWrap','eActorInp','eActors',m.actors||[]);initTags('eActressesWrap','eActressInp','eActresses',m.actresses||[]);
   sv('eMmTelegram',m.mmTelegram);sv('eMmStream',m.mmStream);sv('eMmMega',m.mmMega);sv('eThTelegram',m.thTelegram);sv('eThStream',m.thStream);sv('eThMega',m.thMega);
   document.getElementById('eDescMM').value=m.descMM||'';document.getElementById('eDescTH').value=m.descTH||'';
   document.getElementById('moEdit').classList.add('open');
 };
-
 window.doEdit=async function(){
   const id=document.getElementById('eId').value,title=document.getElementById('eTitle').value.trim();
   if(!id||!title){showMsg('editMsg','Add title','err');return;}
-  const cats=getCats('eGenre');
-  const subtitleType=document.getElementById('eSubtitleType').value||'mm';
+  const cats=getCats('eGenre');const subtitleType=document.getElementById('eSubtitleType').value||'mm';
   const btn=document.getElementById('editBtn');btn.disabled=true;btn.textContent='Saving...';
   try{
     await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,subtitleType,actors:getTags('eActors'),actresses:getTags('eActresses'),mmTelegram:v('eMmTelegram'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thTelegram:v('eThTelegram'),thStream:v('eThStream'),thMega:v('eThMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
@@ -839,21 +768,14 @@ window.doEdit=async function(){
   }catch(e){showMsg('editMsg','Error: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent='Save Changes';}
 };
-
 window._del=function(id,title){pendingDelId=id;document.getElementById('confMsg').textContent=`Delete "${title}"?`;document.getElementById('confDel').classList.add('open');};
 window.doDel=async function(){
   if(!pendingDelId)return;
   const btn=document.querySelector('#confDel .btn-yes');
   if(btn){btn.disabled=true;btn.textContent='Deleting...';}
-  try{
-    await deleteDoc(doc(db,'movies',pendingDelId));
-    confClose();
-  }catch(e){
-    alert('Delete Error: '+e.message);
-    if(btn){btn.disabled=false;btn.textContent='Delete';}
-  }
+  try{await deleteDoc(doc(db,'movies',pendingDelId));confClose();}
+  catch(e){alert('Delete Error: '+e.message);if(btn){btn.disabled=false;btn.textContent='Delete';}}
 };
-
 window.renderMvTable=function(){
   const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
   const show=movies.filter(m=>!q||(m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q)));
@@ -861,26 +783,9 @@ window.renderMvTable=function(){
   if(!show.length){tb.innerHTML='<tr><td colspan="8" class="empty-tbl">No movies found</td></tr>';return;}
   tb.innerHTML=show.map(m=>{
     const safeTitle=(m.title||'').replace(/"/g,'&quot;');
-    return `<tr>
-      <td><img class="mv-img" src="${ps(m.poster)}" onerror="this.src='${FALLBACK}'" alt=""></td>
-      <td><strong>${m.title||''}</strong>${(m.actors&&m.actors.length)?'<br><span style="font-size:.62rem;color:var(--muted)">'+m.actors.slice(0,2).join(', ')+'</span>':''}</td>
-      <td>${m.year||''}</td>
-      <td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td>
-      <td>${m.quality||''}</td>
-      <td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td>
-      <td><div class="sub-bs">${subTypeBadge(m)}</div></td>
-      <td><div class="acts">
-        <button class="btn-e" data-id="${m.id}" onclick="window._edit(this.dataset.id)">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </button>
-        <button class="btn-d" data-id="${m.id}" data-title="${safeTitle}" onclick="window._del(this.dataset.id,this.dataset.title)">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-        </button>
-      </div></td>
-    </tr>`;
+    return `<tr><td><img class="mv-img" src="${ps(m.poster)}" onerror="this.src='${FALLBACK}'" alt=""></td><td><strong>${m.title||''}</strong>${(m.actors&&m.actors.length)?'<br><span style="font-size:.62rem;color:var(--muted)">'+m.actors.slice(0,2).join(', ')+'</span>':''}</td><td>${m.year||''}</td><td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td><td>${m.quality||''}</td><td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td><td><div class="sub-bs">${subTypeBadge(m)}</div></td><td><div class="acts"><button class="btn-e" data-id="${m.id}" onclick="window._edit(this.dataset.id)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-d" data-id="${m.id}" data-title="${safeTitle}" onclick="window._del(this.dataset.id,this.dataset.title)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div></td></tr>`;
   }).join('');
 };
-
 window.setStatus=function(s){document.getElementById('aStatus').value=s;document.getElementById('statusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('statusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
 window.setEditStatus=function(s){document.getElementById('eStatus').value=s;document.getElementById('eStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('eStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
 window.setPStatus=function(s){document.getElementById('pStatus').value=s;document.getElementById('pStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('pStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
