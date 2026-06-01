@@ -33,6 +33,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .nav-item{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.2rem;cursor:pointer;transition:all .2s;border-left:2px solid transparent;font-size:.84rem;color:var(--muted);}
 .nav-item:hover{background:rgba(240,180,41,.05);color:var(--text);}
 .nav-item.on{background:rgba(240,180,41,.08);color:var(--accent);border-left-color:var(--accent);}
+/* Sub nav items */
+.nav-sub-item{display:flex;align-items:center;gap:.6rem;padding:.45rem 1.2rem .45rem 2.6rem;cursor:pointer;transition:all .2s;border-left:2px solid transparent;font-size:.78rem;color:var(--muted);}
+.nav-sub-item:hover{background:rgba(240,180,41,.04);color:var(--text);}
+.nav-sub-item.on{color:var(--accent);border-left-color:var(--accent);background:rgba(240,180,41,.06);}
+.nav-sub-item .sub-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.6;flex-shrink:0;}
+.nav-sub-item.mm-item.on .sub-dot{background:#fc8181;}
+.nav-sub-item.th-item.on .sub-dot{background:#60a5fa;}
+.nav-sub-item.en-item.on .sub-dot{background:#63b3ed;}
+.nav-sub-item.mm-item.on{color:#fc8181;border-left-color:#fc8181;}
+.nav-sub-item.th-item.on{color:#60a5fa;border-left-color:#60a5fa;}
+.nav-sub-item.en-item.on{color:#63b3ed;border-left-color:#63b3ed;}
 .s-footer{padding:1rem 1.2rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted);}
 .s-footer a{color:var(--accent);text-decoration:none;cursor:pointer;margin-right:.5rem;}
 .s-logout{color:#f87171;cursor:pointer;font-size:.72rem;}
@@ -54,10 +65,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-bottom:1.5rem;}
 .sc{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.2rem 1.4rem;position:relative;overflow:hidden;}
 .sc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.sc.g::before{background:var(--green);}.sc.b::before{background:var(--blue);}.sc.y::before{background:var(--accent);}.sc.p::before{background:var(--purple);}.sc.r::before{background:var(--red);}.sc.o::before{background:var(--orange);}
+.sc.g::before{background:var(--green);}.sc.b::before{background:var(--blue);}.sc.y::before{background:var(--accent);}.sc.p::before{background:var(--purple);}.sc.r::before{background:var(--red);}.sc.o::before{background:var(--orange);}.sc.c::before{background:#63b3ed;}
 .sc-label{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:.4rem;}
 .sc-val{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:1px;line-height:1;margin-bottom:.2rem;}
-.sc-val.g{color:var(--green);}.sc-val.b{color:var(--blue);}.sc-val.y{color:var(--accent);}.sc-val.p{color:var(--purple);}.sc-val.r{color:var(--red);}.sc-val.o{color:var(--orange);}
+.sc-val.g{color:var(--green);}.sc-val.b{color:var(--blue);}.sc-val.y{color:var(--accent);}.sc-val.p{color:var(--purple);}.sc-val.r{color:var(--red);}.sc-val.o{color:var(--orange);}.sc-val.c{color:#63b3ed;}
 .sc-note{font-size:.68rem;color:var(--muted);}.sc-note.live{color:var(--green);}
 .chart-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;}
 .chart-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;}
@@ -74,7 +85,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .sub-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem;}
 .sub-card{flex:1;min-width:100px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.8rem 1rem;text-align:center;}
 .sub-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;display:block;margin-bottom:.15rem;}
-.sub-num.mm{color:#fc8181;}.sub-num.th{color:#60a5fa;}.sub-num.both{color:var(--accent);}.sub-num.none{color:var(--muted);}
+.sub-num.mm{color:#fc8181;}.sub-num.th{color:#60a5fa;}.sub-num.en{color:#63b3ed;}.sub-num.both{color:var(--accent);}.sub-num.none{color:var(--muted);}
 .sub-lbl{font-size:.64rem;color:var(--muted);}
 .table-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.2rem;}
 .table-head{padding:.9rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
@@ -102,6 +113,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .sb{font-size:.55rem;padding:1px 5px;border-radius:4px;font-weight:600;}
 .sb-mm{background:rgba(239,68,68,.15);color:#f87171;}
 .sb-th{background:rgba(59,130,246,.15);color:#60a5fa;}
+.sb-en{background:rgba(99,179,237,.15);color:#63b3ed;}
 .status-badge{font-size:.6rem;padding:2px 7px;border-radius:10px;font-weight:600;}
 .status-badge.public{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;}
 .status-badge.private{background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.25);color:#94a3b8;}
@@ -113,6 +125,18 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .spin-sm{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .empty-tbl{text-align:center;color:var(--muted);padding:2rem;font-size:.82rem;}
+/* POST PAGE HEADER BANNER */
+.post-banner{border-radius:14px;padding:1.2rem 1.6rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:1rem;}
+.post-banner.mm-banner{background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.2);}
+.post-banner.th-banner{background:rgba(59,130,246,.07);border:1.5px solid rgba(59,130,246,.2);}
+.post-banner.en-banner{background:rgba(99,179,237,.07);border:1.5px solid rgba(99,179,237,.2);}
+.post-banner .pb-flag{font-size:2rem;line-height:1;}
+.post-banner .pb-info h2{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;margin-bottom:.15rem;}
+.post-banner .pb-info p{font-size:.7rem;color:var(--muted);}
+.post-banner.mm-banner .pb-info h2{color:#fc8181;}
+.post-banner.th-banner .pb-info h2{color:#60a5fa;}
+.post-banner.en-banner .pb-info h2{color:#63b3ed;}
+/* MODAL */
 .mo{display:none;position:fixed;inset:0;z-index:500;backdrop-filter:blur(10px);background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:1rem;}
 .mo.open{display:flex;}
 .mo-box{background:var(--surface);border:1.5px solid var(--border);border-radius:18px;max-width:560px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 40px 80px rgba(0,0,0,.6);animation:popIn .3s cubic-bezier(.34,1.56,.64,1);}
@@ -131,6 +155,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .f textarea{resize:vertical;min-height:62px;}
 .form-section{grid-column:1/-1;border-top:1px solid var(--border);padding-top:.8rem;margin-top:.2rem;}
 .form-section-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:.5rem;}
+.form-section-label.mm-label{color:#fc8181;}
+.form-section-label.th-label{color:#60a5fa;}
+.form-section-label.en-label{color:#63b3ed;}
 .status-toggle{grid-column:1/-1;display:flex;gap:.6rem;align-items:center;}
 .status-toggle label{font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
 .toggle-wrap{display:flex;background:var(--card);border:1.5px solid var(--border);border-radius:8px;overflow:hidden;}
@@ -139,12 +166,16 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .toggle-opt.on-prv{background:rgba(100,116,139,.15);color:#94a3b8;}
 .toggle-opt.on-mm{background:rgba(239,68,68,.15);color:#fc8181;}
 .toggle-opt.on-th{background:rgba(59,130,246,.15);color:#60a5fa;}
+.toggle-opt.on-en{background:rgba(99,179,237,.15);color:#63b3ed;}
 .toggle-opt.on-both{background:rgba(240,180,41,.15);color:var(--accent);}
 .sub-type-hint{grid-column:1/-1;font-size:.64rem;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.55rem .8rem;line-height:1.6;}
 .sub-type-hint strong{color:var(--text);font-weight:600;}
 .mo-btn{grid-column:1/-1;background:linear-gradient(135deg,#f0b429,#d4a03a);border:none;color:#000;padding:.72rem;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;cursor:pointer;transition:opacity .2s;}
 .mo-btn:hover{opacity:.88;}
 .mo-btn:disabled{opacity:.5;cursor:not-allowed;}
+.mo-btn.mm-btn{background:linear-gradient(135deg,#e53e3e,#c53030);color:#fff;}
+.mo-btn.th-btn{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;}
+.mo-btn.en-btn{background:linear-gradient(135deg,#63b3ed,#3182ce);color:#fff;}
 .mo-msg{grid-column:1/-1;padding:.5rem;border-radius:8px;text-align:center;font-size:.8rem;display:none;}
 .mo-msg.ok{display:block;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:#34d399;}
 .mo-msg.err{display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#f87171;}
@@ -179,29 +210,33 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .soc-lbl svg{width:13px;height:13px;fill:currentColor;opacity:.7;}
 .soc-row input{background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;flex:1;padding:.1rem 0;}
 .soc-row input::placeholder{color:var(--muted);}
-/* DATE FILTER */
 .date-filter{display:flex;gap:.35rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center;}
 .date-filter-label{font-size:.66rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-right:.2rem;}
 .df-btn{padding:.32rem .8rem;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.74rem;font-weight:600;font-family:'DM Sans',sans-serif;transition:all .2s;}
 .df-btn:hover{border-color:var(--accent);color:var(--accent);}
 .df-btn.on{background:var(--accent);border-color:var(--accent);color:#000;}
-/* REAL STATS GRID */
 .rs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem;margin-bottom:1.4rem;}
 .rsc{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.2rem;position:relative;overflow:hidden;}
 .rsc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.rsc.g::before{background:var(--green);}.rsc.b::before{background:var(--blue);}.rsc.y::before{background:var(--accent);}.rsc.p::before{background:var(--purple);}.rsc.r::before{background:var(--red);}.rsc.o::before{background:var(--orange);}
+.rsc.g::before{background:var(--green);}.rsc.b::before{background:var(--blue);}.rsc.y::before{background:var(--accent);}.rsc.p::before{background:var(--purple);}.rsc.r::before{background:var(--red);}.rsc.o::before{background:var(--orange);}.rsc.c::before{background:#63b3ed;}
 .rsc-label{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:.3rem;}
 .rsc-val{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:1px;line-height:1;margin-bottom:.1rem;}
-.rsc-val.g{color:var(--green);}.rsc-val.b{color:var(--blue);}.rsc-val.y{color:var(--accent);}.rsc-val.p{color:var(--purple);}.rsc-val.r{color:var(--red);}.rsc-val.o{color:var(--orange);}
+.rsc-val.g{color:var(--green);}.rsc-val.b{color:var(--blue);}.rsc-val.y{color:var(--accent);}.rsc-val.p{color:var(--purple);}.rsc-val.r{color:var(--red);}.rsc-val.o{color:var(--orange);}.rsc-val.c{color:#63b3ed;}
 .rsc-note{font-size:.6rem;color:var(--muted);}
 .divider-label{font-size:.63rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:.6rem 0 .8rem;border-top:1px solid var(--border);margin-top:.4rem;margin-bottom:.2rem;}
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px;}
+/* Post page inline form */
+.post-form-wrap{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.4rem;max-width:680px;}
+.post-form-wrap.mm-form{border-color:rgba(239,68,68,.25);}
+.post-form-wrap.th-form{border-color:rgba(59,130,246,.25);}
+.post-form-wrap.en-form{border-color:rgba(99,179,237,.25);}
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
     <div style="text-align:center;margin-bottom:1.8rem;">
@@ -220,6 +255,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
   </div>
 </div>
 
+<!-- ADMIN APP -->
 <div id="adminApp">
 <aside class="sidebar">
   <div class="s-logo-wrap">
@@ -232,16 +268,22 @@ tr:hover td{background:rgba(240,180,41,.02);}
   </div>
   <nav class="sidebar-nav">
     <div class="nav-sec">Overview</div>
-    <div class="nav-item on" onclick="showPg('dashboard',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
-    <div class="nav-item" onclick="showPg('analytics',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Analytics</div>
+    <div class="nav-item on" id="nav-dashboard" onclick="showPg('dashboard',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+    <div class="nav-item" id="nav-analytics" onclick="showPg('analytics',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Analytics</div>
     <div class="nav-sec">Content</div>
-    <div class="nav-item" onclick="showPg('movies',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20"/></svg>Movies</div>
-    <div class="nav-item" onclick="showPg('post',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Post Movie</div>
+    <div class="nav-item" id="nav-movies" onclick="showPg('movies',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20"/></svg>Movies</div>
+    <!-- Post Movie with sub items -->
+    <div class="nav-item" id="nav-post" onclick="showPg('post-mm',this)">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Post Movie
+    </div>
+    <div class="nav-sub-item mm-item" id="nav-post-mm" onclick="showSubPg('post-mm',this)"><span class="sub-dot"></span>🇲🇲 Myanmar Sub</div>
+    <div class="nav-sub-item th-item" id="nav-post-th" onclick="showSubPg('post-th',this)"><span class="sub-dot"></span>🇹🇭 Thai Sub</div>
+    <div class="nav-sub-item en-item" id="nav-post-en" onclick="showSubPg('post-en',this)"><span class="sub-dot"></span>🇬🇧 English Sub</div>
     <div class="nav-sec">System</div>
-    <div class="nav-item" onclick="showPg('settings',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
+    <div class="nav-item" id="nav-settings" onclick="showPg('settings',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
   </nav>
   <div class="s-footer">
-    <div style="margin-bottom:.4rem">NothingSub v2.6</div>
+    <div style="margin-bottom:.4rem">NothingSub v3.0</div>
     <a onclick="openSite()">View Site</a>
     <span class="s-logout" onclick="doLogout()">Logout</span>
   </div>
@@ -266,6 +308,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="sc p"><div class="sc-label">Private</div><div class="sc-val p" id="s-private"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc y"><div class="sc-label">Myanmar Sub</div><div class="sc-val y" id="s-mm"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc b"><div class="sc-label">Thai Sub</div><div class="sc-val b" id="s-th"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
+        <div class="sc c"><div class="sc-label">English Sub</div><div class="sc-val c" id="s-en"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc r"><div class="sc-label">Downloads Today</div><div class="sc-val r" id="s-dl">-</div><div class="sc-note live">Real (stats)</div></div>
       </div>
       <div class="two-col">
@@ -275,7 +318,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="sub-row">
         <div class="sub-card"><span class="sub-num mm" id="sb-mm">-</span><div class="sub-lbl">Myanmar Sub</div></div>
         <div class="sub-card"><span class="sub-num th" id="sb-th">-</span><div class="sub-lbl">Thai Sub</div></div>
-        <div class="sub-card"><span class="sub-num both" id="sb-both">-</span><div class="sub-lbl">Both</div></div>
+        <div class="sub-card"><span class="sub-num en" id="sb-en">-</span><div class="sub-lbl">English Sub</div></div>
+        <div class="sub-card"><span class="sub-num both" id="sb-both">-</span><div class="sub-lbl">Both/All</div></div>
         <div class="sub-card"><span class="sub-num none" id="sb-none">-</span><div class="sub-lbl">No Link</div></div>
       </div>
       <div class="table-card">
@@ -287,17 +331,15 @@ tr:hover td{background:rgba(240,180,41,.02);}
 
     <!-- ANALYTICS -->
     <div class="pg" id="pg-analytics">
-      <div class="live-badge"><div class="live-dot"></div>Real Data — stats collection (Unlimited)</div>
-
+      <div class="live-badge"><div class="live-dot"></div>Real Data — stats collection</div>
       <div class="date-filter">
-        <span class="date-filter-label">ကြည့်ချင်တဲ့ Period:</span>
+        <span class="date-filter-label">Period:</span>
         <button class="df-btn on" onclick="setDateFilter('today',this)">Today</button>
         <button class="df-btn" onclick="setDateFilter('7',this)">7 Days</button>
         <button class="df-btn" onclick="setDateFilter('30',this)">30 Days</button>
         <button class="df-btn" onclick="setDateFilter('365',this)">1 Year</button>
         <button class="df-btn" onclick="setDateFilter('all',this)">All Time</button>
       </div>
-
       <div class="rs-grid">
         <div class="rsc g"><div class="rsc-label">Page Views</div><div class="rsc-val g" id="rs-views">-</div><div class="rsc-note">Real total ✓</div></div>
         <div class="rsc b"><div class="rsc-label">Movie Clicks</div><div class="rsc-val b" id="rs-clicks">-</div><div class="rsc-note">Real total ✓</div></div>
@@ -306,11 +348,10 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="rsc b"><div class="rsc-label">Desktop Users</div><div class="rsc-val b" id="rs-desktop">-</div><div class="rsc-note">Real total ✓</div></div>
         <div class="rsc r"><div class="rsc-label">🇲🇲 MM Sub Users</div><div class="rsc-val r" id="rs-mm">-</div><div class="rsc-note">Real total ✓</div></div>
         <div class="rsc b"><div class="rsc-label">🇹🇭 TH Sub Users</div><div class="rsc-val b" id="rs-th">-</div><div class="rsc-note">Real total ✓</div></div>
+        <div class="rsc c"><div class="rsc-label">🇬🇧 EN Sub Users</div><div class="rsc-val c" id="rs-en">-</div><div class="rsc-note">Real total ✓</div></div>
         <div class="rsc o"><div class="rsc-label">Total Events</div><div class="rsc-val o" id="rs-total">-</div><div class="rsc-note">All actions ✓</div></div>
       </div>
-
       <div class="divider-label">📍 Visitor Locations & Sources — Last 500 events</div>
-
       <div class="two-col">
         <div class="chart-card"><div class="chart-top"><h3>Language Usage</h3><span>Last 500 sessions</span></div><div class="bar-h" id="langChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
         <div class="chart-card"><div class="chart-top"><h3>Download Sources</h3><span>Last 500 events</span></div><div class="bar-h" id="dlChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
@@ -329,12 +370,12 @@ tr:hover td{background:rgba(240,180,41,.02);}
       </div>
     </div>
 
-    <!-- MOVIES -->
+    <!-- MOVIES LIST -->
     <div class="pg" id="pg-movies">
       <div class="toolbar">
         <div class="m-srch"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="movieSrch" placeholder="Movie search..." oninput="renderMvTable()"></div>
         <div style="flex:1"></div>
-        <button class="btn-add" onclick="openAdd()">+ Movie</button>
+        <button class="btn-add" onclick="openAdd()">+ Add Movie</button>
       </div>
       <div class="mv-table">
         <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub Type</th><th>Actions</th></tr></thead>
@@ -342,36 +383,99 @@ tr:hover td{background:rgba(240,180,41,.02);}
       </div>
     </div>
 
-    <!-- POST MOVIE -->
-    <div class="pg" id="pg-post">
-      <div class="chart-card" style="max-width:680px">
-        <div class="chart-top"><h3>Post New Movie</h3><span>Save to Firebase</span></div>
-        <div class="mo-form" style="margin-top:1rem">
-          <div class="f full"><label>Movie Title *</label><input id="pTitle" placeholder="Eg: Oppenheimer"></div>
-          <div class="f"><label>Year</label><input type="number" id="pYear" placeholder="2024"></div>
-          <div class="f"><label>Quality</label><select id="pQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
-          <div class="f full"><label>Categories</label><div class="cat-grid" id="pCatGrid"></div><input type="hidden" id="pGenre"></div>
-          <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="pPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
-          <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
-          <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-mm" id="pSubMM" onclick="setPSubType('mm')">🇲🇲 MM Only</button><button class="toggle-opt" id="pSubTH" onclick="setPSubType('th')">🇹🇭 TH Only</button><button class="toggle-opt" id="pSubBoth" onclick="setPSubType('both')">🌐 Both</button></div><input type="hidden" id="pSubtitleType" value="mm"></div>
-          <div class="sub-type-hint"><strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်။ MM filter မှာသာ ပြမည်<br><strong>TH Only</strong> — Thai Subtitle သာပါသည်။ TH filter မှာသာ ပြမည်<br><strong>Both</strong> — MM + TH Subtitle နှစ်ခုလုံးပါသည်။ filter အားလုံးမှာ ပြမည်</div>
-          <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
-          <div class="f full"><label>Actors</label><div class="tags-wrap" id="pActorsWrap" onclick="document.getElementById('pActorInp').focus()"><input class="tag-inp" id="pActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="pActors"></div>
-          <div class="f full"><label>Actresses</label><div class="tags-wrap" id="pActressesWrap" onclick="document.getElementById('pActressInp').focus()"><input class="tag-inp" id="pActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="pActresses"></div>
-          <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="pStatusPub" onclick="setPStatus('public')">Public</button><button class="toggle-opt" id="pStatusPrv" onclick="setPStatus('private')">Private</button></div><input type="hidden" id="pStatus" value="public"></div>
-          <div class="form-section"><div class="form-section-label">Myanmar Subtitle Links</div></div>
-          <div class="f full"><label>MM Sub — Telegram (တိုက်ရိုက်ကြည့်ရန်)</label><input id="pMmTelegram" placeholder="https://t.me/c/... သို့မဟုတ် https://t.me/NothingSub/..."></div>
-          <div class="f full"><label>MM Sub — Streamtape</label><input id="pMmStream" placeholder="https://streamtape.com/v/..."></div>
-          <div class="f full"><label>MM Sub — Mega</label><input id="pMmMega" placeholder="https://mega.nz/..."></div>
-          <div class="form-section"><div class="form-section-label">Thai Subtitle Links</div></div>
-          <div class="f full"><label>TH Sub — Telegram (ดูออนไลน์)</label><input id="pThTelegram" placeholder="https://t.me/c/... หรือ https://t.me/NothingSub/..."></div>
-          <div class="f full"><label>TH Sub — Streamtape</label><input id="pThStream" placeholder="https://streamtape.com/v/..."></div>
-          <div class="f full"><label>TH Sub — Mega</label><input id="pThMega" placeholder="https://mega.nz/..."></div>
+    <!-- POST MM -->
+    <div class="pg" id="pg-post-mm">
+      <div class="post-banner mm-banner">
+        <span class="pb-flag">🇲🇲</span>
+        <div class="pb-info">
+          <h2>Post Myanmar Subtitle Movie</h2>
+          <p>မြန်မာ Subtitle သာပါသော Movie များကို ဤ Page မှ Post တင်ပါ</p>
+        </div>
+      </div>
+      <div class="post-form-wrap mm-form">
+        <div class="mo-form" style="padding:0">
+          <div class="f full"><label>Movie Title *</label><input id="mmTitle" placeholder="Eg: Oppenheimer"></div>
+          <div class="f"><label>Year</label><input type="number" id="mmYear" placeholder="2024"></div>
+          <div class="f"><label>Quality</label><select id="mmQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+          <div class="f full"><label>Categories</label><div class="cat-grid" id="mmCatGrid"></div><input type="hidden" id="mmGenre"></div>
+          <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="mmPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+          <div class="form-section"><div class="form-section-label mm-label">Actors / Actresses</div></div>
+          <div class="f full"><label>Actors</label><div class="tags-wrap" id="mmActorsWrap" onclick="document.getElementById('mmActorInp').focus()"><input class="tag-inp" id="mmActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActors"></div>
+          <div class="f full"><label>Actresses</label><div class="tags-wrap" id="mmActressesWrap" onclick="document.getElementById('mmActressInp').focus()"><input class="tag-inp" id="mmActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActresses"></div>
+          <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="mmStatusPub" onclick="setMMStatus('public')">Public</button><button class="toggle-opt" id="mmStatusPrv" onclick="setMMStatus('private')">Private</button></div><input type="hidden" id="mmStatus" value="public"></div>
+          <div class="form-section"><div class="form-section-label mm-label">🇲🇲 Myanmar Subtitle Links</div></div>
+          <div class="f full"><label>Telegram (တိုက်ရိုက်ကြည့်ရန်)</label><input id="mmTelegram" placeholder="https://t.me/c/... သို့မဟုတ် https://t.me/NothingSub/..."></div>
+          <div class="f full"><label>Streamtape</label><input id="mmStream" placeholder="https://streamtape.com/v/..."></div>
+          <div class="f full"><label>Mega</label><input id="mmMega" placeholder="https://mega.nz/..."></div>
           <div class="form-section"><div class="form-section-label">Synopsis</div></div>
-          <div class="f full"><label>Myanmar Synopsis *</label><textarea id="pDescMM" placeholder="Myanmar synopsis..."></textarea></div>
-          <div class="f full"><label>Thai Synopsis (optional)</label><textarea id="pDescTH" placeholder="Thai synopsis..."></textarea></div>
-          <button class="mo-btn" id="postBtn" onclick="doPost()" style="margin-top:.5rem">Post Movie</button>
-          <div class="mo-msg" id="postMsg"></div>
+          <div class="f full"><label>Myanmar Synopsis *</label><textarea id="mmDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+          <button class="mo-btn mm-btn" id="postMMBtn" onclick="doPostMM()" style="margin-top:.5rem">🇲🇲 Post Myanmar Sub Movie</button>
+          <div class="mo-msg" id="postMMMsg"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST TH -->
+    <div class="pg" id="pg-post-th">
+      <div class="post-banner th-banner">
+        <span class="pb-flag">🇹🇭</span>
+        <div class="pb-info">
+          <h2>Post Thai Subtitle Movie</h2>
+          <p>Thai Subtitle သာပါသော Movie များကို ဤ Page မှ Post တင်ပါ</p>
+        </div>
+      </div>
+      <div class="post-form-wrap th-form">
+        <div class="mo-form" style="padding:0">
+          <div class="f full"><label>Movie Title *</label><input id="thTitle" placeholder="Eg: Oppenheimer"></div>
+          <div class="f"><label>Year</label><input type="number" id="thYear" placeholder="2024"></div>
+          <div class="f"><label>Quality</label><select id="thQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+          <div class="f full"><label>Categories</label><div class="cat-grid" id="thCatGrid"></div><input type="hidden" id="thGenre"></div>
+          <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="thPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+          <div class="form-section"><div class="form-section-label th-label">Actors / Actresses</div></div>
+          <div class="f full"><label>Actors</label><div class="tags-wrap" id="thActorsWrap" onclick="document.getElementById('thActorInp').focus()"><input class="tag-inp" id="thActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActors"></div>
+          <div class="f full"><label>Actresses</label><div class="tags-wrap" id="thActressesWrap" onclick="document.getElementById('thActressInp').focus()"><input class="tag-inp" id="thActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActresses"></div>
+          <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="thStatusPub" onclick="setTHStatus('public')">Public</button><button class="toggle-opt" id="thStatusPrv" onclick="setTHStatus('private')">Private</button></div><input type="hidden" id="thStatus" value="public"></div>
+          <div class="form-section"><div class="form-section-label th-label">🇹🇭 Thai Subtitle Links</div></div>
+          <div class="f full"><label>Telegram (ดูออนไลน์)</label><input id="thTelegram" placeholder="https://t.me/c/... หรือ https://t.me/NothingSub/..."></div>
+          <div class="f full"><label>Streamtape</label><input id="thStream" placeholder="https://streamtape.com/v/..."></div>
+          <div class="f full"><label>Mega</label><input id="thMega" placeholder="https://mega.nz/..."></div>
+          <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+          <div class="f full"><label>Myanmar Synopsis *</label><textarea id="thDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+          <div class="f full"><label>Thai Synopsis (optional)</label><textarea id="thDescTH" placeholder="Thai synopsis..."></textarea></div>
+          <button class="mo-btn th-btn" id="postTHBtn" onclick="doPostTH()" style="margin-top:.5rem">🇹🇭 Post Thai Sub Movie</button>
+          <div class="mo-msg" id="postTHMsg"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST EN -->
+    <div class="pg" id="pg-post-en">
+      <div class="post-banner en-banner">
+        <span class="pb-flag">🇬🇧</span>
+        <div class="pb-info">
+          <h2>Post English Subtitle Movie</h2>
+          <p>English Subtitle ပါသော Movie များကို ဤ Page မှ Post တင်ပါ</p>
+        </div>
+      </div>
+      <div class="post-form-wrap en-form">
+        <div class="mo-form" style="padding:0">
+          <div class="f full"><label>Movie Title *</label><input id="enTitle" placeholder="Eg: Oppenheimer"></div>
+          <div class="f"><label>Year</label><input type="number" id="enYear" placeholder="2024"></div>
+          <div class="f"><label>Quality</label><select id="enQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+          <div class="f full"><label>Categories</label><div class="cat-grid" id="enCatGrid"></div><input type="hidden" id="enGenre"></div>
+          <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="enPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+          <div class="form-section"><div class="form-section-label en-label">Actors / Actresses</div></div>
+          <div class="f full"><label>Actors</label><div class="tags-wrap" id="enActorsWrap" onclick="document.getElementById('enActorInp').focus()"><input class="tag-inp" id="enActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActors"></div>
+          <div class="f full"><label>Actresses</label><div class="tags-wrap" id="enActressesWrap" onclick="document.getElementById('enActressInp').focus()"><input class="tag-inp" id="enActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActresses"></div>
+          <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="enStatusPub" onclick="setENStatus('public')">Public</button><button class="toggle-opt" id="enStatusPrv" onclick="setENStatus('private')">Private</button></div><input type="hidden" id="enStatus" value="public"></div>
+          <div class="form-section"><div class="form-section-label en-label">🇬🇧 English Subtitle Links</div></div>
+          <div class="f full"><label>Telegram (Watch Online)</label><input id="enTelegram" placeholder="https://t.me/c/... or https://t.me/NothingSub/..."></div>
+          <div class="f full"><label>Streamtape</label><input id="enStream" placeholder="https://streamtape.com/v/..."></div>
+          <div class="f full"><label>Mega</label><input id="enMega" placeholder="https://mega.nz/..."></div>
+          <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+          <div class="f full"><label>Myanmar Synopsis *</label><textarea id="enDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+          <button class="mo-btn en-btn" id="postENBtn" onclick="doPostEN()" style="margin-top:.5rem">🇬🇧 Post English Sub Movie</button>
+          <div class="mo-msg" id="postENMsg"></div>
         </div>
       </div>
     </div>
@@ -381,7 +485,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="chart-card" style="max-width:620px">
         <div class="chart-top"><h3>Site Settings</h3><span>Saved to Firestore</span></div>
         <div style="display:flex;flex-direction:column;gap:1rem;margin-top:.8rem">
-          <div class="f"><label>Adsterra Smart Link (Global)</label><input id="smartLinkInput" placeholder="https://your-adsterra-smartlink.com/..."><div class="sl-status loading" id="slStatus"><span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>Loading...</span></div><span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">Download ခလုတ် နှိပ်တိုင်း Smart Link ဖွင့်မည် — movie တင်တိုင်း ထည့်စရာမလို</span></div>
+          <div class="f"><label>Adsterra Smart Link (Global)</label><input id="smartLinkInput" placeholder="https://your-adsterra-smartlink.com/..."><div class="sl-status loading" id="slStatus"><span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>Loading...</span></div><span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">Download ခလုတ် နှိပ်တိုင်း Smart Link ဖွင့်မည်</span></div>
           <div class="f">
             <label style="color:var(--accent);font-size:.68rem;letter-spacing:1.5px;margin-bottom:.6rem">Social Links — Footer Icons</label>
             <div style="display:flex;flex-direction:column;gap:.45rem;">
@@ -389,7 +493,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
               <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.445 18.627 0 12 0S0 5.445 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</span><input type="url" id="sFacebook" placeholder="https://facebook.com/NothingSub"></div>
               <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.66a8.32 8.32 0 0 0 4.83 1.54V6.75a4.85 4.85 0 0 1-1.06-.06z"/></svg>TikTok</span><input type="url" id="sTiktok" placeholder="https://tiktok.com/@NothingSub"></div>
             </div>
-            <span style="font-size:.64rem;color:var(--muted);margin-top:.4rem;display:block">Link ထည့်ထားသော icon သာ footer မှာ show ဖြစ်မည်</span>
           </div>
           <div class="f"><label>Site URL</label><input id="siteUrl" placeholder="index.html or https://..."></div>
         </div>
@@ -401,14 +504,14 @@ tr:hover td{background:rgba(240,180,41,.02);}
       </div>
     </div>
 
-  </div>
-</div>
-</div>
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /adminApp -->
 
-<!-- ADD MODAL -->
+<!-- ADD MODAL (Quick Add with all sub types) -->
 <div class="mo" id="moAdd" onclick="moBg(event,'moAdd')">
   <div class="mo-box">
-    <div class="mo-head"><h3>Add Movie</h3><button class="x-btn" onclick="moClose('moAdd')">✕</button></div>
+    <div class="mo-head"><h3>Quick Add Movie</h3><button class="x-btn" onclick="moClose('moAdd')">✕</button></div>
     <div class="mo-form">
       <div class="f full"><label>Movie Title *</label><input id="aTitle" placeholder="Eg: Oppenheimer"></div>
       <div class="f"><label>Year</label><input type="number" id="aYear" placeholder="2024"></div>
@@ -416,20 +519,28 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f full"><label>Categories</label><div class="cat-grid" id="aCatGrid"></div><input type="hidden" id="aGenre"></div>
       <div class="f full"><label>Poster URL (16:9)</label><input id="aPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
       <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
-      <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-mm" id="aSubMM" onclick="setSubType('mm')">🇲🇲 MM Only</button><button class="toggle-opt" id="aSubTH" onclick="setSubType('th')">🇹🇭 TH Only</button><button class="toggle-opt" id="aSubBoth" onclick="setSubType('both')">🌐 Both</button></div><input type="hidden" id="aSubtitleType" value="mm"></div>
-      <div class="sub-type-hint"><strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br><strong>TH Only</strong> — Thai Subtitle သာပါသည်<br><strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်</div>
+      <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap">
+        <button class="toggle-opt on-mm" id="aSubMM" onclick="setSubType('mm')">🇲🇲 MM</button>
+        <button class="toggle-opt" id="aSubTH" onclick="setSubType('th')">🇹🇭 TH</button>
+        <button class="toggle-opt" id="aSubEN" onclick="setSubType('en')">🇬🇧 EN</button>
+        <button class="toggle-opt" id="aSubBoth" onclick="setSubType('both')">🌐 All</button>
+      </div><input type="hidden" id="aSubtitleType" value="mm"></div>
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap" onclick="document.getElementById('aActorInp').focus()"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap" onclick="document.getElementById('aActressInp').focus()"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
       <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="statusPub" onclick="setStatus('public')">Public</button><button class="toggle-opt" id="statusPrv" onclick="setStatus('private')">Private</button></div><input type="hidden" id="aStatus" value="public"></div>
-      <div class="form-section"><div class="form-section-label">Myanmar Subtitle Links</div></div>
-      <div class="f full"><label>MM Telegram (တိုက်ရိုက်ကြည့်ရန်)</label><input id="aMmTelegram" placeholder="https://t.me/..."></div>
+      <div class="form-section"><div class="form-section-label mm-label">MM Sub Links</div></div>
+      <div class="f full"><label>MM Telegram</label><input id="aMmTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>MM Streamtape</label><input id="aMmStream" placeholder="https://streamtape.com/v/..."></div>
       <div class="f full"><label>MM Mega</label><input id="aMmMega" placeholder="https://mega.nz/..."></div>
-      <div class="form-section"><div class="form-section-label">Thai Subtitle Links</div></div>
-      <div class="f full"><label>TH Telegram (ดูออนไลน์)</label><input id="aThTelegram" placeholder="https://t.me/..."></div>
+      <div class="form-section"><div class="form-section-label th-label">TH Sub Links</div></div>
+      <div class="f full"><label>TH Telegram</label><input id="aThTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>TH Streamtape</label><input id="aThStream" placeholder="https://streamtape.com/v/..."></div>
       <div class="f full"><label>TH Mega</label><input id="aThMega" placeholder="https://mega.nz/..."></div>
+      <div class="form-section"><div class="form-section-label en-label">EN Sub Links</div></div>
+      <div class="f full"><label>EN Telegram</label><input id="aEnTelegram" placeholder="https://t.me/..."></div>
+      <div class="f full"><label>EN Streamtape</label><input id="aEnStream" placeholder="https://streamtape.com/v/..."></div>
+      <div class="f full"><label>EN Mega</label><input id="aEnMega" placeholder="https://mega.nz/..."></div>
       <div class="form-section"><div class="form-section-label">Synopsis</div></div>
       <div class="f full"><label>Myanmar Synopsis *</label><textarea id="aDescMM" placeholder="Myanmar synopsis..."></textarea></div>
       <div class="f full"><label>Thai Synopsis (optional)</label><textarea id="aDescTH" placeholder="Thai synopsis..."></textarea></div>
@@ -451,20 +562,28 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f full"><label>Categories</label><div class="cat-grid" id="eCatGrid"></div><input type="hidden" id="eGenre"></div>
       <div class="f full"><label>Poster URL</label><input id="ePoster"></div>
       <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
-      <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-mm" id="eSubMM" onclick="setEditSubType('mm')">🇲🇲 MM Only</button><button class="toggle-opt" id="eSubTH" onclick="setEditSubType('th')">🇹🇭 TH Only</button><button class="toggle-opt" id="eSubBoth" onclick="setEditSubType('both')">🌐 Both</button></div><input type="hidden" id="eSubtitleType" value="mm"></div>
-      <div class="sub-type-hint"><strong>MM Only</strong> — မြန်မာ Subtitle သာပါသည်<br><strong>TH Only</strong> — Thai Subtitle သာပါသည်<br><strong>Both</strong> — MM + TH နှစ်ခုလုံးပါသည်</div>
+      <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap">
+        <button class="toggle-opt on-mm" id="eSubMM" onclick="setEditSubType('mm')">🇲🇲 MM</button>
+        <button class="toggle-opt" id="eSubTH" onclick="setEditSubType('th')">🇹🇭 TH</button>
+        <button class="toggle-opt" id="eSubEN" onclick="setEditSubType('en')">🇬🇧 EN</button>
+        <button class="toggle-opt" id="eSubBoth" onclick="setEditSubType('both')">🌐 All</button>
+      </div><input type="hidden" id="eSubtitleType" value="mm"></div>
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="eActorsWrap" onclick="document.getElementById('eActorInp').focus()"><input class="tag-inp" id="eActorInp" placeholder="Actor name..."></div><input type="hidden" id="eActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eActressesWrap" onclick="document.getElementById('eActressInp').focus()"><input class="tag-inp" id="eActressInp" placeholder="Actress name..."></div><input type="hidden" id="eActresses"></div>
       <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt" id="eStatusPub" onclick="setEditStatus('public')">Public</button><button class="toggle-opt" id="eStatusPrv" onclick="setEditStatus('private')">Private</button></div><input type="hidden" id="eStatus" value="public"></div>
-      <div class="form-section"><div class="form-section-label">Myanmar Sub Links</div></div>
+      <div class="form-section"><div class="form-section-label mm-label">MM Sub Links</div></div>
       <div class="f full"><label>MM Telegram</label><input id="eMmTelegram"></div>
       <div class="f full"><label>MM Streamtape</label><input id="eMmStream"></div>
       <div class="f full"><label>MM Mega</label><input id="eMmMega"></div>
-      <div class="form-section"><div class="form-section-label">Thai Sub Links</div></div>
+      <div class="form-section"><div class="form-section-label th-label">TH Sub Links</div></div>
       <div class="f full"><label>TH Telegram</label><input id="eThTelegram"></div>
       <div class="f full"><label>TH Streamtape</label><input id="eThStream"></div>
       <div class="f full"><label>TH Mega</label><input id="eThMega"></div>
+      <div class="form-section"><div class="form-section-label en-label">EN Sub Links</div></div>
+      <div class="f full"><label>EN Telegram</label><input id="eEnTelegram"></div>
+      <div class="f full"><label>EN Streamtape</label><input id="eEnStream"></div>
+      <div class="f full"><label>EN Mega</label><input id="eEnMega"></div>
       <div class="form-section"><div class="form-section-label">Synopsis</div></div>
       <div class="f full"><label>Myanmar Synopsis</label><textarea id="eDescMM"></textarea></div>
       <div class="f full"><label>Thai Synopsis</label><textarea id="eDescTH"></textarea></div>
@@ -499,14 +618,11 @@ let movies=[],analytics=[],pendingDelId=null;
 let allStatsDocs={};
 let curDateFilter='today';
 
-function uniqueSessions(events){const map=new Map();events.forEach(e=>{const k=e.sessionId||e.id;if(!map.has(k))map.set(k,e);});return[...map.values()];}
 function setSlStatus(state,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+state;el.innerHTML=state==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
 
-// DATE HELPERS
 function getDateKey(d){return d.toISOString().slice(0,10);}
 function getPastDates(days){const dates=[];const now=new Date();for(let i=0;i<days;i++){const d=new Date(now);d.setDate(d.getDate()-i);dates.push(getDateKey(d));}return dates;}
 
-// DATE FILTER
 window.setDateFilter=function(period,btn){
   curDateFilter=period;
   document.querySelectorAll('.df-btn').forEach(b=>b.classList.remove('on'));
@@ -523,25 +639,25 @@ function renderRealStats(){
   else if(curDateFilter==='365')dates=getPastDates(365);
   else dates=Object.keys(allStatsDocs);
 
-  let views=0,clicks=0,downloads=0,mobile=0,desktop=0,mm=0,th=0,total=0;
+  let views=0,clicks=0,downloads=0,mobile=0,desktop=0,mm=0,th=0,en=0,total=0;
   dates.forEach(d=>{
-    const doc=allStatsDocs[d];
-    if(!doc)return;
-    views+=doc.pageviews||0;
-    clicks+=doc.movieClicks||0;
-    downloads+=doc.downloads||0;
-    mobile+=doc.mobile||0;
-    desktop+=doc.desktop||0;
-    mm+=doc.langMM||0;
-    th+=doc.langTH||0;
-    total+=doc.total||0;
+    const docData=allStatsDocs[d];
+    if(!docData)return;
+    views+=docData.pageviews||0;
+    clicks+=docData.movieClicks||0;
+    downloads+=docData.downloads||0;
+    mobile+=docData.mobile||0;
+    desktop+=docData.desktop||0;
+    mm+=docData.langMM||0;
+    th+=docData.langTH||0;
+    en+=docData.langEN||0;
+    total+=docData.total||0;
   });
 
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v.toLocaleString();};
   set('rs-views',views);set('rs-clicks',clicks);set('rs-downloads',downloads);
-  set('rs-mobile',mobile);set('rs-desktop',desktop);set('rs-mm',mm);set('rs-th',th);set('rs-total',total);
+  set('rs-mobile',mobile);set('rs-desktop',desktop);set('rs-mm',mm);set('rs-th',th);set('rs-en',en);set('rs-total',total);
 
-  // Dashboard Downloads Today
   const todayDoc=allStatsDocs[today];
   const sdEl=document.getElementById('s-dl');
   if(sdEl)sdEl.textContent=(todayDoc?.downloads||0).toLocaleString();
@@ -552,7 +668,6 @@ async function loadAllStats(){
     const snap=await getDocs(collection(db,'stats'));
     snap.forEach(d=>{allStatsDocs[d.id]={...d.data()};});
     renderRealStats();
-    // Live update today
     const today=getDateKey(new Date());
     onSnapshot(doc(db,'stats',today),snap=>{
       if(snap.exists()){allStatsDocs[today]={...snap.data()};renderRealStats();}
@@ -600,6 +715,16 @@ function initAdmin(){
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
   tick();setInterval(tick,1000);
+  // Init post page forms
+  initCatGrid('mmCatGrid','mmGenre',[]);
+  initTags('mmActorsWrap','mmActorInp','mmActors',[]);
+  initTags('mmActressesWrap','mmActressInp','mmActresses',[]);
+  initCatGrid('thCatGrid','thGenre',[]);
+  initTags('thActorsWrap','thActorInp','thActors',[]);
+  initTags('thActressesWrap','thActressInp','thActresses',[]);
+  initCatGrid('enCatGrid','enGenre',[]);
+  initTags('enActorsWrap','enActorInp','enActors',[]);
+  initTags('enActressesWrap','enActressInp','enActresses',[]);
 }
 
 async function loadSettings(){
@@ -613,7 +738,7 @@ async function loadSettings(){
       if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;
       if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;
       setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
-    }else{setSlStatus('empty','✗ Settings မရှိသေးပါ — Save All Settings နှိပ်ပါ');}
+    }else{setSlStatus('empty','✗ Settings မရှိသေးပါ');}
   }catch(e){setSlStatus('empty','⚠ Firestore connect error');}
   const savedUrl=localStorage.getItem('ns_siteUrl');
   if(savedUrl)document.getElementById('siteUrl').value=savedUrl;
@@ -640,24 +765,28 @@ window.saveSettings=async function(){
 function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))return PROXY+encodeURIComponent(url)+'&w=96&h=54&fit=cover&output=webp';return url;}
 function hasMM(m){return(m.mmTelegram&&m.mmTelegram!=='#')||(m.mmStream&&m.mmStream!=='#')||(m.mmMega&&m.mmMega!=='#');}
 function hasTH(m){return(m.thTelegram&&m.thTelegram!=='#')||(m.thStream&&m.thStream!=='#')||(m.thMega&&m.thMega!=='#');}
+function hasEN(m){return(m.enTelegram&&m.enTelegram!=='#')||(m.enStream&&m.enStream!=='#')||(m.enMega&&m.enMega!=='#');}
 
 function subTypeBadge(m){
   const st=m.subtitleType||'';
   if(st==='mm')return '<span class="sb sb-mm">🇲🇲 MM</span>';
   if(st==='th')return '<span class="sb sb-th">🇹🇭 TH</span>';
-  if(st==='both')return '<span class="sb sb-mm">🇲🇲</span><span class="sb sb-th">🇹🇭</span>';
-  const mm=hasMM(m),th=hasTH(m);
-  return (mm?'<span class="sb sb-mm">MM</span>':'')+(th?'<span class="sb sb-th">TH</span>':'');
+  if(st==='en')return '<span class="sb sb-en">🇬🇧 EN</span>';
+  if(st==='both')return '<span class="sb sb-mm">🇲🇲</span><span class="sb sb-th">🇹🇭</span><span class="sb sb-en">🇬🇧</span>';
+  const mm=hasMM(m),th=hasTH(m),en=hasEN(m);
+  return (mm?'<span class="sb sb-mm">MM</span>':'')+(th?'<span class="sb sb-th">TH</span>':'')+(en?'<span class="sb sb-en">EN</span>':'');
 }
 
 function updateMovieStats(){
   const total=movies.length,pub=movies.filter(m=>m.status!=='private').length,prv=movies.filter(m=>m.status==='private').length;
-  const mm=movies.filter(m=>m.subtitleType==='mm'||(m.subtitleType==='both')||(!m.subtitleType&&hasMM(m))).length;
-  const th=movies.filter(m=>m.subtitleType==='th'||(m.subtitleType==='both')||(!m.subtitleType&&hasTH(m))).length;
-  const both=movies.filter(m=>m.subtitleType==='both'||(!m.subtitleType&&hasMM(m)&&hasTH(m))).length;
-  const none=movies.filter(m=>!hasMM(m)&&!hasTH(m)&&!m.subtitleType).length;
-  ['s-total','s-public','s-private','s-mm','s-th'].forEach((id,i)=>document.getElementById(id).textContent=[total,pub,prv,mm,th][i]);
-  ['sb-mm','sb-th','sb-both','sb-none'].forEach((id,i)=>document.getElementById(id).textContent=[mm,th,both,none][i]);
+  const mm=movies.filter(m=>m.subtitleType==='mm'||(!m.subtitleType&&hasMM(m))).length;
+  const th=movies.filter(m=>m.subtitleType==='th'||(!m.subtitleType&&hasTH(m))).length;
+  const en=movies.filter(m=>m.subtitleType==='en'||(!m.subtitleType&&hasEN(m))).length;
+  const both=movies.filter(m=>m.subtitleType==='both').length;
+  const none=movies.filter(m=>!hasMM(m)&&!hasTH(m)&&!hasEN(m)&&!m.subtitleType).length;
+  const setEl=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  setEl('s-total',total);setEl('s-public',pub);setEl('s-private',prv);setEl('s-mm',mm);setEl('s-th',th);setEl('s-en',en);
+  setEl('sb-mm',mm);setEl('sb-th',th);setEl('sb-en',en);setEl('sb-both',both);setEl('sb-none',none);
   document.getElementById('catLbl').textContent=total+' movies';
   const cc={};CATS.forEach(c=>cc[c]=0);
   movies.forEach(m=>{const gs=m.genres&&m.genres.length?m.genres:(m.genre?[m.genre]:[]);gs.forEach(g=>{if(cc[g]!==undefined)cc[g]++;});});
@@ -670,16 +799,17 @@ function updateMovieStats(){
 }
 
 function updateAnalytics(){
-  const sessions=uniqueSessions(analytics);
-  const lc={mm:0,th:0,en:0};sessions.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});
+  const sessions=analytics;
+  const lc={mm:0,th:0,en:0};
+  sessions.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});
   const lMax=Math.max(...Object.values(lc),1);
-  document.getElementById('langChart').innerHTML=Object.entries({mm:'Myanmar',th:'Thai',en:'English'}).map(([k,lbl])=>`<div class="bh-item"><div class="bh-label">${lbl}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#a78bfa'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
-  const sc={mmTelegram:0,mmStream:0,mmMega:0,thTelegram:0,thStream:0,thMega:0};
+  document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 Myanmar',th:'🇹🇭 Thai',en:'🇬🇧 English'}).map(([k,lbl])=>`<div class="bh-item"><div class="bh-label" style="width:100px">${lbl}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
+  const sc={mmTelegram:0,mmStream:0,mmMega:0,thTelegram:0,thStream:0,thMega:0,enTelegram:0,enStream:0,enMega:0};
   analytics.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
   const sMax=Math.max(...Object.values(sc),1);
-  const sClr={mmTelegram:'#29b6f6',mmStream:'#fc8181',mmMega:'#e53e3e',thTelegram:'#0891b2',thStream:'#60a5fa',thMega:'#3b82f6'};
-  const sLbl={mmTelegram:'MM Telegram',mmStream:'MM Stream',mmMega:'MM Mega',thTelegram:'TH Telegram',thStream:'TH Stream',thMega:'TH Mega'};
-  const dlRows=Object.entries(sc).filter(([k,n])=>n>0).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('');
+  const sClr={mmTelegram:'#29b6f6',mmStream:'#fc8181',mmMega:'#e53e3e',thTelegram:'#0891b2',thStream:'#60a5fa',thMega:'#3b82f6',enTelegram:'#a3e635',enStream:'#63b3ed',enMega:'#3182ce'};
+  const sLbl={mmTelegram:'MM Telegram',mmStream:'MM Stream',mmMega:'MM Mega',thTelegram:'TH Telegram',thStream:'TH Stream',thMega:'TH Mega',enTelegram:'EN Telegram',enStream:'EN Stream',enMega:'EN Mega'};
+  const dlRows=Object.entries(sc).filter(([,n])=>n>0).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('');
   document.getElementById('dlChart').innerHTML=dlRows||'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No downloads yet</div>';
   const countryMap={},cityMap={};
   sessions.forEach(e=>{if(e.country)countryMap[e.country]=(countryMap[e.country]||0)+1;if(e.city)cityMap[e.city]=(cityMap[e.city]||0)+1;});
@@ -697,6 +827,7 @@ function updateAnalytics(){
   document.getElementById('movieViewsTbl').innerHTML=mvList.length?mvList.map(([t,cn],i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${t}</strong></td><td style="color:var(--accent);font-weight:600">${cn}</td><td>${mvD[t]||0}</td><td style="color:var(--muted);font-size:.72rem">${((mvD[t]||0)/Math.max(cn,1)*100).toFixed(0)}%</td></tr>`).join(''):'<tr><td colspan="5" class="empty-tbl">No data yet</td></tr>';
 }
 
+// CAT & TAGS helpers
 function initCatGrid(gridId,hiddenId,selected=[]){
   const grid=document.getElementById(gridId);if(!grid)return;
   let sel=new Set(selected);
@@ -717,35 +848,71 @@ function initTags(wId,iId,hId,init=[]){
 }
 window.removeTag=function(wId,iId,hId,idx){const w=document.getElementById(wId);if(w&&w._tags){w._tags.splice(idx,1);w._render();}};
 function getTags(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
-function initAddModal(){initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);}
+
 function v(id){const el=document.getElementById(id);return el?(el.value.trim()||'#'):'#';}
 function sv(id,val){const el=document.getElementById(id);if(el)el.value=(val==='#'?'':val||'');}
-window.setPSubType=function(s){document.getElementById('pSubtitleType').value=s;document.getElementById('pSubMM').className='toggle-opt'+(s==='mm'?' on-mm':'');document.getElementById('pSubTH').className='toggle-opt'+(s==='th'?' on-th':'');document.getElementById('pSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');};
-window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;document.getElementById('aSubMM').className='toggle-opt'+(s==='mm'?' on-mm':'');document.getElementById('aSubTH').className='toggle-opt'+(s==='th'?' on-th':'');document.getElementById('aSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');};
-window.setEditSubType=function(s){document.getElementById('eSubtitleType').value=s;document.getElementById('eSubMM').className='toggle-opt'+(s==='mm'?' on-mm':'');document.getElementById('eSubTH').className='toggle-opt'+(s==='th'?' on-th':'');document.getElementById('eSubBoth').className='toggle-opt'+(s==='both'?' on-both':'');};
-async function saveMovie(data,msgId,btnId,btnTxt,onSuccess){
+
+// Status helpers
+window.setMMStatus=s=>{document.getElementById('mmStatus').value=s;document.getElementById('mmStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('mmStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
+window.setTHStatus=s=>{document.getElementById('thStatus').value=s;document.getElementById('thStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('thStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
+window.setENStatus=s=>{document.getElementById('enStatus').value=s;document.getElementById('enStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('enStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
+window.setStatus=s=>{document.getElementById('aStatus').value=s;document.getElementById('statusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('statusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
+window.setEditStatus=s=>{document.getElementById('eStatus').value=s;document.getElementById('eStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('eStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
+window.setSubType=s=>{document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
+window.setEditSubType=s=>{document.getElementById('eSubtitleType').value=s;['eSubMM','eSubTH','eSubEN','eSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'eSubMM',th:'eSubTH',en:'eSubEN',both:'eSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
+
+async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
-  try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'Saved!','ok');onSuccess();}
+  try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'✓ Saved!','ok');onSuccess();}
   catch(e){showMsg(msgId,'Error: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent=btnTxt;}
 }
-window.doPost=async function(){
-  const title=document.getElementById('pTitle').value.trim();if(!title){showMsg('postMsg','Add title','err');return;}
-  const cats=getCats('pGenre');const subtitleType=document.getElementById('pSubtitleType').value||'mm';
-  await saveMovie({title,year:parseInt(document.getElementById('pYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('pQuality').value,poster:document.getElementById('pPoster').value.trim()||'',status:document.getElementById('pStatus').value,subtitleType,actors:getTags('pActors'),actresses:getTags('pActresses'),mmTelegram:v('pMmTelegram'),mmStream:v('pMmStream'),mmMega:v('pMmMega'),thTelegram:v('pThTelegram'),thStream:v('pThStream'),thMega:v('pThMega'),descMM:document.getElementById('pDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('pDescTH').value.trim()||''},'postMsg','postBtn','Post Movie',()=>{
-    ['pTitle','pYear','pPoster','pMmTelegram','pMmStream','pMmMega','pThTelegram','pThStream','pThMega','pDescMM','pDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-    initCatGrid('pCatGrid','pGenre',[]);initTags('pActorsWrap','pActorInp','pActors',[]);initTags('pActressesWrap','pActressInp','pActresses',[]);setPStatus('public');setPSubType('mm');
+
+function clearForm(ids){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';})}
+
+// POST MM
+window.doPostMM=async function(){
+  const title=document.getElementById('mmTitle').value.trim();if(!title){showMsg('postMMMsg','Title ထည့်ပါ','err');return;}
+  const cats=getCats('mmGenre');
+  await saveMovieToDb({title,year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,subtitleType:'mm',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmMega:v('mmMega'),thTelegram:'#',thStream:'#',thMega:'#',enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
+    clearForm(['mmTitle','mmYear','mmPoster','mmTelegram','mmStream','mmMega','mmDescMM']);
+    initCatGrid('mmCatGrid','mmGenre',[]);initTags('mmActorsWrap','mmActorInp','mmActors',[]);initTags('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');
   });
 };
+
+// POST TH
+window.doPostTH=async function(){
+  const title=document.getElementById('thTitle').value.trim();if(!title){showMsg('postTHMsg','Title ထည့်ပါ','err');return;}
+  const cats=getCats('thGenre');
+  await saveMovieToDb({title,year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,subtitleType:'th',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thMega:v('thMega'),enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('thDescMM').value.trim()||'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
+    clearForm(['thTitle','thYear','thPoster','thTelegram','thStream','thMega','thDescMM','thDescTH']);
+    initCatGrid('thCatGrid','thGenre',[]);initTags('thActorsWrap','thActorInp','thActors',[]);initTags('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');
+  });
+};
+
+// POST EN
+window.doPostEN=async function(){
+  const title=document.getElementById('enTitle').value.trim();if(!title){showMsg('postENMsg','Title ထည့်ပါ','err');return;}
+  const cats=getCats('enGenre');
+  await saveMovieToDb({title,year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,subtitleType:'en',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:'#',thStream:'#',thMega:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enMega:v('enMega'),descMM:document.getElementById('enDescMM').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
+    clearForm(['enTitle','enYear','enPoster','enTelegram','enStream','enMega','enDescMM']);
+    initCatGrid('enCatGrid','enGenre',[]);initTags('enActorsWrap','enActorInp','enActors',[]);initTags('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');
+  });
+};
+
+// ADD modal
+window.openAdd=()=>{document.getElementById('moAdd').classList.add('open');initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);};
 window.doAdd=async function(){
-  const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Add title','err');return;}
+  const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('aGenre');const subtitleType=document.getElementById('aSubtitleType').value||'mm';
-  await saveMovie({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType,actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thMega:v('aThMega'),descMM:document.getElementById('aDescMM').value.trim()||'Myanmar subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
-    ['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmMega','aThTelegram','aThStream','aThMega','aDescMM','aDescTH'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType,actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thMega:v('aThMega'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enMega:v('aEnMega'),descMM:document.getElementById('aDescMM').value.trim()||'Subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
+    clearForm(['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmMega','aThTelegram','aThStream','aThMega','aEnTelegram','aEnStream','aEnMega','aDescMM','aDescTH']);
     initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
   });
 };
+
+// EDIT
 window._edit=function(id){
   const m=movies.find(x=>x.id===id);if(!m)return;
   document.getElementById('eId').value=m.id;document.getElementById('eTitle').value=m.title||'';document.getElementById('eYear').value=m.year||'';
@@ -753,21 +920,24 @@ window._edit=function(id){
   setEditStatus(m.status||'public');setEditSubType(m.subtitleType||'mm');
   initCatGrid('eCatGrid','eGenre',m.genres||(m.genre?[m.genre]:[]));
   initTags('eActorsWrap','eActorInp','eActors',m.actors||[]);initTags('eActressesWrap','eActressInp','eActresses',m.actresses||[]);
-  sv('eMmTelegram',m.mmTelegram);sv('eMmStream',m.mmStream);sv('eMmMega',m.mmMega);sv('eThTelegram',m.thTelegram);sv('eThStream',m.thStream);sv('eThMega',m.thMega);
+  sv('eMmTelegram',m.mmTelegram);sv('eMmStream',m.mmStream);sv('eMmMega',m.mmMega);
+  sv('eThTelegram',m.thTelegram);sv('eThStream',m.thStream);sv('eThMega',m.thMega);
+  sv('eEnTelegram',m.enTelegram);sv('eEnStream',m.enStream);sv('eEnMega',m.enMega);
   document.getElementById('eDescMM').value=m.descMM||'';document.getElementById('eDescTH').value=m.descTH||'';
   document.getElementById('moEdit').classList.add('open');
 };
 window.doEdit=async function(){
   const id=document.getElementById('eId').value,title=document.getElementById('eTitle').value.trim();
-  if(!id||!title){showMsg('editMsg','Add title','err');return;}
+  if(!id||!title){showMsg('editMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('eGenre');const subtitleType=document.getElementById('eSubtitleType').value||'mm';
   const btn=document.getElementById('editBtn');btn.disabled=true;btn.textContent='Saving...';
   try{
-    await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,subtitleType,actors:getTags('eActors'),actresses:getTags('eActresses'),mmTelegram:v('eMmTelegram'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thTelegram:v('eThTelegram'),thStream:v('eThStream'),thMega:v('eThMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
-    showMsg('editMsg','Changes saved!','ok');setTimeout(()=>moClose('moEdit'),1500);
+    await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,subtitleType,actors:getTags('eActors'),actresses:getTags('eActresses'),mmTelegram:v('eMmTelegram'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thTelegram:v('eThTelegram'),thStream:v('eThStream'),thMega:v('eThMega'),enTelegram:v('eEnTelegram'),enStream:v('eEnStream'),enMega:v('eEnMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
+    showMsg('editMsg','✓ Changes saved!','ok');setTimeout(()=>moClose('moEdit'),1500);
   }catch(e){showMsg('editMsg','Error: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent='Save Changes';}
 };
+
 window._del=function(id,title){pendingDelId=id;document.getElementById('confMsg').textContent=`Delete "${title}"?`;document.getElementById('confDel').classList.add('open');};
 window.doDel=async function(){
   if(!pendingDelId)return;
@@ -776,6 +946,7 @@ window.doDel=async function(){
   try{await deleteDoc(doc(db,'movies',pendingDelId));confClose();}
   catch(e){alert('Delete Error: '+e.message);if(btn){btn.disabled=false;btn.textContent='Delete';}}
 };
+
 window.renderMvTable=function(){
   const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
   const show=movies.filter(m=>!q||(m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q)));
@@ -786,26 +957,62 @@ window.renderMvTable=function(){
     return `<tr><td><img class="mv-img" src="${ps(m.poster)}" onerror="this.src='${FALLBACK}'" alt=""></td><td><strong>${m.title||''}</strong>${(m.actors&&m.actors.length)?'<br><span style="font-size:.62rem;color:var(--muted)">'+m.actors.slice(0,2).join(', ')+'</span>':''}</td><td>${m.year||''}</td><td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td><td>${m.quality||''}</td><td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td><td><div class="sub-bs">${subTypeBadge(m)}</div></td><td><div class="acts"><button class="btn-e" data-id="${m.id}" onclick="window._edit(this.dataset.id)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-d" data-id="${m.id}" data-title="${safeTitle}" onclick="window._del(this.dataset.id,this.dataset.title)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div></td></tr>`;
   }).join('');
 };
-window.setStatus=function(s){document.getElementById('aStatus').value=s;document.getElementById('statusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('statusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
-window.setEditStatus=function(s){document.getElementById('eStatus').value=s;document.getElementById('eStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('eStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
-window.setPStatus=function(s){document.getElementById('pStatus').value=s;document.getElementById('pStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('pStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
+
 window.openSite=function(){const url=localStorage.getItem('ns_siteUrl')||'index.html';window.open(url+'?v='+Date.now(),'_blank');};
-function showMsg(id,text,type){const el=document.getElementById(id);el.textContent=text;el.className='mo-msg '+type;}
-window.openAdd=()=>{document.getElementById('moAdd').classList.add('open');initAddModal();};
+function showMsg(id,text,type){const el=document.getElementById(id);if(!el)return;el.textContent=text;el.className='mo-msg '+type;}
 window.moClose=(id)=>document.getElementById(id).classList.remove('open');
 window.moBg=(e,id)=>{if(e.target.id===id)window.moClose(id);};
 window.confClose=()=>{document.getElementById('confDel').classList.remove('open');pendingDelId=null;};
+
+// Navigation - main nav items
 window.showPg=function(id,el){
+  // If clicking Post Movie parent, default to post-mm
+  if(id==='post-mm'||id==='post-th'||id==='post-en'){
+    showSubPg(id, document.getElementById('nav-'+id));
+    // Also mark parent nav item
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
+    document.getElementById('nav-post').classList.add('on');
+    return;
+  }
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
-  document.getElementById('pg-'+id).classList.add('on');el.classList.add('on');
-  document.getElementById('tbTitle').textContent={dashboard:'Dashboard',analytics:'Analytics',movies:'Movies',post:'Post Movie',settings:'Settings'}[id]||id;
+  document.querySelectorAll('.nav-sub-item').forEach(n=>n.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  el.classList.add('on');
+  const titles={dashboard:'Dashboard',analytics:'Analytics',movies:'Movies',settings:'Settings'};
+  document.getElementById('tbTitle').textContent=titles[id]||id;
   localStorage.setItem('ns_lastPage',id);
   if(id==='movies')renderMvTable();
-  if(id==='post'){if(!document.getElementById('pCatGrid').children.length)initCatGrid('pCatGrid','pGenre',[]);if(!document.getElementById('pActorInp').dataset.init){initTags('pActorsWrap','pActorInp','pActors',[]);initTags('pActressesWrap','pActressInp','pActresses',[]);document.getElementById('pActorInp').dataset.init='1';}}
 };
-(()=>{const last=localStorage.getItem('ns_lastPage')||'dashboard';if(last!=='dashboard'){const navEl=document.querySelector(`.nav-item[onclick*="'${last}'"]`);if(navEl)window.showPg(last,navEl);}})();
+
+// Sub page navigation for Post Movie
+window.showSubPg=function(id,el){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav-sub-item').forEach(n=>n.classList.remove('on'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
+  document.getElementById('pg-'+id).classList.add('on');
+  el.classList.add('on');
+  document.getElementById('nav-post').classList.add('on');
+  const titles={'post-mm':'Post — 🇲🇲 Myanmar Sub','post-th':'Post — 🇹🇭 Thai Sub','post-en':'Post — 🇬🇧 English Sub'};
+  document.getElementById('tbTitle').textContent=titles[id]||'Post Movie';
+  localStorage.setItem('ns_lastPage',id);
+};
+
+// Restore last page
+(()=>{
+  const last=localStorage.getItem('ns_lastPage')||'dashboard';
+  const navEl=document.getElementById('nav-'+last);
+  if(navEl){
+    if(last==='post-mm'||last==='post-th'||last==='post-en'){
+      window.showSubPg(last,navEl);
+    } else if(last!=='dashboard'){
+      window.showPg(last,navEl);
+    }
+  }
+})();
+
 function tick(){const el=document.getElementById('tbTime');if(el)el.textContent=new Date().toLocaleString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit',day:'2-digit',month:'short'});}
 </script>
 </body>
 </html>
+
