@@ -117,7 +117,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .status-badge.public{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;}
 .status-badge.private{background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.25);color:#94a3b8;}
 .acts{display:flex;gap:.3rem;align-items:center;flex-wrap:wrap;}
-/* Language-specific edit buttons */
 .btn-e-mm{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#fc8181;padding:.28rem .55rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.25rem;transition:all .2s;font-size:.65rem;font-weight:700;font-family:'DM Sans',sans-serif;white-space:nowrap;}
 .btn-e-mm:hover{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.5);}
 .btn-e-th{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);color:#60a5fa;padding:.28rem .55rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.25rem;transition:all .2s;font-size:.65rem;font-weight:700;font-family:'DM Sans',sans-serif;white-space:nowrap;}
@@ -140,7 +139,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .post-banner.mm-banner .pb-info h2{color:#fc8181;}
 .post-banner.th-banner .pb-info h2{color:#60a5fa;}
 .post-banner.en-banner .pb-info h2{color:#63b3ed;}
-/* Edit page banner */
 .edit-banner{border-radius:14px;padding:1rem 1.4rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem;justify-content:space-between;}
 .edit-banner.mm-edit{background:rgba(239,68,68,.06);border:1.5px solid rgba(239,68,68,.2);}
 .edit-banner.th-edit{background:rgba(59,130,246,.06);border:1.5px solid rgba(59,130,246,.2);}
@@ -250,8 +248,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .post-form-wrap.mm-form{border-color:rgba(239,68,68,.25);}
 .post-form-wrap.th-form{border-color:rgba(59,130,246,.25);}
 .post-form-wrap.en-form{border-color:rgba(99,179,237,.25);}
-
-/* Content Type toggle */
 .ct-toggle{grid-column:1/-1;display:flex;gap:.6rem;align-items:center;margin-top:.2rem;}
 .ct-toggle label{font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
 .ct-opt{padding:.38rem .85rem;cursor:pointer;font-size:.75rem;font-weight:600;font-family:'DM Sans',sans-serif;border:1.5px solid var(--border);background:var(--card);color:var(--muted);border-radius:7px;transition:all .2s;}
@@ -259,7 +255,17 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .ct-opt.on-gen{background:rgba(16,185,129,.12);border-color:#10b981;color:#34d399;}
 .ct-opt.on-jav{background:rgba(239,68,68,.14);border-color:#f87171;color:#f87171;}
 .ct-opt.on-wes{background:rgba(139,92,246,.14);border-color:#a78bfa;color:#a78bfa;}
-
+/* Sub-type tab filter */
+.sub-tab-bar{display:flex;gap:.35rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center;}
+.sub-tab{padding:.32rem .9rem;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.76rem;font-weight:600;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:.4rem;}
+.sub-tab:hover{border-color:var(--accent);color:var(--text);}
+.sub-tab.on-all{background:rgba(240,180,41,.12);border-color:var(--accent);color:var(--accent);}
+.sub-tab.on-mm{background:rgba(239,68,68,.12);border-color:#f87171;color:#fc8181;}
+.sub-tab.on-th{background:rgba(59,130,246,.12);border-color:#60a5fa;color:#60a5fa;}
+.sub-tab.on-en{background:rgba(99,179,237,.12);border-color:#63b3ed;color:#63b3ed;}
+.sub-tab.on-both{background:rgba(240,180,41,.12);border-color:var(--accent);color:var(--accent);}
+.mv-count-badge{font-size:.68rem;color:var(--muted);margin-left:auto;align-self:center;}
+.mv-count-badge span{color:var(--text);font-weight:600;}
 </style>
 </head>
 <body>
@@ -306,7 +312,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="nav-sub-item mm-item" id="nav-post-mm" onclick="showSubPg('post-mm',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> Myanmar Sub</div>
     <div class="nav-sub-item th-item" id="nav-post-th" onclick="showSubPg('post-th',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Thai Sub</div>
     <div class="nav-sub-item en-item" id="nav-post-en" onclick="showSubPg('post-en',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> English Sub</div>
-    <!-- EDIT nav — always visible -->
     <div class="nav-item" id="nav-edit">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit Movie
     </div>
@@ -405,6 +410,14 @@ tr:hover td{background:rgba(240,180,41,.02);}
 
     <!-- MOVIES LIST -->
     <div class="pg" id="pg-movies">
+      <div class="sub-tab-bar">
+        <button class="sub-tab on-all" id="stab-all" onclick="setSubTab('all',this)">&#9646; All <span id="stab-all-cnt" style="font-size:.65rem;opacity:.7"></span></button>
+        <button class="sub-tab" id="stab-mm" onclick="setSubTab('mm',this)"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> Myanmar Sub <span id="stab-mm-cnt" style="font-size:.65rem;opacity:.7"></span></button>
+        <button class="sub-tab" id="stab-th" onclick="setSubTab('th',this)"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Thai Sub <span id="stab-th-cnt" style="font-size:.65rem;opacity:.7"></span></button>
+        <button class="sub-tab" id="stab-en" onclick="setSubTab('en',this)"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> English Sub <span id="stab-en-cnt" style="font-size:.65rem;opacity:.7"></span></button>
+        <button class="sub-tab" id="stab-both" onclick="setSubTab('both',this)">&#127758; Both/All <span id="stab-both-cnt" style="font-size:.65rem;opacity:.7"></span></button>
+        <span class="mv-count-badge">Showing <span id="mvShowCount">-</span> movies</span>
+      </div>
       <div class="toolbar">
         <div class="m-srch"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="movieSrch" placeholder="Movie search..." oninput="renderMvTable()"></div>
         <div style="flex:1"></div>
@@ -415,6 +428,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <tbody id="mvTbody"><tr><td colspan="8" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
     </div>
+
     <!-- POST MM -->
     <div class="pg" id="pg-post-mm">
       <div class="post-banner mm-banner"><span class="pb-flag"><svg width="40" height="28" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span><div class="pb-info"><h2>Post Myanmar Subtitle Movie</h2><p>Myanmar Subtitle Movie များ Post တင်ရန်</p></div></div>
@@ -505,19 +519,12 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="mo-msg" id="postENMsg"></div>
       </div></div>
     </div>
+
     <!-- EDIT MM PAGE -->
     <div class="pg" id="pg-edit-mm">
-      <button class="btn-back" onclick="goBackToMovies()">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies
-      </button>
+      <button class="btn-back" onclick="goBackToMovies()"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies</button>
       <div class="edit-banner mm-edit">
-        <div class="edit-banner-left">
-          <span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span>
-          <div>
-            <div class="eb-title">Edit Myanmar Sub Movie</div>
-            <div class="eb-sub">Movie info + MM subtitle links ပြင်ဆင်ရန်</div>
-          </div>
-        </div>
+        <div class="edit-banner-left"><span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span><div><div class="eb-title">Edit Myanmar Sub Movie</div><div class="eb-sub">Movie info + MM subtitle links ပြင်ဆင်ရန်</div></div></div>
         <span class="editing-tag mm" id="editTagMM">-</span>
       </div>
       <div class="post-form-wrap mm-form"><div class="mo-form" style="padding:0">
@@ -543,24 +550,16 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Mega</label><input id="eMMMega" placeholder="https://mega.nz/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>Synopsis (MM)</label><textarea id="eMMDescMM" placeholder="Myanmar synopsis..."></textarea></div>
-        
         <button class="mo-btn mm-btn" id="saveMMBtn" onclick="doSaveEdit('MM')" style="margin-top:.5rem">&#127474;&#127484; Save MM Changes</button>
         <div class="mo-msg" id="editMMMsg"></div>
       </div></div>
     </div>
+
     <!-- EDIT TH PAGE -->
     <div class="pg" id="pg-edit-th">
-      <button class="btn-back" onclick="goBackToMovies()">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies
-      </button>
+      <button class="btn-back" onclick="goBackToMovies()"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies</button>
       <div class="edit-banner th-edit">
-        <div class="edit-banner-left">
-          <span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></span>
-          <div>
-            <div class="eb-title">Edit Thai Sub Movie</div>
-            <div class="eb-sub">Movie info + TH subtitle links ပြင်ဆင်ရန်</div>
-          </div>
-        </div>
+        <div class="edit-banner-left"><span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></span><div><div class="eb-title">Edit Thai Sub Movie</div><div class="eb-sub">Movie info + TH subtitle links ပြင်ဆင်ရန်</div></div></div>
         <span class="editing-tag th" id="editTagTH">-</span>
       </div>
       <div class="post-form-wrap th-form"><div class="mo-form" style="padding:0">
@@ -591,19 +590,12 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="mo-msg" id="editTHMsg"></div>
       </div></div>
     </div>
+
     <!-- EDIT EN PAGE -->
     <div class="pg" id="pg-edit-en">
-      <button class="btn-back" onclick="goBackToMovies()">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies
-      </button>
+      <button class="btn-back" onclick="goBackToMovies()"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies</button>
       <div class="edit-banner en-edit">
-        <div class="edit-banner-left">
-          <span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></span>
-          <div>
-            <div class="eb-title">Edit English Sub Movie</div>
-            <div class="eb-sub">Movie info + EN subtitle links ပြင်ဆင်ရန်</div>
-          </div>
-        </div>
+        <div class="edit-banner-left"><span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></span><div><div class="eb-title">Edit English Sub Movie</div><div class="eb-sub">Movie info + EN subtitle links ပြင်ဆင်ရန်</div></div></div>
         <span class="editing-tag en" id="editTagEN">-</span>
       </div>
       <div class="post-form-wrap en-form"><div class="mo-form" style="padding:0">
@@ -629,11 +621,11 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Mega</label><input id="eENMega" placeholder="https://mega.nz/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>Synopsis (MM)</label><textarea id="eENDescMM" placeholder="Myanmar synopsis..."></textarea></div>
-        
         <button class="mo-btn en-btn" id="saveENBtn" onclick="doSaveEdit('EN')" style="margin-top:.5rem">&#127468;&#127463; Save EN Changes</button>
         <div class="mo-msg" id="editENMsg"></div>
       </div></div>
     </div>
+
     <!-- SETTINGS -->
     <div class="pg" id="pg-settings">
       <div class="chart-card" style="max-width:620px">
@@ -683,12 +675,12 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
       <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="statusPub" onclick="setStatus('public')">Public</button><button class="toggle-opt" id="statusPrv" onclick="setStatus('private')">Private</button></div><input type="hidden" id="aStatus" value="public"></div>
-        <div class="ct-toggle"><label>Content Type:</label>
-          <button class="ct-opt on-gen" id="aCtGen" onclick="setCT('a','general')">&#127916; General</button>
-          <button class="ct-opt" id="aCtJav" onclick="setCT('a','jav')">&#128286; JAV</button>
-          <button class="ct-opt" id="aCtWes" onclick="setCT('a','western')">&#128286; Western</button>
-          <input type="hidden" id="aContentType" value="general">
-        </div>
+      <div class="ct-toggle"><label>Content Type:</label>
+        <button class="ct-opt on-gen" id="aCtGen" onclick="setCT('a','general')">&#127916; General</button>
+        <button class="ct-opt" id="aCtJav" onclick="setCT('a','jav')">&#128286; JAV</button>
+        <button class="ct-opt" id="aCtWes" onclick="setCT('a','western')">&#128286; Western</button>
+        <input type="hidden" id="aContentType" value="general">
+      </div>
       <div class="form-section"><div class="form-section-label mm-label">MM Sub Links</div></div>
       <div class="f full"><label>MM Telegram</label><input id="aMmTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>MM Streamtape</label><input id="aMmStream" placeholder="https://streamtape.com/v/..."></div>
@@ -717,6 +709,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="conf-acts"><button class="btn-no" onclick="confClose()">Cancel</button><button class="btn-yes" onclick="doDel()">Delete</button></div>
   </div>
 </div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getFirestore,collection,addDoc,updateDoc,deleteDoc,doc,query,orderBy,onSnapshot,serverTimestamp,limit,setDoc,getDoc,getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
@@ -730,7 +723,7 @@ const FALLBACK='https://placehold.co/48x27/111820/64748b?text=?';
 const CATS=['Japanese','Korean','Chinese','English','Spanish','Turkish','4K','2K'];
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
-let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today';
+let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all';
 
 function setSlStatus(s,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+s;el.innerHTML=s==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
 function getDateKey(d){return d.toISOString().slice(0,10);}
@@ -778,7 +771,6 @@ function initAdmin(){
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
   tick();setInterval(tick,1000);
-  // Init post page tag inputs
   ['mm','th','en'].forEach(l=>{
     initCatGrid(l+'CatGrid',l+'Genre',[]);
     initTagsFixed(l+'ActorsWrap',l+'ActorInp',l+'Actors',[]);
@@ -804,7 +796,7 @@ window.saveSettings=async function(){
   try{await setDoc(doc(db,'settings','global'),{smartLink:sl||'',socialTelegram:tg||'',socialFacebook:fb||'',socialTiktok:tt||''},{merge:true});ok.style.display='inline';setTimeout(()=>ok.style.display='none',3000);setSlStatus(sl?'ok':'empty',sl?'✓ Saved':'Settings saved');}
   catch(e){er.textContent='✗ Error: '+e.message;er.style.display='inline';setSlStatus('empty','✗ Save မအောင်မြင်');}
 };
-// ── HELPERS ──────────────────────────────────────────────────────────────
+
 function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))return PROXY+encodeURIComponent(url)+'&w=96&h=54&fit=cover&output=webp';return url;}
 function hasMM(m){return!!(m.mmTelegram&&m.mmTelegram!=='#'||m.mmStream&&m.mmStream!=='#'||m.mmMega&&m.mmMega!=='#');}
 function hasTH(m){return!!(m.thTelegram&&m.thTelegram!=='#'||m.thStream&&m.thStream!=='#'||m.thMega&&m.thMega!=='#');}
@@ -818,7 +810,6 @@ function clearForm(ids){ids.forEach(id=>{const el=document.getElementById(id);if
 function getTags(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
 function getCats(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
 
-// ── CAT GRID ─────────────────────────────────────────────────────────────
 function initCatGrid(gridId,hiddenId,selected=[]){
   const grid=document.getElementById(gridId);if(!grid)return;
   let sel=new Set(selected);
@@ -827,7 +818,6 @@ function initCatGrid(gridId,hiddenId,selected=[]){
 }
 window.toggleCat=function(gId,hId,cat){const g=document.getElementById(gId);if(!g||!g._sel)return;if(g._sel.has(cat))g._sel.delete(cat);else g._sel.add(cat);document.getElementById(hId).value=JSON.stringify([...g._sel]);g._render();};
 
-// ── TAG INPUT (fixed: Enter/comma only, no blur-add) ──────────────────────
 function initTagsFixed(wId,iId,hId,init=[]){
   const wrap=document.getElementById(wId),inp=document.getElementById(iId);if(!wrap||!inp)return;
   let tags=[...init];
@@ -843,17 +833,14 @@ function initTagsFixed(wId,iId,hId,init=[]){
   wrap._tags=tags;wrap._render=render;wrap._addTag=addTag;render();
 }
 
-// ── STATUS SETTERS ────────────────────────────────────────────────────────
 function setToggle(pubId,prvId,hidId,s){document.getElementById(hidId).value=s;document.getElementById(pubId).className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById(prvId).className='toggle-opt'+(s==='private'?' on-prv':'');}
 window.setMMStatus=s=>setToggle('mmStatusPub','mmStatusPrv','mmStatus',s);
 window.setTHStatus=s=>setToggle('thStatusPub','thStatusPrv','thStatus',s);
 window.setENStatus=s=>setToggle('enStatusPub','enStatusPrv','enStatus',s);
 window.setStatus=s=>setToggle('statusPub','statusPrv','aStatus',s);
-// Generic edit status setter — called by setESt('MM','public') etc
 window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s);};
 window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
 
-// ── DASHBOARD STATS ───────────────────────────────────────────────────────
 function updateMovieStats(){
   const total=movies.length,pub=movies.filter(m=>m.status!=='private').length,prv=movies.filter(m=>m.status==='private').length;
   const mm=movies.filter(m=>m.subtitleType==='mm'||(!m.subtitleType&&hasMM(m))).length;
@@ -864,6 +851,7 @@ function updateMovieStats(){
   const s=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
   s('s-total',total);s('s-public',pub);s('s-private',prv);s('s-mm',mm);s('s-th',th);s('s-en',en);s('sb-mm',mm);s('sb-th',th);s('sb-en',en);s('sb-both',both);s('sb-none',none);
   document.getElementById('catLbl').textContent=total+' movies';
+  updateTabCounts();
   const cc={};CATS.forEach(c=>cc[c]=0);movies.forEach(m=>{const gs=m.genres?.length?m.genres:(m.genre?[m.genre]:[]);gs.forEach(g=>{if(cc[g]!==undefined)cc[g]++;});});
   const cMax=Math.max(...Object.values(cc),1);
   document.getElementById('catChart').innerHTML=CATS.map((c,i)=>`<div class="bh-item"><div class="bh-label">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(cc[c]/cMax)*100}%;background:${CAT_CLR[i]}"></div></div><div class="bh-val">${cc[c]}</div></div>`).join('');
@@ -895,23 +883,45 @@ function updateAnalytics(){
   const mvList=Object.entries(mvC).sort((a,b)=>b[1]-a[1]).slice(0,10);
   document.getElementById('movieViewsTbl').innerHTML=mvList.length?mvList.map(([t,cn],i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${t}</strong></td><td style="color:var(--accent);font-weight:600">${cn}</td><td>${mvD[t]||0}</td><td style="color:var(--muted);font-size:.72rem">${((mvD[t]||0)/Math.max(cn,1)*100).toFixed(0)}%</td></tr>`).join(''):'<tr><td colspan="5" class="empty-tbl">No data yet</td></tr>';
 }
-// ── MOVIES TABLE — language-specific edit buttons ─────────────────────────
+
+// ── SUB TAB FILTER ────────────────────────────────────────────────────────
+function updateTabCounts(){
+  const counts={all:movies.length,mm:0,th:0,en:0,both:0};
+  movies.forEach(m=>{const st=m.subtitleType||'';if(counts[st]!==undefined)counts[st]++;});
+  ['all','mm','th','en','both'].forEach(k=>{
+    const el=document.getElementById('stab-'+k+'-cnt');
+    if(el)el.textContent='('+counts[k]+')';
+  });
+}
+
+window.setSubTab=function(tab,btn){
+  curSubTab=tab;
+  document.querySelectorAll('.sub-tab').forEach(b=>{b.className='sub-tab';});
+  btn.className='sub-tab on-'+tab;
+  renderMvTable();
+};
+
+// ── MOVIES TABLE ──────────────────────────────────────────────────────────
 window.renderMvTable=function(){
   const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
-  const show=movies.filter(m=>!q||(m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q)));
+  const show=movies.filter(m=>{
+    if(curSubTab!=='all'&&(m.subtitleType||'')!==curSubTab)return false;
+    if(!q)return true;
+    return (m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q));
+  });
+  updateTabCounts();
+  const cntEl=document.getElementById('mvShowCount');if(cntEl)cntEl.textContent=show.length;
   const tb=document.getElementById('mvTbody');
   if(!show.length){tb.innerHTML='<tr><td colspan="8" class="empty-tbl">No movies found</td></tr>';return;}
   tb.innerHTML=show.map(m=>{
     const st=m.subtitleType||'';
     const safeT=(m.title||'').replace(/"/g,'&quot;');
-    // Build edit buttons — only show the language(s) this movie has
     let edits='';
     if(st==='mm') edits=`<button class="btn-e-mm" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'mm')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> Edit</button>`;
     else if(st==='th') edits=`<button class="btn-e-th" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'th')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Edit</button>`;
     else if(st==='en') edits=`<button class="btn-e-en" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'en')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> Edit</button>`;
     else if(st==='both') edits=`<button class="btn-e-mm" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'mm')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></button><button class="btn-e-th" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'th')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></button><button class="btn-e-en" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'en')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></button>`;
-    else{// legacy/unknown — show all 3
-      edits=`<button class="btn-e-mm" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'mm')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></button><button class="btn-e-th" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'th')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></button><button class="btn-e-en" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'en')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></button>`;}
+    else{edits=`<button class="btn-e-mm" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'mm')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></button><button class="btn-e-th" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'th')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></button><button class="btn-e-en" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'en')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></button>`;}
     return `<tr>
       <td><img class="mv-img" src="${ps(m.poster)}" onerror="this.src='${FALLBACK}'" alt=""></td>
       <td><strong>${m.title||''}</strong>${m.actors?.length?'<br><span style="font-size:.62rem;color:var(--muted)">'+m.actors.slice(0,2).join(', ')+'</span>':''}</td>
@@ -925,10 +935,9 @@ window.renderMvTable=function(){
   }).join('');
 };
 
-// ── OPEN EDIT PAGE ────────────────────────────────────────────────────────
 window.openEditPage=function(id,lang){
   const m=movies.find(x=>x.id===id);if(!m)return;
-  const lu=lang.toUpperCase(); // 'MM','TH','EN'
+  const lu=lang.toUpperCase();
   document.getElementById('e'+lu+'Id').value=m.id;
   document.getElementById('e'+lu+'Title').value=m.title||'';
   document.getElementById('e'+lu+'Year').value=m.year||'';
@@ -938,22 +947,17 @@ window.openEditPage=function(id,lang){
   initCatGrid('e'+lu+'CatGrid','e'+lu+'Genre',m.genres||(m.genre?[m.genre]:[]));
   initTagsFixed('e'+lu+'ActorsWrap','e'+lu+'ActorInp','e'+lu+'Actors',m.actors||[]);
   initTagsFixed('e'+lu+'ActressesWrap','e'+lu+'ActressInp','e'+lu+'Actresses',m.actresses||[]);
-  // Set language-specific link fields
-  if(lang==='mm'){sv('eMMTelegram',m.mmTelegram);sv('eMMStream',m.mmStream);sv('eMMmMega',m.mmMega);}
+  if(lang==='mm'){sv('eMMTelegram',m.mmTelegram);sv('eMMStream',m.mmStream);sv('eMMMega',m.mmMega);}
   if(lang==='th'){sv('eTHTelegram',m.thTelegram);sv('eTHStream',m.thStream);sv('eTHMega',m.thMega);}
   if(lang==='en'){sv('eENTelegram',m.enTelegram);sv('eENStream',m.enStream);sv('eENMega',m.enMega);}
   document.getElementById('e'+lu+'DescMM').value=m.descMM||'';
   if(lang==='th'&&document.getElementById('eTHDescTH'))document.getElementById('eTHDescTH').value=m.descTH||'';
-  // Populate contentType toggle
   const ctVal=m.contentType||'general';
   window.setCT('e'+lu,ctVal);
-  // Update banner tag
   document.getElementById('editTag'+lu).textContent=m.title||'-';
-  // Edit nav always visible - just highlight active
   showSubPg('edit-'+lang,document.getElementById('nav-edit-'+lang));
 };
 
-// ── SAVE EDIT (generic — called per language) ─────────────────────────────
 window.doSaveEdit=async function(lu){
   const lang=lu.toLowerCase();
   const id=document.getElementById('e'+lu+'Id').value,title=document.getElementById('e'+lu+'Title').value.trim();
@@ -961,7 +965,7 @@ window.doSaveEdit=async function(lu){
   const cats=getCats('e'+lu+'Genre');
   const btn=document.getElementById('save'+lu+'Btn');btn.disabled=true;btn.textContent='Saving...';
   const data={title,year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
-  if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmMega=v('eMMmMega');}
+  if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmMega=v('eMMMega');}
   if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thMega=v('eTHMega');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
   if(lang==='en'){data.enTelegram=v('eENTelegram');data.enStream=v('eENStream');data.enMega=v('eENMega');}
   try{
@@ -973,12 +977,8 @@ window.doSaveEdit=async function(lu){
   finally{btn.disabled=false;btn.textContent='Save '+lu+' Changes';}
 };
 
-window.goBackToMovies=function(){
-  // Edit nav stays visible
-  showPg('movies',document.getElementById('nav-movies'));
-};
+window.goBackToMovies=function(){showPg('movies',document.getElementById('nav-movies'));};
 
-// ── POST FUNCTIONS ────────────────────────────────────────────────────────
 async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'✓ Saved!','ok');onSuccess();}
@@ -1011,7 +1011,6 @@ window.doPostEN=async function(){
   });
 };
 
-// ── ADD MODAL ──────────────────────────────────────────────────────────────
 window.openAdd=()=>{document.getElementById('moAdd').classList.add('open');initCatGrid('aCatGrid','aGenre',[]);initTagsFixed('aActorsWrap','aActorInp','aActors',[]);initTagsFixed('aActressesWrap','aActressInp','aActresses',[]);};
 window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Title ထည့်ပါ','err');return;}
@@ -1023,7 +1022,6 @@ window.doAdd=async function(){
   });
 };
 
-// ── DELETE ─────────────────────────────────────────────────────────────────
 window._del=function(id,title){pendingDelId=id;document.getElementById('confMsg').textContent=`Delete "${title}"?`;document.getElementById('confDel').classList.add('open');};
 window.doDel=async function(){
   if(!pendingDelId)return;const btn=document.querySelector('#confDel .btn-yes');
@@ -1032,7 +1030,6 @@ window.doDel=async function(){
   catch(e){alert('Delete Error: '+e.message);if(btn){btn.disabled=false;btn.textContent='Delete';}}
 };
 
-// ── NAVIGATION ────────────────────────────────────────────────────────────
 window.openSite=function(){const url=localStorage.getItem('ns_siteUrl')||'index.html';window.open(url+'?v='+Date.now(),'_blank');};
 window.moClose=id=>document.getElementById(id).classList.remove('open');
 window.moBg=(e,id)=>{if(e.target.id===id)window.moClose(id);};
@@ -1060,7 +1057,6 @@ window.showSubPg=function(id,el){
   localStorage.setItem('ns_lastPage',id);
 };
 
-// Restore last page on load — skip edit pages (need data)
 (()=>{
   const last=localStorage.getItem('ns_lastPage')||'dashboard';
   if(last.startsWith('edit-')){return;}
@@ -1071,8 +1067,6 @@ window.showSubPg=function(id,el){
   }
 })();
 
-
-// ── CONTENT TYPE SETTERS ─────────────────────────────────────────────────
 window.setCT=function(prefix,val){
   document.getElementById(prefix+'ContentType').value=val;
   ['Gen','Jav','Wes'].forEach(s=>document.getElementById(prefix+'Ct'+s).className='ct-opt');
