@@ -33,7 +33,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .nav-item{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.2rem;cursor:pointer;transition:all .2s;border-left:2px solid transparent;font-size:.84rem;color:var(--muted);}
 .nav-item:hover{background:rgba(240,180,41,.05);color:var(--text);}
 .nav-item.on{background:rgba(240,180,41,.08);color:var(--accent);border-left-color:var(--accent);}
-/* Sub nav items */
 .nav-sub-item{display:flex;align-items:center;gap:.6rem;padding:.45rem 1.2rem .45rem 2.6rem;cursor:pointer;transition:all .2s;border-left:2px solid transparent;font-size:.78rem;color:var(--muted);}
 .nav-sub-item:hover{background:rgba(240,180,41,.04);color:var(--text);}
 .nav-sub-item.on{color:var(--accent);border-left-color:var(--accent);background:rgba(240,180,41,.06);}
@@ -117,15 +116,20 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .status-badge{font-size:.6rem;padding:2px 7px;border-radius:10px;font-weight:600;}
 .status-badge.public{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;}
 .status-badge.private{background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.25);color:#94a3b8;}
-.acts{display:flex;gap:.3rem;}
-.btn-e{background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.2);color:var(--accent);padding:.3rem .4rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;}
-.btn-e:hover{background:rgba(240,180,41,.25);}
+.acts{display:flex;gap:.3rem;align-items:center;flex-wrap:wrap;}
+/* Language-specific edit buttons */
+.btn-e-mm{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#fc8181;padding:.28rem .55rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.25rem;transition:all .2s;font-size:.65rem;font-weight:700;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.btn-e-mm:hover{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.5);}
+.btn-e-th{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);color:#60a5fa;padding:.28rem .55rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.25rem;transition:all .2s;font-size:.65rem;font-weight:700;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.btn-e-th:hover{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.5);}
+.btn-e-en{background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.2);color:#63b3ed;padding:.28rem .55rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.25rem;transition:all .2s;font-size:.65rem;font-weight:700;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.btn-e-en:hover{background:rgba(99,179,237,.2);border-color:rgba(99,179,237,.5);}
 .btn-d{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;padding:.3rem .4rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;}
 .btn-d:hover{background:rgba(239,68,68,.22);}
+.acts-sep{width:1px;height:18px;background:var(--border);margin:0 .1rem;}
 .spin-sm{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .empty-tbl{text-align:center;color:var(--muted);padding:2rem;font-size:.82rem;}
-/* POST PAGE HEADER BANNER */
 .post-banner{border-radius:14px;padding:1.2rem 1.6rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:1rem;}
 .post-banner.mm-banner{background:rgba(239,68,68,.07);border:1.5px solid rgba(239,68,68,.2);}
 .post-banner.th-banner{background:rgba(59,130,246,.07);border:1.5px solid rgba(59,130,246,.2);}
@@ -136,7 +140,24 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .post-banner.mm-banner .pb-info h2{color:#fc8181;}
 .post-banner.th-banner .pb-info h2{color:#60a5fa;}
 .post-banner.en-banner .pb-info h2{color:#63b3ed;}
-/* MODAL */
+/* Edit page banner */
+.edit-banner{border-radius:14px;padding:1rem 1.4rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem;justify-content:space-between;}
+.edit-banner.mm-edit{background:rgba(239,68,68,.06);border:1.5px solid rgba(239,68,68,.2);}
+.edit-banner.th-edit{background:rgba(59,130,246,.06);border:1.5px solid rgba(59,130,246,.2);}
+.edit-banner.en-edit{background:rgba(99,179,237,.06);border:1.5px solid rgba(99,179,237,.2);}
+.edit-banner-left{display:flex;align-items:center;gap:.8rem;}
+.edit-banner .eb-flag{font-size:1.8rem;line-height:1;}
+.edit-banner .eb-title{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;}
+.edit-banner.mm-edit .eb-title{color:#fc8181;}
+.edit-banner.th-edit .eb-title{color:#60a5fa;}
+.edit-banner.en-edit .eb-title{color:#63b3ed;}
+.edit-banner .eb-sub{font-size:.68rem;color:var(--muted);margin-top:.1rem;}
+.editing-tag{font-size:.68rem;font-weight:700;padding:.28rem .8rem;border-radius:20px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.editing-tag.mm{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#fc8181;}
+.editing-tag.th{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#60a5fa;}
+.editing-tag.en{background:rgba(99,179,237,.12);border:1px solid rgba(99,179,237,.25);color:#63b3ed;}
+.btn-back{background:var(--card);border:1.5px solid var(--border);color:var(--muted);padding:.32rem .8rem;border-radius:7px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.76rem;display:inline-flex;align-items:center;gap:.4rem;transition:all .2s;margin-bottom:1rem;}
+.btn-back:hover{border-color:var(--accent);color:var(--accent);}
 .mo{display:none;position:fixed;inset:0;z-index:500;backdrop-filter:blur(10px);background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:1rem;}
 .mo.open{display:flex;}
 .mo-box{background:var(--surface);border:1.5px solid var(--border);border-radius:18px;max-width:560px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 40px 80px rgba(0,0,0,.6);animation:popIn .3s cubic-bezier(.34,1.56,.64,1);}
@@ -168,8 +189,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .toggle-opt.on-th{background:rgba(59,130,246,.15);color:#60a5fa;}
 .toggle-opt.on-en{background:rgba(99,179,237,.15);color:#63b3ed;}
 .toggle-opt.on-both{background:rgba(240,180,41,.15);color:var(--accent);}
-.sub-type-hint{grid-column:1/-1;font-size:.64rem;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.55rem .8rem;line-height:1.6;}
-.sub-type-hint strong{color:var(--text);font-weight:600;}
 .mo-btn{grid-column:1/-1;background:linear-gradient(135deg,#f0b429,#d4a03a);border:none;color:#000;padding:.72rem;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;cursor:pointer;transition:opacity .2s;}
 .mo-btn:hover{opacity:.88;}
 .mo-btn:disabled{opacity:.5;cursor:not-allowed;}
@@ -193,12 +212,12 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .cat-chip:hover{border-color:var(--accent);color:var(--text);}
 .cat-chip.sel{background:rgba(240,180,41,.15);border-color:var(--accent);color:var(--accent);font-weight:600;}
 .cat-chip.sel::before{content:'✓ ';}
-.tags-wrap{display:flex;flex-wrap:wrap;gap:.3rem;background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:.4rem .6rem;cursor:text;min-height:42px;align-items:center;}
+.tags-wrap{display:flex;flex-wrap:wrap;gap:.3rem;background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:.4rem .6rem;min-height:42px;align-items:center;cursor:text;}
 .tags-wrap:focus-within{border-color:var(--accent);}
-.tag-chip{background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.3);color:var(--accent);padding:2px 8px;border-radius:20px;font-size:.72rem;display:flex;align-items:center;gap:.3rem;}
-.tag-chip button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;line-height:1;padding:0;}
-.tag-chip button:hover{color:var(--text);}
-.tag-inp{background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;flex:1;min-width:80px;padding:2px 0;}
+.tag-chip{background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.3);color:var(--accent);padding:2px 8px;border-radius:20px;font-size:.72rem;display:inline-flex;align-items:center;gap:.3rem;flex-shrink:0;}
+.tag-chip .tag-rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;line-height:1;padding:0;display:inline-flex;align-items:center;}
+.tag-chip .tag-rm:hover{color:var(--text);}
+.tag-inp{background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;min-width:100px;flex:1;padding:2px 0;}
 .tag-inp::placeholder{color:var(--muted);}
 .sl-status{display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;border-radius:8px;font-size:.72rem;margin-top:.4rem;}
 .sl-status.ok{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:#34d399;}
@@ -227,11 +246,20 @@ tr:hover td{background:rgba(240,180,41,.02);}
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px;}
-/* Post page inline form */
 .post-form-wrap{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.4rem;max-width:680px;}
 .post-form-wrap.mm-form{border-color:rgba(239,68,68,.25);}
 .post-form-wrap.th-form{border-color:rgba(59,130,246,.25);}
 .post-form-wrap.en-form{border-color:rgba(99,179,237,.25);}
+
+/* Content Type toggle */
+.ct-toggle{grid-column:1/-1;display:flex;gap:.6rem;align-items:center;margin-top:.2rem;}
+.ct-toggle label{font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.ct-opt{padding:.38rem .85rem;cursor:pointer;font-size:.75rem;font-weight:600;font-family:'DM Sans',sans-serif;border:1.5px solid var(--border);background:var(--card);color:var(--muted);border-radius:7px;transition:all .2s;}
+.ct-opt:hover{border-color:var(--accent);color:var(--text);}
+.ct-opt.on-gen{background:rgba(16,185,129,.12);border-color:#10b981;color:#34d399;}
+.ct-opt.on-jav{background:rgba(239,68,68,.14);border-color:#f87171;color:#f87171;}
+.ct-opt.on-wes{background:rgba(139,92,246,.14);border-color:#a78bfa;color:#a78bfa;}
+
 </style>
 </head>
 <body>
@@ -272,13 +300,19 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="nav-item" id="nav-analytics" onclick="showPg('analytics',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Analytics</div>
     <div class="nav-sec">Content</div>
     <div class="nav-item" id="nav-movies" onclick="showPg('movies',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20"/></svg>Movies</div>
-    <!-- Post Movie with sub items -->
-    <div class="nav-item" id="nav-post" onclick="showPg('post-mm',this)">
+    <div class="nav-item" id="nav-post" onclick="showSubPg('post-mm',document.getElementById('nav-post-mm'))">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Post Movie
     </div>
-    <div class="nav-sub-item mm-item" id="nav-post-mm" onclick="showSubPg('post-mm',this)"><span class="sub-dot"></span>🇲🇲 Myanmar Sub</div>
-    <div class="nav-sub-item th-item" id="nav-post-th" onclick="showSubPg('post-th',this)"><span class="sub-dot"></span>🇹🇭 Thai Sub</div>
-    <div class="nav-sub-item en-item" id="nav-post-en" onclick="showSubPg('post-en',this)"><span class="sub-dot"></span>🇬🇧 English Sub</div>
+    <div class="nav-sub-item mm-item" id="nav-post-mm" onclick="showSubPg('post-mm',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> Myanmar Sub</div>
+    <div class="nav-sub-item th-item" id="nav-post-th" onclick="showSubPg('post-th',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Thai Sub</div>
+    <div class="nav-sub-item en-item" id="nav-post-en" onclick="showSubPg('post-en',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> English Sub</div>
+    <!-- EDIT nav — always visible -->
+    <div class="nav-item" id="nav-edit">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit Movie
+    </div>
+    <div class="nav-sub-item mm-item" id="nav-edit-mm" onclick="showSubPg('edit-mm',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> Edit MM</div>
+    <div class="nav-sub-item th-item" id="nav-edit-th" onclick="showSubPg('edit-th',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Edit TH</div>
+    <div class="nav-sub-item en-item" id="nav-edit-en" onclick="showSubPg('edit-en',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> Edit EN</div>
     <div class="nav-sec">System</div>
     <div class="nav-item" id="nav-settings" onclick="showPg('settings',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
   </nav>
@@ -294,11 +328,10 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <h1 id="tbTitle">Dashboard</h1>
     <div class="tb-sp"></div>
     <span class="tb-time" id="tbTime"></span>
-    <div class="tb-user">● <span id="tbUserEmail">-</span></div>
+    <div class="tb-user">&#9679; <span id="tbUserEmail">-</span></div>
     <button class="visit-btn" onclick="openSite()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Site</button>
   </div>
   <div class="content">
-
     <!-- DASHBOARD -->
     <div class="pg on" id="pg-dashboard">
       <div class="live-badge"><div class="live-dot"></div>Firebase Real-Time</div>
@@ -331,7 +364,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 
     <!-- ANALYTICS -->
     <div class="pg" id="pg-analytics">
-      <div class="live-badge"><div class="live-dot"></div>Real Data — stats collection</div>
+      <div class="live-badge"><div class="live-dot"></div>Real Data &#8212; stats collection</div>
       <div class="date-filter">
         <span class="date-filter-label">Period:</span>
         <button class="df-btn on" onclick="setDateFilter('today',this)">Today</button>
@@ -341,17 +374,17 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="df-btn" onclick="setDateFilter('all',this)">All Time</button>
       </div>
       <div class="rs-grid">
-        <div class="rsc g"><div class="rsc-label">Page Views</div><div class="rsc-val g" id="rs-views">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc b"><div class="rsc-label">Movie Clicks</div><div class="rsc-val b" id="rs-clicks">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc y"><div class="rsc-label">Downloads</div><div class="rsc-val y" id="rs-downloads">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc r"><div class="rsc-label">Mobile Users</div><div class="rsc-val r" id="rs-mobile">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc b"><div class="rsc-label">Desktop Users</div><div class="rsc-val b" id="rs-desktop">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc r"><div class="rsc-label">🇲🇲 MM Sub Users</div><div class="rsc-val r" id="rs-mm">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc b"><div class="rsc-label">🇹🇭 TH Sub Users</div><div class="rsc-val b" id="rs-th">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc c"><div class="rsc-label">🇬🇧 EN Sub Users</div><div class="rsc-val c" id="rs-en">-</div><div class="rsc-note">Real total ✓</div></div>
-        <div class="rsc o"><div class="rsc-label">Total Events</div><div class="rsc-val o" id="rs-total">-</div><div class="rsc-note">All actions ✓</div></div>
+        <div class="rsc g"><div class="rsc-label">Page Views</div><div class="rsc-val g" id="rs-views">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc b"><div class="rsc-label">Movie Clicks</div><div class="rsc-val b" id="rs-clicks">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc y"><div class="rsc-label">Downloads</div><div class="rsc-val y" id="rs-downloads">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc r"><div class="rsc-label">Mobile Users</div><div class="rsc-val r" id="rs-mobile">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc b"><div class="rsc-label">Desktop Users</div><div class="rsc-val b" id="rs-desktop">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc r"><div class="rsc-label">&#127474;&#127484; MM Sub Users</div><div class="rsc-val r" id="rs-mm">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc b"><div class="rsc-label">&#127481;&#127469; TH Sub Users</div><div class="rsc-val b" id="rs-th">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc c"><div class="rsc-label">&#127468;&#127463; EN Sub Users</div><div class="rsc-val c" id="rs-en">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc o"><div class="rsc-label">Total Events</div><div class="rsc-val o" id="rs-total">-</div><div class="rsc-note">All actions</div></div>
       </div>
-      <div class="divider-label">📍 Visitor Locations & Sources — Last 500 events</div>
+      <div class="divider-label">Visitor Locations &amp; Sources &#8212; Last 500 events</div>
       <div class="two-col">
         <div class="chart-card"><div class="chart-top"><h3>Language Usage</h3><span>Last 500 sessions</span></div><div class="bar-h" id="langChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
         <div class="chart-card"><div class="chart-top"><h3>Download Sources</h3><span>Last 500 events</span></div><div class="bar-h" id="dlChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
@@ -378,116 +411,237 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="btn-add" onclick="openAdd()">+ Add Movie</button>
       </div>
       <div class="mv-table">
-        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub Type</th><th>Actions</th></tr></thead>
+        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub</th><th>Edit / Del</th></tr></thead>
         <tbody id="mvTbody"><tr><td colspan="8" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
     </div>
-
     <!-- POST MM -->
     <div class="pg" id="pg-post-mm">
-      <div class="post-banner mm-banner">
-        <span class="pb-flag">🇲🇲</span>
-        <div class="pb-info">
-          <h2>Post Myanmar Subtitle Movie</h2>
-          <p>မြန်မာ Subtitle သာပါသော Movie များကို ဤ Page မှ Post တင်ပါ</p>
+      <div class="post-banner mm-banner"><span class="pb-flag"><svg width="40" height="28" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span><div class="pb-info"><h2>Post Myanmar Subtitle Movie</h2><p>Myanmar Subtitle Movie များ Post တင်ရန်</p></div></div>
+      <div class="post-form-wrap mm-form"><div class="mo-form" style="padding:0">
+        <div class="f full"><label>Movie Title *</label><input id="mmTitle" placeholder="Eg: Oppenheimer"></div>
+        <div class="f"><label>Year</label><input type="number" id="mmYear" placeholder="2024"></div>
+        <div class="f"><label>Quality</label><select id="mmQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="f full"><label>Categories</label><div class="cat-grid" id="mmCatGrid"></div><input type="hidden" id="mmGenre"></div>
+        <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="mmPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+        <div class="form-section"><div class="form-section-label mm-label">Actors / Actresses</div></div>
+        <div class="f full"><label>Actors</label><div class="tags-wrap" id="mmActorsWrap"><input class="tag-inp" id="mmActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActors"></div>
+        <div class="f full"><label>Actresses</label><div class="tags-wrap" id="mmActressesWrap"><input class="tag-inp" id="mmActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActresses"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="mmStatusPub" onclick="setMMStatus('public')">Public</button><button class="toggle-opt" id="mmStatusPrv" onclick="setMMStatus('private')">Private</button></div><input type="hidden" id="mmStatus" value="public"></div>
+        <div class="ct-toggle"><label>Content Type:</label>
+          <button class="ct-opt on-gen" id="mmCtGen" onclick="setCT('mm','general')">&#127916; General</button>
+          <button class="ct-opt" id="mmCtJav" onclick="setCT('mm','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="mmCtWes" onclick="setCT('mm','western')">&#128286; Western</button>
+          <input type="hidden" id="mmContentType" value="general">
         </div>
-      </div>
-      <div class="post-form-wrap mm-form">
-        <div class="mo-form" style="padding:0">
-          <div class="f full"><label>Movie Title *</label><input id="mmTitle" placeholder="Eg: Oppenheimer"></div>
-          <div class="f"><label>Year</label><input type="number" id="mmYear" placeholder="2024"></div>
-          <div class="f"><label>Quality</label><select id="mmQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
-          <div class="f full"><label>Categories</label><div class="cat-grid" id="mmCatGrid"></div><input type="hidden" id="mmGenre"></div>
-          <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="mmPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
-          <div class="form-section"><div class="form-section-label mm-label">Actors / Actresses</div></div>
-          <div class="f full"><label>Actors</label><div class="tags-wrap" id="mmActorsWrap" onclick="document.getElementById('mmActorInp').focus()"><input class="tag-inp" id="mmActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActors"></div>
-          <div class="f full"><label>Actresses</label><div class="tags-wrap" id="mmActressesWrap" onclick="document.getElementById('mmActressInp').focus()"><input class="tag-inp" id="mmActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActresses"></div>
-          <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="mmStatusPub" onclick="setMMStatus('public')">Public</button><button class="toggle-opt" id="mmStatusPrv" onclick="setMMStatus('private')">Private</button></div><input type="hidden" id="mmStatus" value="public"></div>
-          <div class="form-section"><div class="form-section-label mm-label">🇲🇲 Myanmar Subtitle Links</div></div>
-          <div class="f full"><label>Telegram (တိုက်ရိုက်ကြည့်ရန်)</label><input id="mmTelegram" placeholder="https://t.me/c/... သို့မဟုတ် https://t.me/NothingSub/..."></div>
-          <div class="f full"><label>Streamtape</label><input id="mmStream" placeholder="https://streamtape.com/v/..."></div>
-          <div class="f full"><label>Mega</label><input id="mmMega" placeholder="https://mega.nz/..."></div>
-          <div class="form-section"><div class="form-section-label">Synopsis</div></div>
-          <div class="f full"><label>Myanmar Synopsis *</label><textarea id="mmDescMM" placeholder="Myanmar synopsis..."></textarea></div>
-          <button class="mo-btn mm-btn" id="postMMBtn" onclick="doPostMM()" style="margin-top:.5rem">🇲🇲 Post Myanmar Sub Movie</button>
-          <div class="mo-msg" id="postMMMsg"></div>
-        </div>
-      </div>
+        <div class="form-section"><div class="form-section-label mm-label">&#127474;&#127484; Myanmar Subtitle Links</div></div>
+        <div class="f full"><label>Telegram</label><input id="mmTelegram" placeholder="https://t.me/c/..."></div>
+        <div class="f full"><label>Streamtape</label><input id="mmStream" placeholder="https://streamtape.com/v/..."></div>
+        <div class="f full"><label>Mega</label><input id="mmMega" placeholder="https://mega.nz/..."></div>
+        <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+        <div class="f full"><label>Myanmar Synopsis *</label><textarea id="mmDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+        <button class="mo-btn mm-btn" id="postMMBtn" onclick="doPostMM()" style="margin-top:.5rem">&#127474;&#127484; Post Myanmar Sub Movie</button>
+        <div class="mo-msg" id="postMMMsg"></div>
+      </div></div>
     </div>
 
     <!-- POST TH -->
     <div class="pg" id="pg-post-th">
-      <div class="post-banner th-banner">
-        <span class="pb-flag">🇹🇭</span>
-        <div class="pb-info">
-          <h2>Post Thai Subtitle Movie</h2>
-          <p>Thai Subtitle သာပါသော Movie များကို ဤ Page မှ Post တင်ပါ</p>
+      <div class="post-banner th-banner"><span class="pb-flag"><svg width="40" height="28" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></span><div class="pb-info"><h2>Post Thai Subtitle Movie</h2><p>Thai Subtitle Movie များ Post တင်ရန်</p></div></div>
+      <div class="post-form-wrap th-form"><div class="mo-form" style="padding:0">
+        <div class="f full"><label>Movie Title *</label><input id="thTitle" placeholder="Eg: Oppenheimer"></div>
+        <div class="f"><label>Year</label><input type="number" id="thYear" placeholder="2024"></div>
+        <div class="f"><label>Quality</label><select id="thQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="f full"><label>Categories</label><div class="cat-grid" id="thCatGrid"></div><input type="hidden" id="thGenre"></div>
+        <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="thPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+        <div class="form-section"><div class="form-section-label th-label">Actors / Actresses</div></div>
+        <div class="f full"><label>Actors</label><div class="tags-wrap" id="thActorsWrap"><input class="tag-inp" id="thActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActors"></div>
+        <div class="f full"><label>Actresses</label><div class="tags-wrap" id="thActressesWrap"><input class="tag-inp" id="thActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActresses"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="thStatusPub" onclick="setTHStatus('public')">Public</button><button class="toggle-opt" id="thStatusPrv" onclick="setTHStatus('private')">Private</button></div><input type="hidden" id="thStatus" value="public"></div>
+        <div class="ct-toggle"><label>Content Type:</label>
+          <button class="ct-opt on-gen" id="thCtGen" onclick="setCT('th','general')">&#127916; General</button>
+          <button class="ct-opt" id="thCtJav" onclick="setCT('th','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="thCtWes" onclick="setCT('th','western')">&#128286; Western</button>
+          <input type="hidden" id="thContentType" value="general">
         </div>
-      </div>
-      <div class="post-form-wrap th-form">
-        <div class="mo-form" style="padding:0">
-          <div class="f full"><label>Movie Title *</label><input id="thTitle" placeholder="Eg: Oppenheimer"></div>
-          <div class="f"><label>Year</label><input type="number" id="thYear" placeholder="2024"></div>
-          <div class="f"><label>Quality</label><select id="thQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
-          <div class="f full"><label>Categories</label><div class="cat-grid" id="thCatGrid"></div><input type="hidden" id="thGenre"></div>
-          <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="thPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
-          <div class="form-section"><div class="form-section-label th-label">Actors / Actresses</div></div>
-          <div class="f full"><label>Actors</label><div class="tags-wrap" id="thActorsWrap" onclick="document.getElementById('thActorInp').focus()"><input class="tag-inp" id="thActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActors"></div>
-          <div class="f full"><label>Actresses</label><div class="tags-wrap" id="thActressesWrap" onclick="document.getElementById('thActressInp').focus()"><input class="tag-inp" id="thActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActresses"></div>
-          <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="thStatusPub" onclick="setTHStatus('public')">Public</button><button class="toggle-opt" id="thStatusPrv" onclick="setTHStatus('private')">Private</button></div><input type="hidden" id="thStatus" value="public"></div>
-          <div class="form-section"><div class="form-section-label th-label">🇹🇭 Thai Subtitle Links</div></div>
-          <div class="f full"><label>Telegram (ดูออนไลน์)</label><input id="thTelegram" placeholder="https://t.me/c/... หรือ https://t.me/NothingSub/..."></div>
-          <div class="f full"><label>Streamtape</label><input id="thStream" placeholder="https://streamtape.com/v/..."></div>
-          <div class="f full"><label>Mega</label><input id="thMega" placeholder="https://mega.nz/..."></div>
-          <div class="form-section"><div class="form-section-label">Synopsis</div></div>
-          <div class="f full"><label>Myanmar Synopsis *</label><textarea id="thDescMM" placeholder="Myanmar synopsis..."></textarea></div>
-          <div class="f full"><label>Thai Synopsis (optional)</label><textarea id="thDescTH" placeholder="Thai synopsis..."></textarea></div>
-          <button class="mo-btn th-btn" id="postTHBtn" onclick="doPostTH()" style="margin-top:.5rem">🇹🇭 Post Thai Sub Movie</button>
-          <div class="mo-msg" id="postTHMsg"></div>
-        </div>
-      </div>
+        <div class="form-section"><div class="form-section-label th-label">&#127481;&#127469; Thai Subtitle Links</div></div>
+        <div class="f full"><label>Telegram</label><input id="thTelegram" placeholder="https://t.me/c/..."></div>
+        <div class="f full"><label>Streamtape</label><input id="thStream" placeholder="https://streamtape.com/v/..."></div>
+        <div class="f full"><label>Mega</label><input id="thMega" placeholder="https://mega.nz/..."></div>
+        <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+        <div class="f full"><label>Myanmar Synopsis *</label><textarea id="thDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+        <div class="f full"><label>Thai Synopsis (optional)</label><textarea id="thDescTH" placeholder="Thai synopsis..."></textarea></div>
+        <button class="mo-btn th-btn" id="postTHBtn" onclick="doPostTH()" style="margin-top:.5rem">&#127481;&#127469; Post Thai Sub Movie</button>
+        <div class="mo-msg" id="postTHMsg"></div>
+      </div></div>
     </div>
 
     <!-- POST EN -->
     <div class="pg" id="pg-post-en">
-      <div class="post-banner en-banner">
-        <span class="pb-flag">🇬🇧</span>
-        <div class="pb-info">
-          <h2>Post English Subtitle Movie</h2>
-          <p>English Subtitle ပါသော Movie များကို ဤ Page မှ Post တင်ပါ</p>
+      <div class="post-banner en-banner"><span class="pb-flag"><svg width="40" height="28" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></span><div class="pb-info"><h2>Post English Subtitle Movie</h2><p>English Subtitle Movie များ Post တင်ရန်</p></div></div>
+      <div class="post-form-wrap en-form"><div class="mo-form" style="padding:0">
+        <div class="f full"><label>Movie Title *</label><input id="enTitle" placeholder="Eg: Oppenheimer"></div>
+        <div class="f"><label>Year</label><input type="number" id="enYear" placeholder="2024"></div>
+        <div class="f"><label>Quality</label><select id="enQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="f full"><label>Categories</label><div class="cat-grid" id="enCatGrid"></div><input type="hidden" id="enGenre"></div>
+        <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="enPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+        <div class="form-section"><div class="form-section-label en-label">Actors / Actresses</div></div>
+        <div class="f full"><label>Actors</label><div class="tags-wrap" id="enActorsWrap"><input class="tag-inp" id="enActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActors"></div>
+        <div class="f full"><label>Actresses</label><div class="tags-wrap" id="enActressesWrap"><input class="tag-inp" id="enActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActresses"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="enStatusPub" onclick="setENStatus('public')">Public</button><button class="toggle-opt" id="enStatusPrv" onclick="setENStatus('private')">Private</button></div><input type="hidden" id="enStatus" value="public"></div>
+        <div class="ct-toggle"><label>Content Type:</label>
+          <button class="ct-opt on-gen" id="enCtGen" onclick="setCT('en','general')">&#127916; General</button>
+          <button class="ct-opt" id="enCtJav" onclick="setCT('en','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="enCtWes" onclick="setCT('en','western')">&#128286; Western</button>
+          <input type="hidden" id="enContentType" value="general">
         </div>
-      </div>
-      <div class="post-form-wrap en-form">
-        <div class="mo-form" style="padding:0">
-          <div class="f full"><label>Movie Title *</label><input id="enTitle" placeholder="Eg: Oppenheimer"></div>
-          <div class="f"><label>Year</label><input type="number" id="enYear" placeholder="2024"></div>
-          <div class="f"><label>Quality</label><select id="enQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
-          <div class="f full"><label>Categories</label><div class="cat-grid" id="enCatGrid"></div><input type="hidden" id="enGenre"></div>
-          <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="enPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
-          <div class="form-section"><div class="form-section-label en-label">Actors / Actresses</div></div>
-          <div class="f full"><label>Actors</label><div class="tags-wrap" id="enActorsWrap" onclick="document.getElementById('enActorInp').focus()"><input class="tag-inp" id="enActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActors"></div>
-          <div class="f full"><label>Actresses</label><div class="tags-wrap" id="enActressesWrap" onclick="document.getElementById('enActressInp').focus()"><input class="tag-inp" id="enActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActresses"></div>
-          <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="enStatusPub" onclick="setENStatus('public')">Public</button><button class="toggle-opt" id="enStatusPrv" onclick="setENStatus('private')">Private</button></div><input type="hidden" id="enStatus" value="public"></div>
-          <div class="form-section"><div class="form-section-label en-label">🇬🇧 English Subtitle Links</div></div>
-          <div class="f full"><label>Telegram (Watch Online)</label><input id="enTelegram" placeholder="https://t.me/c/... or https://t.me/NothingSub/..."></div>
-          <div class="f full"><label>Streamtape</label><input id="enStream" placeholder="https://streamtape.com/v/..."></div>
-          <div class="f full"><label>Mega</label><input id="enMega" placeholder="https://mega.nz/..."></div>
-          <div class="form-section"><div class="form-section-label">Synopsis</div></div>
-          <div class="f full"><label>Myanmar Synopsis *</label><textarea id="enDescMM" placeholder="Myanmar synopsis..."></textarea></div>
-          <button class="mo-btn en-btn" id="postENBtn" onclick="doPostEN()" style="margin-top:.5rem">🇬🇧 Post English Sub Movie</button>
-          <div class="mo-msg" id="postENMsg"></div>
-        </div>
-      </div>
+        <div class="form-section"><div class="form-section-label en-label">&#127468;&#127463; English Subtitle Links</div></div>
+        <div class="f full"><label>Telegram</label><input id="enTelegram" placeholder="https://t.me/c/..."></div>
+        <div class="f full"><label>Streamtape</label><input id="enStream" placeholder="https://streamtape.com/v/..."></div>
+        <div class="f full"><label>Mega</label><input id="enMega" placeholder="https://mega.nz/..."></div>
+        <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+        <div class="f full"><label>English Synopsis *</label><textarea id="enDescMM" placeholder="English synopsis..."></textarea></div>
+        <button class="mo-btn en-btn" id="postENBtn" onclick="doPostEN()" style="margin-top:.5rem">&#127468;&#127463; Post English Sub Movie</button>
+        <div class="mo-msg" id="postENMsg"></div>
+      </div></div>
     </div>
-
+    <!-- EDIT MM PAGE -->
+    <div class="pg" id="pg-edit-mm">
+      <button class="btn-back" onclick="goBackToMovies()">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies
+      </button>
+      <div class="edit-banner mm-edit">
+        <div class="edit-banner-left">
+          <span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span>
+          <div>
+            <div class="eb-title">Edit Myanmar Sub Movie</div>
+            <div class="eb-sub">Movie info + MM subtitle links ပြင်ဆင်ရန်</div>
+          </div>
+        </div>
+        <span class="editing-tag mm" id="editTagMM">-</span>
+      </div>
+      <div class="post-form-wrap mm-form"><div class="mo-form" style="padding:0">
+        <input type="hidden" id="eMMId">
+        <div class="f full"><label>Movie Title *</label><input id="eMMTitle"></div>
+        <div class="f"><label>Year</label><input type="number" id="eMMYear"></div>
+        <div class="f"><label>Quality</label><select id="eMMQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="f full"><label>Categories</label><div class="cat-grid" id="eMMCatGrid"></div><input type="hidden" id="eMMGenre"></div>
+        <div class="f full"><label>Poster URL (16:9)</label><input id="eMMPoster"></div>
+        <div class="form-section"><div class="form-section-label mm-label">Actors / Actresses</div></div>
+        <div class="f full"><label>Actors</label><div class="tags-wrap" id="eMMActorsWrap"><input class="tag-inp" id="eMMActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eMMActors"></div>
+        <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eMMActressesWrap"><input class="tag-inp" id="eMMActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eMMActresses"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eMMStatPub" onclick="setESt('MM','public')">Public</button><button class="toggle-opt" id="eMMStatPrv" onclick="setESt('MM','private')">Private</button></div><input type="hidden" id="eMMStatus" value="public"></div>
+        <div class="ct-toggle"><label>Content Type:</label>
+          <button class="ct-opt on-gen" id="eMMCtGen" onclick="setCT('eMM','general')">&#127916; General</button>
+          <button class="ct-opt" id="eMMCtJav" onclick="setCT('eMM','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="eMMCtWes" onclick="setCT('eMM','western')">&#128286; Western</button>
+          <input type="hidden" id="eMMContentType" value="general">
+        </div>
+        <div class="form-section"><div class="form-section-label mm-label">&#127474;&#127484; Myanmar Subtitle Links</div></div>
+        <div class="f full"><label>Telegram</label><input id="eMMTelegram" placeholder="https://t.me/c/..."></div>
+        <div class="f full"><label>Streamtape</label><input id="eMMStream" placeholder="https://streamtape.com/v/..."></div>
+        <div class="f full"><label>Mega</label><input id="eMMMega" placeholder="https://mega.nz/..."></div>
+        <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+        <div class="f full"><label>Synopsis (MM)</label><textarea id="eMMDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+        
+        <button class="mo-btn mm-btn" id="saveMMBtn" onclick="doSaveEdit('MM')" style="margin-top:.5rem">&#127474;&#127484; Save MM Changes</button>
+        <div class="mo-msg" id="editMMMsg"></div>
+      </div></div>
+    </div>
+    <!-- EDIT TH PAGE -->
+    <div class="pg" id="pg-edit-th">
+      <button class="btn-back" onclick="goBackToMovies()">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies
+      </button>
+      <div class="edit-banner th-edit">
+        <div class="edit-banner-left">
+          <span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></span>
+          <div>
+            <div class="eb-title">Edit Thai Sub Movie</div>
+            <div class="eb-sub">Movie info + TH subtitle links ပြင်ဆင်ရန်</div>
+          </div>
+        </div>
+        <span class="editing-tag th" id="editTagTH">-</span>
+      </div>
+      <div class="post-form-wrap th-form"><div class="mo-form" style="padding:0">
+        <input type="hidden" id="eTHId">
+        <div class="f full"><label>Movie Title *</label><input id="eTHTitle"></div>
+        <div class="f"><label>Year</label><input type="number" id="eTHYear"></div>
+        <div class="f"><label>Quality</label><select id="eTHQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="f full"><label>Categories</label><div class="cat-grid" id="eTHCatGrid"></div><input type="hidden" id="eTHGenre"></div>
+        <div class="f full"><label>Poster URL (16:9)</label><input id="eTHPoster"></div>
+        <div class="form-section"><div class="form-section-label th-label">Actors / Actresses</div></div>
+        <div class="f full"><label>Actors</label><div class="tags-wrap" id="eTHActorsWrap"><input class="tag-inp" id="eTHActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eTHActors"></div>
+        <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eTHActressesWrap"><input class="tag-inp" id="eTHActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eTHActresses"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eTHStatPub" onclick="setESt('TH','public')">Public</button><button class="toggle-opt" id="eTHStatPrv" onclick="setESt('TH','private')">Private</button></div><input type="hidden" id="eTHStatus" value="public"></div>
+        <div class="ct-toggle"><label>Content Type:</label>
+          <button class="ct-opt on-gen" id="eTHCtGen" onclick="setCT('eTH','general')">&#127916; General</button>
+          <button class="ct-opt" id="eTHCtJav" onclick="setCT('eTH','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="eTHCtWes" onclick="setCT('eTH','western')">&#128286; Western</button>
+          <input type="hidden" id="eTHContentType" value="general">
+        </div>
+        <div class="form-section"><div class="form-section-label th-label">&#127481;&#127469; Thai Subtitle Links</div></div>
+        <div class="f full"><label>Telegram</label><input id="eTHTelegram" placeholder="https://t.me/c/..."></div>
+        <div class="f full"><label>Streamtape</label><input id="eTHStream" placeholder="https://streamtape.com/v/..."></div>
+        <div class="f full"><label>Mega</label><input id="eTHMega" placeholder="https://mega.nz/..."></div>
+        <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+        <div class="f full"><label>Synopsis (MM)</label><textarea id="eTHDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+        <div class="f full"><label>Synopsis (TH)</label><textarea id="eTHDescTH" placeholder="Thai synopsis..."></textarea></div>
+        <button class="mo-btn th-btn" id="saveTHBtn" onclick="doSaveEdit('TH')" style="margin-top:.5rem">&#127481;&#127469; Save TH Changes</button>
+        <div class="mo-msg" id="editTHMsg"></div>
+      </div></div>
+    </div>
+    <!-- EDIT EN PAGE -->
+    <div class="pg" id="pg-edit-en">
+      <button class="btn-back" onclick="goBackToMovies()">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Movies
+      </button>
+      <div class="edit-banner en-edit">
+        <div class="edit-banner-left">
+          <span class="eb-flag"><svg width="32" height="22" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></span>
+          <div>
+            <div class="eb-title">Edit English Sub Movie</div>
+            <div class="eb-sub">Movie info + EN subtitle links ပြင်ဆင်ရန်</div>
+          </div>
+        </div>
+        <span class="editing-tag en" id="editTagEN">-</span>
+      </div>
+      <div class="post-form-wrap en-form"><div class="mo-form" style="padding:0">
+        <input type="hidden" id="eENId">
+        <div class="f full"><label>Movie Title *</label><input id="eENTitle"></div>
+        <div class="f"><label>Year</label><input type="number" id="eENYear"></div>
+        <div class="f"><label>Quality</label><select id="eENQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="f full"><label>Categories</label><div class="cat-grid" id="eENCatGrid"></div><input type="hidden" id="eENGenre"></div>
+        <div class="f full"><label>Poster URL (16:9)</label><input id="eENPoster"></div>
+        <div class="form-section"><div class="form-section-label en-label">Actors / Actresses</div></div>
+        <div class="f full"><label>Actors</label><div class="tags-wrap" id="eENActorsWrap"><input class="tag-inp" id="eENActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eENActors"></div>
+        <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eENActressesWrap"><input class="tag-inp" id="eENActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eENActresses"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eENStatPub" onclick="setESt('EN','public')">Public</button><button class="toggle-opt" id="eENStatPrv" onclick="setESt('EN','private')">Private</button></div><input type="hidden" id="eENStatus" value="public"></div>
+        <div class="ct-toggle"><label>Content Type:</label>
+          <button class="ct-opt on-gen" id="eENCtGen" onclick="setCT('eEN','general')">&#127916; General</button>
+          <button class="ct-opt" id="eENCtJav" onclick="setCT('eEN','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="eENCtWes" onclick="setCT('eEN','western')">&#128286; Western</button>
+          <input type="hidden" id="eENContentType" value="general">
+        </div>
+        <div class="form-section"><div class="form-section-label en-label">&#127468;&#127463; English Subtitle Links</div></div>
+        <div class="f full"><label>Telegram</label><input id="eENTelegram" placeholder="https://t.me/c/..."></div>
+        <div class="f full"><label>Streamtape</label><input id="eENStream" placeholder="https://streamtape.com/v/..."></div>
+        <div class="f full"><label>Mega</label><input id="eENMega" placeholder="https://mega.nz/..."></div>
+        <div class="form-section"><div class="form-section-label">Synopsis</div></div>
+        <div class="f full"><label>Synopsis (MM)</label><textarea id="eENDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+        
+        <button class="mo-btn en-btn" id="saveENBtn" onclick="doSaveEdit('EN')" style="margin-top:.5rem">&#127468;&#127463; Save EN Changes</button>
+        <div class="mo-msg" id="editENMsg"></div>
+      </div></div>
+    </div>
     <!-- SETTINGS -->
     <div class="pg" id="pg-settings">
       <div class="chart-card" style="max-width:620px">
         <div class="chart-top"><h3>Site Settings</h3><span>Saved to Firestore</span></div>
         <div style="display:flex;flex-direction:column;gap:1rem;margin-top:.8rem">
-          <div class="f"><label>Adsterra Smart Link (Global)</label><input id="smartLinkInput" placeholder="https://your-adsterra-smartlink.com/..."><div class="sl-status loading" id="slStatus"><span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>Loading...</span></div><span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">Download ခလုတ် နှိပ်တိုင်း Smart Link ဖွင့်မည်</span></div>
+          <div class="f"><label>Adsterra Smart Link (Global)</label><input id="smartLinkInput" placeholder="https://your-adsterra-smartlink.com/..."><div class="sl-status loading" id="slStatus"><span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>Loading...</span></div><span style="font-size:.64rem;color:var(--muted);margin-top:.3rem;display:block">Download &#62691;&#62688;&#62854;&#62706; &#62685;&#62786;&#62694;&#62789;&#62676; Smart Link &#62705;&#62820;&#62685;&#62786;&#62675;&#62799;</span></div>
           <div class="f">
-            <label style="color:var(--accent);font-size:.68rem;letter-spacing:1.5px;margin-bottom:.6rem">Social Links — Footer Icons</label>
+            <label style="color:var(--accent);font-size:.68rem;letter-spacing:1.5px;margin-bottom:.6rem">Social Links &#8212; Footer Icons</label>
             <div style="display:flex;flex-direction:column;gap:.45rem;">
               <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-2.01 9.47c-.148.666-.537.826-1.084.514l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.9l-2.95-.92c-.642-.2-.654-.642.136-.95l11.51-4.44c.533-.194 1.001.13.696.658z"/></svg>Telegram</span><input type="url" id="sTelegram" placeholder="https://t.me/NothingSub"></div>
               <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.445 18.627 0 12 0S0 5.445 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</span><input type="url" id="sFacebook" placeholder="https://facebook.com/NothingSub"></div>
@@ -498,37 +652,43 @@ tr:hover td{background:rgba(240,180,41,.02);}
         </div>
         <div style="margin-top:1.2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;">
           <button onclick="saveSettings()" style="background:var(--accent);border:none;color:#000;padding:.6rem 1.4rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;font-size:.84rem;">Save All Settings</button>
-          <span id="settingOk" style="font-size:.8rem;color:var(--green);display:none">✓ Saved!</span>
+          <span id="settingOk" style="font-size:.8rem;color:var(--green);display:none">&#10003; Saved!</span>
           <span id="settingErr" style="font-size:.8rem;color:var(--red);display:none"></span>
         </div>
       </div>
     </div>
 
-  </div><!-- /content -->
-</div><!-- /main -->
-</div><!-- /adminApp -->
+  </div><!-- end content -->
+</div><!-- end main -->
+</div><!-- end adminApp -->
 
-<!-- ADD MODAL (Quick Add with all sub types) -->
+<!-- ADD MODAL -->
 <div class="mo" id="moAdd" onclick="moBg(event,'moAdd')">
   <div class="mo-box">
-    <div class="mo-head"><h3>Quick Add Movie</h3><button class="x-btn" onclick="moClose('moAdd')">✕</button></div>
+    <div class="mo-head"><h3>Quick Add Movie</h3><button class="x-btn" onclick="moClose('moAdd')">&#10005;</button></div>
     <div class="mo-form">
       <div class="f full"><label>Movie Title *</label><input id="aTitle" placeholder="Eg: Oppenheimer"></div>
       <div class="f"><label>Year</label><input type="number" id="aYear" placeholder="2024"></div>
       <div class="f"><label>Quality</label><select id="aQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
       <div class="f full"><label>Categories</label><div class="cat-grid" id="aCatGrid"></div><input type="hidden" id="aGenre"></div>
-      <div class="f full"><label>Poster URL (16:9)</label><input id="aPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
+      <div class="f full"><label>Poster URL</label><input id="aPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
       <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
       <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap">
-        <button class="toggle-opt on-mm" id="aSubMM" onclick="setSubType('mm')">🇲🇲 MM</button>
-        <button class="toggle-opt" id="aSubTH" onclick="setSubType('th')">🇹🇭 TH</button>
-        <button class="toggle-opt" id="aSubEN" onclick="setSubType('en')">🇬🇧 EN</button>
-        <button class="toggle-opt" id="aSubBoth" onclick="setSubType('both')">🌐 All</button>
+        <button class="toggle-opt on-mm" id="aSubMM" onclick="setSubType('mm')">&#127474;&#127484; MM</button>
+        <button class="toggle-opt" id="aSubTH" onclick="setSubType('th')">&#127481;&#127469; TH</button>
+        <button class="toggle-opt" id="aSubEN" onclick="setSubType('en')">&#127468;&#127463; EN</button>
+        <button class="toggle-opt" id="aSubBoth" onclick="setSubType('both')">&#127758; All</button>
       </div><input type="hidden" id="aSubtitleType" value="mm"></div>
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
-      <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap" onclick="document.getElementById('aActorInp').focus()"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
-      <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap" onclick="document.getElementById('aActressInp').focus()"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
+      <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
+      <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
       <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="statusPub" onclick="setStatus('public')">Public</button><button class="toggle-opt" id="statusPrv" onclick="setStatus('private')">Private</button></div><input type="hidden" id="aStatus" value="public"></div>
+        <div class="ct-toggle"><label>Content Type:</label>
+          <button class="ct-opt on-gen" id="aCtGen" onclick="setCT('a','general')">&#127916; General</button>
+          <button class="ct-opt" id="aCtJav" onclick="setCT('a','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="aCtWes" onclick="setCT('a','western')">&#128286; Western</button>
+          <input type="hidden" id="aContentType" value="general">
+        </div>
       <div class="form-section"><div class="form-section-label mm-label">MM Sub Links</div></div>
       <div class="f full"><label>MM Telegram</label><input id="aMmTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>MM Streamtape</label><input id="aMmStream" placeholder="https://streamtape.com/v/..."></div>
@@ -542,53 +702,10 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f full"><label>EN Streamtape</label><input id="aEnStream" placeholder="https://streamtape.com/v/..."></div>
       <div class="f full"><label>EN Mega</label><input id="aEnMega" placeholder="https://mega.nz/..."></div>
       <div class="form-section"><div class="form-section-label">Synopsis</div></div>
-      <div class="f full"><label>Myanmar Synopsis *</label><textarea id="aDescMM" placeholder="Myanmar synopsis..."></textarea></div>
-      <div class="f full"><label>Thai Synopsis (optional)</label><textarea id="aDescTH" placeholder="Thai synopsis..."></textarea></div>
+      <div class="f full"><label>Synopsis (MM) *</label><textarea id="aDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+      <div class="f full"><label>Synopsis (TH) optional</label><textarea id="aDescTH" placeholder="Thai synopsis..."></textarea></div>
       <button class="mo-btn" id="addBtn" onclick="doAdd()">+ Save Movie</button>
       <div class="mo-msg" id="addMsg"></div>
-    </div>
-  </div>
-</div>
-
-<!-- EDIT MODAL -->
-<div class="mo" id="moEdit" onclick="moBg(event,'moEdit')">
-  <div class="mo-box">
-    <div class="mo-head"><h3>Edit Movie</h3><button class="x-btn" onclick="moClose('moEdit')">✕</button></div>
-    <div class="mo-form">
-      <input type="hidden" id="eId">
-      <div class="f full"><label>Title *</label><input id="eTitle"></div>
-      <div class="f"><label>Year</label><input type="number" id="eYear"></div>
-      <div class="f"><label>Quality</label><select id="eQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
-      <div class="f full"><label>Categories</label><div class="cat-grid" id="eCatGrid"></div><input type="hidden" id="eGenre"></div>
-      <div class="f full"><label>Poster URL</label><input id="ePoster"></div>
-      <div class="form-section"><div class="form-section-label">Subtitle Type</div></div>
-      <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap">
-        <button class="toggle-opt on-mm" id="eSubMM" onclick="setEditSubType('mm')">🇲🇲 MM</button>
-        <button class="toggle-opt" id="eSubTH" onclick="setEditSubType('th')">🇹🇭 TH</button>
-        <button class="toggle-opt" id="eSubEN" onclick="setEditSubType('en')">🇬🇧 EN</button>
-        <button class="toggle-opt" id="eSubBoth" onclick="setEditSubType('both')">🌐 All</button>
-      </div><input type="hidden" id="eSubtitleType" value="mm"></div>
-      <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
-      <div class="f full"><label>Actors</label><div class="tags-wrap" id="eActorsWrap" onclick="document.getElementById('eActorInp').focus()"><input class="tag-inp" id="eActorInp" placeholder="Actor name..."></div><input type="hidden" id="eActors"></div>
-      <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eActressesWrap" onclick="document.getElementById('eActressInp').focus()"><input class="tag-inp" id="eActressInp" placeholder="Actress name..."></div><input type="hidden" id="eActresses"></div>
-      <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt" id="eStatusPub" onclick="setEditStatus('public')">Public</button><button class="toggle-opt" id="eStatusPrv" onclick="setEditStatus('private')">Private</button></div><input type="hidden" id="eStatus" value="public"></div>
-      <div class="form-section"><div class="form-section-label mm-label">MM Sub Links</div></div>
-      <div class="f full"><label>MM Telegram</label><input id="eMmTelegram"></div>
-      <div class="f full"><label>MM Streamtape</label><input id="eMmStream"></div>
-      <div class="f full"><label>MM Mega</label><input id="eMmMega"></div>
-      <div class="form-section"><div class="form-section-label th-label">TH Sub Links</div></div>
-      <div class="f full"><label>TH Telegram</label><input id="eThTelegram"></div>
-      <div class="f full"><label>TH Streamtape</label><input id="eThStream"></div>
-      <div class="f full"><label>TH Mega</label><input id="eThMega"></div>
-      <div class="form-section"><div class="form-section-label en-label">EN Sub Links</div></div>
-      <div class="f full"><label>EN Telegram</label><input id="eEnTelegram"></div>
-      <div class="f full"><label>EN Streamtape</label><input id="eEnStream"></div>
-      <div class="f full"><label>EN Mega</label><input id="eEnMega"></div>
-      <div class="form-section"><div class="form-section-label">Synopsis</div></div>
-      <div class="f full"><label>Myanmar Synopsis</label><textarea id="eDescMM"></textarea></div>
-      <div class="f full"><label>Thai Synopsis</label><textarea id="eDescTH"></textarea></div>
-      <button class="mo-btn" id="editBtn" onclick="doEdit()">Save Changes</button>
-      <div class="mo-msg" id="editMsg"></div>
     </div>
   </div>
 </div>
@@ -600,7 +717,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="conf-acts"><button class="btn-no" onclick="confClose()">Cancel</button><button class="btn-yes" onclick="doDel()">Delete</button></div>
   </div>
 </div>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getFirestore,collection,addDoc,updateDoc,deleteDoc,doc,query,orderBy,onSnapshot,serverTimestamp,limit,setDoc,getDoc,getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
@@ -614,169 +730,130 @@ const FALLBACK='https://placehold.co/48x27/111820/64748b?text=?';
 const CATS=['Japanese','Korean','Chinese','English','Spanish','Turkish','4K','2K'];
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
-let movies=[],analytics=[],pendingDelId=null;
-let allStatsDocs={};
-let curDateFilter='today';
+let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today';
 
-function setSlStatus(state,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+state;el.innerHTML=state==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
-
+function setSlStatus(s,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+s;el.innerHTML=s==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
 function getDateKey(d){return d.toISOString().slice(0,10);}
-function getPastDates(days){const dates=[];const now=new Date();for(let i=0;i<days;i++){const d=new Date(now);d.setDate(d.getDate()-i);dates.push(getDateKey(d));}return dates;}
+function getPastDates(n){const r=[];const now=new Date();for(let i=0;i<n;i++){const d=new Date(now);d.setDate(d.getDate()-i);r.push(getDateKey(d));}return r;}
 
-window.setDateFilter=function(period,btn){
-  curDateFilter=period;
-  document.querySelectorAll('.df-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderRealStats();
-};
+window.setDateFilter=function(p,btn){curDateFilter=p;document.querySelectorAll('.df-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderRealStats();};
 
 function renderRealStats(){
-  let dates=[];
-  const today=getDateKey(new Date());
+  let dates=[];const today=getDateKey(new Date());
   if(curDateFilter==='today')dates=[today];
   else if(curDateFilter==='7')dates=getPastDates(7);
   else if(curDateFilter==='30')dates=getPastDates(30);
   else if(curDateFilter==='365')dates=getPastDates(365);
   else dates=Object.keys(allStatsDocs);
-
   let views=0,clicks=0,downloads=0,mobile=0,desktop=0,mm=0,th=0,en=0,total=0;
-  dates.forEach(d=>{
-    const docData=allStatsDocs[d];
-    if(!docData)return;
-    views+=docData.pageviews||0;
-    clicks+=docData.movieClicks||0;
-    downloads+=docData.downloads||0;
-    mobile+=docData.mobile||0;
-    desktop+=docData.desktop||0;
-    mm+=docData.langMM||0;
-    th+=docData.langTH||0;
-    en+=docData.langEN||0;
-    total+=docData.total||0;
-  });
-
+  dates.forEach(d=>{const dd=allStatsDocs[d];if(!dd)return;views+=dd.pageviews||0;clicks+=dd.movieClicks||0;downloads+=dd.downloads||0;mobile+=dd.mobile||0;desktop+=dd.desktop||0;mm+=dd.langMM||0;th+=dd.langTH||0;en+=dd.langEN||0;total+=dd.total||0;});
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v.toLocaleString();};
-  set('rs-views',views);set('rs-clicks',clicks);set('rs-downloads',downloads);
-  set('rs-mobile',mobile);set('rs-desktop',desktop);set('rs-mm',mm);set('rs-th',th);set('rs-en',en);set('rs-total',total);
-
-  const todayDoc=allStatsDocs[today];
-  const sdEl=document.getElementById('s-dl');
-  if(sdEl)sdEl.textContent=(todayDoc?.downloads||0).toLocaleString();
+  set('rs-views',views);set('rs-clicks',clicks);set('rs-downloads',downloads);set('rs-mobile',mobile);set('rs-desktop',desktop);set('rs-mm',mm);set('rs-th',th);set('rs-en',en);set('rs-total',total);
+  const td=allStatsDocs[today];const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=(td?.downloads||0).toLocaleString();
 }
 
 async function loadAllStats(){
-  try{
-    const snap=await getDocs(collection(db,'stats'));
-    snap.forEach(d=>{allStatsDocs[d.id]={...d.data()};});
-    renderRealStats();
-    const today=getDateKey(new Date());
-    onSnapshot(doc(db,'stats',today),snap=>{
-      if(snap.exists()){allStatsDocs[today]={...snap.data()};renderRealStats();}
-    });
-  }catch(e){console.error('Stats error',e);}
+  try{const snap=await getDocs(collection(db,'stats'));snap.forEach(d=>{allStatsDocs[d.id]={...d.data()};});renderRealStats();const today=getDateKey(new Date());onSnapshot(doc(db,'stats',today),snap=>{if(snap.exists()){allStatsDocs[today]={...snap.data()};renderRealStats();}});}
+  catch(e){console.error('Stats error',e);}
 }
 
-// AUTH
 onAuthStateChanged(auth,user=>{
-  if(user){
-    document.getElementById('loginPage').style.display='none';
-    document.getElementById('adminApp').classList.add('show');
-    document.getElementById('tbUserEmail').textContent=user.email||'Admin';
-    initAdmin();
-  }else{
-    document.getElementById('loginPage').style.display='flex';
-    document.getElementById('adminApp').classList.remove('show');
-  }
+  if(user){document.getElementById('loginPage').style.display='none';document.getElementById('adminApp').classList.add('show');document.getElementById('tbUserEmail').textContent=user.email||'Admin';initAdmin();}
+  else{document.getElementById('loginPage').style.display='flex';document.getElementById('adminApp').classList.remove('show');}
 });
 
 window.doLogin=async function(){
-  const email=document.getElementById('loginEmail').value.trim();
-  const pwd=document.getElementById('loginPassword').value;
-  const btn=document.getElementById('loginBtn');
-  const err=document.getElementById('loginErr');
-  err.classList.remove('show');
-  if(!email||!pwd){err.textContent='Email နှင့် Password ထည့်ပါ';err.classList.add('show');return;}
+  const email=document.getElementById('loginEmail').value.trim(),pwd=document.getElementById('loginPassword').value;
+  const btn=document.getElementById('loginBtn'),err=document.getElementById('loginErr');err.classList.remove('show');
+  if(!email||!pwd){err.textContent='Email/Password ထည့်ပါ';err.classList.add('show');return;}
   btn.disabled=true;btn.textContent='Logging in...';
   try{await signInWithEmailAndPassword(auth,email,pwd);}
-  catch(e){
-    let msg='Login မအောင်မြင်ပါ';
-    if(e.code==='auth/wrong-password'||e.code==='auth/user-not-found'||e.code==='auth/invalid-credential')msg='Email သို့မဟုတ် Password မှားသည်';
-    else if(e.code==='auth/too-many-requests')msg='ကြိမ်များစွာ ကြိုးစားသောကြောင့် ယာယီပိတ်ထားသည်';
-    else if(e.code==='auth/invalid-email')msg='Email format မှားနေသည်';
-    err.textContent=msg;err.classList.add('show');
-  }
+  catch(e){let msg='Login မအောင်မြင်ပါ';if(['auth/wrong-password','auth/user-not-found','auth/invalid-credential'].includes(e.code))msg='Email/Password မှားသည်';else if(e.code==='auth/too-many-requests')msg='ကြိမ်များစွာ ကြိုးစားသောကြောင့် ယာယီပိတ်သည်';err.textContent=msg;err.classList.add('show');}
   btn.disabled=false;btn.textContent='Login';
 };
-
 window.doLogout=async function(){if(!confirm('Logout လုပ်မလား?'))return;await signOut(auth);};
 
 function initAdmin(){
-  loadSettings();
-  loadAllStats();
+  loadSettings();loadAllStats();
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
   tick();setInterval(tick,1000);
-  // Init post page forms
-  initCatGrid('mmCatGrid','mmGenre',[]);
-  initTags('mmActorsWrap','mmActorInp','mmActors',[]);
-  initTags('mmActressesWrap','mmActressInp','mmActresses',[]);
-  initCatGrid('thCatGrid','thGenre',[]);
-  initTags('thActorsWrap','thActorInp','thActors',[]);
-  initTags('thActressesWrap','thActressInp','thActresses',[]);
-  initCatGrid('enCatGrid','enGenre',[]);
-  initTags('enActorsWrap','enActorInp','enActors',[]);
-  initTags('enActressesWrap','enActressInp','enActresses',[]);
+  // Init post page tag inputs
+  ['mm','th','en'].forEach(l=>{
+    initCatGrid(l+'CatGrid',l+'Genre',[]);
+    initTagsFixed(l+'ActorsWrap',l+'ActorInp',l+'Actors',[]);
+    initTagsFixed(l+'ActressesWrap',l+'ActressInp',l+'Actresses',[]);
+  });
 }
 
 async function loadSettings(){
-  setSlStatus('loading','Loading from Firestore...');
-  try{
-    const snap=await getDoc(doc(db,'settings','global'));
-    if(snap.exists()){
-      const d=snap.data();
-      if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;
-      if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;
-      if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;
-      if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;
-      setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
-    }else{setSlStatus('empty','✗ Settings မရှိသေးပါ');}
-  }catch(e){setSlStatus('empty','⚠ Firestore connect error');}
-  const savedUrl=localStorage.getItem('ns_siteUrl');
-  if(savedUrl)document.getElementById('siteUrl').value=savedUrl;
+  setSlStatus('loading','Loading...');
+  try{const snap=await getDoc(doc(db,'settings','global'));
+    if(snap.exists()){const d=snap.data();if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');}
+    else setSlStatus('empty','✗ Settings မရှိသေးပါ');}
+  catch(e){setSlStatus('empty','⚠ Firestore error');}
+  const u=localStorage.getItem('ns_siteUrl');if(u)document.getElementById('siteUrl').value=u;
 }
 
 window.saveSettings=async function(){
-  const sl=document.getElementById('smartLinkInput').value.trim();
-  const telegram=document.getElementById('sTelegram').value.trim();
-  const facebook=document.getElementById('sFacebook').value.trim();
-  const tiktok=document.getElementById('sTiktok').value.trim();
-  const url=document.getElementById('siteUrl').value.trim();
-  const okEl=document.getElementById('settingOk'),errEl=document.getElementById('settingErr');
-  okEl.style.display='none';errEl.style.display='none';
-  if(sl&&!sl.startsWith('http')){errEl.textContent='✗ Smart Link URL မှားနေသည်';errEl.style.display='inline';return;}
+  const sl=document.getElementById('smartLinkInput').value.trim(),tg=document.getElementById('sTelegram').value.trim(),fb=document.getElementById('sFacebook').value.trim(),tt=document.getElementById('sTiktok').value.trim(),url=document.getElementById('siteUrl').value.trim();
+  const ok=document.getElementById('settingOk'),er=document.getElementById('settingErr');ok.style.display='none';er.style.display='none';
+  if(sl&&!sl.startsWith('http')){er.textContent='✗ Smart Link URL မှားသည်';er.style.display='inline';return;}
   if(url)localStorage.setItem('ns_siteUrl',url);
   setSlStatus('loading','Saving...');
-  try{
-    await setDoc(doc(db,'settings','global'),{smartLink:sl||'',socialTelegram:telegram||'',socialFacebook:facebook||'',socialTiktok:tiktok||''},{merge:true});
-    okEl.style.display='inline';setTimeout(()=>okEl.style.display='none',3000);
-    setSlStatus(sl?'ok':'empty',sl?'✓ Save အောင်မြင် — Social links updated':'Settings saved');
-  }catch(e){errEl.textContent='✗ Error: '+e.message;errEl.style.display='inline';setSlStatus('empty','✗ Save မအောင်မြင်');}
+  try{await setDoc(doc(db,'settings','global'),{smartLink:sl||'',socialTelegram:tg||'',socialFacebook:fb||'',socialTiktok:tt||''},{merge:true});ok.style.display='inline';setTimeout(()=>ok.style.display='none',3000);setSlStatus(sl?'ok':'empty',sl?'✓ Saved':'Settings saved');}
+  catch(e){er.textContent='✗ Error: '+e.message;er.style.display='inline';setSlStatus('empty','✗ Save မအောင်မြင်');}
 };
-
+// ── HELPERS ──────────────────────────────────────────────────────────────
 function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))return PROXY+encodeURIComponent(url)+'&w=96&h=54&fit=cover&output=webp';return url;}
-function hasMM(m){return(m.mmTelegram&&m.mmTelegram!=='#')||(m.mmStream&&m.mmStream!=='#')||(m.mmMega&&m.mmMega!=='#');}
-function hasTH(m){return(m.thTelegram&&m.thTelegram!=='#')||(m.thStream&&m.thStream!=='#')||(m.thMega&&m.thMega!=='#');}
-function hasEN(m){return(m.enTelegram&&m.enTelegram!=='#')||(m.enStream&&m.enStream!=='#')||(m.enMega&&m.enMega!=='#');}
+function hasMM(m){return!!(m.mmTelegram&&m.mmTelegram!=='#'||m.mmStream&&m.mmStream!=='#'||m.mmMega&&m.mmMega!=='#');}
+function hasTH(m){return!!(m.thTelegram&&m.thTelegram!=='#'||m.thStream&&m.thStream!=='#'||m.thMega&&m.thMega!=='#');}
+function hasEN(m){return!!(m.enTelegram&&m.enTelegram!=='#'||m.enStream&&m.enStream!=='#'||m.enMega&&m.enMega!=='#');}
+function subTypeBadge(m){const st=m.subtitleType||'';if(st==='mm')return '<span class="sb sb-mm"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> MM</span>';if(st==='th')return '<span class="sb sb-th"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> TH</span>';if(st==='en')return '<span class="sb sb-en"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> EN</span>';if(st==='both')return '<span class="sb sb-mm"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span><span class="sb sb-th"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></span><span class="sb sb-en"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></span>';const mm=hasMM(m),th=hasTH(m),en=hasEN(m);return(mm?'<span class="sb sb-mm">MM</span>':'')+(th?'<span class="sb sb-th">TH</span>':'')+(en?'<span class="sb sb-en">EN</span>':'');}
+function v(id){const el=document.getElementById(id);return el?(el.value.trim()||'#'):'#';}
+function sv(id,val){const el=document.getElementById(id);if(el)el.value=(val==='#'?'':val||'');}
+function showMsg(id,txt,type){const el=document.getElementById(id);if(!el)return;el.textContent=txt;el.className='mo-msg '+type;}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function clearForm(ids){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';})}
+function getTags(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
+function getCats(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
 
-function subTypeBadge(m){
-  const st=m.subtitleType||'';
-  if(st==='mm')return '<span class="sb sb-mm">🇲🇲 MM</span>';
-  if(st==='th')return '<span class="sb sb-th">🇹🇭 TH</span>';
-  if(st==='en')return '<span class="sb sb-en">🇬🇧 EN</span>';
-  if(st==='both')return '<span class="sb sb-mm">🇲🇲</span><span class="sb sb-th">🇹🇭</span><span class="sb sb-en">🇬🇧</span>';
-  const mm=hasMM(m),th=hasTH(m),en=hasEN(m);
-  return (mm?'<span class="sb sb-mm">MM</span>':'')+(th?'<span class="sb sb-th">TH</span>':'')+(en?'<span class="sb sb-en">EN</span>':'');
+// ── CAT GRID ─────────────────────────────────────────────────────────────
+function initCatGrid(gridId,hiddenId,selected=[]){
+  const grid=document.getElementById(gridId);if(!grid)return;
+  let sel=new Set(selected);
+  function render(){grid.innerHTML=CATS.map(c=>`<span class="cat-chip ${sel.has(c)?'sel':''}" onclick="toggleCat('${gridId}','${hiddenId}','${c}')">${c}</span>`).join('');document.getElementById(hiddenId).value=JSON.stringify([...sel]);}
+  grid._sel=sel;grid._render=render;render();
+}
+window.toggleCat=function(gId,hId,cat){const g=document.getElementById(gId);if(!g||!g._sel)return;if(g._sel.has(cat))g._sel.delete(cat);else g._sel.add(cat);document.getElementById(hId).value=JSON.stringify([...g._sel]);g._render();};
+
+// ── TAG INPUT (fixed: Enter/comma only, no blur-add) ──────────────────────
+function initTagsFixed(wId,iId,hId,init=[]){
+  const wrap=document.getElementById(wId),inp=document.getElementById(iId);if(!wrap||!inp)return;
+  let tags=[...init];
+  function sync(){const h=document.getElementById(hId);if(h)h.value=JSON.stringify(tags);}
+  function render(){
+    wrap.querySelectorAll('.tag-chip').forEach(c=>c.remove());
+    tags.forEach((t,i)=>{const chip=document.createElement('span');chip.className='tag-chip';chip.innerHTML=`${escHtml(t)}<button class="tag-rm" type="button" data-idx="${i}" tabindex="-1">✕</button>`;chip.querySelector('.tag-rm').addEventListener('mousedown',function(e){e.preventDefault();tags.splice(parseInt(this.dataset.idx),1);render();inp.focus();});wrap.insertBefore(chip,inp);});
+    sync();
+  }
+  function addTag(){const val=inp.value.trim().replace(/,$/,'').trim();if(val&&!tags.includes(val)){tags.push(val);render();}inp.value='';}
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===','){e.preventDefault();addTag();}if(e.key==='Backspace'&&!inp.value&&tags.length){tags.pop();render();}});
+  wrap.addEventListener('click',function(e){if(e.target===wrap)inp.focus();});
+  wrap._tags=tags;wrap._render=render;wrap._addTag=addTag;render();
 }
 
+// ── STATUS SETTERS ────────────────────────────────────────────────────────
+function setToggle(pubId,prvId,hidId,s){document.getElementById(hidId).value=s;document.getElementById(pubId).className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById(prvId).className='toggle-opt'+(s==='private'?' on-prv':'');}
+window.setMMStatus=s=>setToggle('mmStatusPub','mmStatusPrv','mmStatus',s);
+window.setTHStatus=s=>setToggle('thStatusPub','thStatusPrv','thStatus',s);
+window.setENStatus=s=>setToggle('enStatusPub','enStatusPrv','enStatus',s);
+window.setStatus=s=>setToggle('statusPub','statusPrv','aStatus',s);
+// Generic edit status setter — called by setESt('MM','public') etc
+window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s);};
+window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
+
+// ── DASHBOARD STATS ───────────────────────────────────────────────────────
 function updateMovieStats(){
   const total=movies.length,pub=movies.filter(m=>m.status!=='private').length,prv=movies.filter(m=>m.status==='private').length;
   const mm=movies.filter(m=>m.subtitleType==='mm'||(!m.subtitleType&&hasMM(m))).length;
@@ -784,12 +861,10 @@ function updateMovieStats(){
   const en=movies.filter(m=>m.subtitleType==='en'||(!m.subtitleType&&hasEN(m))).length;
   const both=movies.filter(m=>m.subtitleType==='both').length;
   const none=movies.filter(m=>!hasMM(m)&&!hasTH(m)&&!hasEN(m)&&!m.subtitleType).length;
-  const setEl=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  setEl('s-total',total);setEl('s-public',pub);setEl('s-private',prv);setEl('s-mm',mm);setEl('s-th',th);setEl('s-en',en);
-  setEl('sb-mm',mm);setEl('sb-th',th);setEl('sb-en',en);setEl('sb-both',both);setEl('sb-none',none);
+  const s=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  s('s-total',total);s('s-public',pub);s('s-private',prv);s('s-mm',mm);s('s-th',th);s('s-en',en);s('sb-mm',mm);s('sb-th',th);s('sb-en',en);s('sb-both',both);s('sb-none',none);
   document.getElementById('catLbl').textContent=total+' movies';
-  const cc={};CATS.forEach(c=>cc[c]=0);
-  movies.forEach(m=>{const gs=m.genres&&m.genres.length?m.genres:(m.genre?[m.genre]:[]);gs.forEach(g=>{if(cc[g]!==undefined)cc[g]++;});});
+  const cc={};CATS.forEach(c=>cc[c]=0);movies.forEach(m=>{const gs=m.genres?.length?m.genres:(m.genre?[m.genre]:[]);gs.forEach(g=>{if(cc[g]!==undefined)cc[g]++;});});
   const cMax=Math.max(...Object.values(cc),1);
   document.getElementById('catChart').innerHTML=CATS.map((c,i)=>`<div class="bh-item"><div class="bh-label">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(cc[c]/cMax)*100}%;background:${CAT_CLR[i]}"></div></div><div class="bh-val">${cc[c]}</div></div>`).join('');
   const qc={};QUALS.forEach(q=>qc[q]=0);movies.forEach(m=>{if(qc[m.quality]!==undefined)qc[m.quality]++;});
@@ -799,68 +874,111 @@ function updateMovieStats(){
 }
 
 function updateAnalytics(){
-  const sessions=analytics;
-  const lc={mm:0,th:0,en:0};
-  sessions.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});
-  const lMax=Math.max(...Object.values(lc),1);
-  document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 Myanmar',th:'🇹🇭 Thai',en:'🇬🇧 English'}).map(([k,lbl])=>`<div class="bh-item"><div class="bh-label" style="width:100px">${lbl}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
+  const lc={mm:0,th:0,en:0};analytics.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});const lMax=Math.max(...Object.values(lc),1);
+  document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 Myanmar',th:'🇹🇭 Thai',en:'🇬🇧 English'}).map(([k,lb])=>`<div class="bh-item"><div class="bh-label" style="width:100px">${lb}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
   const sc={mmTelegram:0,mmStream:0,mmMega:0,thTelegram:0,thStream:0,thMega:0,enTelegram:0,enStream:0,enMega:0};
   analytics.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
   const sMax=Math.max(...Object.values(sc),1);
   const sClr={mmTelegram:'#29b6f6',mmStream:'#fc8181',mmMega:'#e53e3e',thTelegram:'#0891b2',thStream:'#60a5fa',thMega:'#3b82f6',enTelegram:'#a3e635',enStream:'#63b3ed',enMega:'#3182ce'};
   const sLbl={mmTelegram:'MM Telegram',mmStream:'MM Stream',mmMega:'MM Mega',thTelegram:'TH Telegram',thStream:'TH Stream',thMega:'TH Mega',enTelegram:'EN Telegram',enStream:'EN Stream',enMega:'EN Mega'};
-  const dlRows=Object.entries(sc).filter(([,n])=>n>0).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('');
-  document.getElementById('dlChart').innerHTML=dlRows||'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No downloads yet</div>';
-  const countryMap={},cityMap={};
-  sessions.forEach(e=>{if(e.country)countryMap[e.country]=(countryMap[e.country]||0)+1;if(e.city)cityMap[e.city]=(cityMap[e.city]||0)+1;});
-  const locTotal=Object.values(countryMap).reduce((a,b)=>a+b,0);
-  document.getElementById('locTotal').textContent=locTotal?locTotal+' sessions':'Collecting...';
-  const LOC_C=['#f0b429','#3b82f6','#10b981','#8b5cf6','#ef4444','#f97316','#06b6d4','#ec4899'];
-  const ce=Object.entries(countryMap).sort((a,b)=>b[1]-a[1]).slice(0,8),cMax=Math.max(...ce.map(e=>e[1]),1);
-  document.getElementById('countryChart').innerHTML=ce.length?ce.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cMax)*100}%;background:${LOC_C[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No data</div>';
-  const cye=Object.entries(cityMap).sort((a,b)=>b[1]-a[1]).slice(0,8),cyMax=Math.max(...cye.map(e=>e[1]),1);
-  document.getElementById('cityChart').innerHTML=cye.length?cye.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cyMax)*100}%;background:${LOC_C[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No data</div>';
+  document.getElementById('dlChart').innerHTML=Object.entries(sc).filter(([,n])=>n>0).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('')||'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No downloads yet</div>';
+  const cM={},cyM={};analytics.forEach(e=>{if(e.country)cM[e.country]=(cM[e.country]||0)+1;if(e.city)cyM[e.city]=(cyM[e.city]||0)+1;});
+  const lt=Object.values(cM).reduce((a,b)=>a+b,0);document.getElementById('locTotal').textContent=lt?lt+' sessions':'Collecting...';
+  const LC=['#f0b429','#3b82f6','#10b981','#8b5cf6','#ef4444','#f97316','#06b6d4','#ec4899'];
+  const ce=Object.entries(cM).sort((a,b)=>b[1]-a[1]).slice(0,8),cMax2=Math.max(...ce.map(e=>e[1]),1);
+  document.getElementById('countryChart').innerHTML=ce.length?ce.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cMax2)*100}%;background:${LC[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted)">No data</div>';
+  const cye=Object.entries(cyM).sort((a,b)=>b[1]-a[1]).slice(0,8),cyMax=Math.max(...cye.map(e=>e[1]),1);
+  document.getElementById('cityChart').innerHTML=cye.length?cye.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cyMax)*100}%;background:${LC[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted)">No data</div>';
   const mvC={},mvD={};
   analytics.filter(e=>e.type==='movie_click'&&e.movieTitle).forEach(e=>{mvC[e.movieTitle]=(mvC[e.movieTitle]||0)+1;});
   analytics.filter(e=>e.type==='download_click'&&e.movieTitle).forEach(e=>{mvD[e.movieTitle]=(mvD[e.movieTitle]||0)+1;});
   const mvList=Object.entries(mvC).sort((a,b)=>b[1]-a[1]).slice(0,10);
   document.getElementById('movieViewsTbl').innerHTML=mvList.length?mvList.map(([t,cn],i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${t}</strong></td><td style="color:var(--accent);font-weight:600">${cn}</td><td>${mvD[t]||0}</td><td style="color:var(--muted);font-size:.72rem">${((mvD[t]||0)/Math.max(cn,1)*100).toFixed(0)}%</td></tr>`).join(''):'<tr><td colspan="5" class="empty-tbl">No data yet</td></tr>';
 }
+// ── MOVIES TABLE — language-specific edit buttons ─────────────────────────
+window.renderMvTable=function(){
+  const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
+  const show=movies.filter(m=>!q||(m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q)));
+  const tb=document.getElementById('mvTbody');
+  if(!show.length){tb.innerHTML='<tr><td colspan="8" class="empty-tbl">No movies found</td></tr>';return;}
+  tb.innerHTML=show.map(m=>{
+    const st=m.subtitleType||'';
+    const safeT=(m.title||'').replace(/"/g,'&quot;');
+    // Build edit buttons — only show the language(s) this movie has
+    let edits='';
+    if(st==='mm') edits=`<button class="btn-e-mm" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'mm')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> Edit</button>`;
+    else if(st==='th') edits=`<button class="btn-e-th" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'th')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Edit</button>`;
+    else if(st==='en') edits=`<button class="btn-e-en" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'en')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> Edit</button>`;
+    else if(st==='both') edits=`<button class="btn-e-mm" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'mm')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></button><button class="btn-e-th" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'th')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></button><button class="btn-e-en" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'en')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></button>`;
+    else{// legacy/unknown — show all 3
+      edits=`<button class="btn-e-mm" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'mm')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></button><button class="btn-e-th" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'th')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></button><button class="btn-e-en" data-id="${m.id}" onclick="openEditPage(this.dataset.id,'en')"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></button>`;}
+    return `<tr>
+      <td><img class="mv-img" src="${ps(m.poster)}" onerror="this.src='${FALLBACK}'" alt=""></td>
+      <td><strong>${m.title||''}</strong>${m.actors?.length?'<br><span style="font-size:.62rem;color:var(--muted)">'+m.actors.slice(0,2).join(', ')+'</span>':''}</td>
+      <td>${m.year||''}</td>
+      <td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td>
+      <td>${m.quality||''}</td>
+      <td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td>
+      <td><div class="sub-bs">${subTypeBadge(m)}</div></td>
+      <td><div class="acts">${edits}<span class="acts-sep"></span><button class="btn-d" data-id="${m.id}" data-title="${safeT}" onclick="window._del(this.dataset.id,this.dataset.title)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div></td>
+    </tr>`;
+  }).join('');
+};
 
-// CAT & TAGS helpers
-function initCatGrid(gridId,hiddenId,selected=[]){
-  const grid=document.getElementById(gridId);if(!grid)return;
-  let sel=new Set(selected);
-  function render(){grid.innerHTML=CATS.map(c=>`<span class="cat-chip ${sel.has(c)?'sel':''}" onclick="toggleCat('${gridId}','${hiddenId}','${c}')">${c}</span>`).join('');document.getElementById(hiddenId).value=JSON.stringify([...sel]);}
-  grid._sel=sel;grid._render=render;render();
-}
-window.toggleCat=function(gId,hId,cat){const g=document.getElementById(gId);if(!g||!g._sel)return;if(g._sel.has(cat))g._sel.delete(cat);else g._sel.add(cat);document.getElementById(hId).value=JSON.stringify([...g._sel]);g._render();};
-function getCats(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
-function initTags(wId,iId,hId,init=[]){
-  const wrap=document.getElementById(wId),inp=document.getElementById(iId);if(!wrap||!inp)return;
-  let tags=[...init];
-  function sync(){document.getElementById(hId).value=JSON.stringify(tags);}
-  function render(){wrap.querySelectorAll('.tag-chip').forEach(c=>c.remove());tags.forEach((t,i)=>{const c=document.createElement('span');c.className='tag-chip';c.innerHTML=`${t}<button onclick="removeTag('${wId}','${iId}','${hId}',${i})" type="button">✕</button>`;wrap.insertBefore(c,inp);});sync();}
-  function add(val){const v=val.trim();if(v&&!tags.includes(v)){tags.push(v);render();}inp.value='';}
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();add(inp.value);}if(e.key==='Backspace'&&!inp.value&&tags.length){tags.pop();render();}});
-  inp.addEventListener('blur',()=>{if(inp.value.trim())add(inp.value);});
-  wrap._tags=tags;wrap._render=render;render();
-}
-window.removeTag=function(wId,iId,hId,idx){const w=document.getElementById(wId);if(w&&w._tags){w._tags.splice(idx,1);w._render();}};
-function getTags(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
+// ── OPEN EDIT PAGE ────────────────────────────────────────────────────────
+window.openEditPage=function(id,lang){
+  const m=movies.find(x=>x.id===id);if(!m)return;
+  const lu=lang.toUpperCase(); // 'MM','TH','EN'
+  document.getElementById('e'+lu+'Id').value=m.id;
+  document.getElementById('e'+lu+'Title').value=m.title||'';
+  document.getElementById('e'+lu+'Year').value=m.year||'';
+  document.getElementById('e'+lu+'Quality').value=m.quality||'1080p';
+  document.getElementById('e'+lu+'Poster').value=m.poster||'';
+  window.setESt(lu,m.status||'public');
+  initCatGrid('e'+lu+'CatGrid','e'+lu+'Genre',m.genres||(m.genre?[m.genre]:[]));
+  initTagsFixed('e'+lu+'ActorsWrap','e'+lu+'ActorInp','e'+lu+'Actors',m.actors||[]);
+  initTagsFixed('e'+lu+'ActressesWrap','e'+lu+'ActressInp','e'+lu+'Actresses',m.actresses||[]);
+  // Set language-specific link fields
+  if(lang==='mm'){sv('eMMTelegram',m.mmTelegram);sv('eMMStream',m.mmStream);sv('eMMmMega',m.mmMega);}
+  if(lang==='th'){sv('eTHTelegram',m.thTelegram);sv('eTHStream',m.thStream);sv('eTHMega',m.thMega);}
+  if(lang==='en'){sv('eENTelegram',m.enTelegram);sv('eENStream',m.enStream);sv('eENMega',m.enMega);}
+  document.getElementById('e'+lu+'DescMM').value=m.descMM||'';
+  if(lang==='th'&&document.getElementById('eTHDescTH'))document.getElementById('eTHDescTH').value=m.descTH||'';
+  // Populate contentType toggle
+  const ctVal=m.contentType||'general';
+  window.setCT('e'+lu,ctVal);
+  // Update banner tag
+  document.getElementById('editTag'+lu).textContent=m.title||'-';
+  // Edit nav always visible - just highlight active
+  showSubPg('edit-'+lang,document.getElementById('nav-edit-'+lang));
+};
 
-function v(id){const el=document.getElementById(id);return el?(el.value.trim()||'#'):'#';}
-function sv(id,val){const el=document.getElementById(id);if(el)el.value=(val==='#'?'':val||'');}
+// ── SAVE EDIT (generic — called per language) ─────────────────────────────
+window.doSaveEdit=async function(lu){
+  const lang=lu.toLowerCase();
+  const id=document.getElementById('e'+lu+'Id').value,title=document.getElementById('e'+lu+'Title').value.trim();
+  if(!id||!title){showMsg('edit'+lu+'Msg','Title ထည့်ပါ','err');return;}
+  const cats=getCats('e'+lu+'Genre');
+  const btn=document.getElementById('save'+lu+'Btn');btn.disabled=true;btn.textContent='Saving...';
+  const data={title,year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
+  if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmMega=v('eMMmMega');}
+  if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thMega=v('eTHMega');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
+  if(lang==='en'){data.enTelegram=v('eENTelegram');data.enStream=v('eENStream');data.enMega=v('eENMega');}
+  try{
+    await updateDoc(doc(db,'movies',id),data);
+    showMsg('edit'+lu+'Msg','✓ Saved!','ok');
+    document.getElementById('editTag'+lu).textContent=title;
+    setTimeout(()=>goBackToMovies(),1600);
+  }catch(e){showMsg('edit'+lu+'Msg','Error: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='Save '+lu+' Changes';}
+};
 
-// Status helpers
-window.setMMStatus=s=>{document.getElementById('mmStatus').value=s;document.getElementById('mmStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('mmStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
-window.setTHStatus=s=>{document.getElementById('thStatus').value=s;document.getElementById('thStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('thStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
-window.setENStatus=s=>{document.getElementById('enStatus').value=s;document.getElementById('enStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('enStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
-window.setStatus=s=>{document.getElementById('aStatus').value=s;document.getElementById('statusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('statusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
-window.setEditStatus=s=>{document.getElementById('eStatus').value=s;document.getElementById('eStatusPub').className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById('eStatusPrv').className='toggle-opt'+(s==='private'?' on-prv':'');};
-window.setSubType=s=>{document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
-window.setEditSubType=s=>{document.getElementById('eSubtitleType').value=s;['eSubMM','eSubTH','eSubEN','eSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'eSubMM',th:'eSubTH',en:'eSubEN',both:'eSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
+window.goBackToMovies=function(){
+  // Edit nav stays visible
+  showPg('movies',document.getElementById('nav-movies'));
+};
 
+// ── POST FUNCTIONS ────────────────────────────────────────────────────────
 async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'✓ Saved!','ok');onSuccess();}
@@ -868,151 +986,104 @@ async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   finally{btn.disabled=false;btn.textContent=btnTxt;}
 }
 
-function clearForm(ids){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';})}
-
-// POST MM
 window.doPostMM=async function(){
   const title=document.getElementById('mmTitle').value.trim();if(!title){showMsg('postMMMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('mmGenre');
-  await saveMovieToDb({title,year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,subtitleType:'mm',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmMega:v('mmMega'),thTelegram:'#',thStream:'#',thMega:'#',enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
+  await saveMovieToDb({title,year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,subtitleType:'mm',contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmMega:v('mmMega'),thTelegram:'#',thStream:'#',thMega:'#',enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
     clearForm(['mmTitle','mmYear','mmPoster','mmTelegram','mmStream','mmMega','mmDescMM']);
-    initCatGrid('mmCatGrid','mmGenre',[]);initTags('mmActorsWrap','mmActorInp','mmActors',[]);initTags('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');
+    initCatGrid('mmCatGrid','mmGenre',[]);initTagsFixed('mmActorsWrap','mmActorInp','mmActors',[]);initTagsFixed('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');window.setCT('mm','general');
   });
 };
-
-// POST TH
 window.doPostTH=async function(){
   const title=document.getElementById('thTitle').value.trim();if(!title){showMsg('postTHMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('thGenre');
-  await saveMovieToDb({title,year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,subtitleType:'th',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thMega:v('thMega'),enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('thDescMM').value.trim()||'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
+  await saveMovieToDb({title,year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,subtitleType:'th',contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thMega:v('thMega'),enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('thDescMM').value.trim()||'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
     clearForm(['thTitle','thYear','thPoster','thTelegram','thStream','thMega','thDescMM','thDescTH']);
-    initCatGrid('thCatGrid','thGenre',[]);initTags('thActorsWrap','thActorInp','thActors',[]);initTags('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');
+    initCatGrid('thCatGrid','thGenre',[]);initTagsFixed('thActorsWrap','thActorInp','thActors',[]);initTagsFixed('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');window.setCT('th','general');
   });
 };
-
-// POST EN
 window.doPostEN=async function(){
   const title=document.getElementById('enTitle').value.trim();if(!title){showMsg('postENMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('enGenre');
-  await saveMovieToDb({title,year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,subtitleType:'en',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:'#',thStream:'#',thMega:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enMega:v('enMega'),descMM:document.getElementById('enDescMM').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
+  await saveMovieToDb({title,year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,subtitleType:'en',contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:'#',thStream:'#',thMega:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enMega:v('enMega'),descMM:document.getElementById('enDescMM').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
     clearForm(['enTitle','enYear','enPoster','enTelegram','enStream','enMega','enDescMM']);
-    initCatGrid('enCatGrid','enGenre',[]);initTags('enActorsWrap','enActorInp','enActors',[]);initTags('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');
+    initCatGrid('enCatGrid','enGenre',[]);initTagsFixed('enActorsWrap','enActorInp','enActors',[]);initTagsFixed('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');window.setCT('en','general');
   });
 };
 
-// ADD modal
-window.openAdd=()=>{document.getElementById('moAdd').classList.add('open');initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);};
+// ── ADD MODAL ──────────────────────────────────────────────────────────────
+window.openAdd=()=>{document.getElementById('moAdd').classList.add('open');initCatGrid('aCatGrid','aGenre',[]);initTagsFixed('aActorsWrap','aActorInp','aActors',[]);initTagsFixed('aActressesWrap','aActressInp','aActresses',[]);};
 window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Title ထည့်ပါ','err');return;}
-  const cats=getCats('aGenre');const subtitleType=document.getElementById('aSubtitleType').value||'mm';
-  await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType,actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thMega:v('aThMega'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enMega:v('aEnMega'),descMM:document.getElementById('aDescMM').value.trim()||'Subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
+  const cats=getCats('aGenre'),st=document.getElementById('aSubtitleType').value||'mm';
+  await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType:st,contentType:document.getElementById('aContentType').value||'general',actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thMega:v('aThMega'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enMega:v('aEnMega'),descMM:document.getElementById('aDescMM').value.trim()||'Subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
     clearForm(['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmMega','aThTelegram','aThStream','aThMega','aEnTelegram','aEnStream','aEnMega','aDescMM','aDescTH']);
-    initCatGrid('aCatGrid','aGenre',[]);initTags('aActorsWrap','aActorInp','aActors',[]);initTags('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
+    initCatGrid('aCatGrid','aGenre',[]);initTagsFixed('aActorsWrap','aActorInp','aActors',[]);initTagsFixed('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
   });
 };
 
-// EDIT
-window._edit=function(id){
-  const m=movies.find(x=>x.id===id);if(!m)return;
-  document.getElementById('eId').value=m.id;document.getElementById('eTitle').value=m.title||'';document.getElementById('eYear').value=m.year||'';
-  document.getElementById('eQuality').value=m.quality||'1080p';document.getElementById('ePoster').value=m.poster||'';
-  setEditStatus(m.status||'public');setEditSubType(m.subtitleType||'mm');
-  initCatGrid('eCatGrid','eGenre',m.genres||(m.genre?[m.genre]:[]));
-  initTags('eActorsWrap','eActorInp','eActors',m.actors||[]);initTags('eActressesWrap','eActressInp','eActresses',m.actresses||[]);
-  sv('eMmTelegram',m.mmTelegram);sv('eMmStream',m.mmStream);sv('eMmMega',m.mmMega);
-  sv('eThTelegram',m.thTelegram);sv('eThStream',m.thStream);sv('eThMega',m.thMega);
-  sv('eEnTelegram',m.enTelegram);sv('eEnStream',m.enStream);sv('eEnMega',m.enMega);
-  document.getElementById('eDescMM').value=m.descMM||'';document.getElementById('eDescTH').value=m.descTH||'';
-  document.getElementById('moEdit').classList.add('open');
-};
-window.doEdit=async function(){
-  const id=document.getElementById('eId').value,title=document.getElementById('eTitle').value.trim();
-  if(!id||!title){showMsg('editMsg','Title ထည့်ပါ','err');return;}
-  const cats=getCats('eGenre');const subtitleType=document.getElementById('eSubtitleType').value||'mm';
-  const btn=document.getElementById('editBtn');btn.disabled=true;btn.textContent='Saving...';
-  try{
-    await updateDoc(doc(db,'movies',id),{title,year:parseInt(document.getElementById('eYear').value)||2024,genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('eQuality').value,poster:document.getElementById('ePoster').value.trim(),status:document.getElementById('eStatus').value,subtitleType,actors:getTags('eActors'),actresses:getTags('eActresses'),mmTelegram:v('eMmTelegram'),mmStream:v('eMmStream'),mmMega:v('eMmMega'),thTelegram:v('eThTelegram'),thStream:v('eThStream'),thMega:v('eThMega'),enTelegram:v('eEnTelegram'),enStream:v('eEnStream'),enMega:v('eEnMega'),descMM:document.getElementById('eDescMM').value.trim(),descTH:document.getElementById('eDescTH').value.trim(),updatedAt:serverTimestamp()});
-    showMsg('editMsg','✓ Changes saved!','ok');setTimeout(()=>moClose('moEdit'),1500);
-  }catch(e){showMsg('editMsg','Error: '+e.message,'err');}
-  finally{btn.disabled=false;btn.textContent='Save Changes';}
-};
-
+// ── DELETE ─────────────────────────────────────────────────────────────────
 window._del=function(id,title){pendingDelId=id;document.getElementById('confMsg').textContent=`Delete "${title}"?`;document.getElementById('confDel').classList.add('open');};
 window.doDel=async function(){
-  if(!pendingDelId)return;
-  const btn=document.querySelector('#confDel .btn-yes');
+  if(!pendingDelId)return;const btn=document.querySelector('#confDel .btn-yes');
   if(btn){btn.disabled=true;btn.textContent='Deleting...';}
   try{await deleteDoc(doc(db,'movies',pendingDelId));confClose();}
   catch(e){alert('Delete Error: '+e.message);if(btn){btn.disabled=false;btn.textContent='Delete';}}
 };
 
-window.renderMvTable=function(){
-  const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
-  const show=movies.filter(m=>!q||(m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q)));
-  const tb=document.getElementById('mvTbody');
-  if(!show.length){tb.innerHTML='<tr><td colspan="8" class="empty-tbl">No movies found</td></tr>';return;}
-  tb.innerHTML=show.map(m=>{
-    const safeTitle=(m.title||'').replace(/"/g,'&quot;');
-    return `<tr><td><img class="mv-img" src="${ps(m.poster)}" onerror="this.src='${FALLBACK}'" alt=""></td><td><strong>${m.title||''}</strong>${(m.actors&&m.actors.length)?'<br><span style="font-size:.62rem;color:var(--muted)">'+m.actors.slice(0,2).join(', ')+'</span>':''}</td><td>${m.year||''}</td><td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td><td>${m.quality||''}</td><td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td><td><div class="sub-bs">${subTypeBadge(m)}</div></td><td><div class="acts"><button class="btn-e" data-id="${m.id}" onclick="window._edit(this.dataset.id)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-d" data-id="${m.id}" data-title="${safeTitle}" onclick="window._del(this.dataset.id,this.dataset.title)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div></td></tr>`;
-  }).join('');
-};
-
+// ── NAVIGATION ────────────────────────────────────────────────────────────
 window.openSite=function(){const url=localStorage.getItem('ns_siteUrl')||'index.html';window.open(url+'?v='+Date.now(),'_blank');};
-function showMsg(id,text,type){const el=document.getElementById(id);if(!el)return;el.textContent=text;el.className='mo-msg '+type;}
-window.moClose=(id)=>document.getElementById(id).classList.remove('open');
+window.moClose=id=>document.getElementById(id).classList.remove('open');
 window.moBg=(e,id)=>{if(e.target.id===id)window.moClose(id);};
-window.confClose=()=>{document.getElementById('confDel').classList.remove('open');pendingDelId=null;};
+window.confClose=()=>{document.getElementById('confDel').classList.remove('open');pendingDelId=null;const btn=document.querySelector('#confDel .btn-yes');if(btn){btn.disabled=false;btn.textContent='Delete';}};
 
-// Navigation - main nav items
 window.showPg=function(id,el){
-  // If clicking Post Movie parent, default to post-mm
-  if(id==='post-mm'||id==='post-th'||id==='post-en'){
-    showSubPg(id, document.getElementById('nav-'+id));
-    // Also mark parent nav item
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
-    document.getElementById('nav-post').classList.add('on');
-    return;
-  }
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
-  document.querySelectorAll('.nav-sub-item').forEach(n=>n.classList.remove('on'));
+  document.querySelectorAll('.nav-item,.nav-sub-item').forEach(n=>n.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
-  el.classList.add('on');
+  if(el)el.classList.add('on');
   const titles={dashboard:'Dashboard',analytics:'Analytics',movies:'Movies',settings:'Settings'};
   document.getElementById('tbTitle').textContent=titles[id]||id;
   localStorage.setItem('ns_lastPage',id);
   if(id==='movies')renderMvTable();
 };
-
-// Sub page navigation for Post Movie
 window.showSubPg=function(id,el){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nav-sub-item').forEach(n=>n.classList.remove('on'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
+  document.querySelectorAll('.nav-item,.nav-sub-item').forEach(n=>n.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
-  el.classList.add('on');
-  document.getElementById('nav-post').classList.add('on');
-  const titles={'post-mm':'Post — 🇲🇲 Myanmar Sub','post-th':'Post — 🇹🇭 Thai Sub','post-en':'Post — 🇬🇧 English Sub'};
-  document.getElementById('tbTitle').textContent=titles[id]||'Post Movie';
+  if(el)el.classList.add('on');
+  if(id.startsWith('post-'))document.getElementById('nav-post').classList.add('on');
+  if(id.startsWith('edit-'))document.getElementById('nav-edit').classList.add('on');
+  const titles={'post-mm':'Post — 🇲🇲 Myanmar','post-th':'Post — 🇹🇭 Thai','post-en':'Post — 🇬🇧 English','edit-mm':'Edit — 🇲🇲 Myanmar Sub','edit-th':'Edit — 🇹🇭 Thai Sub','edit-en':'Edit — 🇬🇧 English Sub'};
+  document.getElementById('tbTitle').textContent=titles[id]||'Page';
   localStorage.setItem('ns_lastPage',id);
 };
 
-// Restore last page
+// Restore last page on load — skip edit pages (need data)
 (()=>{
   const last=localStorage.getItem('ns_lastPage')||'dashboard';
+  if(last.startsWith('edit-')){return;}
   const navEl=document.getElementById('nav-'+last);
   if(navEl){
-    if(last==='post-mm'||last==='post-th'||last==='post-en'){
-      window.showSubPg(last,navEl);
-    } else if(last!=='dashboard'){
-      window.showPg(last,navEl);
-    }
+    if(['post-mm','post-th','post-en'].includes(last))window.showSubPg(last,navEl);
+    else if(last!=='dashboard')window.showPg(last,navEl);
   }
 })();
 
+
+// ── CONTENT TYPE SETTERS ─────────────────────────────────────────────────
+window.setCT=function(prefix,val){
+  document.getElementById(prefix+'ContentType').value=val;
+  ['Gen','Jav','Wes'].forEach(s=>document.getElementById(prefix+'Ct'+s).className='ct-opt');
+  const map={general:'Gen',jav:'Jav',western:'Wes'};
+  const sfx=map[val]||'Gen';
+  const clsMap={Gen:'on-gen',Jav:'on-jav',Wes:'on-wes'};
+  document.getElementById(prefix+'Ct'+sfx).className='ct-opt '+clsMap[sfx];
+};
+
 function tick(){const el=document.getElementById('tbTime');if(el)el.textContent=new Date().toLocaleString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit',day:'2-digit',month:'short'});}
+
 </script>
 </body>
 </html>
-
