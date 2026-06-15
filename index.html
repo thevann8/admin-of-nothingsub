@@ -249,6 +249,14 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .soc-lbl svg{width:13px;height:13px;fill:currentColor;opacity:.7;}
 .soc-row input{background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;flex:1;padding:.1rem 0;}
 .soc-row input::placeholder{color:var(--muted);}
+.cat-row{display:flex;align-items:center;gap:.5rem;background:var(--card);border:1.5px solid var(--border);border-radius:8px;padding:.38rem .6rem;cursor:grab;transition:border-color .2s,box-shadow .2s;user-select:none;}
+.cat-row:active{cursor:grabbing;}
+.cat-row.drag-over{border-color:var(--accent);box-shadow:0 0 12px rgba(240,180,41,.2);}
+.cat-row-drag{opacity:.4;}
+.cat-drag-handle{color:var(--muted);font-size:.85rem;flex-shrink:0;cursor:grab;padding:0 .15rem;}
+.cat-row-name{flex:1;font-size:.82rem;color:var(--text);}
+.cat-row-rm{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;border-radius:6px;padding:2px 8px;font-size:.72rem;font-weight:700;cursor:pointer;flex-shrink:0;transition:all .2s;}
+.cat-row-rm:hover{background:rgba(239,68,68,.3);}
 .date-filter{display:flex;gap:.35rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center;}
 .date-filter-label{font-size:.66rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-right:.2rem;}
 .df-btn{padding:.32rem .8rem;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.74rem;font-weight:600;font-family:'DM Sans',sans-serif;transition:all .2s;}
@@ -680,6 +688,15 @@ tr:hover td{background:rgba(240,180,41,.02);}
           </div>
           <div class="f"><label>Site URL</label><input id="siteUrl" placeholder="index.html or https://..."></div>
           <div class="f" style="margin-top:.4rem">
+            <label style="color:var(--accent);font-size:.68rem;letter-spacing:1.5px;margin-bottom:.5rem">Custom Categories &#8212; Sidenav မှာပြမည့် categories</label>
+            <div style="font-size:.65rem;color:var(--muted);margin-bottom:.7rem">ကိုယ်ချင်တဲ့ category နာမည်ထည့်ပါ &#8212; ↕ drag ကိုင်ပြီး order ပြောင်းနိုင်</div>
+            <div id="catManagerList" style="display:flex;flex-direction:column;gap:.35rem;margin-bottom:.65rem;"></div>
+            <div style="display:flex;gap:.5rem;">
+              <input id="catNewInp" placeholder="New category name..." style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.45rem .7rem;color:var(--text);font-size:.8rem;font-family:'DM Sans',sans-serif;" onkeydown="if(event.key==='Enter')addCatItem()">
+              <button onclick="addCatItem()" style="background:var(--accent);border:none;color:#000;padding:.45rem .9rem;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer;white-space:nowrap;">+ Add</button>
+            </div>
+          </div>
+          <div class="f" style="margin-top:.4rem">
             <label style="color:var(--accent);font-size:.68rem;letter-spacing:1.5px;margin-bottom:.5rem">Subtitle Visibility &#8212; ဘယ် subtitle ကို site မှာပြမလဲ</label>
             <div style="font-size:.65rem;color:var(--muted);margin-bottom:.6rem">OFF ထားရင် ဦးစားပေးရွေးချယ်မှုနဲ့ nav မှာ ပြတော့မည်မဟုတ်ပါ</div>
             <div class="sub-vis-grid">
@@ -794,7 +811,77 @@ const db=getFirestore(app);
 const auth=getAuth(app);
 const PROXY='https://images.weserv.nl/?url=';
 const FALLBACK='https://placehold.co/48x27/111820/64748b?text=?';
-const CATS=['Japanese','Korean','Chinese','English','Spanish','Turkish','4K','2K'];
+let CATS=['Japanese','Korean','Chinese','English','Spanish','Turkish','4K','2K'];
+
+// ── Category Manager ─────────────────────────────────────────────────────────
+let _catDragSrc = null;
+
+function renderCatManager(){
+  const list = document.getElementById('catManagerList');
+  if(!list) return;
+  list.innerHTML = CATS.map((c,i)=>`
+    <div class="cat-row" draggable="true" data-idx="${i}"
+      ondragstart="catDragStart(event,${i})"
+      ondragover="catDragOver(event)"
+      ondrop="catDrop(event,${i})"
+      ondragend="catDragEnd(event)">
+      <span class="cat-drag-handle">☰</span>
+      <span class="cat-row-name">${escHtml(c)}</span>
+      <button class="cat-row-rm" onclick="removeCat(${i})">✕</button>
+    </div>`).join('');
+}
+
+window.addCatItem = function(){
+  const inp = document.getElementById('catNewInp');
+  const val = inp.value.trim();
+  if(!val) return;
+  if(CATS.map(x=>x.toLowerCase()).includes(val.toLowerCase())){inp.value='';return;}
+  CATS.push(val);
+  renderCatManager();
+  refreshAllCatGrids();
+  inp.value='';
+  inp.focus();
+};
+
+window.removeCat = function(i){
+  CATS.splice(i,1);
+  renderCatManager();
+  refreshAllCatGrids();
+};
+
+window.catDragStart = function(e,i){
+  _catDragSrc=i;
+  e.currentTarget.classList.add('cat-row-drag');
+  e.dataTransfer.effectAllowed='move';
+};
+window.catDragOver = function(e){
+  e.preventDefault();
+  e.dataTransfer.dropEffect='move';
+  document.querySelectorAll('.cat-row').forEach(r=>r.classList.remove('drag-over'));
+  e.currentTarget.classList.add('drag-over');
+};
+window.catDrop = function(e,toIdx){
+  e.preventDefault();
+  if(_catDragSrc===null||_catDragSrc===toIdx) return;
+  const moved = CATS.splice(_catDragSrc,1)[0];
+  CATS.splice(toIdx,0,moved);
+  renderCatManager();
+  refreshAllCatGrids();
+  _catDragSrc=null;
+};
+window.catDragEnd = function(e){
+  e.currentTarget.classList.remove('cat-row-drag');
+  document.querySelectorAll('.cat-row').forEach(r=>r.classList.remove('drag-over'));
+  _catDragSrc=null;
+};
+
+function refreshAllCatGrids(){
+  document.querySelectorAll('[id$="CatGrid"]').forEach(el=>{
+    const hId = el.id.replace('CatGrid','Cats');
+    const cur = el._sel ? [...el._sel] : [];
+    initCatGrid(el.id, hId, cur.filter(c=>CATS.includes(c)));
+  });
+}
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
 let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all';
@@ -859,10 +946,14 @@ async function loadSettings(){
       // Load subtitle visibility
       const sv=d.subtitleVisibility||{mm:true,th:true,en:true};
       ['mm','th','en'].forEach(l=>{const v=sv[l]!==false;applySubVis(l,v);});
+      // Load custom categories
+      if(d.categories && d.categories.length){ CATS.length=0; d.categories.forEach(c=>CATS.push(c)); }
     }
     else setSlStatus('empty','✗ Settings မရှိသေးပါ');}
   catch(e){setSlStatus('empty','⚠ Firestore error');}
   const u=localStorage.getItem('ns_siteUrl');if(u)document.getElementById('siteUrl').value=u;
+  renderCatManager();
+  refreshAllCatGrids();
 }
 
 window.saveSettings=async function(){
@@ -872,7 +963,7 @@ window.saveSettings=async function(){
   if(url)localStorage.setItem('ns_siteUrl',url);
   const svMM=document.getElementById('svMM').checked,svTH=document.getElementById('svTH').checked,svEN=document.getElementById('svEN').checked;
   setSlStatus('loading','Saving...');
-  try{await setDoc(doc(db,'settings','global'),{smartLink:sl||'',socialTelegram:tg||'',socialFacebook:fb||'',socialTiktok:tt||'',subtitleVisibility:{mm:svMM,th:svTH,en:svEN}},{merge:true});ok.style.display='inline';setTimeout(()=>ok.style.display='none',3000);setSlStatus(sl?'ok':'empty',sl?'✓ Saved':'Settings saved');}
+  try{await setDoc(doc(db,'settings','global'),{smartLink:sl||'',socialTelegram:tg||'',socialFacebook:fb||'',socialTiktok:tt||'',subtitleVisibility:{mm:svMM,th:svTH,en:svEN},categories:[...CATS]},{merge:true});ok.style.display='inline';setTimeout(()=>ok.style.display='none',3000);setSlStatus(sl?'ok':'empty',sl?'✓ Saved':'Settings saved');}
   catch(e){er.textContent='✗ Error: '+e.message;er.style.display='inline';setSlStatus('empty','✗ Save မအောင်မြင်');}
 };
 
