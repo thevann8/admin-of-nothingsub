@@ -824,6 +824,27 @@ const auth=getAuth(app);
 const PROXY='https://images.weserv.nl/?url=';
 const FALLBACK='https://placehold.co/48x27/111820/64748b?text=?';
 let CATS=['Japanese','Korean','Chinese','English','Spanish','Turkish','4K','2K'];
+const CAT_FLAGS = {
+  '4K':'<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9v6M14 9l-3 3 3 3"/></svg>',
+  '2K':'<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M13 9v6M9 9l3 3-3 3"/></svg>'
+};
+const DEFAULT_CAT_ICON = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
+const COUNTRY_FLAG_ALIASES = {
+  'thailand':'TH','thai':'TH','japan':'JP','japanese':'JP','korea':'KR','korean':'KR','south korea':'KR','china':'CN','chinese':'CN','hong kong':'HK','taiwan':'TW',
+  'english':'GB','england':'GB','uk':'GB','united kingdom':'GB','britain':'GB','usa':'US','u.s.a':'US','us':'US','united states':'US','america':'US','american':'US',
+  'spain':'ES','spanish':'ES','turkey':'TR','turkish':'TR','india':'IN','indian':'IN','indonesia':'ID','indonesian':'ID','vietnam':'VN','vietnamese':'VN',
+  'philippines':'PH','filipino':'PH','malaysia':'MY','malaysian':'MY','singapore':'SG','myanmar':'MM','burma':'MM','burmese':'MM','laos':'LA','cambodia':'KH',
+  'france':'FR','french':'FR','germany':'DE','german':'DE','italy':'IT','italian':'IT','russia':'RU','russian':'RU','brazil':'BR','brazilian':'BR',
+  'mexico':'MX','mexican':'MX','canada':'CA','canadian':'CA','australia':'AU','australian':'AU','new zealand':'NZ','argentina':'AR','egypt':'EG','iran':'IR'
+};
+function normalizeCatName(name){return String(name||'').trim().toLowerCase().replace(/[._-]+/g,' ').replace(/\s+/g,' ');}
+function flagEmojiFromCode(code){return String(code||'').toUpperCase().replace(/[A-Z]/g,ch=>String.fromCodePoint(127397+ch.charCodeAt(0)));}
+function getCountryFlagIcon(name){
+  const code = COUNTRY_FLAG_ALIASES[normalizeCatName(name)];
+  return code ? `<img class="cat-country-flag" src="https://flagcdn.com/16x12/${code.toLowerCase()}.png" alt="" loading="lazy" style="width:16px;height:12px;object-fit:cover;border-radius:2px;flex-shrink:0">` : '';
+}
+function getCatIcon(name){return CAT_FLAGS[name] || CAT_FLAGS[String(name||'').trim()] || getCountryFlagIcon(name) || DEFAULT_CAT_ICON;}
+function catDomId(name){return String(name||'').trim().replace(/[^a-z0-9_-]+/gi,'_') || 'cat';}
 
 // ── Category Manager ─────────────────────────────────────────────────────────
 let _catDragSrc = null;
@@ -838,6 +859,7 @@ function renderCatManager(){
       ondrop="catDrop(event,${i})"
       ondragend="catDragEnd(event)">
       <span class="cat-drag-handle">☰</span>
+      ${getCatIcon(c)}
       <span class="cat-row-name">${escHtml(c)}</span>
       <button class="cat-row-rm" onclick="removeCat(${i})">✕</button>
     </div>`).join('');
@@ -1003,7 +1025,7 @@ function getCats(hId){try{const v=document.getElementById(hId)?.value;return v?J
 function initCatGrid(gridId,hiddenId,selected=[]){
   const grid=document.getElementById(gridId);if(!grid)return;
   let sel=new Set(selected);
-  function render(){grid.innerHTML=CATS.map(c=>`<span class="cat-chip ${sel.has(c)?'sel':''}" onclick="toggleCat('${gridId}','${hiddenId}','${c}')">${c}</span>`).join('');document.getElementById(hiddenId).value=JSON.stringify([...sel]);}
+  function render(){grid.innerHTML=CATS.map(c=>`<span class="cat-chip ${sel.has(c)?'sel':''}" onclick='toggleCat(${JSON.stringify(gridId)},${JSON.stringify(hiddenId)},${JSON.stringify(c)})'>${getCatIcon(c)} ${escHtml(c)}</span>`).join('');document.getElementById(hiddenId).value=JSON.stringify([...sel]);}
   grid._sel=sel;grid._render=render;render();
 }
 window.toggleCat=function(gId,hId,cat){const g=document.getElementById(gId);if(!g||!g._sel)return;if(g._sel.has(cat))g._sel.delete(cat);else g._sel.add(cat);document.getElementById(hId).value=JSON.stringify([...g._sel]);g._render();};
@@ -1286,4 +1308,7 @@ function tick(){const el=document.getElementById('tbTime');if(el)el.textContent=
 </script>
 </body>
 </html>
+
+
+
 
