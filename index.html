@@ -887,9 +887,17 @@ window.catDragEnd = function(e){
   _catDragSrc=null;
 };
 
+function getCatHiddenId(gridId){
+  const map={
+    mmCatGrid:'mmGenre',thCatGrid:'thGenre',enCatGrid:'enGenre',aCatGrid:'aGenre',
+    eMMCatGrid:'eMMGenre',eTHCatGrid:'eTHGenre',eENCatGrid:'eENGenre'
+  };
+  return map[gridId]||gridId.replace('CatGrid','Genre');
+}
 function refreshAllCatGrids(){
   document.querySelectorAll('[id$="CatGrid"]').forEach(el=>{
-    const hId = el.id.replace('CatGrid','Cats');
+    const hId = getCatHiddenId(el.id);
+    if(!document.getElementById(hId)) return;
     const cur = el._sel ? [...el._sel] : [];
     initCatGrid(el.id, hId, cur.filter(c=>CATS.includes(c)));
   });
@@ -1278,3 +1286,4 @@ function tick(){const el=document.getElementById('tbTime');if(el)el.textContent=
 </script>
 </body>
 </html>
+
