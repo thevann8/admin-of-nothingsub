@@ -284,6 +284,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .ct-opt:hover{border-color:var(--accent);color:var(--text);}
 .ct-opt.on-gen{background:rgba(16,185,129,.12);border-color:#10b981;color:#34d399;}
 .ct-opt.on-jav{background:rgba(239,68,68,.14);border-color:#f87171;color:#f87171;}
+.ct-opt.on-asian{background:rgba(16,185,129,.14);border-color:#34d399;color:#34d399;}
 .ct-opt.on-wes{background:rgba(139,92,246,.14);border-color:#a78bfa;color:#a78bfa;}
 .sub-tab-bar{display:flex;gap:.35rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center;}
 .sub-tab{padding:.32rem .9rem;border-radius:8px;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-size:.76rem;font-weight:600;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:.4rem;}
@@ -474,6 +475,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="mmCtGen" onclick="setCT('mm','general')">&#127916; General</button>
           <button class="ct-opt" id="mmCtJav" onclick="setCT('mm','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="mmCtAsian" onclick="setCT('mm','asian')">&#127759; Asian</button>
           <button class="ct-opt" id="mmCtWes" onclick="setCT('mm','western')">&#128286; Western</button>
           <input type="hidden" id="mmContentType" value="general">
         </div>
@@ -509,6 +511,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="thCtGen" onclick="setCT('th','general')">&#127916; General</button>
           <button class="ct-opt" id="thCtJav" onclick="setCT('th','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="thCtAsian" onclick="setCT('th','asian')">&#127759; Asian</button>
           <button class="ct-opt" id="thCtWes" onclick="setCT('th','western')">&#128286; Western</button>
           <input type="hidden" id="thContentType" value="general">
         </div>
@@ -544,6 +547,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="enCtGen" onclick="setCT('en','general')">&#127916; General</button>
           <button class="ct-opt" id="enCtJav" onclick="setCT('en','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="enCtAsian" onclick="setCT('en','asian')">&#127759; Asian</button>
           <button class="ct-opt" id="enCtWes" onclick="setCT('en','western')">&#128286; Western</button>
           <input type="hidden" id="enContentType" value="general">
         </div>
@@ -584,6 +588,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eMMCtGen" onclick="setCT('eMM','general')">&#127916; General</button>
           <button class="ct-opt" id="eMMCtJav" onclick="setCT('eMM','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="eMMCtAsian" onclick="setCT('eMM','asian')">&#127759; Asian</button>
           <button class="ct-opt" id="eMMCtWes" onclick="setCT('eMM','western')">&#128286; Western</button>
           <input type="hidden" id="eMMContentType" value="general">
         </div>
@@ -624,6 +629,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eTHCtGen" onclick="setCT('eTH','general')">&#127916; General</button>
           <button class="ct-opt" id="eTHCtJav" onclick="setCT('eTH','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="eTHCtAsian" onclick="setCT('eTH','asian')">&#127759; Asian</button>
           <button class="ct-opt" id="eTHCtWes" onclick="setCT('eTH','western')">&#128286; Western</button>
           <input type="hidden" id="eTHContentType" value="general">
         </div>
@@ -665,6 +671,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eENCtGen" onclick="setCT('eEN','general')">&#127916; General</button>
           <button class="ct-opt" id="eENCtJav" onclick="setCT('eEN','jav')">&#128286; JAV</button>
+          <button class="ct-opt" id="eENCtAsian" onclick="setCT('eEN','asian')">&#127759; Asian</button>
           <button class="ct-opt" id="eENCtWes" onclick="setCT('eEN','western')">&#128286; Western</button>
           <input type="hidden" id="eENContentType" value="general">
         </div>
@@ -781,6 +788,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="ct-toggle"><label>Content Type:</label>
         <button class="ct-opt on-gen" id="aCtGen" onclick="setCT('a','general')">&#127916; General</button>
         <button class="ct-opt" id="aCtJav" onclick="setCT('a','jav')">&#128286; JAV</button>
+        <button class="ct-opt" id="aCtAsian" onclick="setCT('a','asian')">&#127759; Asian</button>
         <button class="ct-opt" id="aCtWes" onclick="setCT('a','western')">&#128286; Western</button>
         <input type="hidden" id="aContentType" value="general">
       </div>
@@ -1296,10 +1304,10 @@ window.toggleSubVis=function(l){
 
 window.setCT=function(prefix,val){
   document.getElementById(prefix+'ContentType').value=val;
-  ['Gen','Jav','Wes'].forEach(s=>document.getElementById(prefix+'Ct'+s).className='ct-opt');
-  const map={general:'Gen',jav:'Jav',western:'Wes'};
+  ['Gen','Jav','Asian','Wes'].forEach(s=>document.getElementById(prefix+'Ct'+s).className='ct-opt');
+  const map={general:'Gen',jav:'Jav',asian:'Asian',western:'Wes'};
   const sfx=map[val]||'Gen';
-  const clsMap={Gen:'on-gen',Jav:'on-jav',Wes:'on-wes'};
+  const clsMap={Gen:'on-gen',Jav:'on-jav',Asian:'on-asian',Wes:'on-wes'};
   document.getElementById(prefix+'Ct'+sfx).className='ct-opt '+clsMap[sfx];
 };
 
@@ -1308,7 +1316,3 @@ function tick(){const el=document.getElementById('tbTime');if(el)el.textContent=
 </script>
 </body>
 </html>
-
-
-
-
