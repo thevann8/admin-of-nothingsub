@@ -717,6 +717,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
             </div>
           </div>
           <div class="f"><label>Site URL</label><input id="siteUrl" placeholder="index.html or https://..."></div>
+          <div id="adManagerRoot" class="setting-manager"></div>
+          <div id="socialManagerRoot" class="setting-manager"></div>
           <div class="f" style="margin-top:.4rem">
             <label style="color:var(--accent);font-size:.68rem;letter-spacing:1.5px;margin-bottom:.5rem">Custom Categories &#8212; Sidenav မှာပြမည့် categories</label>
             <div style="font-size:.65rem;color:var(--muted);margin-bottom:.7rem">ကိုယ်ချင်တဲ့ category နာမည်ထည့်ပါ &#8212; ↕ drag ကိုင်ပြီး order ပြောင်းနိုင်</div>
@@ -764,8 +766,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
           </div>
         </div>
         <div style="margin-top:1.2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;">
-          <div id="adManagerRoot" class="setting-manager"></div>
-          <div id="socialManagerRoot" class="setting-manager"></div>
           <button onclick="saveSettings()" style="background:var(--accent);border:none;color:#000;padding:.6rem 1.4rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;font-size:.84rem;">Save All Settings</button>
           <span id="settingOk" style="font-size:.8rem;color:var(--green);display:none">&#10003; Saved!</span>
           <span id="settingErr" style="font-size:.8rem;color:var(--red);display:none"></span>
@@ -995,6 +995,8 @@ window.doLogin=async function(){
 window.doLogout=async function(){if(!confirm('Logout လုပ်မလား?'))return;await signOut(auth);};
 
 function initAdmin(){
+  renderAdManager(currentSettings);
+  renderSocialManager(currentSettings);
   loadSettings();loadAllStats();
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
@@ -1009,15 +1011,15 @@ function initAdmin(){
 async function loadSettings(){
   setSlStatus('loading','Loading...');
   try{const snap=await getDoc(doc(db,'settings','global'));
-    if(snap.exists()){const d=snap.data();if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
+    if(snap.exists()){const d=snap.data();currentSettings=d;renderAdManager(d);renderSocialManager(d);if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
       // Load subtitle visibility
       const sv=d.subtitleVisibility||{mm:true,th:true,en:true};
       ['mm','th','en'].forEach(l=>{const v=sv[l]!==false;applySubVis(l,v);});
       // Load custom categories
       if(d.categories && d.categories.length){ CATS.length=0; d.categories.forEach(c=>CATS.push(c)); }
     }
-    else setSlStatus('empty','✗ Settings မရှိသေးပါ');}
-  catch(e){setSlStatus('empty','⚠ Firestore error');}
+    else {currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);setSlStatus('empty','✗ Settings မရှိသေးပါ');}}
+  catch(e){currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);setSlStatus('empty','⚠ Firestore error');}
   const u=localStorage.getItem('ns_siteUrl');if(u)document.getElementById('siteUrl').value=u;
   renderCatManager();
   refreshAllCatGrids();
