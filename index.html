@@ -66,6 +66,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .sv-pill input:checked~.sv-thumb.en{background:#63b3ed;}
 .sv-status{font-size:.62rem;font-weight:700;letter-spacing:.5px;}
 .sv-status.on{color:var(--green);}.sv-status.off{color:var(--muted);}
+
+.setting-manager{margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem;display:flex;flex-direction:column;gap:1rem;}
+.lang-config-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:1rem;}.lang-config-card h4{font-size:.78rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.75rem;color:var(--accent);}
+.slot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;}@media(max-width:900px){.slot-grid{grid-template-columns:1fr;}}
+.slot-box{display:flex;flex-direction:column;gap:.4rem;}.slot-box label{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:700;}
+.slot-box textarea{min-height:96px;background:var(--card);border:1.5px solid var(--border);color:var(--text);border-radius:8px;padding:.6rem;font-family:Consolas,monospace;font-size:.75rem;resize:vertical;}
+.slot-actions{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;}.slot-actions button,.social-save-btn{background:var(--accent);border:none;color:#000;padding:.42rem .78rem;border-radius:7px;font-weight:700;font-size:.72rem;cursor:pointer;}
+.history-box{font-size:.65rem;color:var(--muted);background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:8px;padding:.45rem;max-height:86px;overflow:auto;white-space:pre-wrap;}
+.social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;}@media(max-width:700px){.social-grid{grid-template-columns:1fr;}}
+.social-grid input{background:var(--card);border:1.5px solid var(--border);color:var(--text);border-radius:8px;padding:.48rem .6rem;font-size:.76rem;}
+
 .s-footer a{color:var(--accent);text-decoration:none;cursor:pointer;margin-right:.5rem;}
 .s-logout{color:#f87171;cursor:pointer;font-size:.72rem;}
 .s-logout:hover{color:#fc8181;}
@@ -753,6 +764,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
           </div>
         </div>
         <div style="margin-top:1.2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;">
+          <div id="adManagerRoot" class="setting-manager"></div>
+          <div id="socialManagerRoot" class="setting-manager"></div>
           <button onclick="saveSettings()" style="background:var(--accent);border:none;color:#000;padding:.6rem 1.4rem;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;font-size:.84rem;">Save All Settings</button>
           <span id="settingOk" style="font-size:.8rem;color:var(--green);display:none">&#10003; Saved!</span>
           <span id="settingErr" style="font-size:.8rem;color:var(--red);display:none"></span>
@@ -935,6 +948,10 @@ function refreshAllCatGrids(){
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
 let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all';
+let currentSettings={};
+const AD_LANGS={mm:'Myanmar Sub',th:'Thai Sub',en:'English Sub'};
+const AD_SLOTS={topBanner:'Top Banner',bottomSticky:'Bottom Sticky',inFeed:'In-feed',footer:'Footer'};
+const SOCIAL_KEYS={facebook:'Facebook',telegram:'Telegram',x:'X',instagram:'Instagram',youtube:'YouTube'};
 
 function setSlStatus(s,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+s;el.innerHTML=s==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
 function getDateKey(d){return d.toISOString().slice(0,10);}
@@ -950,7 +967,7 @@ function renderRealStats(){
   else if(curDateFilter==='365')dates=getPastDates(365);
   else dates=Object.keys(allStatsDocs);
   let views=0,clicks=0,downloads=0,mobile=0,desktop=0,mm=0,th=0,en=0,total=0;
-  dates.forEach(d=>{const dd=allStatsDocs[d];if(!dd)return;views+=dd.pageviews||0;clicks+=dd.movieClicks||0;downloads+=dd.downloads||0;mobile+=dd.mobile||0;desktop+=dd.desktop||0;mm+=dd.langMM||0;th+=dd.langTH||0;en+=dd.langEN||0;total+=dd.total||0;});
+  dates.forEach(d=>{const dd=allStatsDocs[d];if(!dd)return;views+=dd.pageviews||0;clicks+=dd.movieClicks||0;downloads+=dd.downloads||0;mobile+=dd.mobile||0;desktop+=dd.desktop||0;mm+=(dd.subMMViews ?? dd.langMM ?? 0);th+=(dd.subTHViews ?? dd.langTH ?? 0);en+=(dd.subENViews ?? dd.langEN ?? 0);total+=dd.total||0;});
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v.toLocaleString();};
   set('rs-views',views);set('rs-clicks',clicks);set('rs-downloads',downloads);set('rs-mobile',mobile);set('rs-desktop',desktop);set('rs-mm',mm);set('rs-th',th);set('rs-en',en);set('rs-total',total);
   const td=allStatsDocs[today];const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=(td?.downloads||0).toLocaleString();
@@ -1017,6 +1034,19 @@ window.saveSettings=async function(){
   catch(e){er.textContent='✗ Error: '+e.message;er.style.display='inline';setSlStatus('empty','✗ Save မအောင်မြင်');}
 };
 
+function escAttr(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function renderAdManager(d=currentSettings){
+  const root=document.getElementById('adManagerRoot'); if(!root)return; const ads=d.ads||{}, hist=d.adHistory||{};
+  let html='<div class="chart-top"><h3>Ad Code Manager</h3><span>Separate by subtitle version</span></div>';
+  Object.entries(AD_LANGS).forEach(([lang,label])=>{ html+='<div class="lang-config-card"><h4>'+label+'</h4><div class="slot-grid">'; Object.entries(AD_SLOTS).forEach(([slot,slotLabel])=>{ const id='ad-'+lang+'-'+slot; const h=((hist[lang]&&hist[lang][slot])||[]).slice(0,5).map(x=>'- '+(x.at||'')+' - '+(((x.code||'').slice(0,90)||'(empty)').replace(/</g,'&lt;'))).join('\n')||'No history yet'; html+='<div class="slot-box"><label>'+slotLabel+'</label><textarea id="'+id+'" placeholder="Paste HTML / JS / iframe ad code here...">'+escAttr((ads[lang]&&ads[lang][slot])||'')+'</textarea><div class="slot-actions"><button onclick="saveAdSlot(\''+lang+'\',\''+slot+'\')">Submit '+slotLabel+'</button><span class="mo-msg" id="'+id+'-msg"></span></div><div class="history-box">'+h+'</div></div>'; }); html+='</div></div>'; }); root.innerHTML=html;
+}
+function renderSocialManager(d=currentSettings){
+  const root=document.getElementById('socialManagerRoot'); if(!root)return; const links=d.socialLinks||{}; let html='<div class="chart-top"><h3>Social Links</h3><span>MM / Thai / English separated</span></div>'; Object.entries(AD_LANGS).forEach(([lang,label])=>{ html+='<div class="lang-config-card"><h4>'+label+'</h4><div class="social-grid">'; Object.entries(SOCIAL_KEYS).forEach(([key,name])=>{ html+='<input id="soc-'+lang+'-'+key+'" placeholder="'+name+' URL" value="'+escAttr((links[lang]&&links[lang][key])||'')+'">'; }); html+='</div><div style="margin-top:.7rem"><button class="social-save-btn" onclick="saveSocialLinks(\''+lang+'\')">Save '+label+' Social Links</button> <span class="mo-msg" id="soc-'+lang+'-msg"></span></div></div>'; }); root.innerHTML=html;
+}
+async function saveAdSlot(lang,slot){ const el=document.getElementById('ad-'+lang+'-'+slot), msg=document.getElementById('ad-'+lang+'-'+slot+'-msg'); if(!el)return; const code=el.value.trim(); if(msg){msg.textContent='Saving...';msg.className='mo-msg';} try{const ref=doc(db,'settings','global');const snap=await getDoc(ref);const cur=snap.exists()?snap.data():{};const hist=cur.adHistory||{};hist[lang]=hist[lang]||{};hist[lang][slot]=[{at:new Date().toLocaleString(),code},...(hist[lang][slot]||[])].slice(0,10);await setDoc(ref,{ads:{[lang]:{[slot]:code}},adHistory:hist},{merge:true});currentSettings={...cur,ads:{...(cur.ads||{}),[lang]:{...((cur.ads||{})[lang]||{}),[slot]:code}},adHistory:hist};renderAdManager(currentSettings);} catch(e){if(msg){msg.textContent='Error: '+e.message;msg.className='mo-msg err';}} }
+async function saveSocialLinks(lang){ const msg=document.getElementById('soc-'+lang+'-msg'); const data={};Object.keys(SOCIAL_KEYS).forEach(k=>data[k]=document.getElementById('soc-'+lang+'-'+k)?.value.trim()||''); if(msg){msg.textContent='Saving...';msg.className='mo-msg';} try{await setDoc(doc(db,'settings','global'),{socialLinks:{[lang]:data}},{merge:true});if(msg){msg.textContent='Saved';msg.className='mo-msg ok';}} catch(e){if(msg){msg.textContent='Error: '+e.message;msg.className='mo-msg err';}} }
+window.saveAdSlot=saveAdSlot;
+window.saveSocialLinks=saveSocialLinks;
 function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))return PROXY+encodeURIComponent(url)+'&w=96&h=54&fit=cover&output=webp';return url;}
 function hasMM(m){return!!(m.mmTelegram&&m.mmTelegram!=='#'||m.mmStream&&m.mmStream!=='#'||m.mmMega&&m.mmMega!=='#');}
 function hasTH(m){return!!(m.thTelegram&&m.thTelegram!=='#'||m.thStream&&m.thStream!=='#'||m.thMega&&m.thMega!=='#');}
@@ -1082,7 +1112,7 @@ function updateMovieStats(){
 }
 
 function updateAnalytics(){
-  const lc={mm:0,th:0,en:0};analytics.forEach(e=>{if(lc[e.lang]!==undefined)lc[e.lang]++;});const lMax=Math.max(...Object.values(lc),1);
+  const lc={mm:0,th:0,en:0};analytics.forEach(e=>{const k=e.type==='subtitle_view'?e.subtitleLang:e.lang;if(lc[k]!==undefined)lc[k]++;});const lMax=Math.max(...Object.values(lc),1);
   document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 Myanmar',th:'🇹🇭 Thai',en:'🇬🇧 English'}).map(([k,lb])=>`<div class="bh-item"><div class="bh-label" style="width:100px">${lb}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
   const sc={mmTelegram:0,mmStream:0,mmMega:0,thTelegram:0,thStream:0,thMega:0,enTelegram:0,enStream:0,enMega:0};
   analytics.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
