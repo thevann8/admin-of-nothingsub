@@ -480,6 +480,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-banner mm-banner"><span class="pb-flag"><svg width="40" height="28" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span><div class="pb-info"><h2>Post Myanmar Subtitle Movie</h2><p>Myanmar Subtitle Movie များ Post တင်ရန်</p></div></div>
       <div class="post-form-wrap mm-form"><div class="mo-form" style="padding:0">
         <div class="f full"><label>Movie Title *</label><input id="mmTitle" placeholder="Eg: Oppenheimer"></div>
+        <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title — optional)</span></label><input id="mmCaption" maxlength="90" placeholder="Eg: Sakura Miura · Myanmar subtitle"></div>
         <div class="f"><label>Year</label><input type="number" id="mmYear" placeholder="2024"></div>
         <div class="f"><label>Quality</label><select id="mmQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="mmCatGrid"></div><input type="hidden" id="mmGenre"></div>
@@ -516,6 +517,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-banner th-banner"><span class="pb-flag"><svg width="40" height="28" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></span><div class="pb-info"><h2>Post Thai Subtitle Movie</h2><p>Thai Subtitle Movie များ Post တင်ရန်</p></div></div>
       <div class="post-form-wrap th-form"><div class="mo-form" style="padding:0">
         <div class="f full"><label>Movie Title *</label><input id="thTitle" placeholder="Eg: Oppenheimer"></div>
+        <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(optional)</span></label><input id="thCaption" maxlength="90" placeholder="Small text below the title"></div>
         <div class="f"><label>Year</label><input type="number" id="thYear" placeholder="2024"></div>
         <div class="f"><label>Quality</label><select id="thQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="thCatGrid"></div><input type="hidden" id="thGenre"></div>
@@ -552,6 +554,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-banner en-banner"><span class="pb-flag"><svg width="40" height="28" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></span><div class="pb-info"><h2>Post English Subtitle Movie</h2><p>English Subtitle Movie များ Post တင်ရန်</p></div></div>
       <div class="post-form-wrap en-form"><div class="mo-form" style="padding:0">
         <div class="f full"><label>Movie Title *</label><input id="enTitle" placeholder="Eg: Oppenheimer"></div>
+        <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(optional)</span></label><input id="enCaption" maxlength="90" placeholder="Small text below the title"></div>
         <div class="f"><label>Year</label><input type="number" id="enYear" placeholder="2024"></div>
         <div class="f"><label>Quality</label><select id="enQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="enCatGrid"></div><input type="hidden" id="enGenre"></div>
@@ -593,6 +596,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-form-wrap mm-form"><div class="mo-form" style="padding:0">
         <input type="hidden" id="eMMId">
         <div class="f full"><label>Movie Title *</label><input id="eMMTitle"></div>
+        <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title)</span></label><input id="eMMCaption" maxlength="90"></div>
         <div class="f"><label>Year</label><input type="number" id="eMMYear"></div>
         <div class="f"><label>Quality</label><select id="eMMQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="eMMCatGrid"></div><input type="hidden" id="eMMGenre"></div>
@@ -634,6 +638,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-form-wrap th-form"><div class="mo-form" style="padding:0">
         <input type="hidden" id="eTHId">
         <div class="f full"><label>Movie Title *</label><input id="eTHTitle"></div>
+        <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title)</span></label><input id="eTHCaption" maxlength="90"></div>
         <div class="f"><label>Year</label><input type="number" id="eTHYear"></div>
         <div class="f"><label>Quality</label><select id="eTHQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="eTHCatGrid"></div><input type="hidden" id="eTHGenre"></div>
@@ -676,6 +681,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-form-wrap en-form"><div class="mo-form" style="padding:0">
         <input type="hidden" id="eENId">
         <div class="f full"><label>Movie Title *</label><input id="eENTitle"></div>
+        <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title)</span></label><input id="eENCaption" maxlength="90"></div>
         <div class="f"><label>Year</label><input type="number" id="eENYear"></div>
         <div class="f"><label>Quality</label><select id="eENQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="eENCatGrid"></div><input type="hidden" id="eENGenre"></div>
@@ -1207,6 +1213,7 @@ window.openEditPage=function(id,lang){
   const lu=lang.toUpperCase();
   document.getElementById('e'+lu+'Id').value=m.id;
   document.getElementById('e'+lu+'Title').value=m.title||'';
+  document.getElementById('e'+lu+'Caption').value=m.cardCaption||'';
   document.getElementById('e'+lu+'Year').value=m.year||'';
   document.getElementById('e'+lu+'Quality').value=m.quality||'1080p';
   document.getElementById('e'+lu+'Poster').value=m.poster||'';
@@ -1231,7 +1238,7 @@ window.doSaveEdit=async function(lu){
   if(!id||!title){showMsg('edit'+lu+'Msg','Title ထည့်ပါ','err');return;}
   const cats=getCats('e'+lu+'Genre');
   const btn=document.getElementById('save'+lu+'Btn');btn.disabled=true;btn.textContent='Saving...';
-  const data={title,year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
+  const data={title,cardCaption:document.getElementById('e'+lu+'Caption').value.trim(),year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
   if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmMega=v('eMMMega');data.mmMixdrop=v('eMMEmbed');data.mmEmbed=v('eMMEmbedSrc');data.mmSeek=v('eMMSeek');data.mmDood=v('eMMDood');data.mmDoodEmbed=v('eMMDoodEmbed');}
   if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thMega=v('eTHMega');data.thMixdrop=v('eTHMixdrop');data.thEmbed=v('eTHEmbed');data.thSeek=v('eTHSeek');data.thDood=v('eTHDood');data.thDoodEmbed=v('eTHDoodEmbed');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
   if(lang==='en'){data.enTelegram=v('eENTelegram');data.enStream=v('eENStream');data.enMega=v('eENMega');data.enMixdrop=v('eENMixdrop');data.enEmbed=v('eENEmbed');data.enSeek=v('eENSeek');data.enDood=v('eENDood');data.enDoodEmbed=v('eENDoodEmbed');}
@@ -1256,8 +1263,8 @@ async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
 window.doPostMM=async function(){
   const title=document.getElementById('mmTitle').value.trim();if(!title){showMsg('postMMMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('mmGenre');
-  await saveMovieToDb({title,year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,subtitleType:'mm',contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmMega:v('mmMega'),mmMixdrop:v('mmMixdrop'),mmEmbed:v('mmEmbed'),mmSeek:v('mmSeek'),mmDood:v('mmDood'),mmDoodEmbed:v('mmDoodEmbed'),thTelegram:'#',thStream:'#',thMega:'#',enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
-    clearForm(['mmTitle','mmYear','mmPoster','mmTelegram','mmStream','mmMega','mmMixdrop','mmEmbed','mmSeek','mmDood','mmDoodEmbed','mmDescMM']);
+  await saveMovieToDb({title,cardCaption:document.getElementById('mmCaption').value.trim(),year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,subtitleType:'mm',contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmMega:v('mmMega'),mmMixdrop:v('mmMixdrop'),mmEmbed:v('mmEmbed'),mmSeek:v('mmSeek'),mmDood:v('mmDood'),mmDoodEmbed:v('mmDoodEmbed'),thTelegram:'#',thStream:'#',thMega:'#',enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
+    clearForm(['mmTitle','mmCaption','mmYear','mmPoster','mmTelegram','mmStream','mmMega','mmMixdrop','mmEmbed','mmSeek','mmDood','mmDoodEmbed','mmDescMM']);
     initCatGrid('mmCatGrid','mmGenre',[]);initTagsFixed('mmActorsWrap','mmActorInp','mmActors',[]);initTagsFixed('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');window.setCT('mm','general');
   });
 };
@@ -1266,8 +1273,8 @@ window.doPostMM=async function(){
 window.doPostTH=async function(){
   const title=document.getElementById('thTitle').value.trim();if(!title){showMsg('postTHMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('thGenre');
-  await saveMovieToDb({title,year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,subtitleType:'th',contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thMega:v('thMega'),thMixdrop:v('thMixdrop'),thEmbed:v('thEmbed'),thSeek:v('thSeek'),thDood:v('thDood'),thDoodEmbed:v('thDoodEmbed'),enTelegram:'#',enStream:'#',enMega:'#',descMM:'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
-    clearForm(['thTitle','thYear','thPoster','thTelegram','thStream','thMega','thMixdrop','thEmbed','thSeek','thDood','thDoodEmbed','thDescTH']);
+  await saveMovieToDb({title,cardCaption:document.getElementById('thCaption').value.trim(),year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,subtitleType:'th',contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thMega:v('thMega'),thMixdrop:v('thMixdrop'),thEmbed:v('thEmbed'),thSeek:v('thSeek'),thDood:v('thDood'),thDoodEmbed:v('thDoodEmbed'),enTelegram:'#',enStream:'#',enMega:'#',descMM:'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
+    clearForm(['thTitle','thCaption','thYear','thPoster','thTelegram','thStream','thMega','thMixdrop','thEmbed','thSeek','thDood','thDoodEmbed','thDescTH']);
     initCatGrid('thCatGrid','thGenre',[]);initTagsFixed('thActorsWrap','thActorInp','thActors',[]);initTagsFixed('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');window.setCT('th','general');
   });
 };
@@ -1276,8 +1283,8 @@ window.doPostTH=async function(){
 window.doPostEN=async function(){
   const title=document.getElementById('enTitle').value.trim();if(!title){showMsg('postENMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('enGenre');
-  await saveMovieToDb({title,year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,subtitleType:'en',contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:'#',thStream:'#',thMega:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enMega:v('enMega'),enMixdrop:v('enMixdrop'),enEmbed:v('enEmbed'),enSeek:v('enSeek'),enDood:v('enDood'),enDoodEmbed:v('enDoodEmbed'),descMM:document.getElementById('enDescEN').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
-    clearForm(['enTitle','enYear','enPoster','enTelegram','enStream','enMega','enMixdrop','enEmbed','enSeek','enDood','enDoodEmbed','enDescEN']);
+  await saveMovieToDb({title,cardCaption:document.getElementById('enCaption').value.trim(),year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,subtitleType:'en',contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:'#',thStream:'#',thMega:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enMega:v('enMega'),enMixdrop:v('enMixdrop'),enEmbed:v('enEmbed'),enSeek:v('enSeek'),enDood:v('enDood'),enDoodEmbed:v('enDoodEmbed'),descMM:document.getElementById('enDescEN').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
+    clearForm(['enTitle','enCaption','enYear','enPoster','enTelegram','enStream','enMega','enMixdrop','enEmbed','enSeek','enDood','enDoodEmbed','enDescEN']);
     initCatGrid('enCatGrid','enGenre',[]);initTagsFixed('enActorsWrap','enActorInp','enActors',[]);initTagsFixed('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');window.setCT('en','general');
   });
 };
