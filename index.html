@@ -428,17 +428,17 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="rsc g"><div class="rsc-label">Page Views</div><div class="rsc-val g" id="rs-views">-</div><div class="rsc-note">Real total</div></div>
         <div class="rsc b"><div class="rsc-label">Movie Clicks</div><div class="rsc-val b" id="rs-clicks">-</div><div class="rsc-note">Real total</div></div>
         <div class="rsc y"><div class="rsc-label">Downloads</div><div class="rsc-val y" id="rs-downloads">-</div><div class="rsc-note">Real total</div></div>
-        <div class="rsc r"><div class="rsc-label">Mobile Users</div><div class="rsc-val r" id="rs-mobile">-</div><div class="rsc-note">Real total</div></div>
-        <div class="rsc b"><div class="rsc-label">Desktop Users</div><div class="rsc-val b" id="rs-desktop">-</div><div class="rsc-note">Real total</div></div>
-        <div class="rsc r"><div class="rsc-label">&#127474;&#127484; MM Sub Users</div><div class="rsc-val r" id="rs-mm">-</div><div class="rsc-note">Real total</div></div>
-        <div class="rsc b"><div class="rsc-label">&#127481;&#127469; TH Sub Users</div><div class="rsc-val b" id="rs-th">-</div><div class="rsc-note">Real total</div></div>
-        <div class="rsc c"><div class="rsc-label">&#127468;&#127463; EN Sub Users</div><div class="rsc-val c" id="rs-en">-</div><div class="rsc-note">Real total</div></div>
+        <div class="rsc r"><div class="rsc-label">Mobile Events</div><div class="rsc-val r" id="rs-mobile">-</div><div class="rsc-note">Not unique users</div></div>
+        <div class="rsc b"><div class="rsc-label">Desktop Events</div><div class="rsc-val b" id="rs-desktop">-</div><div class="rsc-note">Not unique users</div></div>
+        <div class="rsc r"><div class="rsc-label">&#127474;&#127484; MM Sub Events</div><div class="rsc-val r" id="rs-mm">-</div><div class="rsc-note">Not unique users</div></div>
+        <div class="rsc b"><div class="rsc-label">&#127481;&#127469; TH Sub Events</div><div class="rsc-val b" id="rs-th">-</div><div class="rsc-note">Not unique users</div></div>
+        <div class="rsc c"><div class="rsc-label">&#127468;&#127463; EN Sub Events</div><div class="rsc-val c" id="rs-en">-</div><div class="rsc-note">Not unique users</div></div>
         <div class="rsc o"><div class="rsc-label">Total Events</div><div class="rsc-val o" id="rs-total">-</div><div class="rsc-note">All actions</div></div>
       </div>
-      <div class="divider-label">Visitor Locations &amp; Sources &#8212; Last 500 events</div>
+      <div class="divider-label">Locations &amp; Sources &#8212; selected period (latest 500 stored events)</div>
       <div class="two-col">
-        <div class="chart-card"><div class="chart-top"><h3>Language Usage</h3><span>Last 500 sessions</span></div><div class="bar-h" id="langChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
-        <div class="chart-card"><div class="chart-top"><h3>Download Sources</h3><span>Last 500 events</span></div><div class="bar-h" id="dlChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
+        <div class="chart-card"><div class="chart-top"><h3>Language Usage</h3><span>Selected events</span></div><div class="bar-h" id="langChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
+        <div class="chart-card"><div class="chart-top"><h3>Download Sources</h3><span>Selected events</span></div><div class="bar-h" id="dlChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
       </div>
       <div class="chart-card">
         <div class="chart-top"><h3>Visitor Locations</h3><span id="locTotal">Live</span></div>
@@ -448,7 +448,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         </div>
       </div>
       <div class="table-card">
-        <div class="table-head"><h3>Movie View Counts</h3><span>Last 500 events</span></div>
+        <div class="table-head"><h3>Movie Click Counts</h3><span>Selected events</span></div>
         <table><thead><tr><th>#</th><th>Movie</th><th>Clicks</th><th>Downloads</th><th>DL Rate</th></tr></thead>
         <tbody id="movieViewsTbl"><tr><td colspan="5" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
@@ -977,10 +977,20 @@ const AD_SLOTS={topBanner:'Top Banner',bottomSticky:'Bottom Sticky',inFeed:'In-f
 const SOCIAL_KEYS={facebook:'Facebook',telegram:'Telegram',x:'X',instagram:'Instagram',youtube:'YouTube'};
 
 function setSlStatus(s,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+s;el.innerHTML=s==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
-function getDateKey(d){return d.toISOString().slice(0,10);}
-function getPastDates(n){const r=[];const now=new Date();for(let i=0;i<n;i++){const d=new Date(now);d.setDate(d.getDate()-i);r.push(getDateKey(d));}return r;}
+function getDateKey(d=new Date()){
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Bangkok',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d);
+  const get=t=>parts.find(p=>p.type===t)?.value;
+  return `${get('year')}-${get('month')}-${get('day')}`;
+}
+function getPastDates(n){const r=[];for(let i=0;i<n;i++)r.push(getDateKey(new Date(Date.now()-i*86400000)));return r;}
+function eventDateKey(e){return e?.ts?.toDate?getDateKey(e.ts.toDate()):null;}
+function filteredAnalytics(){
+  if(curDateFilter==='all')return analytics;
+  const days=curDateFilter==='today'?new Set([getDateKey()]):new Set(getPastDates(Number(curDateFilter)));
+  return analytics.filter(e=>days.has(eventDateKey(e)));
+}
 
-window.setDateFilter=function(p,btn){curDateFilter=p;document.querySelectorAll('.df-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderRealStats();};
+window.setDateFilter=function(p,btn){curDateFilter=p;document.querySelectorAll('.df-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderRealStats();updateAnalytics();};
 
 function renderRealStats(){
   let dates=[];const today=getDateKey(new Date());
@@ -1080,7 +1090,7 @@ function subTypeBadge(m){const st=m.subtitleType||'';if(st==='mm')return '<span 
 function v(id){const el=document.getElementById(id);return el?(el.value.trim()||'#'):'#';}
 function sv(id,val){const el=document.getElementById(id);if(el)el.value=(val==='#'?'':val||'');}
 function showMsg(id,txt,type){const el=document.getElementById(id);if(!el)return;el.textContent=txt;el.className='mo-msg '+type;}
-function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function escHtml(s){return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function clearForm(ids){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';})}
 function getTags(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
 function getCats(hId){try{const v=document.getElementById(hId)?.value;return v?JSON.parse(v):[];}catch{return[];}}
@@ -1137,26 +1147,27 @@ function updateMovieStats(){
 }
 
 function updateAnalytics(){
-  const lc={mm:0,th:0,en:0};analytics.forEach(e=>{const k=e.type==='subtitle_view'?e.subtitleLang:e.lang;if(lc[k]!==undefined)lc[k]++;});const lMax=Math.max(...Object.values(lc),1);
+  const events=filteredAnalytics();
+  const lc={mm:0,th:0,en:0};events.forEach(e=>{const k=e.type==='subtitle_view'?e.subtitleLang:e.lang;if(lc[k]!==undefined)lc[k]++;});const lMax=Math.max(...Object.values(lc),1);
   document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 Myanmar',th:'🇹🇭 Thai',en:'🇬🇧 English'}).map(([k,lb])=>`<div class="bh-item"><div class="bh-label" style="width:100px">${lb}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
   const sc={mmTelegram:0,mmStream:0,mmMega:0,thTelegram:0,thStream:0,thMega:0,enTelegram:0,enStream:0,enMega:0};
-  analytics.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
+  events.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
   const sMax=Math.max(...Object.values(sc),1);
   const sClr={mmTelegram:'#29b6f6',mmStream:'#fc8181',mmMega:'#e53e3e',thTelegram:'#0891b2',thStream:'#60a5fa',thMega:'#3b82f6',enTelegram:'#a3e635',enStream:'#63b3ed',enMega:'#3182ce'};
   const sLbl={mmTelegram:'MM Telegram',mmStream:'MM Stream',mmMega:'MM Mega',thTelegram:'TH Telegram',thStream:'TH Stream',thMega:'TH Mega',enTelegram:'EN Telegram',enStream:'EN Stream',enMega:'EN Mega'};
   document.getElementById('dlChart').innerHTML=Object.entries(sc).filter(([,n])=>n>0).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('')||'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No downloads yet</div>';
-  const cM={},cyM={};analytics.forEach(e=>{if(e.country)cM[e.country]=(cM[e.country]||0)+1;if(e.city)cyM[e.city]=(cyM[e.city]||0)+1;});
+  const cM={},cyM={};events.forEach(e=>{if(e.country)cM[e.country]=(cM[e.country]||0)+1;if(e.city)cyM[e.city]=(cyM[e.city]||0)+1;});
   const lt=Object.values(cM).reduce((a,b)=>a+b,0);document.getElementById('locTotal').textContent=lt?lt+' sessions':'Collecting...';
   const LC=['#f0b429','#3b82f6','#10b981','#8b5cf6','#ef4444','#f97316','#06b6d4','#ec4899'];
   const ce=Object.entries(cM).sort((a,b)=>b[1]-a[1]).slice(0,8),cMax2=Math.max(...ce.map(e=>e[1]),1);
-  document.getElementById('countryChart').innerHTML=ce.length?ce.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cMax2)*100}%;background:${LC[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted)">No data</div>';
+  document.getElementById('countryChart').innerHTML=ce.length?ce.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${escHtml(c)}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cMax2)*100}%;background:${LC[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted)">No data</div>';
   const cye=Object.entries(cyM).sort((a,b)=>b[1]-a[1]).slice(0,8),cyMax=Math.max(...cye.map(e=>e[1]),1);
-  document.getElementById('cityChart').innerHTML=cye.length?cye.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cyMax)*100}%;background:${LC[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted)">No data</div>';
+  document.getElementById('cityChart').innerHTML=cye.length?cye.map(([c,n],i)=>`<div class="bh-item"><div class="bh-label" style="width:90px">${escHtml(c)}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/cyMax)*100}%;background:${LC[i%8]}"></div></div><div class="bh-val">${n}</div></div>`).join(''):'<div style="font-size:.75rem;color:var(--muted)">No data</div>';
   const mvC={},mvD={};
-  analytics.filter(e=>e.type==='movie_click'&&e.movieTitle).forEach(e=>{mvC[e.movieTitle]=(mvC[e.movieTitle]||0)+1;});
-  analytics.filter(e=>e.type==='download_click'&&e.movieTitle).forEach(e=>{mvD[e.movieTitle]=(mvD[e.movieTitle]||0)+1;});
+  events.filter(e=>e.type==='movie_click'&&e.movieTitle).forEach(e=>{mvC[e.movieTitle]=(mvC[e.movieTitle]||0)+1;});
+  events.filter(e=>e.type==='download_click'&&e.movieTitle).forEach(e=>{mvD[e.movieTitle]=(mvD[e.movieTitle]||0)+1;});
   const mvList=Object.entries(mvC).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  document.getElementById('movieViewsTbl').innerHTML=mvList.length?mvList.map(([t,cn],i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${t}</strong></td><td style="color:var(--accent);font-weight:600">${cn}</td><td>${mvD[t]||0}</td><td style="color:var(--muted);font-size:.72rem">${((mvD[t]||0)/Math.max(cn,1)*100).toFixed(0)}%</td></tr>`).join(''):'<tr><td colspan="5" class="empty-tbl">No data yet</td></tr>';
+  document.getElementById('movieViewsTbl').innerHTML=mvList.length?mvList.map(([t,cn],i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${escHtml(t)}</strong></td><td style="color:var(--accent);font-weight:600">${cn}</td><td>${mvD[t]||0}</td><td style="color:var(--muted);font-size:.72rem">${((mvD[t]||0)/Math.max(cn,1)*100).toFixed(0)}%</td></tr>`).join(''):'<tr><td colspan="5" class="empty-tbl">No data yet</td></tr>';
 }
 
 function updateTabCounts(){
