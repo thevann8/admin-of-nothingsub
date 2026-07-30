@@ -1264,7 +1264,7 @@ window.goBackToMovies=function(){showPg('movies',document.getElementById('nav-mo
 
 window.copyMovieTemplate=async function(lu){
   const thSynopsis=lu==='TH'?document.getElementById('eTHDescTH')?.value.trim():'';
-  const data={version:1,title:document.getElementById('e'+lu+'Title').value.trim(),hook:document.getElementById('e'+lu+'Caption').value.trim(),synopsis:thSynopsis||document.getElementById('e'+lu+'DescMM').value.trim(),actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses')};
+  const data={title:document.getElementById('e'+lu+'Title').value.trim(),hook:document.getElementById('e'+lu+'Caption').value.trim(),synopsis:thSynopsis||document.getElementById('e'+lu+'DescMM').value.trim(),actors:getTags('e'+lu+'Actors').join(', '),actresses:getTags('e'+lu+'Actresses').join(', ')};
   try{await navigator.clipboard.writeText(JSON.stringify(data));alert('Template copied — paste it into Telegram Post Generator.');}
   catch(e){alert('Clipboard permission failed. Please use HTTPS and allow clipboard access.');}
 };
