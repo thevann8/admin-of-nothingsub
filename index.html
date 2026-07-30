@@ -428,8 +428,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="rsc g"><div class="rsc-label">Page Views</div><div class="rsc-val g" id="rs-views">-</div><div class="rsc-note">Real total</div></div>
         <div class="rsc b"><div class="rsc-label">Movie Clicks</div><div class="rsc-val b" id="rs-clicks">-</div><div class="rsc-note">Real total</div></div>
         <div class="rsc y"><div class="rsc-label">Downloads</div><div class="rsc-val y" id="rs-downloads">-</div><div class="rsc-note">Real total</div></div>
-        <div class="rsc r"><div class="rsc-label">Mobile Events</div><div class="rsc-val r" id="rs-mobile">-</div><div class="rsc-note">Not unique users</div></div>
-        <div class="rsc b"><div class="rsc-label">Desktop Events</div><div class="rsc-val b" id="rs-desktop">-</div><div class="rsc-note">Not unique users</div></div>
         <div class="rsc r"><div class="rsc-label">&#127474;&#127484; MM Sub Events</div><div class="rsc-val r" id="rs-mm">-</div><div class="rsc-note">Not unique users</div></div>
         <div class="rsc b"><div class="rsc-label">&#127481;&#127469; TH Sub Events</div><div class="rsc-val b" id="rs-th">-</div><div class="rsc-note">Not unique users</div></div>
         <div class="rsc c"><div class="rsc-label">&#127468;&#127463; EN Sub Events</div><div class="rsc-val c" id="rs-en">-</div><div class="rsc-note">Not unique users</div></div>
@@ -467,6 +465,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="toolbar">
         <div class="m-srch"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="movieSrch" placeholder="Movie search..." oninput="renderMvTable()"></div>
         <div style="flex:1"></div>
+        <button class="btn-add" style="background:#7c2d12" onclick="cleanupLegacyMovieLinks()">Remove legacy links</button>
         <button class="btn-add" onclick="openAdd()">+ Add Movie</button>
       </div>
       <div class="mv-table">
@@ -489,6 +488,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="mmActorsWrap"><input class="tag-inp" id="mmActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="mmActressesWrap"><input class="tag-inp" id="mmActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActresses"></div>
         <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="mmStatusPub" onclick="setMMStatus('public')">Public</button><button class="toggle-opt" id="mmStatusPrv" onclick="setMMStatus('private')">Private</button></div><input type="hidden" id="mmStatus" value="public"></div>
+        <div class="f full"><label>Access Tier</label><select id="mmAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="mmCtGen" onclick="setCT('mm','general')">&#127916; General</button>
           <button class="ct-opt" id="mmCtJav" onclick="setCT('mm','jav')">&#128286; JAV</button>
@@ -499,12 +499,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label mm-label">&#127474;&#127484; Myanmar Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="mmTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert လုပ်ပေးမည် — https://streamtape.com/v/...)</span></label><input id="mmStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
-        <div class="f full"><label>Mega</label><input id="mmMega" placeholder="https://mega.nz/..."></div>
-        <div class="f full"><label>📥 Mixdrop Download Link <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Download Link — https://mixdrop.top/f/...)</span></label><input id="mmMixdrop" placeholder="https://mixdrop.top/f/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Mixdrop Embed URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Embed Link — https://mixdrop.top/e/...)</span></label><input id="mmEmbed" placeholder="https://mixdrop.top/e/xxxxxxxxx"></div>
-        <div class="f full"><label>▶️ Seek Stream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(မြန်မာစာတန်းထိုး တိုက်ရိုက်ကြည့်ရန် — https://seek.gg/...)</span></label><input id="mmSeek" placeholder="https://seek.gg/..."></div>
-        <div class="f full"><label>📥 Doodstream Download Link <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Download — https://dood.to/d/...)</span></label><input id="mmDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Doodstream Embed URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Embed — https://dood.to/e/...)</span></label><input id="mmDoodEmbed" placeholder="https://dood.to/e/xxxxxxxxx"></div>
+        <div class="f full"><label>🎬 Doodstream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/d/ or /e/ — player auto-convert)</span></label><input id="mmDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
+        <div class="f full"><label>📥 MegaUp Download URL</label><input id="mmMegaUp" placeholder="https://megaup.net/..."></div>
+        <div class="f full"><label>📥 UserDrive Download URL</label><input id="mmUserDrive" placeholder="https://userdrive.me/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>Myanmar Synopsis *</label><textarea id="mmDescMM" placeholder="Myanmar synopsis..."></textarea></div>
         <button class="mo-btn mm-btn" id="postMMBtn" onclick="doPostMM()" style="margin-top:.5rem">&#127474;&#127484; Post Myanmar Sub Movie</button>
@@ -526,6 +523,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="thActorsWrap"><input class="tag-inp" id="thActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="thActressesWrap"><input class="tag-inp" id="thActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActresses"></div>
         <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="thStatusPub" onclick="setTHStatus('public')">Public</button><button class="toggle-opt" id="thStatusPrv" onclick="setTHStatus('private')">Private</button></div><input type="hidden" id="thStatus" value="public"></div>
+        <div class="f full"><label>Access Tier</label><select id="thAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="thCtGen" onclick="setCT('th','general')">&#127916; General</button>
           <button class="ct-opt" id="thCtJav" onclick="setCT('th','jav')">&#128286; JAV</button>
@@ -536,12 +534,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label th-label">&#127481;&#127469; Thai Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="thTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert လုပ်ပေးမည် — https://streamtape.com/v/...)</span></label><input id="thStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
-        <div class="f full"><label>Mega</label><input id="thMega" placeholder="https://mega.nz/..."></div>
-        <div class="f full"><label>📥 Mixdrop Download Link <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Download Link — https://mixdrop.top/f/...)</span></label><input id="thMixdrop" placeholder="https://mixdrop.top/f/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Mixdrop Embed URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Embed Link — https://mixdrop.top/e/...)</span></label><input id="thEmbed" placeholder="https://mixdrop.top/e/xxxxxxxxx"></div>
-        <div class="f full"><label>▶️ Seek Stream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(တိုက်ရိုက်ကြည့်ရန် — https://seek.gg/...)</span></label><input id="thSeek" placeholder="https://seek.gg/..."></div>
-        <div class="f full"><label>📥 Doodstream Download Link <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Download — https://dood.to/d/...)</span></label><input id="thDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Doodstream Embed URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Embed — https://dood.to/e/...)</span></label><input id="thDoodEmbed" placeholder="https://dood.to/e/xxxxxxxxx"></div>
+        <div class="f full"><label>🎬 Doodstream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/d/ or /e/ — player auto-convert)</span></label><input id="thDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
+        <div class="f full"><label>📥 MegaUp Download URL</label><input id="thMegaUp" placeholder="https://megaup.net/..."></div>
+        <div class="f full"><label>📥 UserDrive Download URL</label><input id="thUserDrive" placeholder="https://userdrive.me/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>Thai Synopsis (optional)</label><textarea id="thDescTH" placeholder="Thai synopsis..."></textarea></div>
         <button class="mo-btn th-btn" id="postTHBtn" onclick="doPostTH()" style="margin-top:.5rem">&#127481;&#127469; Post Thai Sub Movie</button>
@@ -563,6 +558,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="enActorsWrap"><input class="tag-inp" id="enActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="enActressesWrap"><input class="tag-inp" id="enActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActresses"></div>
         <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="enStatusPub" onclick="setENStatus('public')">Public</button><button class="toggle-opt" id="enStatusPrv" onclick="setENStatus('private')">Private</button></div><input type="hidden" id="enStatus" value="public"></div>
+        <div class="f full"><label>Access Tier</label><select id="enAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="enCtGen" onclick="setCT('en','general')">&#127916; General</button>
           <button class="ct-opt" id="enCtJav" onclick="setCT('en','jav')">&#128286; JAV</button>
@@ -573,12 +569,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label en-label">&#127468;&#127463; English Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="enTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert လုပ်ပေးမည် — https://streamtape.com/v/...)</span></label><input id="enStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
-        <div class="f full"><label>Mega</label><input id="enMega" placeholder="https://mega.nz/..."></div>
-        <div class="f full"><label>📥 Mixdrop Download Link <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Download Link — https://mixdrop.top/f/...)</span></label><input id="enMixdrop" placeholder="https://mixdrop.top/f/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Mixdrop Embed URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Embed Link — https://mixdrop.top/e/...)</span></label><input id="enEmbed" placeholder="https://mixdrop.top/e/xxxxxxxxx"></div>
-        <div class="f full"><label>▶️ Seek Stream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(တိုက်ရိုက်ကြည့်ရန် — https://seek.gg/...)</span></label><input id="enSeek" placeholder="https://seek.gg/..."></div>
-        <div class="f full"><label>📥 Doodstream Download Link <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Download — https://dood.to/d/...)</span></label><input id="enDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Doodstream Embed URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(Embed — https://dood.to/e/...)</span></label><input id="enDoodEmbed" placeholder="https://dood.to/e/xxxxxxxxx"></div>
+        <div class="f full"><label>🎬 Doodstream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/d/ or /e/ — player auto-convert)</span></label><input id="enDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
+        <div class="f full"><label>📥 MegaUp Download URL</label><input id="enMegaUp" placeholder="https://megaup.net/..."></div>
+        <div class="f full"><label>📥 UserDrive Download URL</label><input id="enUserDrive" placeholder="https://userdrive.me/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>English Synopsis *</label><textarea id="enDescEN" placeholder="English synopsis..."></textarea></div>
         <button class="mo-btn en-btn" id="postENBtn" onclick="doPostEN()" style="margin-top:.5rem">&#127468;&#127463; Post English Sub Movie</button>
@@ -605,6 +598,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="eMMActorsWrap"><input class="tag-inp" id="eMMActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eMMActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eMMActressesWrap"><input class="tag-inp" id="eMMActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eMMActresses"></div>
         <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eMMStatPub" onclick="setESt('MM','public')">Public</button><button class="toggle-opt" id="eMMStatPrv" onclick="setESt('MM','private')">Private</button></div><input type="hidden" id="eMMStatus" value="public"></div>
+        <div class="f full"><label>Access Tier</label><select id="eMMAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eMMCtGen" onclick="setCT('eMM','general')">&#127916; General</button>
           <button class="ct-opt" id="eMMCtJav" onclick="setCT('eMM','jav')">&#128286; JAV</button>
@@ -615,14 +609,12 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label mm-label">&#127474;&#127484; Myanmar Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="eMMTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert)</span></label><input id="eMMStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
-        <div class="f full"><label>Mega</label><input id="eMMMega" placeholder="https://mega.nz/..."></div>
-        <div class="f full"><label>📥 Mixdrop Download Link</label><input id="eMMEmbed" placeholder="https://mixdrop.top/f/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Mixdrop Embed URL</label><input id="eMMEmbedSrc" placeholder="https://mixdrop.top/e/xxxxxxxxx"></div>
-        <div class="f full"><label>▶️ Seek Stream URL</label><input id="eMMSeek" placeholder="https://seek.gg/..."></div>
-        <div class="f full"><label>📥 Doodstream Download Link</label><input id="eMMDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Doodstream Embed URL</label><input id="eMMDoodEmbed" placeholder="https://dood.to/e/xxxxxxxxx"></div>
+        <div class="f full"><label>🎬 Doodstream URL</label><input id="eMMDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
+        <div class="f full"><label>📥 MegaUp Download URL</label><input id="eMMMegaUp" placeholder="https://megaup.net/..."></div>
+        <div class="f full"><label>📥 UserDrive Download URL</label><input id="eMMUserDrive" placeholder="https://userdrive.me/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>Synopsis (MM)</label><textarea id="eMMDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+        <button class="mo-btn" type="button" onclick="copyMovieTemplate('MM')" style="margin-top:.5rem">Copy for Template</button>
         <button class="mo-btn mm-btn" id="saveMMBtn" onclick="doSaveEdit('MM')" style="margin-top:.5rem">&#127474;&#127484; Save MM Changes</button>
         <div class="mo-msg" id="editMMMsg"></div>
       </div></div>
@@ -647,6 +639,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="eTHActorsWrap"><input class="tag-inp" id="eTHActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eTHActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eTHActressesWrap"><input class="tag-inp" id="eTHActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eTHActresses"></div>
         <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eTHStatPub" onclick="setESt('TH','public')">Public</button><button class="toggle-opt" id="eTHStatPrv" onclick="setESt('TH','private')">Private</button></div><input type="hidden" id="eTHStatus" value="public"></div>
+        <div class="f full"><label>Access Tier</label><select id="eTHAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eTHCtGen" onclick="setCT('eTH','general')">&#127916; General</button>
           <button class="ct-opt" id="eTHCtJav" onclick="setCT('eTH','jav')">&#128286; JAV</button>
@@ -657,15 +650,13 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label th-label">&#127481;&#127469; Thai Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="eTHTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert)</span></label><input id="eTHStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
-        <div class="f full"><label>Mega</label><input id="eTHMega" placeholder="https://mega.nz/..."></div>
-        <div class="f full"><label>📥 Mixdrop Download Link</label><input id="eTHMixdrop" placeholder="https://mixdrop.top/f/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Mixdrop Embed URL</label><input id="eTHEmbed" placeholder="https://mixdrop.top/e/xxxxxxxxx"></div>
-        <div class="f full"><label>▶️ Seek Stream URL</label><input id="eTHSeek" placeholder="https://seek.gg/..."></div>
-        <div class="f full"><label>📥 Doodstream Download Link</label><input id="eTHDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Doodstream Embed URL</label><input id="eTHDoodEmbed" placeholder="https://dood.to/e/xxxxxxxxx"></div>
+        <div class="f full"><label>🎬 Doodstream URL</label><input id="eTHDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
+        <div class="f full"><label>📥 MegaUp Download URL</label><input id="eTHMegaUp" placeholder="https://megaup.net/..."></div>
+        <div class="f full"><label>📥 UserDrive Download URL</label><input id="eTHUserDrive" placeholder="https://userdrive.me/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>Synopsis (MM)</label><textarea id="eTHDescMM" placeholder="Myanmar synopsis..."></textarea></div>
         <div class="f full"><label>Synopsis (TH)</label><textarea id="eTHDescTH" placeholder="Thai synopsis..."></textarea></div>
+        <button class="mo-btn" type="button" onclick="copyMovieTemplate('TH')" style="margin-top:.5rem">Copy for Template</button>
         <button class="mo-btn th-btn" id="saveTHBtn" onclick="doSaveEdit('TH')" style="margin-top:.5rem">&#127481;&#127469; Save TH Changes</button>
         <div class="mo-msg" id="editTHMsg"></div>
       </div></div>
@@ -690,6 +681,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="eENActorsWrap"><input class="tag-inp" id="eENActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eENActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eENActressesWrap"><input class="tag-inp" id="eENActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eENActresses"></div>
         <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eENStatPub" onclick="setESt('EN','public')">Public</button><button class="toggle-opt" id="eENStatPrv" onclick="setESt('EN','private')">Private</button></div><input type="hidden" id="eENStatus" value="public"></div>
+        <div class="f full"><label>Access Tier</label><select id="eENAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eENCtGen" onclick="setCT('eEN','general')">&#127916; General</button>
           <button class="ct-opt" id="eENCtJav" onclick="setCT('eEN','jav')">&#128286; JAV</button>
@@ -700,14 +692,12 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label en-label">&#127468;&#127463; English Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="eENTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert)</span></label><input id="eENStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
-        <div class="f full"><label>Mega</label><input id="eENMega" placeholder="https://mega.nz/..."></div>
-        <div class="f full"><label>📥 Mixdrop Download Link</label><input id="eENMixdrop" placeholder="https://mixdrop.top/f/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Mixdrop Embed URL</label><input id="eENEmbed" placeholder="https://mixdrop.top/e/xxxxxxxxx"></div>
-        <div class="f full"><label>▶️ Seek Stream URL</label><input id="eENSeek" placeholder="https://seek.gg/..."></div>
-        <div class="f full"><label>📥 Doodstream Download Link</label><input id="eENDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
-        <div class="f full"><label>🎬 Doodstream Embed URL</label><input id="eENDoodEmbed" placeholder="https://dood.to/e/xxxxxxxxx"></div>
+        <div class="f full"><label>🎬 Doodstream URL</label><input id="eENDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
+        <div class="f full"><label>📥 MegaUp Download URL</label><input id="eENMegaUp" placeholder="https://megaup.net/..."></div>
+        <div class="f full"><label>📥 UserDrive Download URL</label><input id="eENUserDrive" placeholder="https://userdrive.me/..."></div>
         <div class="form-section"><div class="form-section-label">Synopsis</div></div>
         <div class="f full"><label>Synopsis (MM)</label><textarea id="eENDescMM" placeholder="Myanmar synopsis..."></textarea></div>
+        <button class="mo-btn" type="button" onclick="copyMovieTemplate('EN')" style="margin-top:.5rem">Copy for Template</button>
         <button class="mo-btn en-btn" id="saveENBtn" onclick="doSaveEdit('EN')" style="margin-top:.5rem">&#127468;&#127463; Save EN Changes</button>
         <div class="mo-msg" id="editENMsg"></div>
       </div></div>
@@ -821,6 +811,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
       <div class="f full"><label>Actresses</label><div class="tags-wrap" id="aActressesWrap"><input class="tag-inp" id="aActressInp" placeholder="Actress name..."></div><input type="hidden" id="aActresses"></div>
       <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="statusPub" onclick="setStatus('public')">Public</button><button class="toggle-opt" id="statusPrv" onclick="setStatus('private')">Private</button></div><input type="hidden" id="aStatus" value="public"></div>
+      <div class="f full"><label>Access Tier</label><select id="aAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
       <div class="ct-toggle"><label>Content Type:</label>
         <button class="ct-opt on-gen" id="aCtGen" onclick="setCT('a','general')">&#127916; General</button>
         <button class="ct-opt" id="aCtJav" onclick="setCT('a','jav')">&#128286; JAV</button>
@@ -831,15 +822,21 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="form-section"><div class="form-section-label mm-label">MM Sub Links</div></div>
       <div class="f full"><label>MM Telegram</label><input id="aMmTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>MM Streamtape</label><input id="aMmStream" placeholder="https://streamtape.com/v/..."></div>
-      <div class="f full"><label>MM Mega</label><input id="aMmMega" placeholder="https://mega.nz/..."></div>
+      <div class="f full"><label>MM Doodstream</label><input id="aMmDood" placeholder="https://dood.to/d/..."></div>
+      <div class="f full"><label>MM MegaUp</label><input id="aMmMegaUp" placeholder="https://megaup.net/..."></div>
+      <div class="f full"><label>MM UserDrive</label><input id="aMmUserDrive" placeholder="https://userdrive.me/..."></div>
       <div class="form-section"><div class="form-section-label th-label">TH Sub Links</div></div>
       <div class="f full"><label>TH Telegram</label><input id="aThTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>TH Streamtape</label><input id="aThStream" placeholder="https://streamtape.com/v/..."></div>
-      <div class="f full"><label>TH Mega</label><input id="aThMega" placeholder="https://mega.nz/..."></div>
+      <div class="f full"><label>TH Doodstream</label><input id="aThDood" placeholder="https://dood.to/d/..."></div>
+      <div class="f full"><label>TH MegaUp</label><input id="aThMegaUp" placeholder="https://megaup.net/..."></div>
+      <div class="f full"><label>TH UserDrive</label><input id="aThUserDrive" placeholder="https://userdrive.me/..."></div>
       <div class="form-section"><div class="form-section-label en-label">EN Sub Links</div></div>
       <div class="f full"><label>EN Telegram</label><input id="aEnTelegram" placeholder="https://t.me/..."></div>
       <div class="f full"><label>EN Streamtape</label><input id="aEnStream" placeholder="https://streamtape.com/v/..."></div>
-      <div class="f full"><label>EN Mega</label><input id="aEnMega" placeholder="https://mega.nz/..."></div>
+      <div class="f full"><label>EN Doodstream</label><input id="aEnDood" placeholder="https://dood.to/d/..."></div>
+      <div class="f full"><label>EN MegaUp</label><input id="aEnMegaUp" placeholder="https://megaup.net/..."></div>
+      <div class="f full"><label>EN UserDrive</label><input id="aEnUserDrive" placeholder="https://userdrive.me/..."></div>
       <div class="form-section"><div class="form-section-label">Synopsis</div></div>
       <div class="f full"><label>Synopsis (MM) *</label><textarea id="aDescMM" placeholder="Myanmar synopsis..."></textarea></div>
       <div class="f full"><label>Synopsis (TH) optional</label><textarea id="aDescTH" placeholder="Thai synopsis..."></textarea></div>
@@ -859,7 +856,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore,collection,addDoc,updateDoc,deleteDoc,doc,query,orderBy,onSnapshot,serverTimestamp,limit,setDoc,getDoc,getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore,collection,addDoc,updateDoc,deleteDoc,deleteField,doc,query,orderBy,onSnapshot,serverTimestamp,limit,setDoc,getDoc,getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import { getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 const app=initializeApp({apiKey:"AIzaSyA4y_u0HsSs15ANQrasvCGpyQ57IF0jOvs",authDomain:"nothingsub-bc4f8.firebaseapp.com",projectId:"nothingsub-bc4f8",storageBucket:"nothingsub-bc4f8.firebasestorage.app",messagingSenderId:"603228016723",appId:"1:603228016723:web:3bd1bce763d046dc4a36a6"});
@@ -999,10 +996,10 @@ function renderRealStats(){
   else if(curDateFilter==='30')dates=getPastDates(30);
   else if(curDateFilter==='365')dates=getPastDates(365);
   else dates=Object.keys(allStatsDocs);
-  let views=0,clicks=0,downloads=0,mobile=0,desktop=0,mm=0,th=0,en=0,total=0;
-  dates.forEach(d=>{const dd=allStatsDocs[d];if(!dd)return;views+=dd.pageviews||0;clicks+=dd.movieClicks||0;downloads+=dd.downloads||0;mobile+=dd.mobile||0;desktop+=dd.desktop||0;mm+=(dd.subMMViews ?? dd.langMM ?? 0);th+=(dd.subTHViews ?? dd.langTH ?? 0);en+=(dd.subENViews ?? dd.langEN ?? 0);total+=dd.total||0;});
+  let views=0,clicks=0,downloads=0,mm=0,th=0,en=0,total=0;
+  dates.forEach(d=>{const dd=allStatsDocs[d];if(!dd)return;views+=dd.pageviews||0;clicks+=dd.movieClicks||0;downloads+=dd.downloads||0;mm+=(dd.subMMViews ?? dd.langMM ?? 0);th+=(dd.subTHViews ?? dd.langTH ?? 0);en+=(dd.subENViews ?? dd.langEN ?? 0);total+=dd.total||0;});
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v.toLocaleString();};
-  set('rs-views',views);set('rs-clicks',clicks);set('rs-downloads',downloads);set('rs-mobile',mobile);set('rs-desktop',desktop);set('rs-mm',mm);set('rs-th',th);set('rs-en',en);set('rs-total',total);
+  set('rs-views',views);set('rs-clicks',clicks);set('rs-downloads',downloads);set('rs-mm',mm);set('rs-th',th);set('rs-en',en);set('rs-total',total);
   const td=allStatsDocs[today];const sdEl=document.getElementById('s-dl');if(sdEl)sdEl.textContent=(td?.downloads||0).toLocaleString();
 }
 
@@ -1083,9 +1080,9 @@ async function saveSocialLinks(lang){ const msg=document.getElementById('soc-'+l
 window.saveAdSlot=saveAdSlot;
 window.saveSocialLinks=saveSocialLinks;
 function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))return PROXY+encodeURIComponent(url)+'&w=96&h=54&fit=cover&output=webp';return url;}
-function hasMM(m){return!!(m.mmTelegram&&m.mmTelegram!=='#'||m.mmStream&&m.mmStream!=='#'||m.mmMega&&m.mmMega!=='#');}
-function hasTH(m){return!!(m.thTelegram&&m.thTelegram!=='#'||m.thStream&&m.thStream!=='#'||m.thMega&&m.thMega!=='#');}
-function hasEN(m){return!!(m.enTelegram&&m.enTelegram!=='#'||m.enStream&&m.enStream!=='#'||m.enMega&&m.enMega!=='#');}
+function hasMM(m){return!!(m.mmTelegram&&m.mmTelegram!=='#'||m.mmStream&&m.mmStream!=='#'||m.mmDood&&m.mmDood!=='#'||m.mmMegaUp&&m.mmMegaUp!=='#'||m.mmUserDrive&&m.mmUserDrive!=='#');}
+function hasTH(m){return!!(m.thTelegram&&m.thTelegram!=='#'||m.thStream&&m.thStream!=='#'||m.thDood&&m.thDood!=='#'||m.thMegaUp&&m.thMegaUp!=='#'||m.thUserDrive&&m.thUserDrive!=='#');}
+function hasEN(m){return!!(m.enTelegram&&m.enTelegram!=='#'||m.enStream&&m.enStream!=='#'||m.enDood&&m.enDood!=='#'||m.enMegaUp&&m.enMegaUp!=='#'||m.enUserDrive&&m.enUserDrive!=='#');}
 function subTypeBadge(m){const st=m.subtitleType||'';if(st==='mm')return '<span class="sb sb-mm"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> MM</span>';if(st==='th')return '<span class="sb sb-th"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> TH</span>';if(st==='en')return '<span class="sb sb-en"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> EN</span>';if(st==='both')return '<span class="sb sb-mm"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg></span><span class="sb sb-th"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg></span><span class="sb sb-en"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg></span>';const mm=hasMM(m),th=hasTH(m),en=hasEN(m);return(mm?'<span class="sb sb-mm">MM</span>':'')+(th?'<span class="sb sb-th">TH</span>':'')+(en?'<span class="sb sb-en">EN</span>':'');}
 function v(id){const el=document.getElementById(id);return el?(el.value.trim()||'#'):'#';}
 function sv(id,val){const el=document.getElementById(id);if(el)el.value=(val==='#'?'':val||'');}
@@ -1150,11 +1147,11 @@ function updateAnalytics(){
   const events=filteredAnalytics();
   const lc={mm:0,th:0,en:0};events.forEach(e=>{const k=e.type==='subtitle_view'?e.subtitleLang:e.lang;if(lc[k]!==undefined)lc[k]++;});const lMax=Math.max(...Object.values(lc),1);
   document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 Myanmar',th:'🇹🇭 Thai',en:'🇬🇧 English'}).map(([k,lb])=>`<div class="bh-item"><div class="bh-label" style="width:100px">${lb}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
-  const sc={mmTelegram:0,mmStream:0,mmMega:0,thTelegram:0,thStream:0,thMega:0,enTelegram:0,enStream:0,enMega:0};
+  const sc={mmTelegram:0,mmStream:0,mmDood:0,mmMegaUp:0,mmUserDrive:0,thTelegram:0,thStream:0,thDood:0,thMegaUp:0,thUserDrive:0,enTelegram:0,enStream:0,enDood:0,enMegaUp:0,enUserDrive:0};
   events.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
   const sMax=Math.max(...Object.values(sc),1);
-  const sClr={mmTelegram:'#29b6f6',mmStream:'#fc8181',mmMega:'#e53e3e',thTelegram:'#0891b2',thStream:'#60a5fa',thMega:'#3b82f6',enTelegram:'#a3e635',enStream:'#63b3ed',enMega:'#3182ce'};
-  const sLbl={mmTelegram:'MM Telegram',mmStream:'MM Stream',mmMega:'MM Mega',thTelegram:'TH Telegram',thStream:'TH Stream',thMega:'TH Mega',enTelegram:'EN Telegram',enStream:'EN Stream',enMega:'EN Mega'};
+  const sClr={mmTelegram:'#29b6f6',mmStream:'#fc8181',mmDood:'#f97316',mmMegaUp:'#e53e3e',mmUserDrive:'#8b5cf6',thTelegram:'#0891b2',thStream:'#60a5fa',thDood:'#f97316',thMegaUp:'#e53e3e',thUserDrive:'#8b5cf6',enTelegram:'#a3e635',enStream:'#63b3ed',enDood:'#f97316',enMegaUp:'#e53e3e',enUserDrive:'#8b5cf6'};
+  const sLbl={mmTelegram:'MM Telegram',mmStream:'MM Streamtape',mmDood:'MM Doodstream',mmMegaUp:'MM MegaUp',mmUserDrive:'MM UserDrive',thTelegram:'TH Telegram',thStream:'TH Streamtape',thDood:'TH Doodstream',thMegaUp:'TH MegaUp',thUserDrive:'TH UserDrive',enTelegram:'EN Telegram',enStream:'EN Streamtape',enDood:'EN Doodstream',enMegaUp:'EN MegaUp',enUserDrive:'EN UserDrive'};
   document.getElementById('dlChart').innerHTML=Object.entries(sc).filter(([,n])=>n>0).map(([k,n])=>`<div class="bh-item"><div class="bh-label" style="width:100px;font-size:.67rem">${sLbl[k]}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(n/sMax)*100}%;background:${sClr[k]}"></div></div><div class="bh-val">${n}</div></div>`).join('')||'<div style="font-size:.75rem;color:var(--muted);padding:.5rem">No downloads yet</div>';
   const cM={},cyM={};events.forEach(e=>{if(e.country)cM[e.country]=(cM[e.country]||0)+1;if(e.city)cyM[e.city]=(cyM[e.city]||0)+1;});
   const lt=Object.values(cM).reduce((a,b)=>a+b,0);document.getElementById('locTotal').textContent=lt?lt+' sessions':'Collecting...';
@@ -1232,9 +1229,10 @@ window.openEditPage=function(id,lang){
   initCatGrid('e'+lu+'CatGrid','e'+lu+'Genre',m.genres||(m.genre?[m.genre]:[]));
   initTagsFixed('e'+lu+'ActorsWrap','e'+lu+'ActorInp','e'+lu+'Actors',m.actors||[]);
   initTagsFixed('e'+lu+'ActressesWrap','e'+lu+'ActressInp','e'+lu+'Actresses',m.actresses||[]);
-  if(lang==='mm'){sv('eMMTelegram',m.mmTelegram);sv('eMMStream',m.mmStream);sv('eMMMega',m.mmMega);sv('eMMEmbed',m.mmMixdrop);sv('eMMEmbedSrc',m.mmEmbed);sv('eMMSeek',m.mmSeek);sv('eMMDood',m.mmDood);sv('eMMDoodEmbed',m.mmDoodEmbed);}
-  if(lang==='th'){sv('eTHTelegram',m.thTelegram);sv('eTHStream',m.thStream);sv('eTHMega',m.thMega);sv('eTHMixdrop',m.thMixdrop);sv('eTHEmbed',m.thEmbed);sv('eTHSeek',m.thSeek);sv('eTHDood',m.thDood);sv('eTHDoodEmbed',m.thDoodEmbed);}
-  if(lang==='en'){sv('eENTelegram',m.enTelegram);sv('eENStream',m.enStream);sv('eENMega',m.enMega);sv('eENMixdrop',m.enMixdrop);sv('eENEmbed',m.enEmbed);sv('eENSeek',m.enSeek);sv('eENDood',m.enDood);sv('eENDoodEmbed',m.enDoodEmbed);}
+  document.getElementById('e'+lu+'AccessTier').value=m.accessTier==='vip'?'vip':'free';
+  if(lang==='mm'){sv('eMMTelegram',m.mmTelegram);sv('eMMStream',m.mmStream);sv('eMMDood',m.mmDood);sv('eMMMegaUp',m.mmMegaUp);sv('eMMUserDrive',m.mmUserDrive);}
+  if(lang==='th'){sv('eTHTelegram',m.thTelegram);sv('eTHStream',m.thStream);sv('eTHDood',m.thDood);sv('eTHMegaUp',m.thMegaUp);sv('eTHUserDrive',m.thUserDrive);}
+  if(lang==='en'){sv('eENTelegram',m.enTelegram);sv('eENStream',m.enStream);sv('eENDood',m.enDood);sv('eENMegaUp',m.enMegaUp);sv('eENUserDrive',m.enUserDrive);}
   document.getElementById('e'+lu+'DescMM').value=m.descMM||'';
   if(lang==='th'&&document.getElementById('eTHDescTH'))document.getElementById('eTHDescTH').value=m.descTH||'';
   const ctVal=m.contentType||'general';
@@ -1249,10 +1247,10 @@ window.doSaveEdit=async function(lu){
   if(!id||!title){showMsg('edit'+lu+'Msg','Title ထည့်ပါ','err');return;}
   const cats=getCats('e'+lu+'Genre');
   const btn=document.getElementById('save'+lu+'Btn');btn.disabled=true;btn.textContent='Saving...';
-  const data={title,cardCaption:document.getElementById('e'+lu+'Caption').value.trim(),year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
-  if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmMega=v('eMMMega');data.mmMixdrop=v('eMMEmbed');data.mmEmbed=v('eMMEmbedSrc');data.mmSeek=v('eMMSeek');data.mmDood=v('eMMDood');data.mmDoodEmbed=v('eMMDoodEmbed');}
-  if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thMega=v('eTHMega');data.thMixdrop=v('eTHMixdrop');data.thEmbed=v('eTHEmbed');data.thSeek=v('eTHSeek');data.thDood=v('eTHDood');data.thDoodEmbed=v('eTHDoodEmbed');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
-  if(lang==='en'){data.enTelegram=v('eENTelegram');data.enStream=v('eENStream');data.enMega=v('eENMega');data.enMixdrop=v('eENMixdrop');data.enEmbed=v('eENEmbed');data.enSeek=v('eENSeek');data.enDood=v('eENDood');data.enDoodEmbed=v('eENDoodEmbed');}
+  const data={title,cardCaption:document.getElementById('e'+lu+'Caption').value.trim(),year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,accessTier:document.getElementById('e'+lu+'AccessTier').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
+  if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmDood=v('eMMDood');data.mmMegaUp=v('eMMMegaUp');data.mmUserDrive=v('eMMUserDrive');}
+  if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thDood=v('eTHDood');data.thMegaUp=v('eTHMegaUp');data.thUserDrive=v('eTHUserDrive');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
+  if(lang==='en'){data.enTelegram=v('eENTelegram');data.enStream=v('eENStream');data.enDood=v('eENDood');data.enMegaUp=v('eENMegaUp');data.enUserDrive=v('eENUserDrive');}
   try{
     await updateDoc(doc(db,'movies',id),data);
     showMsg('edit'+lu+'Msg','✓ Saved!','ok');
@@ -1264,6 +1262,23 @@ window.doSaveEdit=async function(lu){
 
 window.goBackToMovies=function(){showPg('movies',document.getElementById('nav-movies'));};
 
+window.copyMovieTemplate=async function(lu){
+  const thSynopsis=lu==='TH'?document.getElementById('eTHDescTH')?.value.trim():'';
+  const data={version:1,title:document.getElementById('e'+lu+'Title').value.trim(),hook:document.getElementById('e'+lu+'Caption').value.trim(),synopsis:thSynopsis||document.getElementById('e'+lu+'DescMM').value.trim(),actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses')};
+  try{await navigator.clipboard.writeText(JSON.stringify(data));alert('Template copied — paste it into Telegram Post Generator.');}
+  catch(e){alert('Clipboard permission failed. Please use HTTPS and allow clipboard access.');}
+};
+
+window.cleanupLegacyMovieLinks=async function(){
+  if(!confirm('All movies မှာ old streaming/download fields ကို အပြီးဖျက်မယ်။ Telegram, Streamtape, Doodstream, MegaUp, UserDrive ပဲကျန်မယ်။ ဆက်လုပ်မလား?'))return;
+  const legacy=['mmMega','thMega','enMega','mmMixdrop','thMixdrop','enMixdrop','mmEmbed','thEmbed','enEmbed','mmSeek','thSeek','enSeek','mmDoodEmbed','thDoodEmbed','enDoodEmbed','mmMoon','thMoon','enMoon','mmMoonEmbed','thMoonEmbed','enMoonEmbed'];
+  try{
+    const snap=await getDocs(collection(db,'movies'));
+    await Promise.all(snap.docs.map(d=>updateDoc(d.ref,Object.fromEntries(legacy.map(k=>[k,deleteField()])))));
+    alert(`Removed legacy link fields from ${snap.size} movies.`);
+  }catch(e){alert('Cleanup error: '+e.message);}
+};
+
 async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'✓ Saved!','ok');onSuccess();}
@@ -1274,8 +1289,8 @@ async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
 window.doPostMM=async function(){
   const title=document.getElementById('mmTitle').value.trim();if(!title){showMsg('postMMMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('mmGenre');
-  await saveMovieToDb({title,cardCaption:document.getElementById('mmCaption').value.trim(),year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,subtitleType:'mm',contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmMega:v('mmMega'),mmMixdrop:v('mmMixdrop'),mmEmbed:v('mmEmbed'),mmSeek:v('mmSeek'),mmDood:v('mmDood'),mmDoodEmbed:v('mmDoodEmbed'),thTelegram:'#',thStream:'#',thMega:'#',enTelegram:'#',enStream:'#',enMega:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
-    clearForm(['mmTitle','mmCaption','mmYear','mmPoster','mmTelegram','mmStream','mmMega','mmMixdrop','mmEmbed','mmSeek','mmDood','mmDoodEmbed','mmDescMM']);
+  await saveMovieToDb({title,cardCaption:document.getElementById('mmCaption').value.trim(),year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,accessTier:document.getElementById('mmAccessTier').value,subtitleType:'mm',contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmDood:v('mmDood'),mmMegaUp:v('mmMegaUp'),mmUserDrive:v('mmUserDrive'),thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
+    clearForm(['mmTitle','mmCaption','mmYear','mmPoster','mmTelegram','mmStream','mmDood','mmMegaUp','mmUserDrive','mmDescMM']);
     initCatGrid('mmCatGrid','mmGenre',[]);initTagsFixed('mmActorsWrap','mmActorInp','mmActors',[]);initTagsFixed('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');window.setCT('mm','general');
   });
 };
@@ -1284,8 +1299,8 @@ window.doPostMM=async function(){
 window.doPostTH=async function(){
   const title=document.getElementById('thTitle').value.trim();if(!title){showMsg('postTHMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('thGenre');
-  await saveMovieToDb({title,cardCaption:document.getElementById('thCaption').value.trim(),year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,subtitleType:'th',contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thMega:v('thMega'),thMixdrop:v('thMixdrop'),thEmbed:v('thEmbed'),thSeek:v('thSeek'),thDood:v('thDood'),thDoodEmbed:v('thDoodEmbed'),enTelegram:'#',enStream:'#',enMega:'#',descMM:'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
-    clearForm(['thTitle','thCaption','thYear','thPoster','thTelegram','thStream','thMega','thMixdrop','thEmbed','thSeek','thDood','thDoodEmbed','thDescTH']);
+  await saveMovieToDb({title,cardCaption:document.getElementById('thCaption').value.trim(),year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,accessTier:document.getElementById('thAccessTier').value,subtitleType:'th',contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thDood:v('thDood'),thMegaUp:v('thMegaUp'),thUserDrive:v('thUserDrive'),enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
+    clearForm(['thTitle','thCaption','thYear','thPoster','thTelegram','thStream','thDood','thMegaUp','thUserDrive','thDescTH']);
     initCatGrid('thCatGrid','thGenre',[]);initTagsFixed('thActorsWrap','thActorInp','thActors',[]);initTagsFixed('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');window.setCT('th','general');
   });
 };
@@ -1294,8 +1309,8 @@ window.doPostTH=async function(){
 window.doPostEN=async function(){
   const title=document.getElementById('enTitle').value.trim();if(!title){showMsg('postENMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('enGenre');
-  await saveMovieToDb({title,cardCaption:document.getElementById('enCaption').value.trim(),year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,subtitleType:'en',contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmMega:'#',thTelegram:'#',thStream:'#',thMega:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enMega:v('enMega'),enMixdrop:v('enMixdrop'),enEmbed:v('enEmbed'),enSeek:v('enSeek'),enDood:v('enDood'),enDoodEmbed:v('enDoodEmbed'),descMM:document.getElementById('enDescEN').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
-    clearForm(['enTitle','enCaption','enYear','enPoster','enTelegram','enStream','enMega','enMixdrop','enEmbed','enSeek','enDood','enDoodEmbed','enDescEN']);
+  await saveMovieToDb({title,cardCaption:document.getElementById('enCaption').value.trim(),year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,accessTier:document.getElementById('enAccessTier').value,subtitleType:'en',contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enDood:v('enDood'),enMegaUp:v('enMegaUp'),enUserDrive:v('enUserDrive'),descMM:document.getElementById('enDescEN').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
+    clearForm(['enTitle','enCaption','enYear','enPoster','enTelegram','enStream','enDood','enMegaUp','enUserDrive','enDescEN']);
     initCatGrid('enCatGrid','enGenre',[]);initTagsFixed('enActorsWrap','enActorInp','enActors',[]);initTagsFixed('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');window.setCT('en','general');
   });
 };
@@ -1304,8 +1319,8 @@ window.openAdd=()=>{document.getElementById('moAdd').classList.add('open');initC
 window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('aGenre'),st=document.getElementById('aSubtitleType').value||'mm';
-  await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,subtitleType:st,contentType:document.getElementById('aContentType').value||'general',actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmMega:v('aMmMega'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thMega:v('aThMega'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enMega:v('aEnMega'),descMM:document.getElementById('aDescMM').value.trim()||'Subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
-    clearForm(['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmMega','aThTelegram','aThStream','aThMega','aEnTelegram','aEnStream','aEnMega','aDescMM','aDescTH']);
+  await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,accessTier:document.getElementById('aAccessTier').value,subtitleType:st,contentType:document.getElementById('aContentType').value||'general',actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmDood:v('aMmDood'),mmMegaUp:v('aMmMegaUp'),mmUserDrive:v('aMmUserDrive'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thDood:v('aThDood'),thMegaUp:v('aThMegaUp'),thUserDrive:v('aThUserDrive'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enDood:v('aEnDood'),enMegaUp:v('aEnMegaUp'),enUserDrive:v('aEnUserDrive'),descMM:document.getElementById('aDescMM').value.trim()||'Subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
+    clearForm(['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmDood','aMmMegaUp','aMmUserDrive','aThTelegram','aThStream','aThDood','aThMegaUp','aThUserDrive','aEnTelegram','aEnStream','aEnDood','aEnMegaUp','aEnUserDrive','aDescMM','aDescTH']);
     initCatGrid('aCatGrid','aGenre',[]);initTagsFixed('aActorsWrap','aActorInp','aActors',[]);initTagsFixed('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
   });
