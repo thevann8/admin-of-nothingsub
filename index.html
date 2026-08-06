@@ -462,6 +462,14 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="sub-tab" id="stab-both" onclick="setSubTab('both',this)">&#127758; Both/All <span id="stab-both-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <span class="mv-count-badge">Showing <span id="mvShowCount">-</span> movies</span>
       </div>
+      <div class="sub-tab-bar" id="movieContentFilters" style="display:none;margin-top:-.25rem;padding-top:0">
+        <span style="font-size:.67rem;color:var(--muted);font-weight:600;letter-spacing:.5px">CONTENT:</span>
+        <button class="sub-tab on-all" data-content-filter="all" onclick="setMovieContentFilter('all',this)">All</button>
+        <button class="sub-tab" data-content-filter="jav" onclick="setMovieContentFilter('jav',this)">Japanese</button>
+        <button class="sub-tab" data-content-filter="asian" onclick="setMovieContentFilter('asian',this)">Asian</button>
+        <button class="sub-tab" data-content-filter="western" onclick="setMovieContentFilter('western',this)">Western</button>
+        <button class="sub-tab" data-content-filter="vip" onclick="setMovieContentFilter('vip',this)">VIP</button>
+      </div>
       <div class="toolbar">
         <div class="m-srch"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="movieSrch" placeholder="Movie search..." oninput="renderMvTable()"></div>
         <div style="flex:1"></div>
@@ -974,7 +982,7 @@ function refreshAllCatGrids(){
 }
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
-let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all';
+let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all',curMovieContentFilter='all';
 let currentSettings={};
 const AD_LANGS={mm:'Myanmar Sub',th:'Thai Sub',en:'English Sub'};
 const AD_SLOTS={topBanner:'Top Banner',bottomSticky:'Bottom Sticky',inFeed:'In-feed',footer:'Footer',popunder:'Popunder (Adsterra — no visible box)',socialBar:'Social Bar (Adsterra — no visible box)',nativeBanner:'Native Banner (Adsterra — visible box)'};
@@ -1185,8 +1193,21 @@ function updateTabCounts(){
 
 window.setSubTab=function(tab,btn){
   curSubTab=tab;
+  curMovieContentFilter='all';
   document.querySelectorAll('.sub-tab').forEach(b=>{b.className='sub-tab';});
   btn.className='sub-tab on-'+tab;
+  updateMovieContentFilters();
+  renderMvTable();
+};
+
+function updateMovieContentFilters(){
+  const box=document.getElementById('movieContentFilters');if(!box)return;
+  box.style.display=['mm','th','en'].includes(curSubTab)?'flex':'none';
+  box.querySelectorAll('[data-content-filter]').forEach(b=>b.className='sub-tab'+(b.dataset.contentFilter===curMovieContentFilter?' on-all':''));
+}
+window.setMovieContentFilter=function(type,btn){
+  curMovieContentFilter=type;
+  updateMovieContentFilters();
   renderMvTable();
 };
 
@@ -1194,6 +1215,7 @@ window.renderMvTable=function(){
   const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
   const show=movies.filter(m=>{
     if(curSubTab!=='all'&&(m.subtitleType||'')!==curSubTab)return false;
+    if(curMovieContentFilter!=='all' && (curMovieContentFilter==='vip'?m.accessTier!=='vip':(m.contentType||'general')!==curMovieContentFilter))return false;
     if(!q)return true;
     return (m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q));
   });
