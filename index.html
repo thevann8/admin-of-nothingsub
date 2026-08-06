@@ -480,7 +480,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-form-wrap mm-form"><div class="mo-form" style="padding:0">
         <div class="f full"><label>Movie Title *</label><input id="mmTitle" placeholder="Eg: Oppenheimer"></div>
         <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title — optional)</span></label><input id="mmCaption" maxlength="90" placeholder="Eg: Sakura Miura · Myanmar subtitle"></div>
-        <div class="f"><label>Year</label><input type="number" id="mmYear" placeholder="2024"></div>
+        <div class="f"><label>Release Year</label><input type="number" id="mmYear" placeholder="2024"></div>
+        <div class="f"><label>Posted Date</label><input type="date" id="mmPostedDate"></div>
         <div class="f"><label>Quality</label><select id="mmQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="mmCatGrid"></div><input type="hidden" id="mmGenre"></div>
         <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="mmPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
@@ -515,7 +516,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-form-wrap th-form"><div class="mo-form" style="padding:0">
         <div class="f full"><label>Movie Title *</label><input id="thTitle" placeholder="Eg: Oppenheimer"></div>
         <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(optional)</span></label><input id="thCaption" maxlength="90" placeholder="Small text below the title"></div>
-        <div class="f"><label>Year</label><input type="number" id="thYear" placeholder="2024"></div>
+        <div class="f"><label>Release Year</label><input type="number" id="thYear" placeholder="2024"></div>
+        <div class="f"><label>Posted Date</label><input type="date" id="thPostedDate"></div>
         <div class="f"><label>Quality</label><select id="thQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="thCatGrid"></div><input type="hidden" id="thGenre"></div>
         <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="thPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
@@ -550,7 +552,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
       <div class="post-form-wrap en-form"><div class="mo-form" style="padding:0">
         <div class="f full"><label>Movie Title *</label><input id="enTitle" placeholder="Eg: Oppenheimer"></div>
         <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(optional)</span></label><input id="enCaption" maxlength="90" placeholder="Small text below the title"></div>
-        <div class="f"><label>Year</label><input type="number" id="enYear" placeholder="2024"></div>
+        <div class="f"><label>Release Year</label><input type="number" id="enYear" placeholder="2024"></div>
+        <div class="f"><label>Posted Date</label><input type="date" id="enPostedDate"></div>
         <div class="f"><label>Quality</label><select id="enQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="enCatGrid"></div><input type="hidden" id="enGenre"></div>
         <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="enPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
@@ -590,7 +593,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <input type="hidden" id="eMMId">
         <div class="f full"><label>Movie Title *</label><input id="eMMTitle"></div>
         <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title)</span></label><input id="eMMCaption" maxlength="90"></div>
-        <div class="f"><label>Year</label><input type="number" id="eMMYear"></div>
+        <div class="f"><label>Release Year</label><input type="number" id="eMMYear"></div>
+        <div class="f"><label>Posted Date</label><input type="date" id="eMMPostedDate"></div>
         <div class="f"><label>Quality</label><select id="eMMQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="eMMCatGrid"></div><input type="hidden" id="eMMGenre"></div>
         <div class="f full"><label>Poster URL (16:9)</label><input id="eMMPoster"></div>
@@ -631,7 +635,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <input type="hidden" id="eTHId">
         <div class="f full"><label>Movie Title *</label><input id="eTHTitle"></div>
         <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title)</span></label><input id="eTHCaption" maxlength="90"></div>
-        <div class="f"><label>Year</label><input type="number" id="eTHYear"></div>
+        <div class="f"><label>Release Year</label><input type="number" id="eTHYear"></div>
+        <div class="f"><label>Posted Date</label><input type="date" id="eTHPostedDate"></div>
         <div class="f"><label>Quality</label><select id="eTHQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="eTHCatGrid"></div><input type="hidden" id="eTHGenre"></div>
         <div class="f full"><label>Poster URL (16:9)</label><input id="eTHPoster"></div>
@@ -673,7 +678,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <input type="hidden" id="eENId">
         <div class="f full"><label>Movie Title *</label><input id="eENTitle"></div>
         <div class="f full"><label>Card Caption <span style="font-size:.62rem;color:var(--muted);font-weight:400">(small text below the title)</span></label><input id="eENCaption" maxlength="90"></div>
-        <div class="f"><label>Year</label><input type="number" id="eENYear"></div>
+        <div class="f"><label>Release Year</label><input type="number" id="eENYear"></div>
+        <div class="f"><label>Posted Date</label><input type="date" id="eENPostedDate"></div>
         <div class="f"><label>Quality</label><select id="eENQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="eENCatGrid"></div><input type="hidden" id="eENGenre"></div>
         <div class="f full"><label>Poster URL (16:9)</label><input id="eENPoster"></div>
@@ -796,7 +802,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="mo-head"><h3>Quick Add Movie</h3><button class="x-btn" onclick="moClose('moAdd')">&#10005;</button></div>
     <div class="mo-form">
       <div class="f full"><label>Movie Title *</label><input id="aTitle" placeholder="Eg: Oppenheimer"></div>
-      <div class="f"><label>Year</label><input type="number" id="aYear" placeholder="2024"></div>
+      <div class="f"><label>Release Year</label><input type="number" id="aYear" placeholder="2024"></div>
+      <div class="f"><label>Posted Date</label><input type="date" id="aPostedDate"></div>
       <div class="f"><label>Quality</label><select id="aQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
       <div class="f full"><label>Categories</label><div class="cat-grid" id="aCatGrid"></div><input type="hidden" id="aGenre"></div>
       <div class="f full"><label>Poster URL</label><input id="aPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
@@ -1145,8 +1152,8 @@ function updateMovieStats(){
 
 function updateAnalytics(){
   const events=filteredAnalytics();
-  const lc={mm:0,th:0,en:0};events.forEach(e=>{const k=e.type==='subtitle_view'?e.subtitleLang:e.lang;if(lc[k]!==undefined)lc[k]++;});const lMax=Math.max(...Object.values(lc),1);
-  document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 Myanmar',th:'🇹🇭 Thai',en:'🇬🇧 English'}).map(([k,lb])=>`<div class="bh-item"><div class="bh-label" style="width:100px">${lb}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
+  const lc={mm:0,th:0,en:0};events.filter(e=>e.type==='subtitle_view').forEach(e=>{const k=e.subtitleLang;if(lc[k]!==undefined)lc[k]++;});const lMax=Math.max(...Object.values(lc),1);
+  document.getElementById('langChart').innerHTML=Object.entries({mm:'🇲🇲 MM Sub selected',th:'🇹🇭 TH Sub selected',en:'🇬🇧 EN Sub selected'}).map(([k,lb])=>`<div class="bh-item"><div class="bh-label" style="width:130px">${lb}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(lc[k]/lMax)*100}%;background:${{mm:'#fc8181',th:'#60a5fa',en:'#63b3ed'}[k]}"></div></div><div class="bh-val">${lc[k]}</div></div>`).join('');
   const sc={mmTelegram:0,mmStream:0,mmDood:0,mmMegaUp:0,mmUserDrive:0,thTelegram:0,thStream:0,thDood:0,thMegaUp:0,thUserDrive:0,enTelegram:0,enStream:0,enDood:0,enMegaUp:0,enUserDrive:0};
   events.filter(e=>e.type==='download_click').forEach(e=>{const s=e.source||'';if(sc[s]!==undefined)sc[s]++;});
   const sMax=Math.max(...Object.values(sc),1);
@@ -1223,6 +1230,7 @@ window.openEditPage=function(id,lang){
   document.getElementById('e'+lu+'Title').value=m.title||'';
   document.getElementById('e'+lu+'Caption').value=m.cardCaption||'';
   document.getElementById('e'+lu+'Year').value=m.year||'';
+  document.getElementById('e'+lu+'PostedDate').value=m.postedDate||'';
   document.getElementById('e'+lu+'Quality').value=m.quality||'1080p';
   document.getElementById('e'+lu+'Poster').value=m.poster||'';
   window.setESt(lu,m.status||'public');
@@ -1248,6 +1256,7 @@ window.doSaveEdit=async function(lu){
   const cats=getCats('e'+lu+'Genre');
   const btn=document.getElementById('save'+lu+'Btn');btn.disabled=true;btn.textContent='Saving...';
   const data={title,cardCaption:document.getElementById('e'+lu+'Caption').value.trim(),year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,accessTier:document.getElementById('e'+lu+'AccessTier').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
+  data.postedDate=document.getElementById('e'+lu+'PostedDate').value||'';
   if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmDood=v('eMMDood');data.mmMegaUp=v('eMMMegaUp');data.mmUserDrive=v('eMMUserDrive');}
   if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thDood=v('eTHDood');data.thMegaUp=v('eTHMegaUp');data.thUserDrive=v('eTHUserDrive');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
   if(lang==='en'){data.enTelegram=v('eENTelegram');data.enStream=v('eENStream');data.enDood=v('eENDood');data.enMegaUp=v('eENMegaUp');data.enUserDrive=v('eENUserDrive');}
@@ -1281,6 +1290,8 @@ window.cleanupLegacyMovieLinks=async function(){
 
 async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
+  const dateInput={postMMBtn:'mmPostedDate',postTHBtn:'thPostedDate',postENBtn:'enPostedDate',addBtn:'aPostedDate'}[btnId];
+  data.postedDate=document.getElementById(dateInput)?.value||new Date().toISOString().slice(0,10);
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'✓ Saved!','ok');onSuccess();}
   catch(e){showMsg(msgId,'Error: '+e.message,'err');}
   finally{btn.disabled=false;btn.textContent=btnTxt;}
@@ -1290,7 +1301,7 @@ window.doPostMM=async function(){
   const title=document.getElementById('mmTitle').value.trim();if(!title){showMsg('postMMMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('mmGenre');
   await saveMovieToDb({title,cardCaption:document.getElementById('mmCaption').value.trim(),year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,accessTier:document.getElementById('mmAccessTier').value,subtitleType:'mm',contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmDood:v('mmDood'),mmMegaUp:v('mmMegaUp'),mmUserDrive:v('mmUserDrive'),thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
-    clearForm(['mmTitle','mmCaption','mmYear','mmPoster','mmTelegram','mmStream','mmDood','mmMegaUp','mmUserDrive','mmDescMM']);
+    clearForm(['mmTitle','mmCaption','mmYear','mmPostedDate','mmPoster','mmTelegram','mmStream','mmDood','mmMegaUp','mmUserDrive','mmDescMM']);
     initCatGrid('mmCatGrid','mmGenre',[]);initTagsFixed('mmActorsWrap','mmActorInp','mmActors',[]);initTagsFixed('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');window.setCT('mm','general');
   });
 };
@@ -1300,7 +1311,7 @@ window.doPostTH=async function(){
   const title=document.getElementById('thTitle').value.trim();if(!title){showMsg('postTHMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('thGenre');
   await saveMovieToDb({title,cardCaption:document.getElementById('thCaption').value.trim(),year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,accessTier:document.getElementById('thAccessTier').value,subtitleType:'th',contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thDood:v('thDood'),thMegaUp:v('thMegaUp'),thUserDrive:v('thUserDrive'),enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
-    clearForm(['thTitle','thCaption','thYear','thPoster','thTelegram','thStream','thDood','thMegaUp','thUserDrive','thDescTH']);
+    clearForm(['thTitle','thCaption','thYear','thPostedDate','thPoster','thTelegram','thStream','thDood','thMegaUp','thUserDrive','thDescTH']);
     initCatGrid('thCatGrid','thGenre',[]);initTagsFixed('thActorsWrap','thActorInp','thActors',[]);initTagsFixed('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');window.setCT('th','general');
   });
 };
@@ -1310,7 +1321,7 @@ window.doPostEN=async function(){
   const title=document.getElementById('enTitle').value.trim();if(!title){showMsg('postENMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('enGenre');
   await saveMovieToDb({title,cardCaption:document.getElementById('enCaption').value.trim(),year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,accessTier:document.getElementById('enAccessTier').value,subtitleType:'en',contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enDood:v('enDood'),enMegaUp:v('enMegaUp'),enUserDrive:v('enUserDrive'),descMM:document.getElementById('enDescEN').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
-    clearForm(['enTitle','enCaption','enYear','enPoster','enTelegram','enStream','enDood','enMegaUp','enUserDrive','enDescEN']);
+    clearForm(['enTitle','enCaption','enYear','enPostedDate','enPoster','enTelegram','enStream','enDood','enMegaUp','enUserDrive','enDescEN']);
     initCatGrid('enCatGrid','enGenre',[]);initTagsFixed('enActorsWrap','enActorInp','enActors',[]);initTagsFixed('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');window.setCT('en','general');
   });
 };
@@ -1320,7 +1331,7 @@ window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('aGenre'),st=document.getElementById('aSubtitleType').value||'mm';
   await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,accessTier:document.getElementById('aAccessTier').value,subtitleType:st,contentType:document.getElementById('aContentType').value||'general',actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmDood:v('aMmDood'),mmMegaUp:v('aMmMegaUp'),mmUserDrive:v('aMmUserDrive'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thDood:v('aThDood'),thMegaUp:v('aThMegaUp'),thUserDrive:v('aThUserDrive'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enDood:v('aEnDood'),enMegaUp:v('aEnMegaUp'),enUserDrive:v('aEnUserDrive'),descMM:document.getElementById('aDescMM').value.trim()||'Subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
-    clearForm(['aTitle','aYear','aPoster','aMmTelegram','aMmStream','aMmDood','aMmMegaUp','aMmUserDrive','aThTelegram','aThStream','aThDood','aThMegaUp','aThUserDrive','aEnTelegram','aEnStream','aEnDood','aEnMegaUp','aEnUserDrive','aDescMM','aDescTH']);
+    clearForm(['aTitle','aYear','aPostedDate','aPoster','aMmTelegram','aMmStream','aMmDood','aMmMegaUp','aMmUserDrive','aThTelegram','aThStream','aThDood','aThMegaUp','aThUserDrive','aEnTelegram','aEnStream','aEnDood','aEnMegaUp','aEnUserDrive','aDescMM','aDescTH']);
     initCatGrid('aCatGrid','aGenre',[]);initTagsFixed('aActorsWrap','aActorInp','aActors',[]);initTagsFixed('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
   });
