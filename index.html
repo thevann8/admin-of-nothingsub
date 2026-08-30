@@ -255,6 +255,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .tag-chip .tag-rm:hover{color:var(--text);}
 .tag-inp{background:none;border:none;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.82rem;min-width:100px;flex:1;padding:2px 0;}
 .tag-inp::placeholder{color:var(--muted);}
+.tag-add{border:1px solid rgba(240,180,41,.45);background:rgba(240,180,41,.12);color:var(--accent);border-radius:7px;padding:.32rem .52rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.68rem;cursor:pointer;white-space:nowrap;}
+.tag-add:active{transform:scale(.97);}
 .sl-status{display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;border-radius:8px;font-size:.72rem;margin-top:.4rem;}
 .sl-status.ok{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:#34d399;}
 .sl-status.empty{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;}
@@ -1175,6 +1177,9 @@ window.toggleCat=function(gId,hId,cat){const g=document.getElementById(gId);if(!
 
 function initTagsFixed(wId,iId,hId,init=[]){
   const wrap=document.getElementById(wId),inp=document.getElementById(iId);if(!wrap||!inp)return;
+  // Hint mobile keyboards to show Done, and avoid autofill changing the input.
+  inp.setAttribute('enterkeyhint','done');
+  inp.setAttribute('autocomplete','off');
   let tags=[...init];
   function sync(){const h=document.getElementById(hId);if(h)h.value=JSON.stringify(tags);}
   function render(){
@@ -1183,6 +1188,12 @@ function initTagsFixed(wId,iId,hId,init=[]){
     sync();
   }
   function addTag(){const val=inp.value.trim().replace(/,$/,'').trim();if(val&&!tags.includes(val)){tags.push(val);render();}inp.value='';}
+  let addBtn=wrap.querySelector('.tag-add');
+  if(!addBtn){
+    addBtn=document.createElement('button');addBtn.type='button';addBtn.className='tag-add';addBtn.textContent='+ Add';
+    wrap.appendChild(addBtn);
+  }
+  addBtn.onclick=function(){addTag();inp.focus();};
   // Android/iOS keyboards do not all send the same Enter event. Support the
   // normal desktop key, mobile "Done/Go" keypress, and mobile line-break input.
   function commitTag(e){
@@ -1196,6 +1207,10 @@ function initTagsFixed(wId,iId,hId,init=[]){
   });
   inp.addEventListener('keypress',function(e){if(e.key==='Enter')commitTag(e);});
   inp.addEventListener('beforeinput',commitTag);
+  // Some mobile webviews never expose their Done key to JavaScript. In that
+  // case, moving to another field or closing the keyboard still saves the name.
+  inp.addEventListener('change',addTag);
+  inp.addEventListener('blur',addTag);
   wrap.addEventListener('click',function(e){if(e.target===wrap)inp.focus();});
   wrap._tags=tags;wrap._render=render;wrap._addTag=addTag;render();
 }
