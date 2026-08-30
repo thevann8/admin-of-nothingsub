@@ -1183,7 +1183,19 @@ function initTagsFixed(wId,iId,hId,init=[]){
     sync();
   }
   function addTag(){const val=inp.value.trim().replace(/,$/,'').trim();if(val&&!tags.includes(val)){tags.push(val);render();}inp.value='';}
-  inp.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===','){e.preventDefault();addTag();}if(e.key==='Backspace'&&!inp.value&&tags.length){tags.pop();render();}});
+  // Android/iOS keyboards do not all send the same Enter event. Support the
+  // normal desktop key, mobile "Done/Go" keypress, and mobile line-break input.
+  function commitTag(e){
+    const isEnter=e.key==='Enter'||e.code==='Enter'||e.key===','||e.inputType==='insertLineBreak'||e.inputType==='insertParagraph';
+    if(!isEnter)return;
+    e.preventDefault();e.stopPropagation();addTag();
+  }
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===','){commitTag(e);}
+    if(e.key==='Backspace'&&!inp.value&&tags.length){tags.pop();render();}
+  });
+  inp.addEventListener('keypress',function(e){if(e.key==='Enter')commitTag(e);});
+  inp.addEventListener('beforeinput',commitTag);
   wrap.addEventListener('click',function(e){if(e.target===wrap)inp.focus();});
   wrap._tags=tags;wrap._render=render;wrap._addTag=addTag;render();
 }
