@@ -399,30 +399,26 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <!-- DASHBOARD -->
     <div class="pg on" id="pg-dashboard">
       <div class="live-badge"><div class="live-dot"></div>Firebase Real-Time</div>
+      <div class="sub-tab-bar dash-version-tabs">
+        <span style="font-size:.67rem;color:var(--muted);font-weight:600;letter-spacing:.5px">VERSION:</span>
+        <button class="sub-tab on-all" data-dash-version="all" onclick="setDashboardVersion('all',this)">All</button>
+        <button class="sub-tab" data-dash-version="mm" onclick="setDashboardVersion('mm',this)">🇲🇲 Myanmar</button>
+        <button class="sub-tab" data-dash-version="th" onclick="setDashboardVersion('th',this)">🇹🇭 Thai</button>
+        <button class="sub-tab" data-dash-version="en" onclick="setDashboardVersion('en',this)">🇬🇧 English</button>
+      </div>
       <div class="stats-grid">
         <div class="sc g"><div class="sc-label">Total Movies</div><div class="sc-val g" id="s-total"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc b"><div class="sc-label">Public</div><div class="sc-val b" id="s-public"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc p"><div class="sc-label">Private</div><div class="sc-val p" id="s-private"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc g"><div class="sc-label">Free Movies</div><div class="sc-val g" id="s-free"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc y"><div class="sc-label">VIP Movies</div><div class="sc-val y" id="s-vip"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
-        <div class="sc y"><div class="sc-label">Myanmar Sub</div><div class="sc-val y" id="s-mm"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
-        <div class="sc b"><div class="sc-label">Thai Sub</div><div class="sc-val b" id="s-th"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
-        <div class="sc c"><div class="sc-label">English Sub</div><div class="sc-val c" id="s-en"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
-        <div class="sc r"><div class="sc-label">Downloads Today</div><div class="sc-val r" id="s-dl">-</div><div class="sc-note live">Real (stats)</div></div>
       </div>
       <div class="two-col">
         <div class="chart-card"><div class="chart-top"><h3>Movies by Category</h3><span id="catLbl">-</span></div><div class="bar-h" id="catChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
         <div class="chart-card"><div class="chart-top"><h3>Movies by Quality</h3><span>Firebase</span></div><div class="bar-h" id="qualChart"><div class="empty-tbl"><span class="spin-sm"></span></div></div></div>
       </div>
-      <div class="sub-row">
-        <div class="sub-card"><span class="sub-num mm" id="sb-mm">-</span><div class="sub-lbl">Myanmar Sub</div></div>
-        <div class="sub-card"><span class="sub-num th" id="sb-th">-</span><div class="sub-lbl">Thai Sub</div></div>
-        <div class="sub-card"><span class="sub-num en" id="sb-en">-</span><div class="sub-lbl">English Sub</div></div>
-        <div class="sub-card"><span class="sub-num both" id="sb-both">-</span><div class="sub-lbl">Both/All</div></div>
-        <div class="sub-card"><span class="sub-num none" id="sb-none">-</span><div class="sub-lbl">No Link</div></div>
-      </div>
       <div class="table-card">
-        <div class="table-head"><h3>Latest Movies</h3><span>Real-time</span></div>
+        <div class="table-head"><h3 id="latestMoviesTitle">Latest Movies</h3><span id="latestMoviesScope">All versions</span></div>
         <table><thead><tr><th>#</th><th>Title</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub Type</th><th>Date</th></tr></thead>
         <tbody id="latestTbl"><tr><td colspan="7" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
@@ -1237,25 +1233,37 @@ window.setStatus=s=>setToggle('statusPub','statusPrv','aStatus',s);
 window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s);};
 window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
 
+let dashboardVersion='all';
+window.setDashboardVersion=function(version,btn){
+  dashboardVersion=version;
+  document.querySelectorAll('[data-dash-version]').forEach(el=>el.className='sub-tab'+(el.dataset.dashVersion===version?' on-all':''));
+  if(btn)btn.className='sub-tab on-all';
+  updateMovieStats();
+};
+function movieMatchesDashboardVersion(m){
+  if(dashboardVersion==='all')return true;
+  if(m.subtitleType===dashboardVersion)return true;
+  if(!m.subtitleType)return dashboardVersion==='mm'?hasMM(m):dashboardVersion==='th'?hasTH(m):hasEN(m);
+  return false;
+}
 function updateMovieStats(){
-  const total=movies.length,pub=movies.filter(m=>m.status!=='private').length,prv=movies.filter(m=>m.status==='private').length;
-  const free=movies.filter(m=>m.accessTier!=='vip').length,vip=movies.filter(m=>m.accessTier==='vip').length;
-  const mm=movies.filter(m=>m.subtitleType==='mm'||(!m.subtitleType&&hasMM(m))).length;
-  const th=movies.filter(m=>m.subtitleType==='th'||(!m.subtitleType&&hasTH(m))).length;
-  const en=movies.filter(m=>m.subtitleType==='en'||(!m.subtitleType&&hasEN(m))).length;
-  const both=movies.filter(m=>m.subtitleType==='both').length;
-  const none=movies.filter(m=>!hasMM(m)&&!hasTH(m)&&!hasEN(m)&&!m.subtitleType).length;
+  const dashboardMovies=movies.filter(movieMatchesDashboardVersion);
+  const total=dashboardMovies.length,pub=dashboardMovies.filter(m=>m.status!=='private').length,prv=dashboardMovies.filter(m=>m.status==='private').length;
+  const free=dashboardMovies.filter(m=>m.accessTier!=='vip').length,vip=dashboardMovies.filter(m=>m.accessTier==='vip').length;
   const s=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  s('s-total',total);s('s-public',pub);s('s-private',prv);s('s-free',free);s('s-vip',vip);s('s-mm',mm);s('s-th',th);s('s-en',en);s('sb-mm',mm);s('sb-th',th);s('sb-en',en);s('sb-both',both);s('sb-none',none);
+  s('s-total',total);s('s-public',pub);s('s-private',prv);s('s-free',free);s('s-vip',vip);
   document.getElementById('catLbl').textContent=total+' movies';
+  const scope={all:'All versions',mm:'Myanmar Sub',th:'Thai Sub',en:'English Sub'}[dashboardVersion];
+  document.getElementById('latestMoviesTitle').textContent='Latest '+(dashboardVersion==='all'?'Movies':scope+' Movies');
+  document.getElementById('latestMoviesScope').textContent=scope;
   updateTabCounts();
-  const cc={};CATS.forEach(c=>cc[c]=0);movies.forEach(m=>{const gs=m.genres?.length?m.genres:(m.genre?[m.genre]:[]);gs.forEach(g=>{if(cc[g]!==undefined)cc[g]++;});});
+  const cc={};CATS.forEach(c=>cc[c]=0);dashboardMovies.forEach(m=>{const gs=m.genres?.length?m.genres:(m.genre?[m.genre]:[]);gs.forEach(g=>{if(cc[g]!==undefined)cc[g]++;});});
   const cMax=Math.max(...Object.values(cc),1);
   document.getElementById('catChart').innerHTML=CATS.map((c,i)=>`<div class="bh-item"><div class="bh-label">${c}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(cc[c]/cMax)*100}%;background:${CAT_CLR[i]}"></div></div><div class="bh-val">${cc[c]}</div></div>`).join('');
-  const qc={};QUALS.forEach(q=>qc[q]=0);movies.forEach(m=>{if(qc[m.quality]!==undefined)qc[m.quality]++;});
+  const qc={};QUALS.forEach(q=>qc[q]=0);dashboardMovies.forEach(m=>{if(qc[m.quality]!==undefined)qc[m.quality]++;});
   const qMax=Math.max(...Object.values(qc),1);
   document.getElementById('qualChart').innerHTML=QUALS.map(q=>`<div class="bh-item"><div class="bh-label">${q}</div><div class="bh-wrap"><div class="bh-fill" style="width:${(qc[q]/qMax)*100}%;background:var(--blue)"></div></div><div class="bh-val">${qc[q]}</div></div>`).join('');
-  document.getElementById('latestTbl').innerHTML=movies.length?movies.slice(0,8).map((m,i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${m.title||''}</strong></td><td>${m.genre||''}</td><td>${m.quality||''}</td><td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td><td><div class="sub-bs">${subTypeBadge(m)}</div></td><td style="font-size:.7rem;color:var(--muted)">${m.createdAt?.toDate?m.createdAt.toDate().toLocaleDateString('en-GB'):'-'}</td></tr>`).join(''):'<tr><td colspan="7" class="empty-tbl">No movies yet</td></tr>';
+  document.getElementById('latestTbl').innerHTML=dashboardMovies.length?dashboardMovies.slice(0,8).map((m,i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${m.title||''}</strong></td><td>${m.genre||''}</td><td>${m.quality||''}</td><td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td><td><div class="sub-bs">${subTypeBadge(m)}</div></td><td style="font-size:.7rem;color:var(--muted)">${m.createdAt?.toDate?m.createdAt.toDate().toLocaleDateString('en-GB'):'-'}</td></tr>`).join(''):'<tr><td colspan="7" class="empty-tbl">No movies yet</td></tr>';
 }
 
 function updateAnalytics(){
