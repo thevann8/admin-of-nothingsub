@@ -151,6 +151,14 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .sb-mm{background:rgba(239,68,68,.15);color:#f87171;}
 .sb-th{background:rgba(59,130,246,.15);color:#60a5fa;}
 .sb-en{background:rgba(99,179,237,.15);color:#63b3ed;}
+.link-badges{display:flex;flex-wrap:wrap;gap:.25rem;min-width:108px;max-width:190px;}
+.link-badge{font-size:.53rem;line-height:1;padding:4px 5px;border-radius:4px;font-weight:700;white-space:nowrap;border:1px solid transparent;}
+.link-tg{color:#70caff;background:rgba(0,136,204,.12);border-color:rgba(0,136,204,.25);}
+.link-stream{color:#fda4af;background:rgba(225,29,72,.1);border-color:rgba(225,29,72,.22);}
+.link-dood{color:#c4b5fd;background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.26);}
+.link-mega{color:#fca5a5;background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.22);}
+.link-userdrive{color:#86efac;background:rgba(22,163,74,.1);border-color:rgba(22,163,74,.24);}
+.no-link-badge{color:var(--muted);font-size:.68rem;}
 .status-badge{font-size:.6rem;padding:2px 7px;border-radius:10px;font-weight:600;}
 .status-badge.public{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;}
 .status-badge.private{background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.25);color:#94a3b8;}
@@ -479,8 +487,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="btn-add" onclick="openAdd()">+ Add Movie</button>
       </div>
       <div class="mv-table">
-        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub</th><th>Edit / Del</th></tr></thead>
-        <tbody id="mvTbody"><tr><td colspan="8" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
+        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub</th><th>Links</th><th>Edit / Del</th></tr></thead>
+        <tbody id="mvTbody"><tr><td colspan="9" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
     </div>
 
@@ -1296,6 +1304,17 @@ window.setMovieContentFilter=function(type,btn){
   renderMvTable();
 };
 
+function movieLinkBadges(m){
+  const langs=[['mm','🇲🇲 MM'],['th','🇹🇭 TH'],['en','🇬🇧 EN']];
+  const sources=[['Telegram','TG','tg'],['Stream','Stream','stream'],['Dood','Dood','dood'],['MegaUp','Mega','mega'],['UserDrive','UD','userdrive']];
+  const valid=value=>typeof value==='string'&&value.trim()&&value.trim()!=='#';
+  const badges=[];
+  langs.forEach(([prefix,label])=>sources.forEach(([field,shortName,kind])=>{
+    if(valid(m[prefix+field])) badges.push(`<span class="link-badge link-${kind}" title="${label} ${field}">${label} ${shortName}</span>`);
+  }));
+  return badges.length?`<div class="link-badges">${badges.join('')}</div>`:'<span class="no-link-badge">—</span>';
+}
+
 window.renderMvTable=function(){
   const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
   const show=movies.filter(m=>{
@@ -1307,7 +1326,7 @@ window.renderMvTable=function(){
   updateTabCounts();
   const cntEl=document.getElementById('mvShowCount');if(cntEl)cntEl.textContent=show.length;
   const tb=document.getElementById('mvTbody');
-  if(!show.length){tb.innerHTML='<tr><td colspan="8" class="empty-tbl">No movies found</td></tr>';return;}
+  if(!show.length){tb.innerHTML='<tr><td colspan="9" class="empty-tbl">No movies found</td></tr>';return;}
   tb.innerHTML=show.map(m=>{
     const st=m.subtitleType||'';
     const safeT=(m.title||'').replace(/"/g,'&quot;');
@@ -1325,6 +1344,7 @@ window.renderMvTable=function(){
       <td>${m.quality||''}</td>
       <td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td>
       <td><div class="sub-bs">${subTypeBadge(m)}</div></td>
+      <td>${movieLinkBadges(m)}</td>
       <td><div class="acts">${edits}<span class="acts-sep"></span><button class="btn-d" data-id="${m.id}" data-title="${safeT}" onclick="window._del(this.dataset.id,this.dataset.title)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div></td>
     </tr>`;
   }).join('');
