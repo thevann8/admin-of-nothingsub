@@ -162,6 +162,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .status-badge{font-size:.6rem;padding:2px 7px;border-radius:10px;font-weight:600;}
 .status-badge.public{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;}
 .status-badge.private{background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.25);color:#94a3b8;}
+.access-badge{font-size:.6rem;padding:2px 7px;border-radius:10px;font-weight:700;display:inline-block;}
+.access-badge.free{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;}
+.access-badge.vip{background:rgba(240,180,41,.13);border:1px solid rgba(240,180,41,.38);color:var(--accent);}
 .acts{display:flex;gap:.3rem;align-items:center;flex-wrap:wrap;}
 .btn-e-mm{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#fc8181;padding:.28rem .55rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.25rem;transition:all .2s;font-size:.65rem;font-weight:700;font-family:'DM Sans',sans-serif;white-space:nowrap;}
 .btn-e-mm:hover{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.5);}
@@ -400,6 +403,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="sc g"><div class="sc-label">Total Movies</div><div class="sc-val g" id="s-total"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc b"><div class="sc-label">Public</div><div class="sc-val b" id="s-public"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc p"><div class="sc-label">Private</div><div class="sc-val p" id="s-private"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
+        <div class="sc g"><div class="sc-label">Free Movies</div><div class="sc-val g" id="s-free"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
+        <div class="sc y"><div class="sc-label">VIP Movies</div><div class="sc-val y" id="s-vip"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc y"><div class="sc-label">Myanmar Sub</div><div class="sc-val y" id="s-mm"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc b"><div class="sc-label">Thai Sub</div><div class="sc-val b" id="s-th"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
         <div class="sc c"><div class="sc-label">English Sub</div><div class="sc-val c" id="s-en"><span class="spin-sm"></span></div><div class="sc-note live">Live</div></div>
@@ -478,6 +483,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="sub-tab" data-content-filter="jav" onclick="setMovieContentFilter('jav',this)">Japanese</button>
         <button class="sub-tab" data-content-filter="asian" onclick="setMovieContentFilter('asian',this)">Asian</button>
         <button class="sub-tab" data-content-filter="western" onclick="setMovieContentFilter('western',this)">Western</button>
+        <button class="sub-tab" data-content-filter="free" onclick="setMovieContentFilter('free',this)">Free</button>
         <button class="sub-tab" data-content-filter="vip" onclick="setMovieContentFilter('vip',this)">VIP</button>
       </div>
       <div class="toolbar">
@@ -487,8 +493,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="btn-add" onclick="openAdd()">+ Add Movie</button>
       </div>
       <div class="mv-table">
-        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Sub</th><th>Links</th><th>Edit / Del</th></tr></thead>
-        <tbody id="mvTbody"><tr><td colspan="9" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
+        <table><thead><tr><th></th><th>Title</th><th>Year</th><th>Category</th><th>Quality</th><th>Status</th><th>Access</th><th>Sub</th><th>Links</th><th>Edit / Del</th></tr></thead>
+        <tbody id="mvTbody"><tr><td colspan="10" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
       </div>
     </div>
 
@@ -1233,13 +1239,14 @@ window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;[
 
 function updateMovieStats(){
   const total=movies.length,pub=movies.filter(m=>m.status!=='private').length,prv=movies.filter(m=>m.status==='private').length;
+  const free=movies.filter(m=>m.accessTier!=='vip').length,vip=movies.filter(m=>m.accessTier==='vip').length;
   const mm=movies.filter(m=>m.subtitleType==='mm'||(!m.subtitleType&&hasMM(m))).length;
   const th=movies.filter(m=>m.subtitleType==='th'||(!m.subtitleType&&hasTH(m))).length;
   const en=movies.filter(m=>m.subtitleType==='en'||(!m.subtitleType&&hasEN(m))).length;
   const both=movies.filter(m=>m.subtitleType==='both').length;
   const none=movies.filter(m=>!hasMM(m)&&!hasTH(m)&&!hasEN(m)&&!m.subtitleType).length;
   const s=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  s('s-total',total);s('s-public',pub);s('s-private',prv);s('s-mm',mm);s('s-th',th);s('s-en',en);s('sb-mm',mm);s('sb-th',th);s('sb-en',en);s('sb-both',both);s('sb-none',none);
+  s('s-total',total);s('s-public',pub);s('s-private',prv);s('s-free',free);s('s-vip',vip);s('s-mm',mm);s('s-th',th);s('s-en',en);s('sb-mm',mm);s('sb-th',th);s('sb-en',en);s('sb-both',both);s('sb-none',none);
   document.getElementById('catLbl').textContent=total+' movies';
   updateTabCounts();
   const cc={};CATS.forEach(c=>cc[c]=0);movies.forEach(m=>{const gs=m.genres?.length?m.genres:(m.genre?[m.genre]:[]);gs.forEach(g=>{if(cc[g]!==undefined)cc[g]++;});});
@@ -1319,14 +1326,14 @@ window.renderMvTable=function(){
   const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
   const show=movies.filter(m=>{
     if(curSubTab!=='all'&&(m.subtitleType||'')!==curSubTab)return false;
-    if(curMovieContentFilter!=='all' && (curMovieContentFilter==='vip'?m.accessTier!=='vip':(m.contentType||'general')!==curMovieContentFilter))return false;
+    if(curMovieContentFilter!=='all' && (curMovieContentFilter==='vip'?m.accessTier!=='vip':curMovieContentFilter==='free'?m.accessTier==='vip':(m.contentType||'general')!==curMovieContentFilter))return false;
     if(!q)return true;
     return (m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q));
   });
   updateTabCounts();
   const cntEl=document.getElementById('mvShowCount');if(cntEl)cntEl.textContent=show.length;
   const tb=document.getElementById('mvTbody');
-  if(!show.length){tb.innerHTML='<tr><td colspan="9" class="empty-tbl">No movies found</td></tr>';return;}
+  if(!show.length){tb.innerHTML='<tr><td colspan="10" class="empty-tbl">No movies found</td></tr>';return;}
   tb.innerHTML=show.map(m=>{
     const st=m.subtitleType||'';
     const safeT=(m.title||'').replace(/"/g,'&quot;');
@@ -1343,6 +1350,7 @@ window.renderMvTable=function(){
       <td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td>
       <td>${m.quality||''}</td>
       <td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td>
+      <td><span class="access-badge ${m.accessTier==='vip'?'vip':'free'}">${m.accessTier==='vip'?'VIP':'Free'}</span></td>
       <td><div class="sub-bs">${subTypeBadge(m)}</div></td>
       <td>${movieLinkBadges(m)}</td>
       <td><div class="acts">${edits}<span class="acts-sep"></span><button class="btn-d" data-id="${m.id}" data-title="${safeT}" onclick="window._del(this.dataset.id,this.dataset.title)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div></td>
