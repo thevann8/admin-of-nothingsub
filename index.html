@@ -82,6 +82,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;}@media(max-width:700px){.social-grid{grid-template-columns:1fr;}}
 .social-grid input{background:var(--card);border:1.5px solid var(--border);color:var(--text);border-radius:8px;padding:.48rem .6rem;font-size:.76rem;}
 
+/* VIP announcement and dedicated ads manager */
+.manager-page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.2rem;}.manager-page-head h2{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:1.4px;}.manager-page-head p{font-size:.72rem;color:var(--muted);margin-top:.2rem;line-height:1.45;}.vip-editor-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:1.2rem;align-items:start;}@media(max-width:960px){.vip-editor-grid{grid-template-columns:1fr;}}
+.vip-editor-card,.ads-manager-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem;}.vip-editor-card h3,.ads-manager-card h3{font-size:.85rem;margin-bottom:1rem;}.vip-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}.vip-form-grid .full{grid-column:1/-1;}@media(max-width:560px){.vip-form-grid{grid-template-columns:1fr;}.vip-form-grid .full{grid-column:auto;}}.vip-form-grid label{display:block;font-size:.65rem;color:var(--muted);letter-spacing:.9px;text-transform:uppercase;font-weight:700;margin-bottom:.35rem;}.vip-form-grid input,.vip-form-grid textarea{width:100%;box-sizing:border-box;background:var(--surface);border:1.5px solid var(--border);color:var(--text);border-radius:9px;padding:.62rem .7rem;font:inherit;font-size:.8rem;outline:none;}.vip-form-grid textarea{min-height:94px;resize:vertical;line-height:1.5;}.vip-form-grid input:focus,.vip-form-grid textarea:focus{border-color:var(--accent);}.vip-switch-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.75rem .85rem;}.vip-switch-row strong{font-size:.78rem;}.vip-switch-row span{display:block;color:var(--muted);font-size:.64rem;margin-top:.15rem;}.vip-toggle{appearance:none;width:46px;height:25px;background:var(--border);border-radius:20px;position:relative;cursor:pointer;transition:.2s;flex-shrink:0;}.vip-toggle::after{content:'';position:absolute;width:19px;height:19px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s;}.vip-toggle:checked{background:var(--green);}.vip-toggle:checked::after{transform:translateX(21px);}.vip-save-btn{margin-top:1rem;background:var(--accent);border:none;color:#111;border-radius:9px;padding:.66rem 1rem;font:700 .8rem 'DM Sans',sans-serif;cursor:pointer;}.vip-preview{background:radial-gradient(circle at 85% 5%,rgba(124,58,237,.28),transparent 36%),linear-gradient(135deg,rgba(240,180,41,.15),#14111e 62%);border:1px solid rgba(240,180,41,.38);border-radius:15px;padding:1.1rem;}.vip-preview-tag{font-size:.58rem;letter-spacing:1.7px;color:#fcd34d;font-weight:800;text-transform:uppercase;}.vip-preview h3{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;font-size:1.7rem;margin:.25rem 0;color:#fff;}.vip-preview p{white-space:pre-line;font-size:.75rem;color:#cbd5e1;line-height:1.55;min-height:3em;}.vip-preview-bottom{display:flex;justify-content:space-between;align-items:end;gap:.6rem;margin-top:1rem;}.vip-preview-price{font-family:'Bebas Neue',sans-serif;color:#fcd34d;font-size:1.6rem;letter-spacing:1px;}.vip-preview-btn{background:var(--accent);color:#111;border-radius:8px;padding:.52rem .65rem;font-size:.7rem;font-weight:800;}
+.ad-lang-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;}.ad-lang-tab{border:1px solid var(--border);background:var(--surface);color:var(--muted);padding:.5rem .8rem;border-radius:8px;cursor:pointer;font:700 .74rem 'DM Sans',sans-serif;}.ad-lang-tab.on{border-color:var(--accent);background:rgba(240,180,41,.12);color:var(--accent);}.ad-clean-note{font-size:.68rem;color:var(--muted);line-height:1.5;padding:.7rem .8rem;background:var(--surface);border:1px solid var(--border);border-radius:9px;margin-bottom:1rem;}.ad-slot-clean-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;}@media(max-width:850px){.ad-slot-clean-grid{grid-template-columns:1fr;}}.ad-slot-clean{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:.9rem;}.ad-slot-clean-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.55rem;}.ad-slot-clean-title{font-size:.72rem;font-weight:800;}.ad-state{font-size:.58rem;padding:3px 6px;border-radius:999px;font-weight:800;letter-spacing:.4px;}.ad-state.live{color:#34d399;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);}.ad-state.empty{color:var(--muted);background:var(--card);border:1px solid var(--border);}.ad-slot-clean textarea{width:100%;box-sizing:border-box;min-height:80px;background:var(--card);border:1.5px solid var(--border);border-radius:8px;color:var(--text);padding:.55rem;font: .7rem Consolas,monospace;resize:vertical;}.ad-slot-clean textarea:focus{outline:none;border-color:var(--accent);}.ad-clean-actions{display:flex;align-items:center;gap:.5rem;margin-top:.55rem;}.ad-save-clean,.ad-clear-clean{border:none;border-radius:7px;padding:.42rem .65rem;font:700 .68rem 'DM Sans',sans-serif;cursor:pointer;}.ad-save-clean{background:var(--accent);color:#111;}.ad-clear-clean{background:transparent;color:#f87171;border:1px solid rgba(248,113,113,.3);}.ad-clean-msg{font-size:.64rem;color:var(--muted);}
+
 .s-footer a{color:var(--accent);text-decoration:none;cursor:pointer;margin-right:.5rem;}
 .s-logout{color:#f87171;cursor:pointer;font-size:.72rem;}
 .s-logout:hover{color:#fc8181;}
@@ -377,6 +382,9 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="nav-sub-item mm-item" id="nav-edit-mm" onclick="showSubPg('edit-mm',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="4.33" y="0" fill="#FECB00"/><rect width="18" height="4.34" y="4.33" fill="#34A853"/><rect width="18" height="4.33" y="8.67" fill="#EA3323"/><polygon points="9,1.5 10.1,4.8 13.6,4.8 10.8,6.8 11.9,10.1 9,8.1 6.1,10.1 7.2,6.8 4.4,4.8 7.9,4.8" fill="white"/></svg> Edit MM</div>
     <div class="nav-sub-item th-item" id="nav-edit-th" onclick="showSubPg('edit-th',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Edit TH</div>
     <div class="nav-sub-item en-item" id="nav-edit-en" onclick="showSubPg('edit-en',this)"><span class="sub-dot"></span><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px;flex-shrink:0"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> Edit EN</div>
+    <div class="nav-sec">Marketing</div>
+    <div class="nav-item" id="nav-vip" onclick="showPg('vip',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7l3 12h10l3-12-4 4-4-7-4 7-4-4z"/><path d="M7 19h10"/></svg>VIP Announcement</div>
+    <div class="nav-item" id="nav-ads" onclick="showPg('ads',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h6M7 13h10"/></svg>Ads Manager</div>
     <div class="nav-sec">System</div>
     <div class="nav-item" id="nav-settings" onclick="showPg('settings',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
   </nav>
@@ -735,6 +743,34 @@ tr:hover td{background:rgba(240,180,41,.02);}
       </div></div>
     </div>
 
+    <!-- VIP ANNOUNCEMENT -->
+    <div class="pg" id="pg-vip">
+      <div class="manager-page-head"><div><h2>VIP Announcement</h2><p>Home page VIP promotion ကို On/Off လုပ်ပြီး စာသား၊ စျေးနှုန်းနဲ့ Telegram contact ကို ကိုယ်တိုင်ပြင်နိုင်သည်။</p></div></div>
+      <div class="vip-editor-grid">
+        <div class="vip-editor-card">
+          <h3>Announcement Content</h3>
+          <div class="vip-form-grid">
+            <div class="full vip-switch-row"><div><strong>Show VIP announcement</strong><span>Home page တွင် VIP card ကိုပြမည်</span></div><input class="vip-toggle" type="checkbox" id="vipEnabled" onchange="updateVipPreview()"></div>
+            <div><label>Small label</label><input id="vipKicker" maxlength="40" placeholder="NothingSub VIP" oninput="updateVipPreview()"></div>
+            <div><label>Price</label><input id="vipPrice" maxlength="40" placeholder="2,999 ကျပ်" oninput="updateVipPreview()"></div>
+            <div class="full"><label>Headline</label><input id="vipTitle" maxlength="80" placeholder="VIP Membership" oninput="updateVipPreview()"></div>
+            <div class="full"><label>Description</label><textarea id="vipDescription" maxlength="400" placeholder="နေ့စဉ် VIP Video အသစ် ၃ ပုဒ်..." oninput="updateVipPreview()"></textarea></div>
+            <div><label>Period text</label><input id="vipPeriod" maxlength="60" placeholder="30 Days Membership" oninput="updateVipPreview()"></div>
+            <div><label>Button text</label><input id="vipButtonText" maxlength="60" placeholder="VIP ဝင်ရန် ↗" oninput="updateVipPreview()"></div>
+            <div class="full"><label>Telegram / contact URL</label><input id="vipContactUrl" type="url" placeholder="https://t.me/nothingsub_admin" oninput="updateVipPreview()"></div>
+          </div>
+          <button type="button" class="vip-save-btn" onclick="saveVipAnnouncement()">Save VIP Announcement</button> <span class="mo-msg" id="vipSaveMsg"></span>
+        </div>
+        <div class="vip-editor-card"><h3>Live Preview</h3><div class="vip-preview"><div class="vip-preview-tag" id="vipPreviewKicker">NothingSub VIP</div><h3 id="vipPreviewTitle">VIP Membership</h3><p id="vipPreviewDescription">နေ့စဉ် VIP Video အသစ်များကို ကြည့်ရှုနိုင်ပါသည်။</p><div class="vip-preview-bottom"><div><div class="vip-preview-price" id="vipPreviewPrice">2,999 ကျပ်</div><div class="sc-note" id="vipPreviewPeriod">30 Days Membership</div></div><div class="vip-preview-btn" id="vipPreviewButton">VIP ဝင်ရန် ↗</div></div></div></div>
+      </div>
+    </div>
+
+    <!-- ADS MANAGER -->
+    <div class="pg" id="pg-ads">
+      <div class="manager-page-head"><div><h2>Ads Manager</h2><p>Subtitle version တစ်ခုချင်းစီအတွက် ad slot များကို သန့်ရှင်းစွာ manage လုပ်ပါ။ Submit ပြီးလျှင် code box ပြန်ရှင်းသွားမည်။</p></div></div>
+      <div class="ads-manager-card"><div id="adManagerRoot"></div></div>
+    </div>
+
     <!-- SETTINGS -->
     <div class="pg" id="pg-settings">
       <div class="settings-grid">
@@ -753,10 +789,6 @@ tr:hover td{background:rgba(240,180,41,.02);}
             <div class="soc-row"><span class="soc-lbl"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.66a8.32 8.32 0 0 0 4.83 1.54V6.75a4.85 4.85 0 0 1-1.06-.06z"/></svg>TikTok</span><input type="url" id="sTiktok" placeholder="https://tiktok.com/@NothingSub"></div>
           </div>
         </div>
-      </div>
-
-      <div class="chart-card" style="margin-top:1.2rem">
-        <div id="adManagerRoot" class="setting-manager" style="margin-top:0;border-top:none;padding-top:0"></div>
       </div>
 
       <div class="chart-card" style="margin-top:1.2rem">
@@ -1043,6 +1075,8 @@ let currentSettings={};
 const AD_LANGS={mm:'Myanmar Sub',th:'Thai Sub',en:'English Sub'};
 const AD_SLOTS={topBanner:'Top Banner',bottomSticky:'Bottom Sticky',inFeed:'In-feed',footer:'Footer',popunder:'Popunder (Adsterra — no visible box)',socialBar:'Social Bar (Adsterra — no visible box)',nativeBanner:'Native Banner (Adsterra — visible box)'};
 const SOCIAL_KEYS={facebook:'Facebook',telegram:'Telegram',x:'X',instagram:'Instagram',youtube:'YouTube'};
+let activeAdLang='mm';
+const VIP_DEFAULTS={enabled:false,kicker:'NothingSub VIP',title:'VIP Membership',description:'နေ့စဉ် VIP Video အသစ် ၃ ပုဒ်\nPrivate VIP Channel Access',price:'2,999 ကျပ်',period:'30 Days Membership',buttonText:'VIP ဝင်ရန် ↗',contactUrl:'https://t.me/nothingsub_admin'};
 
 function setSlStatus(s,msg){const el=document.getElementById('slStatus');if(!el)return;el.className='sl-status '+s;el.innerHTML=s==='loading'?`<span class="spin-sm" style="width:10px;height:10px;border-width:1.5px"></span><span>${msg}</span>`:`<span>${msg}</span>`;}
 function getDateKey(d=new Date()){
@@ -1098,6 +1132,7 @@ window.doLogout=async function(){if(!confirm('Logout လုပ်မလား?')
 function initAdmin(){
   renderAdManager(currentSettings);
   renderSocialManager(currentSettings);
+  renderVipManager(currentSettings);
   loadSettings();loadAllStats();
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
@@ -1113,7 +1148,7 @@ function initAdmin(){
 async function loadSettings(){
   setSlStatus('loading','Loading...');
   try{const snap=await getDoc(doc(db,'settings','global'));
-    if(snap.exists()){const d=snap.data();currentSettings=d;renderAdManager(d);renderSocialManager(d);if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
+    if(snap.exists()){const d=snap.data();currentSettings=d;renderAdManager(d);renderSocialManager(d);renderVipManager(d);if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
       // Load subtitle visibility
       const sv=d.subtitleVisibility||{mm:true,th:true,en:true};
       ['mm','th','en'].forEach(l=>{const v=sv[l]!==false;applySubVis(l,v);});
@@ -1121,8 +1156,8 @@ async function loadSettings(){
       if(d.categories && d.categories.length){ CATS.length=0; d.categories.forEach(c=>CATS.push(c)); }
       if(d.hashtags && d.hashtags.length){ TAGS.length=0; d.hashtags.forEach(tag=>TAGS.push(tag)); }
     }
-    else {currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);setSlStatus('empty','✗ Settings မရှိသေးပါ');}}
-  catch(e){currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);setSlStatus('empty','⚠ Firestore error');}
+    else {currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);renderVipManager(currentSettings);setSlStatus('empty','✗ Settings မရှိသေးပါ');}}
+  catch(e){currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);renderVipManager(currentSettings);setSlStatus('empty','⚠ Firestore error');}
   const u=localStorage.getItem('ns_siteUrl');if(u)document.getElementById('siteUrl').value=u;
   renderCatManager();
   refreshAllCatGrids();
@@ -1167,15 +1202,21 @@ window.restoreOriginalHomeOrder=async function(){
 };
 
 function escAttr(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function readVipForm(){return {enabled:!!document.getElementById('vipEnabled')?.checked,kicker:document.getElementById('vipKicker')?.value.trim()||VIP_DEFAULTS.kicker,title:document.getElementById('vipTitle')?.value.trim()||VIP_DEFAULTS.title,description:document.getElementById('vipDescription')?.value.trim()||VIP_DEFAULTS.description,price:document.getElementById('vipPrice')?.value.trim()||VIP_DEFAULTS.price,period:document.getElementById('vipPeriod')?.value.trim()||VIP_DEFAULTS.period,buttonText:document.getElementById('vipButtonText')?.value.trim()||VIP_DEFAULTS.buttonText,contactUrl:document.getElementById('vipContactUrl')?.value.trim()||VIP_DEFAULTS.contactUrl};}
+function renderVipManager(d=currentSettings){const vip={...VIP_DEFAULTS,...(d.vipAnnouncement||{})};const set=(id,value)=>{const el=document.getElementById(id);if(el)el.value=value||'';};const enabled=document.getElementById('vipEnabled');if(enabled)enabled.checked=vip.enabled===true;set('vipKicker',vip.kicker);set('vipTitle',vip.title);set('vipDescription',vip.description);set('vipPrice',vip.price);set('vipPeriod',vip.period);set('vipButtonText',vip.buttonText);set('vipContactUrl',vip.contactUrl);updateVipPreview();}
+window.updateVipPreview=function(){const vip=readVipForm();const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};set('vipPreviewKicker',vip.kicker);set('vipPreviewTitle',vip.title);set('vipPreviewDescription',vip.description);set('vipPreviewPrice',vip.price);set('vipPreviewPeriod',vip.period);set('vipPreviewButton',vip.buttonText);};
+window.saveVipAnnouncement=async function(){const msg=document.getElementById('vipSaveMsg'),vip=readVipForm();if(!/^https:\/\//i.test(vip.contactUrl)){if(msg){msg.textContent='Enter a valid https:// contact URL';msg.className='mo-msg err';}return;}if(msg){msg.textContent='Saving...';msg.className='mo-msg';}try{await setDoc(doc(db,'settings','global'),{vipAnnouncement:vip},{merge:true});currentSettings={...currentSettings,vipAnnouncement:vip};if(msg){msg.textContent='✓ VIP announcement saved';msg.className='mo-msg ok';}}catch(e){if(msg){msg.textContent='Error: '+e.message;msg.className='mo-msg err';}}};
 function renderAdManager(d=currentSettings){
-  const root=document.getElementById('adManagerRoot'); if(!root)return; const ads=d.ads||{}, hist=d.adHistory||{};
-  let html='<div class="chart-top"><h3>Ad Code Manager</h3><span>Separate by subtitle version</span></div>';
-  Object.entries(AD_LANGS).forEach(([lang,label])=>{ html+='<div class="lang-config-card"><h4>'+label+'</h4><div class="slot-grid">'; Object.entries(AD_SLOTS).forEach(([slot,slotLabel])=>{ const id='ad-'+lang+'-'+slot; const h=((hist[lang]&&hist[lang][slot])||[]).slice(0,5).map(x=>'- '+(x.at||'')+' - '+(((x.code||'').slice(0,90)||'(empty)').replace(/</g,'&lt;'))).join('\n')||'No history yet'; html+='<div class="slot-box"><label>'+slotLabel+'</label><textarea id="'+id+'" placeholder="Paste HTML / JS / iframe ad code here...">'+escAttr((ads[lang]&&ads[lang][slot])||'')+'</textarea><div class="slot-actions"><button onclick="saveAdSlot(\''+lang+'\',\''+slot+'\')">Submit '+slotLabel+'</button><span class="mo-msg" id="'+id+'-msg"></span></div><div class="history-box">'+h+'</div></div>'; }); html+='</div></div>'; }); root.innerHTML=html;
+  const root=document.getElementById('adManagerRoot');if(!root)return;const ads=d.ads||{},hist=d.adHistory||{};if(!AD_LANGS[activeAdLang])activeAdLang='mm';
+  let html='<div class="chart-top"><h3>Ad Code Manager</h3><span>Separate by subtitle version</span></div><div class="ad-lang-tabs">';Object.entries(AD_LANGS).forEach(([lang,label])=>{html+='<button type="button" class="ad-lang-tab '+(lang===activeAdLang?'on':'')+'" onclick="setAdLanguage(\''+lang+'\')">'+label+'</button>';});html+='</div><div class="ad-clean-note">Paste new HTML / iframe / JS only when you want to replace an ad. After Submit, the box is cleared; the active ad remains live on the website.</div><div class="ad-slot-clean-grid">';
+  Object.entries(AD_SLOTS).forEach(([slot,label])=>{const active=!!ads?.[activeAdLang]?.[slot];const history=(hist?.[activeAdLang]?.[slot]||[])[0];const id='ad-'+activeAdLang+'-'+slot;html+='<div class="ad-slot-clean"><div class="ad-slot-clean-top"><span class="ad-slot-clean-title">'+label+'</span><span class="ad-state '+(active?'live':'empty')+'">'+(active?'● LIVE':'EMPTY')+'</span></div><textarea id="'+id+'" placeholder="Paste replacement code here..."></textarea><div class="ad-clean-actions"><button class="ad-save-clean" onclick="saveAdSlot(\''+activeAdLang+'\',\''+slot+'\')">Submit</button>'+(active?'<button class="ad-clear-clean" onclick="clearAdSlot(\''+activeAdLang+'\',\''+slot+'\')">Remove</button>':'')+'<span class="ad-clean-msg" id="'+id+'-msg">'+(history?'Last saved: '+escAttr(history.at||''):'')+'</span></div></div>';});root.innerHTML=html+'</div>';
 }
+window.setAdLanguage=function(lang){activeAdLang=lang;renderAdManager(currentSettings);};
 function renderSocialManager(d=currentSettings){
   const root=document.getElementById('socialManagerRoot'); if(!root)return; const links=d.socialLinks||{}; let html='<div class="chart-top"><h3>Social Links</h3><span>MM / Thai / English separated</span></div>'; Object.entries(AD_LANGS).forEach(([lang,label])=>{ html+='<div class="lang-config-card"><h4>'+label+'</h4><div class="social-grid">'; Object.entries(SOCIAL_KEYS).forEach(([key,name])=>{ html+='<input id="soc-'+lang+'-'+key+'" placeholder="'+name+' URL" value="'+escAttr((links[lang]&&links[lang][key])||'')+'">'; }); html+='</div><div style="margin-top:.7rem"><button class="social-save-btn" onclick="saveSocialLinks(\''+lang+'\')">Save '+label+' Social Links</button> <span class="mo-msg" id="soc-'+lang+'-msg"></span></div></div>'; }); root.innerHTML=html;
 }
-async function saveAdSlot(lang,slot){ const el=document.getElementById('ad-'+lang+'-'+slot), msg=document.getElementById('ad-'+lang+'-'+slot+'-msg'); if(!el)return; const code=el.value.trim(); if(msg){msg.textContent='Saving...';msg.className='mo-msg';} try{const ref=doc(db,'settings','global');const snap=await getDoc(ref);const cur=snap.exists()?snap.data():{};const hist=cur.adHistory||{};hist[lang]=hist[lang]||{};hist[lang][slot]=[{at:new Date().toLocaleString(),code},...(hist[lang][slot]||[])].slice(0,10);await setDoc(ref,{ads:{[lang]:{[slot]:code}},adHistory:hist},{merge:true});currentSettings={...cur,ads:{...(cur.ads||{}),[lang]:{...((cur.ads||{})[lang]||{}),[slot]:code}},adHistory:hist};renderAdManager(currentSettings);} catch(e){if(msg){msg.textContent='Error: '+e.message;msg.className='mo-msg err';}} }
+async function saveAdSlot(lang,slot){const el=document.getElementById('ad-'+lang+'-'+slot),msg=document.getElementById('ad-'+lang+'-'+slot+'-msg');if(!el)return;const code=el.value.trim();if(!code){if(msg)msg.textContent='Paste code first';return;}if(msg)msg.textContent='Saving...';try{const ref=doc(db,'settings','global'),snap=await getDoc(ref),cur=snap.exists()?snap.data():{},hist=cur.adHistory||{};hist[lang]=hist[lang]||{};hist[lang][slot]=[{at:new Date().toLocaleString(),code},...(hist[lang][slot]||[])].slice(0,10);await setDoc(ref,{ads:{[lang]:{[slot]:code}},adHistory:hist},{merge:true});currentSettings={...cur,ads:{...(cur.ads||{}),[lang]:{...((cur.ads||{})[lang]||{}),[slot]:code}},adHistory:hist};renderAdManager(currentSettings);}catch(e){if(msg)msg.textContent='Error: '+e.message;}}
+window.clearAdSlot=async function(lang,slot){if(!confirm('Remove this live ad?'))return;try{await setDoc(doc(db,'settings','global'),{ads:{[lang]:{[slot]:''}}},{merge:true});currentSettings.ads=currentSettings.ads||{};currentSettings.ads[lang]={...(currentSettings.ads[lang]||{}),[slot]:''};renderAdManager(currentSettings);}catch(e){alert('Could not remove ad: '+e.message);}};
 async function saveSocialLinks(lang){ const msg=document.getElementById('soc-'+lang+'-msg'); const data={};Object.keys(SOCIAL_KEYS).forEach(k=>data[k]=document.getElementById('soc-'+lang+'-'+k)?.value.trim()||''); if(msg){msg.textContent='Saving...';msg.className='mo-msg';} try{await setDoc(doc(db,'settings','global'),{socialLinks:{[lang]:data}},{merge:true});if(msg){msg.textContent='Saved';msg.className='mo-msg ok';}} catch(e){if(msg){msg.textContent='Error: '+e.message;msg.className='mo-msg err';}} }
 window.saveAdSlot=saveAdSlot;
 window.saveSocialLinks=saveSocialLinks;
@@ -1516,7 +1557,7 @@ window.showPg=function(id,el){
   document.querySelectorAll('.nav-item,.nav-sub-item').forEach(n=>n.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
   if(el)el.classList.add('on');
-  const titles={dashboard:'Dashboard',analytics:'Analytics',movies:'Movies',settings:'Settings'};
+  const titles={dashboard:'Dashboard',analytics:'Analytics',movies:'Movies',vip:'VIP Announcement',ads:'Ads Manager',settings:'Settings'};
   document.getElementById('tbTitle').textContent=titles[id]||id;
   localStorage.setItem('ns_lastPage',id);
   if(id==='movies')renderMvTable();
