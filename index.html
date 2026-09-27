@@ -304,6 +304,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .rsc-val{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:1px;line-height:1;margin-bottom:.1rem;}
 .rsc-val.g{color:var(--green);}.rsc-val.b{color:var(--blue);}.rsc-val.y{color:var(--accent);}.rsc-val.p{color:var(--purple);}.rsc-val.r{color:var(--red);}.rsc-val.o{color:var(--orange);}.rsc-val.c{color:#63b3ed;}
 .rsc-note{font-size:.6rem;color:var(--muted);}
+.ad-track-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin-bottom:1.1rem;}@media(max-width:700px){.ad-track-summary{grid-template-columns:1fr;}}.ad-track-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem;}.ad-track-card span{display:block;font-size:.6rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:700;}.ad-track-card strong{display:block;margin-top:.3rem;font-family:'Bebas Neue',sans-serif;font-size:1.85rem;letter-spacing:1px;color:var(--accent);}.ad-track-note{font-family:'Noto Sans Myanmar','DM Sans',sans-serif;font-size:.7rem;line-height:1.6;color:var(--muted);margin-bottom:1rem;}.ad-track-table td{vertical-align:middle;}.ad-track-id{font-family:Consolas,monospace;font-size:.68rem;color:#cbd5e1;word-break:break-all;}.ad-track-client{font-family:'Noto Sans Myanmar','DM Sans',sans-serif;font-size:.76rem;color:var(--text);font-weight:700;}.ad-track-meta{font-size:.65rem;color:var(--muted);margin-top:.18rem;}.ad-track-clicks{font-weight:800;color:#fcd34d;}.ad-track-ctr{font-weight:800;color:#34d399;}
 .divider-label{font-size:.63rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:.6rem 0 .8rem;border-top:1px solid var(--border);margin-top:.4rem;margin-bottom:.2rem;}
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -368,6 +369,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
     <div class="nav-sec">Overview</div>
     <div class="nav-item on" id="nav-dashboard" onclick="showPg('dashboard',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
     <div class="nav-item" id="nav-analytics" onclick="showPg('analytics',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Analytics</div>
+    <div class="nav-item" id="nav-ad-tracking" onclick="showPg('ad-tracking',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 2 5-6"/></svg>Ad Click Tracking</div>
     <div class="nav-sec">Content</div>
     <div class="nav-item" id="nav-movies" onclick="showPg('movies',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20"/></svg>Movies</div>
     <div class="nav-item" id="nav-post" onclick="showSubPg('post-mm',document.getElementById('nav-post-mm'))">
@@ -468,6 +470,22 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="table-head"><h3>Movie Click Counts</h3><span>Selected events</span></div>
         <table><thead><tr><th>#</th><th>Movie</th><th>Clicks</th><th>Downloads</th><th>DL Rate</th></tr></thead>
         <tbody id="movieViewsTbl"><tr><td colspan="5" class="empty-tbl"><span class="spin-sm"></span></td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- LOCAL AD CLICK TRACKING -->
+    <div class="pg" id="pg-ad-tracking">
+      <div class="manager-page-head"><div><h2>Ad Click Tracking</h2><p>Generated local ads များ၏ view, click နှင့် CTR ကို campaign ID အလိုက် စစ်ဆေးနိုင်သည်။</p></div></div>
+      <div class="ad-track-note">Tracking အလုပ်လုပ်ရန် generated ad code တွင် <code>data-ns-ad="1"</code> နှင့် <code>data-ns-campaign-id</code> ပါရမည်။ Click link သည် <code>/go/CAMPAIGN-ID</code> မှတစ်ဆင့်သွားရမည်။</div>
+      <div class="ad-track-summary">
+        <div class="ad-track-card"><span>Tracked Campaigns</span><strong id="adTrackCampaigns">0</strong></div>
+        <div class="ad-track-card"><span>Total Views</span><strong id="adTrackViews">0</strong></div>
+        <div class="ad-track-card"><span>Total Clicks</span><strong id="adTrackClicks">0</strong></div>
+      </div>
+      <div class="table-card">
+        <div class="table-head"><h3>Campaign Performance</h3><span>All-time tracked totals</span></div>
+        <table class="ad-track-table"><thead><tr><th>Client / Campaign</th><th>Version</th><th>Placement</th><th>Views</th><th>Clicks</th><th>CTR</th></tr></thead>
+        <tbody id="adTrackingRows"><tr><td colspan="6" class="empty-tbl">No tracked local ads yet</td></tr></tbody></table>
       </div>
     </div>
 
@@ -1070,7 +1088,7 @@ window.addMovieTag=async function(gridId,hiddenId,inputId){
 };
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
-let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all',curMovieContentFilter='all';
+let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all',curMovieContentFilter='all',adCampaignStats={};
 let currentSettings={};
 const AD_LANGS={mm:'Myanmar Sub',th:'Thai Sub',en:'English Sub'};
 const AD_SLOTS={topBanner:'Top Banner',bottomSticky:'Bottom Sticky',inFeed:'In-feed',footer:'Footer',popunder:'Popunder (Adsterra — no visible box)',socialBar:'Social Bar (Adsterra — no visible box)',nativeBanner:'Native Banner (Adsterra — visible box)'};
@@ -1136,6 +1154,7 @@ function initAdmin(){
   loadSettings();loadAllStats();
   onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
+  onSnapshot(collection(db,'adCampaigns'),snap=>{adCampaignStats={};snap.forEach(d=>{adCampaignStats[d.id]={id:d.id,...d.data()};});renderAdTracking();});
   tick();setInterval(tick,1000);
   ['mm','th','en'].forEach(l=>{
     initCatGrid(l+'CatGrid',l+'Genre',[]);
@@ -1148,7 +1167,7 @@ function initAdmin(){
 async function loadSettings(){
   setSlStatus('loading','Loading...');
   try{const snap=await getDoc(doc(db,'settings','global'));
-    if(snap.exists()){const d=snap.data();currentSettings=d;renderAdManager(d);renderSocialManager(d);renderVipManager(d);if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
+    if(snap.exists()){const d=snap.data();currentSettings=d;renderAdManager(d);renderAdTracking();renderSocialManager(d);renderVipManager(d);if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
       // Load subtitle visibility
       const sv=d.subtitleVisibility||{mm:true,th:true,en:true};
       ['mm','th','en'].forEach(l=>{const v=sv[l]!==false;applySubVis(l,v);});
@@ -1156,8 +1175,8 @@ async function loadSettings(){
       if(d.categories && d.categories.length){ CATS.length=0; d.categories.forEach(c=>CATS.push(c)); }
       if(d.hashtags && d.hashtags.length){ TAGS.length=0; d.hashtags.forEach(tag=>TAGS.push(tag)); }
     }
-    else {currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);renderVipManager(currentSettings);setSlStatus('empty','✗ Settings မရှိသေးပါ');}}
-  catch(e){currentSettings={};renderAdManager(currentSettings);renderSocialManager(currentSettings);renderVipManager(currentSettings);setSlStatus('empty','⚠ Firestore error');}
+    else {currentSettings={};renderAdManager(currentSettings);renderAdTracking();renderSocialManager(currentSettings);renderVipManager(currentSettings);setSlStatus('empty','✗ Settings မရှိသေးပါ');}}
+  catch(e){currentSettings={};renderAdManager(currentSettings);renderAdTracking();renderSocialManager(currentSettings);renderVipManager(currentSettings);setSlStatus('empty','⚠ Firestore error');}
   const u=localStorage.getItem('ns_siteUrl');if(u)document.getElementById('siteUrl').value=u;
   renderCatManager();
   refreshAllCatGrids();
@@ -1213,6 +1232,25 @@ function renderAdManager(d=currentSettings){
   Object.entries(AD_SLOTS).forEach(([slot,label])=>{const active=!!ads?.[activeAdLang]?.[slot];const history=(hist?.[activeAdLang]?.[slot]||[])[0];const id='ad-'+activeAdLang+'-'+slot;html+='<div class="ad-slot-clean"><div class="ad-slot-clean-top"><span class="ad-slot-clean-title">'+label+'</span><span class="ad-state '+(active?'live':'empty')+'">'+(active?'● LIVE':'EMPTY')+'</span></div><textarea id="'+id+'" placeholder="Paste replacement code here..."></textarea><div class="ad-clean-actions"><button class="ad-save-clean" onclick="saveAdSlot(\''+activeAdLang+'\',\''+slot+'\')">Submit</button>'+(active?'<button class="ad-clear-clean" onclick="clearAdSlot(\''+activeAdLang+'\',\''+slot+'\')">Remove</button>':'')+'<span class="ad-clean-msg" id="'+id+'-msg">'+(history?'Last saved: '+escAttr(history.at||''):'')+'</span></div></div>';});root.innerHTML=html+'</div>';
 }
 window.setAdLanguage=function(lang){activeAdLang=lang;renderAdManager(currentSettings);};
+function getTrackedAdMetadata(){
+  const found={};const ads=currentSettings.ads||{};
+  Object.entries(ads).forEach(([lang,slots])=>Object.entries(slots||{}).forEach(([placement,code])=>{
+    const box=document.createElement('template');box.innerHTML=String(code||'');
+    const ad=box.content.querySelector('[data-ns-ad="1"][data-ns-campaign-id]');
+    if(!ad)return;const id=(ad.dataset.nsCampaignId||'').trim();
+    if(!/^[A-Za-z0-9_-]{6,140}$/.test(id))return;
+    found[id]={client:(ad.dataset.nsClient||'Unknown client').trim(),campaign:(ad.dataset.nsCampaign||id).trim(),lang:['mm','th','en'].includes(ad.dataset.nsLang)?ad.dataset.nsLang:lang,placement:(ad.dataset.nsPlacement||placement).trim()};
+  }));return found;
+}
+function renderAdTracking(){
+  const rows=document.getElementById('adTrackingRows');if(!rows)return;
+  const metadata=getTrackedAdMetadata(),ids=[...new Set([...Object.keys(adCampaignStats),...Object.keys(metadata)])];
+  const entries=ids.map(id=>({id,...(adCampaignStats[id]||{}),meta:metadata[id]||{}})).sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0));
+  const views=entries.reduce((sum,item)=>sum+Number(item.impressions||0),0),clicks=entries.reduce((sum,item)=>sum+Number(item.clicks||0),0);
+  const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=Number(value||0).toLocaleString();};set('adTrackCampaigns',entries.length);set('adTrackViews',views);set('adTrackClicks',clicks);
+  const langLabel={mm:'🇲🇲 MM',th:'🇹🇭 TH',en:'🇬🇧 EN'};
+  rows.innerHTML=entries.length?entries.map(item=>{const m=item.meta||{},v=Number(item.impressions||0),c=Number(item.clicks||0),ctr=v?(c/v*100).toFixed(2)+'%':'0.00%';return `<tr><td><div class="ad-track-client">${escHtml(m.client||'Unknown client')}</div><div class="ad-track-meta">${escHtml(m.campaign||'Campaign metadata unavailable')}</div><div class="ad-track-id">${escHtml(item.id)}</div></td><td>${langLabel[m.lang]||'—'}</td><td>${escHtml(m.placement||'—')}</td><td>${v.toLocaleString()}</td><td class="ad-track-clicks">${c.toLocaleString()}</td><td class="ad-track-ctr">${ctr}</td></tr>`;}).join(''):'<tr><td colspan="6" class="empty-tbl">No tracked local ads yet</td></tr>';
+}
 function renderSocialManager(d=currentSettings){
   const root=document.getElementById('socialManagerRoot'); if(!root)return; const links=d.socialLinks||{}; let html='<div class="chart-top"><h3>Social Links</h3><span>MM / Thai / English separated</span></div>'; Object.entries(AD_LANGS).forEach(([lang,label])=>{ html+='<div class="lang-config-card"><h4>'+label+'</h4><div class="social-grid">'; Object.entries(SOCIAL_KEYS).forEach(([key,name])=>{ html+='<input id="soc-'+lang+'-'+key+'" placeholder="'+name+' URL" value="'+escAttr((links[lang]&&links[lang][key])||'')+'">'; }); html+='</div><div style="margin-top:.7rem"><button class="social-save-btn" onclick="saveSocialLinks(\''+lang+'\')">Save '+label+' Social Links</button> <span class="mo-msg" id="soc-'+lang+'-msg"></span></div></div>'; }); root.innerHTML=html;
 }
@@ -1558,7 +1596,7 @@ window.showPg=function(id,el){
   document.querySelectorAll('.nav-item,.nav-sub-item').forEach(n=>n.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
   if(el)el.classList.add('on');
-  const titles={dashboard:'Dashboard',analytics:'Analytics',movies:'Movies',vip:'VIP Announcement',ads:'Ads Manager',settings:'Settings'};
+  const titles={dashboard:'Dashboard',analytics:'Analytics','ad-tracking':'Ad Click Tracking',movies:'Movies',vip:'VIP Announcement',ads:'Ads Manager',settings:'Settings'};
   document.getElementById('tbTitle').textContent=titles[id]||id;
   localStorage.setItem('ns_lastPage',id);
   if(id==='movies')renderMvTable();
