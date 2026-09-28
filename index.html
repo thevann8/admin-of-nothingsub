@@ -1216,6 +1216,7 @@ window.saveSettings=async function(){
   if(sl&&!sl.startsWith('http')){er.textContent='✗ Smart Link URL မှားသည်';er.style.display='inline';return;}
   if(url)localStorage.setItem('ns_siteUrl',url);
   const svMM=document.getElementById('svMM').checked,svTH=document.getElementById('svTH').checked,svEN=document.getElementById('svEN').checked;
+  if(!svMM&&!svTH&&!svEN){er.textContent='Keep at least one subtitle version ON.';er.style.display='inline';return;}
   setSlStatus('loading','Saving...');
   try{await setDoc(doc(db,'settings','global'),{smartLink:sl||'',socialTelegram:tg||'',socialFacebook:fb||'',socialTiktok:tt||'',subtitleVisibility:{mm:svMM,th:svTH,en:svEN},categories:[...CATS],hashtags:[...TAGS]},{merge:true});ok.style.display='inline';setTimeout(()=>ok.style.display='none',3000);setSlStatus(sl?'ok':'empty',sl?'✓ Saved':'Settings saved');}
   catch(e){er.textContent='✗ Error: '+e.message;er.style.display='inline';setSlStatus('empty','✗ Save မအောင်မြင်');}
