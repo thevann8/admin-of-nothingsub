@@ -1196,7 +1196,9 @@ async function loadSettings(){
   try{const snap=await getDoc(doc(db,'settings','global'));
     if(snap.exists()){const d=snap.data();currentSettings=d;renderAdManager(d);renderAdTracking();renderSocialManager(d);renderVipManager(d);if(d.smartLink)document.getElementById('smartLinkInput').value=d.smartLink;if(d.socialTelegram)document.getElementById('sTelegram').value=d.socialTelegram;if(d.socialFacebook)document.getElementById('sFacebook').value=d.socialFacebook;if(d.socialTiktok)document.getElementById('sTiktok').value=d.socialTiktok;setSlStatus(d.smartLink?'ok':'empty',d.smartLink?'✓ Smart Link active':'✗ Smart Link မရှိသေးပါ');
       // Load subtitle visibility
-      const sv=d.subtitleVisibility||{mm:true,th:true,en:true};
+      // Safe default for old settings documents: only Myanmar is public until
+      // an administrator explicitly enables another subtitle language.
+      const sv=d.subtitleVisibility||{mm:true,th:false,en:false};
       ['mm','th','en'].forEach(l=>{const v=sv[l]!==false;applySubVis(l,v);});
       // Load custom categories
       if(d.categories && d.categories.length){ CATS.length=0; d.categories.forEach(c=>CATS.push(c)); }
