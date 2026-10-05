@@ -496,6 +496,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="sub-tab" id="stab-th" onclick="setSubTab('th',this)"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Thai Sub <span id="stab-th-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <button class="sub-tab" id="stab-en" onclick="setSubTab('en',this)"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> English Sub <span id="stab-en-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <button class="sub-tab" id="stab-both" onclick="setSubTab('both',this)">&#127758; Both/All <span id="stab-both-cnt" style="font-size:.65rem;opacity:.7"></span></button>
+        <button class="sub-tab" id="stab-scheduled" onclick="setSubTab('scheduled',this)">&#128339; Scheduled <span id="stab-scheduled-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <span class="mv-count-badge">Showing <span id="mvShowCount">-</span> movies</span>
       </div>
       <div class="sub-tab-bar" id="movieContentFilters" style="display:none;margin-top:-.25rem;padding-top:0">
@@ -653,7 +654,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label mm-label">Actors / Actresses</div></div>
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="eMMActorsWrap"><input class="tag-inp" id="eMMActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eMMActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eMMActressesWrap"><input class="tag-inp" id="eMMActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eMMActresses"></div>
-        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eMMStatPub" onclick="setESt('MM','public')">Public</button><button class="toggle-opt" id="eMMStatPrv" onclick="setESt('MM','private')">Private</button></div><input type="hidden" id="eMMStatus" value="public"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eMMStatPub" onclick="setESt('MM','public')">Public</button><button class="toggle-opt" id="eMMStatPrv" onclick="setESt('MM','private')">Private</button><button class="toggle-opt" id="eMMStatSch" onclick="setESt('MM','scheduled')">Schedule</button></div><input type="hidden" id="eMMStatus" value="public"></div>
+        <div class="f" id="eMMScheduleWrap" style="display:none"><label>Publish date &amp; time</label><input type="datetime-local" id="eMMScheduleAt"></div>
         <div class="f full"><label>Access Tier</label><select id="eMMAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eMMCtGen" onclick="setCT('eMM','general')">&#127916; General</button>
@@ -696,7 +698,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label th-label">Actors / Actresses</div></div>
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="eTHActorsWrap"><input class="tag-inp" id="eTHActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eTHActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eTHActressesWrap"><input class="tag-inp" id="eTHActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eTHActresses"></div>
-        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eTHStatPub" onclick="setESt('TH','public')">Public</button><button class="toggle-opt" id="eTHStatPrv" onclick="setESt('TH','private')">Private</button></div><input type="hidden" id="eTHStatus" value="public"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eTHStatPub" onclick="setESt('TH','public')">Public</button><button class="toggle-opt" id="eTHStatPrv" onclick="setESt('TH','private')">Private</button><button class="toggle-opt" id="eTHStatSch" onclick="setESt('TH','scheduled')">Schedule</button></div><input type="hidden" id="eTHStatus" value="public"></div>
+        <div class="f" id="eTHScheduleWrap" style="display:none"><label>Publish date &amp; time</label><input type="datetime-local" id="eTHScheduleAt"></div>
         <div class="f full"><label>Access Tier</label><select id="eTHAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eTHCtGen" onclick="setCT('eTH','general')">&#127916; General</button>
@@ -740,7 +743,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label en-label">Actors / Actresses</div></div>
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="eENActorsWrap"><input class="tag-inp" id="eENActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="eENActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="eENActressesWrap"><input class="tag-inp" id="eENActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="eENActresses"></div>
-        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eENStatPub" onclick="setESt('EN','public')">Public</button><button class="toggle-opt" id="eENStatPrv" onclick="setESt('EN','private')">Private</button></div><input type="hidden" id="eENStatus" value="public"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="eENStatPub" onclick="setESt('EN','public')">Public</button><button class="toggle-opt" id="eENStatPrv" onclick="setESt('EN','private')">Private</button><button class="toggle-opt" id="eENStatSch" onclick="setESt('EN','scheduled')">Schedule</button></div><input type="hidden" id="eENStatus" value="public"></div>
+        <div class="f" id="eENScheduleWrap" style="display:none"><label>Publish date &amp; time</label><input type="datetime-local" id="eENScheduleAt"></div>
         <div class="f full"><label>Access Tier</label><select id="eENAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="eENCtGen" onclick="setCT('eEN','general')">&#127916; General</button>
@@ -1407,7 +1411,7 @@ window.setMMStatus=s=>setToggle('mmStatusPub','mmStatusPrv','mmStatus',s,'mmStat
 window.setTHStatus=s=>setToggle('thStatusPub','thStatusPrv','thStatus',s,'thStatusSch','thScheduleWrap');
 window.setENStatus=s=>setToggle('enStatusPub','enStatusPrv','enStatus',s,'enStatusSch','enScheduleWrap');
 window.setStatus=s=>setToggle('statusPub','statusPrv','aStatus',s);
-window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s);};
+window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s,'e'+lu+'StatSch','e'+lu+'ScheduleWrap');};
 window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
 
 let dashboardVersion='all';
@@ -1467,10 +1471,21 @@ function updateAnalytics(){
   document.getElementById('movieViewsTbl').innerHTML=mvList.length?mvList.map(([t,cn],i)=>`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><strong>${escHtml(t)}</strong></td><td style="color:var(--accent);font-weight:600">${cn}</td><td>${mvD[t]||0}</td><td style="color:var(--muted);font-size:.72rem">${((mvD[t]||0)/Math.max(cn,1)*100).toFixed(0)}%</td></tr>`).join(''):'<tr><td colspan="5" class="empty-tbl">No data yet</td></tr>';
 }
 
+function scheduledTime(m){
+  const value=m?.scheduledAt;
+  if(value?.toDate)return value.toDate().getTime();
+  return typeof value==='string'?new Date(value).getTime():NaN;
+}
+function isScheduledMovie(m){const when=scheduledTime(m);return Number.isFinite(when)&&when>Date.now();}
+function scheduleInputValue(value){
+  const when=scheduledTime({scheduledAt:value});if(!Number.isFinite(when))return '';
+  const d=new Date(when),pad=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
 function updateTabCounts(){
-  const counts={all:movies.length,mm:0,th:0,en:0,both:0};
-  movies.forEach(m=>{const st=m.subtitleType||'';if(counts[st]!==undefined)counts[st]++;});
-  ['all','mm','th','en','both'].forEach(k=>{
+  const counts={all:0,mm:0,th:0,en:0,both:0,scheduled:0};
+  movies.forEach(m=>{if(isScheduledMovie(m)){counts.scheduled++;return;}counts.all++;const st=m.subtitleType||'';if(counts[st]!==undefined)counts[st]++;});
+  ['all','mm','th','en','both','scheduled'].forEach(k=>{
     const el=document.getElementById('stab-'+k+'-cnt');
     if(el)el.textContent='('+counts[k]+')';
   });
@@ -1510,7 +1525,9 @@ function movieLinkBadges(m){
 window.renderMvTable=function(){
   const q=(document.getElementById('movieSrch')?.value||'').toLowerCase();
   const show=movies.filter(m=>{
-    if(curSubTab!=='all'&&(m.subtitleType||'')!==curSubTab)return false;
+    const scheduled=isScheduledMovie(m);
+    if(curSubTab==='scheduled'){if(!scheduled)return false;}
+    else {if(scheduled)return false;if(curSubTab!=='all'&&(m.subtitleType||'')!==curSubTab)return false;}
     if(curMovieContentFilter!=='all' && (curMovieContentFilter==='vip'?m.accessTier!=='vip':curMovieContentFilter==='free'?m.accessTier==='vip':(m.contentType||'general')!==curMovieContentFilter))return false;
     if(!q)return true;
     return (m.title||'').toLowerCase().includes(q)||[...(m.actors||[]),...(m.actresses||[])].some(a=>(a||'').toLowerCase().includes(q));
@@ -1534,7 +1551,7 @@ window.renderMvTable=function(){
       <td>${m.year||''}</td>
       <td>${Array.isArray(m.genre)?m.genre.join(', '):(m.genre||'')}</td>
       <td>${m.quality||''}</td>
-      <td><span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span></td>
+      <td>${isScheduledMovie(m)?`<span class="status-badge" style="background:rgba(59,130,246,.16);color:#60a5fa">Scheduled<br><small>${new Date(scheduledTime(m)).toLocaleString()}</small></span>`:`<span class="status-badge ${m.status==='private'?'private':'public'}">${m.status==='private'?'Private':'Public'}</span>`}</td>
       <td><span class="access-badge ${m.accessTier==='vip'?'vip':'free'}">${m.accessTier==='vip'?'VIP':'Free'}</span></td>
       <td><div class="sub-bs">${subTypeBadge(m)}</div></td>
       <td>${movieLinkBadges(m)}</td>
@@ -1553,7 +1570,9 @@ window.openEditPage=function(id,lang){
   document.getElementById('e'+lu+'PostedDate').value=m.postedDate||'';
   document.getElementById('e'+lu+'Quality').value=m.quality||'1080p';
   document.getElementById('e'+lu+'Poster').value=m.poster||'';
-  window.setESt(lu,m.status||'public');
+  const scheduled=isScheduledMovie(m);
+  window.setESt(lu,scheduled?'scheduled':(m.status||'public'));
+  const scheduleInput=document.getElementById('e'+lu+'ScheduleAt');if(scheduleInput)scheduleInput.value=scheduled?scheduleInputValue(m.scheduledAt):'';
   initCatGrid('e'+lu+'CatGrid','e'+lu+'Genre',m.genres||(m.genre?[m.genre]:[]));
   initTagGrid('e'+lu+'TagGrid','e'+lu+'Tags',m.tags||[]);
   initTagsFixed('e'+lu+'ActorsWrap','e'+lu+'ActorInp','e'+lu+'Actors',m.actors||[]);
@@ -1578,6 +1597,11 @@ window.doSaveEdit=async function(lu){
   const btn=document.getElementById('save'+lu+'Btn');btn.disabled=true;btn.textContent='Saving...';
   const data={title,cardCaption:document.getElementById('e'+lu+'Caption').value.trim(),year:parseInt(document.getElementById('e'+lu+'Year').value)||2024,contentType:(()=>{const el=document.getElementById('e'+lu+'ContentType');return el?el.value:'general';})(),genre:cats[0]||CATS[0],genres:cats,tags:getTags('e'+lu+'Tags'),quality:document.getElementById('e'+lu+'Quality').value,poster:document.getElementById('e'+lu+'Poster').value.trim(),status:document.getElementById('e'+lu+'Status').value,accessTier:document.getElementById('e'+lu+'AccessTier').value,subtitleType:lang,actors:getTags('e'+lu+'Actors'),actresses:getTags('e'+lu+'Actresses'),descMM:document.getElementById('e'+lu+'DescMM').value.trim(),updatedAt:serverTimestamp()};
   data.postedDate=document.getElementById('e'+lu+'PostedDate').value||'';
+  if(data.status==='scheduled'){
+    const raw=document.getElementById('e'+lu+'ScheduleAt')?.value||'',when=new Date(raw);
+    if(!raw||Number.isNaN(when.getTime())||when.getTime()<=Date.now()){showMsg('edit'+lu+'Msg','Choose a future publish date and time.','err');btn.disabled=false;btn.textContent='Save '+lu+' Changes';return;}
+    data.status='public';data.scheduledAt=when.toISOString();
+  }else data.scheduledAt='';
   if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmDood=v('eMMDood');data.mmMegaUp=v('eMMMegaUp');data.mmUserDrive=v('eMMUserDrive');}
   if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thDood=v('eTHDood');data.thMegaUp=v('eTHMegaUp');data.thUserDrive=v('eTHUserDrive');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
   if(lang==='en'){data.enTelegram=v('eENTelegram');data.enStream=v('eENStream');data.enDood=v('eENDood');data.enMegaUp=v('eENMegaUp');data.enUserDrive=v('eENUserDrive');}
