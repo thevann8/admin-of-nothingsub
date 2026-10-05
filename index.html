@@ -237,6 +237,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .toggle-opt{padding:.4rem .9rem;cursor:pointer;font-size:.76rem;font-weight:600;font-family:'DM Sans',sans-serif;border:none;background:none;color:var(--muted);transition:all .2s;}
 .toggle-opt.on-pub{background:rgba(16,185,129,.15);color:#34d399;}
 .toggle-opt.on-prv{background:rgba(100,116,139,.15);color:#94a3b8;}
+.toggle-opt.on-sch{background:rgba(59,130,246,.16);color:#60a5fa;}
 .toggle-opt.on-mm{background:rgba(239,68,68,.15);color:#fc8181;}
 .toggle-opt.on-th{background:rgba(59,130,246,.15);color:#60a5fa;}
 .toggle-opt.on-en{background:rgba(99,179,237,.15);color:#63b3ed;}
@@ -533,7 +534,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label mm-label">Actors / Actresses</div></div>
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="mmActorsWrap"><input class="tag-inp" id="mmActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="mmActressesWrap"><input class="tag-inp" id="mmActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="mmActresses"></div>
-        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="mmStatusPub" onclick="setMMStatus('public')">Public</button><button class="toggle-opt" id="mmStatusPrv" onclick="setMMStatus('private')">Private</button></div><input type="hidden" id="mmStatus" value="public"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="mmStatusPub" onclick="setMMStatus('public')">Public</button><button class="toggle-opt" id="mmStatusPrv" onclick="setMMStatus('private')">Private</button><button class="toggle-opt" id="mmStatusSch" onclick="setMMStatus('scheduled')">Schedule</button></div><input type="hidden" id="mmStatus" value="public"></div>
+        <div class="f" id="mmScheduleWrap" style="display:none"><label>Publish date &amp; time</label><input type="datetime-local" id="mmScheduleAt"></div>
         <div class="f full"><label>Access Tier</label><select id="mmAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="mmCtGen" onclick="setCT('mm','general')">&#127916; General</button>
@@ -570,7 +572,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label th-label">Actors / Actresses</div></div>
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="thActorsWrap"><input class="tag-inp" id="thActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="thActressesWrap"><input class="tag-inp" id="thActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="thActresses"></div>
-        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="thStatusPub" onclick="setTHStatus('public')">Public</button><button class="toggle-opt" id="thStatusPrv" onclick="setTHStatus('private')">Private</button></div><input type="hidden" id="thStatus" value="public"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="thStatusPub" onclick="setTHStatus('public')">Public</button><button class="toggle-opt" id="thStatusPrv" onclick="setTHStatus('private')">Private</button><button class="toggle-opt" id="thStatusSch" onclick="setTHStatus('scheduled')">Schedule</button></div><input type="hidden" id="thStatus" value="public"></div>
+        <div class="f" id="thScheduleWrap" style="display:none"><label>Publish date &amp; time</label><input type="datetime-local" id="thScheduleAt"></div>
         <div class="f full"><label>Access Tier</label><select id="thAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="thCtGen" onclick="setCT('th','general')">&#127916; General</button>
@@ -607,7 +610,8 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="form-section"><div class="form-section-label en-label">Actors / Actresses</div></div>
         <div class="f full"><label>Actors</label><div class="tags-wrap" id="enActorsWrap"><input class="tag-inp" id="enActorInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActors"></div>
         <div class="f full"><label>Actresses</label><div class="tags-wrap" id="enActressesWrap"><input class="tag-inp" id="enActressInp" placeholder="Type name + Enter"></div><input type="hidden" id="enActresses"></div>
-        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="enStatusPub" onclick="setENStatus('public')">Public</button><button class="toggle-opt" id="enStatusPrv" onclick="setENStatus('private')">Private</button></div><input type="hidden" id="enStatus" value="public"></div>
+        <div class="status-toggle"><label>Status:</label><div class="toggle-wrap"><button class="toggle-opt on-pub" id="enStatusPub" onclick="setENStatus('public')">Public</button><button class="toggle-opt" id="enStatusPrv" onclick="setENStatus('private')">Private</button><button class="toggle-opt" id="enStatusSch" onclick="setENStatus('scheduled')">Schedule</button></div><input type="hidden" id="enStatus" value="public"></div>
+        <div class="f" id="enScheduleWrap" style="display:none"><label>Publish date &amp; time</label><input type="datetime-local" id="enScheduleAt"></div>
         <div class="f full"><label>Access Tier</label><select id="enAccessTier"><option value="free">Free</option><option value="vip">VIP</option></select></div>
         <div class="ct-toggle"><label>Content Type:</label>
           <button class="ct-opt on-gen" id="enCtGen" onclick="setCT('en','general')">&#127916; General</button>
@@ -1398,10 +1402,10 @@ function initTagsFixed(wId,iId,hId,init=[]){
   wrap._tags=tags;wrap._render=render;wrap._addTag=addTag;render();
 }
 
-function setToggle(pubId,prvId,hidId,s){document.getElementById(hidId).value=s;document.getElementById(pubId).className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById(prvId).className='toggle-opt'+(s==='private'?' on-prv':'');}
-window.setMMStatus=s=>setToggle('mmStatusPub','mmStatusPrv','mmStatus',s);
-window.setTHStatus=s=>setToggle('thStatusPub','thStatusPrv','thStatus',s);
-window.setENStatus=s=>setToggle('enStatusPub','enStatusPrv','enStatus',s);
+function setToggle(pubId,prvId,hidId,s,schId='',scheduleWrapId=''){document.getElementById(hidId).value=s;document.getElementById(pubId).className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById(prvId).className='toggle-opt'+(s==='private'?' on-prv':'');const sch=document.getElementById(schId);if(sch)sch.className='toggle-opt'+(s==='scheduled'?' on-sch':'');const wrap=document.getElementById(scheduleWrapId);if(wrap)wrap.style.display=s==='scheduled'?'flex':'none';}
+window.setMMStatus=s=>setToggle('mmStatusPub','mmStatusPrv','mmStatus',s,'mmStatusSch','mmScheduleWrap');
+window.setTHStatus=s=>setToggle('thStatusPub','thStatusPrv','thStatus',s,'thStatusSch','thScheduleWrap');
+window.setENStatus=s=>setToggle('enStatusPub','enStatusPrv','enStatus',s,'enStatusSch','enScheduleWrap');
 window.setStatus=s=>setToggle('statusPub','statusPrv','aStatus',s);
 window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s);};
 window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
@@ -1609,7 +1613,9 @@ async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   const btn=document.getElementById(btnId);btn.disabled=true;btn.textContent='Saving...';
   const dateInput={postMMBtn:'mmPostedDate',postTHBtn:'thPostedDate',postENBtn:'enPostedDate',addBtn:'aPostedDate'}[btnId];
   const tagInput={postMMBtn:'mmTags',postTHBtn:'thTags',postENBtn:'enTags',addBtn:'aTags'}[btnId];
+  const scheduleInput={postMMBtn:'mmScheduleAt',postTHBtn:'thScheduleAt',postENBtn:'enScheduleAt'}[btnId];
   data.postedDate=document.getElementById(dateInput)?.value||new Date().toISOString().slice(0,10);
+  if(data.status==='scheduled'){const raw=document.getElementById(scheduleInput)?.value||'';const when=new Date(raw);if(!raw||Number.isNaN(when.getTime())||when.getTime()<=Date.now()){showMsg(msgId,'Choose a future publish date and time.','err');btn.disabled=false;btn.textContent=btnTxt;return;}data.status='public';data.scheduledAt=when.toISOString();}else data.scheduledAt='';
   if(tagInput)data.tags=getTags(tagInput);
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'✓ Saved!','ok');onSuccess();}
   catch(e){showMsg(msgId,'Error: '+e.message,'err');}
