@@ -1115,6 +1115,7 @@ window.addMovieTag=async function(gridId,hiddenId,inputId){
 const QUALS=['4K','2K','1080p','720p'];
 const CAT_CLR=['#f0b429','#3b82f6','#ef4444','#10b981','#8b5cf6','#f97316','#e11d48','#0891b2'];
 let movies=[],analytics=[],pendingDelId=null,allStatsDocs={},curDateFilter='today',curSubTab='all',curMovieContentFilter='all',adCampaignStats={};
+const migratingScheduledMovieIds=new Set();
 let currentSettings={};
 const AD_LANGS={mm:'Myanmar Sub',th:'Thai Sub',en:'English Sub'};
 const LOCAL_AD_SLOTS={topBanner:'Top Banner',bottomSticky:'Bottom Sticky',inFeed:'In-feed',footer:'Footer'};
@@ -1187,7 +1188,16 @@ function initAdmin(){
     currentSettings=snap.data();
     renderAdManager(currentSettings);renderAdTracking();renderAdHistory();
   },error=>console.error('Ad settings live sync error',error));
-  onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{movies=snap.docs.map(d=>({id:d.id,...d.data()}));updateMovieStats();renderMvTable();});
+  onSnapshot(query(collection(db,'movies'),orderBy('createdAt','desc')),snap=>{
+    movies=snap.docs.map(d=>({id:d.id,...d.data()}));
+    // Posts scheduled with the earlier implementation were stored as public.
+    // Convert only future-dated ones, so older mobile caches cannot reveal them.
+    movies.filter(m=>m.status==='public'&&isScheduledMovie(m)&&!migratingScheduledMovieIds.has(m.id)).forEach(m=>{
+      migratingScheduledMovieIds.add(m.id);
+      updateDoc(doc(db,'movies',m.id),{status:'scheduled'}).catch(e=>console.warn('Scheduled post migration failed',e)).finally(()=>migratingScheduledMovieIds.delete(m.id));
+    });
+    updateMovieStats();renderMvTable();
+  });
   onSnapshot(query(collection(db,'analytics'),orderBy('ts','desc'),limit(500)),snap=>{analytics=snap.docs.map(d=>({id:d.id,...d.data()}));updateAnalytics();});
   onSnapshot(collection(db,'adCampaigns'),snap=>{adCampaignStats={};snap.forEach(d=>{adCampaignStats[d.id]={id:d.id,...d.data()};});renderAdTracking();});
   tick();setInterval(tick,1000);
@@ -1600,7 +1610,7 @@ window.doSaveEdit=async function(lu){
   if(data.status==='scheduled'){
     const raw=document.getElementById('e'+lu+'ScheduleAt')?.value||'',when=new Date(raw);
     if(!raw||Number.isNaN(when.getTime())||when.getTime()<=Date.now()){showMsg('edit'+lu+'Msg','Choose a future publish date and time.','err');btn.disabled=false;btn.textContent='Save '+lu+' Changes';return;}
-    data.status='public';data.scheduledAt=when.toISOString();
+    data.scheduledAt=when.toISOString();
   }else data.scheduledAt='';
   if(lang==='mm'){data.mmTelegram=v('eMMTelegram');data.mmStream=v('eMMStream');data.mmDood=v('eMMDood');data.mmMegaUp=v('eMMMegaUp');data.mmUserDrive=v('eMMUserDrive');}
   if(lang==='th'){data.thTelegram=v('eTHTelegram');data.thStream=v('eTHStream');data.thDood=v('eTHDood');data.thMegaUp=v('eTHMegaUp');data.thUserDrive=v('eTHUserDrive');data.descTH=document.getElementById('eTHDescTH')?.value.trim()||'';}
@@ -1639,7 +1649,7 @@ async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
   const tagInput={postMMBtn:'mmTags',postTHBtn:'thTags',postENBtn:'enTags',addBtn:'aTags'}[btnId];
   const scheduleInput={postMMBtn:'mmScheduleAt',postTHBtn:'thScheduleAt',postENBtn:'enScheduleAt'}[btnId];
   data.postedDate=document.getElementById(dateInput)?.value||new Date().toISOString().slice(0,10);
-  if(data.status==='scheduled'){const raw=document.getElementById(scheduleInput)?.value||'';const when=new Date(raw);if(!raw||Number.isNaN(when.getTime())||when.getTime()<=Date.now()){showMsg(msgId,'Choose a future publish date and time.','err');btn.disabled=false;btn.textContent=btnTxt;return;}data.status='public';data.scheduledAt=when.toISOString();}else data.scheduledAt='';
+  if(data.status==='scheduled'){const raw=document.getElementById(scheduleInput)?.value||'';const when=new Date(raw);if(!raw||Number.isNaN(when.getTime())||when.getTime()<=Date.now()){showMsg(msgId,'Choose a future publish date and time.','err');btn.disabled=false;btn.textContent=btnTxt;return;}data.scheduledAt=when.toISOString();}else data.scheduledAt='';
   if(tagInput)data.tags=getTags(tagInput);
   try{await addDoc(collection(db,'movies'),{...data,createdAt:serverTimestamp()});showMsg(msgId,'✓ Saved!','ok');onSuccess();}
   catch(e){showMsg(msgId,'Error: '+e.message,'err');}
