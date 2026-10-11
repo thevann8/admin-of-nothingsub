@@ -1777,9 +1777,33 @@ function applySubVis(l,on){
   if(status){status.textContent=on?'ON':'OFF';status.className='sv-status '+(on?'on':'off');}
   if(card){card.className='sv-card'+(on?' on-'+l:'');}
 }
-window.toggleSubVis=function(l){
+window.toggleSubVis=async function(l){
   const chk=document.getElementById('sv'+l.toUpperCase());
-  if(chk)applySubVis(l,chk.checked);
+  if(!chk)return;
+  const visibility={
+    mm:!!document.getElementById('svMM')?.checked,
+    th:!!document.getElementById('svTH')?.checked,
+    en:!!document.getElementById('svEN')?.checked
+  };
+  // Do not let an accidental final switch-off leave visitors with no option.
+  if(!visibility.mm&&!visibility.th&&!visibility.en){
+    chk.checked=true;
+    applySubVis(l,true);
+    const err=document.getElementById('settingErr');
+    if(err){err.textContent='Keep at least one subtitle version ON.';err.style.display='inline';}
+    return;
+  }
+  applySubVis(l,visibility[l]);
+  const ok=document.getElementById('settingOk'),err=document.getElementById('settingErr');
+  if(ok)ok.style.display='none';
+  if(err)err.style.display='none';
+  try{
+    await setDoc(doc(db,'settings','global'),{subtitleVisibility:visibility},{merge:true});
+    currentSettings={...currentSettings,subtitleVisibility:visibility};
+    if(ok){ok.textContent='✓ Subtitle visibility saved';ok.style.display='inline';setTimeout(()=>ok.style.display='none',3000);}
+  }catch(e){
+    if(err){err.textContent='✗ Could not save: '+e.message;err.style.display='inline';}
+  }
 };
 
 window.setCT=function(prefix,val){
