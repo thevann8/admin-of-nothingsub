@@ -1229,10 +1229,11 @@ async function loadSettings(){
       // Load subtitle visibility
       // Safe default for old settings documents: only Myanmar is public until
       // an administrator explicitly enables another subtitle language.
-      // Only an explicit boolean true is public.  This also keeps legacy
-      // partial settings (or a stored string "false") safely switched off.
+      // No language is public by default.  Older saved ON values are accepted,
+      // but false, "false", and missing values stay OFF.
       const sv={mm:false,th:false,en:false,...(d.subtitleVisibility&&typeof d.subtitleVisibility==='object'?d.subtitleVisibility:{})};
-      ['mm','th','en'].forEach(l=>{const v=sv[l]===true;applySubVis(l,v);});
+      const isLanguageEnabled=value=>value===true||value===1||String(value).trim().toLowerCase()==='true'||String(value).trim().toLowerCase()==='on';
+      ['mm','th','en'].forEach(l=>{const v=isLanguageEnabled(sv[l]);applySubVis(l,v);});
       // Load custom categories
       if(d.categories && d.categories.length){ CATS.length=0; d.categories.forEach(c=>CATS.push(c)); }
       if(d.hashtags && d.hashtags.length){ TAGS.length=0; d.hashtags.forEach(tag=>TAGS.push(tag)); }
