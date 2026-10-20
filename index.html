@@ -538,6 +538,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f"><label>Release Year</label><input type="number" id="mmYear" placeholder="2024"></div>
         <div class="f"><label>Posted Date</label><input type="date" id="mmPostedDate"></div>
         <div class="f"><label>Quality</label><select id="mmQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-mm" id="mmSubMM" onclick="setMMSubType('mm')">🇲🇲 MM Sub</button><button class="toggle-opt" id="mmSubNone" onclick="setMMSubType('none')">🚫 No Sub</button></div><input type="hidden" id="mmSubtitleType" value="mm"></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="mmCatGrid"></div><input type="hidden" id="mmGenre"></div>
         <div class="f full"><label>Hashtags / Genres</label><div class="cat-grid" id="mmTagGrid"></div><div style="display:flex;gap:.45rem;margin-top:.45rem"><input id="mmTagNew" placeholder="Add custom tag..." style="flex:1" onkeydown="if(event.key==='Enter')addMovieTag('mmTagGrid','mmTags','mmTagNew')"><button type="button" class="toggle-opt" onclick="addMovieTag('mmTagGrid','mmTags','mmTagNew')">+ Add</button></div><input type="hidden" id="mmTags"></div>
         <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="mmPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
@@ -554,7 +555,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
           <button class="ct-opt" id="mmCtWes" onclick="setCT('mm','western')">&#128286; Western</button>
           <input type="hidden" id="mmContentType" value="general">
         </div>
-        <div class="form-section"><div class="form-section-label mm-label">&#127474;&#127484; Myanmar Subtitle Links</div></div>
+        <div class="form-section"><div class="form-section-label mm-label" id="mmLinkSection">&#127474;&#127484; Myanmar Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="mmTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert လုပ်ပေးမည် — https://streamtape.com/v/...)</span></label><input id="mmStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
         <div class="f full"><label>🎬 Doodstream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/d/ or /e/ — player auto-convert)</span></label><input id="mmDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
@@ -576,6 +577,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f"><label>Release Year</label><input type="number" id="thYear" placeholder="2024"></div>
         <div class="f"><label>Posted Date</label><input type="date" id="thPostedDate"></div>
         <div class="f"><label>Quality</label><select id="thQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-th" id="thSubTH" onclick="setTHSubType('th')">🇹🇭 Thai Sub</button><button class="toggle-opt" id="thSubNone" onclick="setTHSubType('none')">🚫 No Sub</button></div><input type="hidden" id="thSubtitleType" value="th"></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="thCatGrid"></div><input type="hidden" id="thGenre"></div>
         <div class="f full"><label>Hashtags / Genres</label><div class="cat-grid" id="thTagGrid"></div><div style="display:flex;gap:.45rem;margin-top:.45rem"><input id="thTagNew" placeholder="Add custom tag..." style="flex:1" onkeydown="if(event.key==='Enter')addMovieTag('thTagGrid','thTags','thTagNew')"><button type="button" class="toggle-opt" onclick="addMovieTag('thTagGrid','thTags','thTagNew')">+ Add</button></div><input type="hidden" id="thTags"></div>
         <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="thPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
@@ -592,7 +594,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
           <button class="ct-opt" id="thCtWes" onclick="setCT('th','western')">&#128286; Western</button>
           <input type="hidden" id="thContentType" value="general">
         </div>
-        <div class="form-section"><div class="form-section-label th-label">&#127481;&#127469; Thai Subtitle Links</div></div>
+        <div class="form-section"><div class="form-section-label th-label" id="thLinkSection">&#127481;&#127469; Thai Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="thTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert လုပ်ပေးမည် — https://streamtape.com/v/...)</span></label><input id="thStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
         <div class="f full"><label>🎬 Doodstream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/d/ or /e/ — player auto-convert)</span></label><input id="thDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
@@ -614,6 +616,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <div class="f"><label>Release Year</label><input type="number" id="enYear" placeholder="2024"></div>
         <div class="f"><label>Posted Date</label><input type="date" id="enPostedDate"></div>
         <div class="f"><label>Quality</label><select id="enQuality"><option>1080p</option><option>4K</option><option>2K</option><option>720p</option></select></div>
+        <div class="status-toggle full"><label>Subtitle:</label><div class="toggle-wrap"><button class="toggle-opt on-en" id="enSubEN" onclick="setENSubType('en')">🇬🇧 English Sub</button><button class="toggle-opt" id="enSubNone" onclick="setENSubType('none')">🚫 No Sub</button></div><input type="hidden" id="enSubtitleType" value="en"></div>
         <div class="f full"><label>Categories</label><div class="cat-grid" id="enCatGrid"></div><input type="hidden" id="enGenre"></div>
         <div class="f full"><label>Hashtags / Genres</label><div class="cat-grid" id="enTagGrid"></div><div style="display:flex;gap:.45rem;margin-top:.45rem"><input id="enTagNew" placeholder="Add custom tag..." style="flex:1" onkeydown="if(event.key==='Enter')addMovieTag('enTagGrid','enTags','enTagNew')"><button type="button" class="toggle-opt" onclick="addMovieTag('enTagGrid','enTags','enTagNew')">+ Add</button></div><input type="hidden" id="enTags"></div>
         <div class="f full"><label>Poster URL (16:9 TMDB backdrop)</label><input id="enPoster" placeholder="https://image.tmdb.org/t/p/original/..."></div>
@@ -630,7 +633,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
           <button class="ct-opt" id="enCtWes" onclick="setCT('en','western')">&#128286; Western</button>
           <input type="hidden" id="enContentType" value="general">
         </div>
-        <div class="form-section"><div class="form-section-label en-label">&#127468;&#127463; English Subtitle Links</div></div>
+        <div class="form-section"><div class="form-section-label en-label" id="enLinkSection">&#127468;&#127463; English Subtitle Links</div></div>
         <div class="f full"><label>Telegram</label><input id="enTelegram" placeholder="https://t.me/c/..."></div>
         <div class="f full"><label>🎬 Streamtape URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/v/ ထည့်ရုံ — embed auto-convert လုပ်ပေးမည် — https://streamtape.com/v/...)</span></label><input id="enStream" placeholder="https://streamtape.com/v/xxxxxxxxx"></div>
         <div class="f full"><label>🎬 Doodstream URL <span style="font-size:.62rem;color:var(--muted);font-weight:400">(/d/ or /e/ — player auto-convert)</span></label><input id="enDood" placeholder="https://dood.to/d/xxxxxxxxx"></div>
@@ -1447,8 +1450,35 @@ function initTagsFixed(wId,iId,hId,init=[]){
 
 function setToggle(pubId,prvId,hidId,s,schId='',scheduleWrapId=''){document.getElementById(hidId).value=s;document.getElementById(pubId).className='toggle-opt'+(s==='public'?' on-pub':'');document.getElementById(prvId).className='toggle-opt'+(s==='private'?' on-prv':'');const sch=document.getElementById(schId);if(sch)sch.className='toggle-opt'+(s==='scheduled'?' on-sch':'');const wrap=document.getElementById(scheduleWrapId);if(wrap)wrap.style.display=s==='scheduled'?'flex':'none';}
 window.setMMStatus=s=>setToggle('mmStatusPub','mmStatusPrv','mmStatus',s,'mmStatusSch','mmScheduleWrap');
+window.setMMSubType=function(type){
+  document.getElementById('mmSubtitleType').value=type;
+  document.getElementById('mmSubMM').className='toggle-opt'+(type==='mm'?' on-mm':'');
+  document.getElementById('mmSubNone').className='toggle-opt'+(type==='none'?' on-none':'');
+  const section=document.getElementById('mmLinkSection');
+  if(section)section.innerHTML=type==='none'?'🎬 Video Links':'🇲🇲 Myanmar Subtitle Links';
+  const btn=document.getElementById('postMMBtn');
+  if(btn)btn.innerHTML=type==='none'?'🚫 Post No Sub Movie':'🇲🇲 Post Myanmar Sub Movie';
+};
 window.setTHStatus=s=>setToggle('thStatusPub','thStatusPrv','thStatus',s,'thStatusSch','thScheduleWrap');
+window.setTHSubType=function(type){
+  document.getElementById('thSubtitleType').value=type;
+  document.getElementById('thSubTH').className='toggle-opt'+(type==='th'?' on-th':'');
+  document.getElementById('thSubNone').className='toggle-opt'+(type==='none'?' on-none':'');
+  const section=document.getElementById('thLinkSection');
+  if(section)section.innerHTML=type==='none'?'🎬 Video Links':'🇹🇭 Thai Subtitle Links';
+  const btn=document.getElementById('postTHBtn');
+  if(btn)btn.innerHTML=type==='none'?'🚫 Post No Sub Movie':'🇹🇭 Post Thai Sub Movie';
+};
 window.setENStatus=s=>setToggle('enStatusPub','enStatusPrv','enStatus',s,'enStatusSch','enScheduleWrap');
+window.setENSubType=function(type){
+  document.getElementById('enSubtitleType').value=type;
+  document.getElementById('enSubEN').className='toggle-opt'+(type==='en'?' on-en':'');
+  document.getElementById('enSubNone').className='toggle-opt'+(type==='none'?' on-none':'');
+  const section=document.getElementById('enLinkSection');
+  if(section)section.innerHTML=type==='none'?'🎬 Video Links':'🇬🇧 English Subtitle Links';
+  const btn=document.getElementById('postENBtn');
+  if(btn)btn.innerHTML=type==='none'?'🚫 Post No Sub Movie':'🇬🇧 Post English Sub Movie';
+};
 window.setStatus=s=>setToggle('statusPub','statusPrv','aStatus',s);
 window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s,'e'+lu+'StatSch','e'+lu+'ScheduleWrap');};
 window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth','aSubNone'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth',none:'aSubNone'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
@@ -1687,30 +1717,30 @@ async function saveMovieToDb(data,msgId,btnId,btnTxt,onSuccess){
 
 window.doPostMM=async function(){
   const title=document.getElementById('mmTitle').value.trim();if(!title){showMsg('postMMMsg','Title ထည့်ပါ','err');return;}
-  const cats=getCats('mmGenre');
-  await saveMovieToDb({title,cardCaption:document.getElementById('mmCaption').value.trim(),year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,tags:getTags('mmTags'),quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,accessTier:document.getElementById('mmAccessTier').value,subtitleType:'mm',contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmDood:v('mmDood'),mmMegaUp:v('mmMegaUp'),mmUserDrive:v('mmUserDrive'),thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:document.getElementById('mmDescMM').value.trim()||'Myanmar subtitle included.',descTH:''},'postMMMsg','postMMBtn','🇲🇲 Post Myanmar Sub Movie',()=>{
+  const cats=getCats('mmGenre'),subtitleType=document.getElementById('mmSubtitleType').value||'mm';
+  await saveMovieToDb({title,cardCaption:document.getElementById('mmCaption').value.trim(),year:parseInt(document.getElementById('mmYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,tags:getTags('mmTags'),quality:document.getElementById('mmQuality').value,poster:document.getElementById('mmPoster').value.trim()||'',status:document.getElementById('mmStatus').value,accessTier:document.getElementById('mmAccessTier').value,subtitleType,contentType:document.getElementById('mmContentType').value||'general',actors:getTags('mmActors'),actresses:getTags('mmActresses'),mmTelegram:v('mmTelegram'),mmStream:v('mmStream'),mmDood:v('mmDood'),mmMegaUp:v('mmMegaUp'),mmUserDrive:v('mmUserDrive'),thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:document.getElementById('mmDescMM').value.trim()||(subtitleType==='none'?'No subtitle included.':'Myanmar subtitle included.'),descTH:''},'postMMMsg','postMMBtn',subtitleType==='none'?'🚫 Post No Sub Movie':'🇲🇲 Post Myanmar Sub Movie',()=>{
     clearForm(['mmTitle','mmCaption','mmYear','mmPostedDate','mmPoster','mmTelegram','mmStream','mmDood','mmMegaUp','mmUserDrive','mmDescMM']);
-    initCatGrid('mmCatGrid','mmGenre',[]);initTagGrid('mmTagGrid','mmTags',[]);initTagsFixed('mmActorsWrap','mmActorInp','mmActors',[]);initTagsFixed('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');window.setCT('mm','general');
+    initCatGrid('mmCatGrid','mmGenre',[]);initTagGrid('mmTagGrid','mmTags',[]);initTagsFixed('mmActorsWrap','mmActorInp','mmActors',[]);initTagsFixed('mmActressesWrap','mmActressInp','mmActresses',[]);setMMStatus('public');setMMSubType('mm');window.setCT('mm','general');
   });
 };
 
 // ── FIX: doPostTH — thDescMM မရှိ၊ thDescTH သုံးရမည် ──
 window.doPostTH=async function(){
   const title=document.getElementById('thTitle').value.trim();if(!title){showMsg('postTHMsg','Title ထည့်ပါ','err');return;}
-  const cats=getCats('thGenre');
-  await saveMovieToDb({title,cardCaption:document.getElementById('thCaption').value.trim(),year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,accessTier:document.getElementById('thAccessTier').value,subtitleType:'th',contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thDood:v('thDood'),thMegaUp:v('thMegaUp'),thUserDrive:v('thUserDrive'),enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn','🇹🇭 Post Thai Sub Movie',()=>{
+  const cats=getCats('thGenre'),subtitleType=document.getElementById('thSubtitleType').value||'th';
+  await saveMovieToDb({title,cardCaption:document.getElementById('thCaption').value.trim(),year:parseInt(document.getElementById('thYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('thQuality').value,poster:document.getElementById('thPoster').value.trim()||'',status:document.getElementById('thStatus').value,accessTier:document.getElementById('thAccessTier').value,subtitleType,contentType:document.getElementById('thContentType').value||'general',actors:getTags('thActors'),actresses:getTags('thActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:v('thTelegram'),thStream:v('thStream'),thDood:v('thDood'),thMegaUp:v('thMegaUp'),thUserDrive:v('thUserDrive'),enTelegram:'#',enStream:'#',enDood:'#',enMegaUp:'#',enUserDrive:'#',descMM:subtitleType==='none'?'No subtitle included.':'Thai subtitle included.',descTH:document.getElementById('thDescTH').value.trim()||''},'postTHMsg','postTHBtn',subtitleType==='none'?'🚫 Post No Sub Movie':'🇹🇭 Post Thai Sub Movie',()=>{
     clearForm(['thTitle','thCaption','thYear','thPostedDate','thPoster','thTelegram','thStream','thDood','thMegaUp','thUserDrive','thDescTH']);
-    initCatGrid('thCatGrid','thGenre',[]);initTagGrid('thTagGrid','thTags',[]);initTagsFixed('thActorsWrap','thActorInp','thActors',[]);initTagsFixed('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');window.setCT('th','general');
+    initCatGrid('thCatGrid','thGenre',[]);initTagGrid('thTagGrid','thTags',[]);initTagsFixed('thActorsWrap','thActorInp','thActors',[]);initTagsFixed('thActressesWrap','thActressInp','thActresses',[]);setTHStatus('public');setTHSubType('th');window.setCT('th','general');
   });
 };
 
 // ── FIX: doPostEN — enDescMM မရှိ၊ enDescEN သုံးရမည် ──
 window.doPostEN=async function(){
   const title=document.getElementById('enTitle').value.trim();if(!title){showMsg('postENMsg','Title ထည့်ပါ','err');return;}
-  const cats=getCats('enGenre');
-  await saveMovieToDb({title,cardCaption:document.getElementById('enCaption').value.trim(),year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,accessTier:document.getElementById('enAccessTier').value,subtitleType:'en',contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enDood:v('enDood'),enMegaUp:v('enMegaUp'),enUserDrive:v('enUserDrive'),descMM:document.getElementById('enDescEN').value.trim()||'English subtitle included.',descTH:''},'postENMsg','postENBtn','🇬🇧 Post English Sub Movie',()=>{
+  const cats=getCats('enGenre'),subtitleType=document.getElementById('enSubtitleType').value||'en';
+  await saveMovieToDb({title,cardCaption:document.getElementById('enCaption').value.trim(),year:parseInt(document.getElementById('enYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('enQuality').value,poster:document.getElementById('enPoster').value.trim()||'',status:document.getElementById('enStatus').value,accessTier:document.getElementById('enAccessTier').value,subtitleType,contentType:document.getElementById('enContentType').value||'general',actors:getTags('enActors'),actresses:getTags('enActresses'),mmTelegram:'#',mmStream:'#',mmDood:'#',mmMegaUp:'#',mmUserDrive:'#',thTelegram:'#',thStream:'#',thDood:'#',thMegaUp:'#',thUserDrive:'#',enTelegram:v('enTelegram'),enStream:v('enStream'),enDood:v('enDood'),enMegaUp:v('enMegaUp'),enUserDrive:v('enUserDrive'),descMM:document.getElementById('enDescEN').value.trim()||(subtitleType==='none'?'No subtitle included.':'English subtitle included.'),descTH:''},'postENMsg','postENBtn',subtitleType==='none'?'🚫 Post No Sub Movie':'🇬🇧 Post English Sub Movie',()=>{
     clearForm(['enTitle','enCaption','enYear','enPostedDate','enPoster','enTelegram','enStream','enDood','enMegaUp','enUserDrive','enDescEN']);
-    initCatGrid('enCatGrid','enGenre',[]);initTagGrid('enTagGrid','enTags',[]);initTagsFixed('enActorsWrap','enActorInp','enActors',[]);initTagsFixed('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');window.setCT('en','general');
+    initCatGrid('enCatGrid','enGenre',[]);initTagGrid('enTagGrid','enTags',[]);initTagsFixed('enActorsWrap','enActorInp','enActors',[]);initTagsFixed('enActressesWrap','enActressInp','enActresses',[]);setENStatus('public');setENSubType('en');window.setCT('en','general');
   });
 };
 
