@@ -244,6 +244,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .toggle-opt.on-th{background:rgba(59,130,246,.15);color:#60a5fa;}
 .toggle-opt.on-en{background:rgba(99,179,237,.15);color:#63b3ed;}
 .toggle-opt.on-both{background:rgba(240,180,41,.15);color:var(--accent);}
+.toggle-opt.on-none{background:rgba(148,163,184,.16);color:#cbd5e1;}
 .mo-btn{grid-column:1/-1;background:linear-gradient(135deg,#f0b429,#d4a03a);border:none;color:#000;padding:.72rem;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:2px;cursor:pointer;transition:opacity .2s;}
 .mo-btn:hover{opacity:.88;}
 .mo-btn:disabled{opacity:.5;cursor:not-allowed;}
@@ -336,6 +337,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
 .sub-tab.on-th{background:rgba(59,130,246,.12);border-color:#60a5fa;color:#60a5fa;}
 .sub-tab.on-en{background:rgba(99,179,237,.12);border-color:#63b3ed;color:#63b3ed;}
 .sub-tab.on-both{background:rgba(240,180,41,.12);border-color:var(--accent);color:var(--accent);}
+.sub-tab.on-none{background:rgba(148,163,184,.14);border-color:#94a3b8;color:#cbd5e1;}
 .mv-count-badge{font-size:.68rem;color:var(--muted);margin-left:auto;align-self:center;}
 .mv-count-badge span{color:var(--text);font-weight:600;}
 </style>
@@ -502,6 +504,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="sub-tab" id="stab-th" onclick="setSubTab('th',this)"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px"><rect width="18" height="13" fill="#A51931"/><rect width="18" height="9.36" y="1.82" fill="#F5F5F5"/><rect width="18" height="5.2" y="3.9" fill="#2E2A4A"/></svg> Thai Sub <span id="stab-th-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <button class="sub-tab" id="stab-en" onclick="setSubTab('en',this)"><svg width="16" height="11" viewBox="0 0 18 13" xmlns="http://www.w3.org/2000/svg" style="border-radius:2px"><rect width="18" height="13" fill="#012169"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="white" stroke-width="2.8"/><path d="M0,0 L18,13 M18,0 L0,13" stroke="#C8102E" stroke-width="1.6"/><path d="M9,0 V13 M0,6.5 H18" stroke="white" stroke-width="4"/><path d="M9,0 V13 M0,6.5 H18" stroke="#C8102E" stroke-width="2.2"/></svg> English Sub <span id="stab-en-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <button class="sub-tab" id="stab-both" onclick="setSubTab('both',this)">&#127758; Both/All <span id="stab-both-cnt" style="font-size:.65rem;opacity:.7"></span></button>
+        <button class="sub-tab" id="stab-none" onclick="setSubTab('none',this)">&#128683; No Sub <span id="stab-none-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <button class="sub-tab" id="stab-scheduled" onclick="setSubTab('scheduled',this)">&#128339; Scheduled <span id="stab-scheduled-cnt" style="font-size:.65rem;opacity:.7"></span></button>
         <span class="mv-count-badge">Showing <span id="mvShowCount">-</span> movies</span>
       </div>
@@ -911,6 +914,7 @@ tr:hover td{background:rgba(240,180,41,.02);}
         <button class="toggle-opt" id="aSubTH" onclick="setSubType('th')">&#127481;&#127469; TH</button>
         <button class="toggle-opt" id="aSubEN" onclick="setSubType('en')">&#127468;&#127463; EN</button>
         <button class="toggle-opt" id="aSubBoth" onclick="setSubType('both')">&#127758; All</button>
+        <button class="toggle-opt" id="aSubNone" onclick="setSubType('none')">&#128683; No Sub</button>
       </div><input type="hidden" id="aSubtitleType" value="mm"></div>
       <div class="form-section"><div class="form-section-label">Actors / Actresses</div></div>
       <div class="f full"><label>Actors</label><div class="tags-wrap" id="aActorsWrap"><input class="tag-inp" id="aActorInp" placeholder="Actor name..."></div><input type="hidden" id="aActors"></div>
@@ -1379,6 +1383,8 @@ async function saveSocialLinks(lang){ const msg=document.getElementById('soc-'+l
 window.saveAdSlot=saveAdSlot;
 window.saveSocialLinks=saveSocialLinks;
 function ps(url){if(!url||url==='#')return FALLBACK;if(url.startsWith('http'))return PROXY+encodeURIComponent(url)+'&w=96&h=54&fit=cover&output=webp';return url;}
+const defaultSubTypeBadge=subTypeBadge;
+subTypeBadge=function(m){return m.subtitleType==='none'?'<span class="sb" style="background:rgba(148,163,184,.16);color:#cbd5e1">No Sub</span>':defaultSubTypeBadge(m);};
 function hasMM(m){return!!(m.mmTelegram&&m.mmTelegram!=='#'||m.mmStream&&m.mmStream!=='#'||m.mmDood&&m.mmDood!=='#'||m.mmMegaUp&&m.mmMegaUp!=='#'||m.mmUserDrive&&m.mmUserDrive!=='#');}
 function hasTH(m){return!!(m.thTelegram&&m.thTelegram!=='#'||m.thStream&&m.thStream!=='#'||m.thDood&&m.thDood!=='#'||m.thMegaUp&&m.thMegaUp!=='#'||m.thUserDrive&&m.thUserDrive!=='#');}
 function hasEN(m){return!!(m.enTelegram&&m.enTelegram!=='#'||m.enStream&&m.enStream!=='#'||m.enDood&&m.enDood!=='#'||m.enMegaUp&&m.enMegaUp!=='#'||m.enUserDrive&&m.enUserDrive!=='#');}
@@ -1445,7 +1451,7 @@ window.setTHStatus=s=>setToggle('thStatusPub','thStatusPrv','thStatus',s,'thStat
 window.setENStatus=s=>setToggle('enStatusPub','enStatusPrv','enStatus',s,'enStatusSch','enScheduleWrap');
 window.setStatus=s=>setToggle('statusPub','statusPrv','aStatus',s);
 window.setESt=function(lu,s){setToggle('e'+lu+'StatPub','e'+lu+'StatPrv','e'+lu+'Status',s,'e'+lu+'StatSch','e'+lu+'ScheduleWrap');};
-window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
+window.setSubType=function(s){document.getElementById('aSubtitleType').value=s;['aSubMM','aSubTH','aSubEN','aSubBoth','aSubNone'].forEach(id=>document.getElementById(id).className='toggle-opt');const map={mm:'aSubMM',th:'aSubTH',en:'aSubEN',both:'aSubBoth',none:'aSubNone'};if(map[s])document.getElementById(map[s]).className=`toggle-opt on-${s==='both'?'both':s}`;};
 
 let dashboardVersion='all';
 window.setDashboardVersion=function(version,btn){
@@ -1516,9 +1522,9 @@ function scheduleInputValue(value){
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 function updateTabCounts(){
-  const counts={all:0,mm:0,th:0,en:0,both:0,scheduled:0};
+  const counts={all:0,mm:0,th:0,en:0,both:0,none:0,scheduled:0};
   movies.forEach(m=>{if(isScheduledMovie(m)){counts.scheduled++;return;}counts.all++;const st=m.subtitleType||'';if(counts[st]!==undefined)counts[st]++;});
-  ['all','mm','th','en','both','scheduled'].forEach(k=>{
+  ['all','mm','th','en','both','none','scheduled'].forEach(k=>{
     const el=document.getElementById('stab-'+k+'-cnt');
     if(el)el.textContent='('+counts[k]+')';
   });
@@ -1712,7 +1718,7 @@ window.openAdd=()=>{document.getElementById('moAdd').classList.add('open');initC
 window.doAdd=async function(){
   const title=document.getElementById('aTitle').value.trim();if(!title){showMsg('addMsg','Title ထည့်ပါ','err');return;}
   const cats=getCats('aGenre'),st=document.getElementById('aSubtitleType').value||'mm';
-  await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,accessTier:document.getElementById('aAccessTier').value,subtitleType:st,contentType:document.getElementById('aContentType').value||'general',actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmDood:v('aMmDood'),mmMegaUp:v('aMmMegaUp'),mmUserDrive:v('aMmUserDrive'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thDood:v('aThDood'),thMegaUp:v('aThMegaUp'),thUserDrive:v('aThUserDrive'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enDood:v('aEnDood'),enMegaUp:v('aEnMegaUp'),enUserDrive:v('aEnUserDrive'),descMM:document.getElementById('aDescMM').value.trim()||'Subtitle included.',descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
+  await saveMovieToDb({title,year:parseInt(document.getElementById('aYear').value)||new Date().getFullYear(),genre:cats[0]||CATS[0],genres:cats,quality:document.getElementById('aQuality').value,poster:document.getElementById('aPoster').value.trim()||'',status:document.getElementById('aStatus').value,accessTier:document.getElementById('aAccessTier').value,subtitleType:st,contentType:document.getElementById('aContentType').value||'general',actors:getTags('aActors'),actresses:getTags('aActresses'),mmTelegram:v('aMmTelegram'),mmStream:v('aMmStream'),mmDood:v('aMmDood'),mmMegaUp:v('aMmMegaUp'),mmUserDrive:v('aMmUserDrive'),thTelegram:v('aThTelegram'),thStream:v('aThStream'),thDood:v('aThDood'),thMegaUp:v('aThMegaUp'),thUserDrive:v('aThUserDrive'),enTelegram:v('aEnTelegram'),enStream:v('aEnStream'),enDood:v('aEnDood'),enMegaUp:v('aEnMegaUp'),enUserDrive:v('aEnUserDrive'),descMM:document.getElementById('aDescMM').value.trim()||(st==='none'?'No subtitle included.':'Subtitle included.'),descTH:document.getElementById('aDescTH').value.trim()||''},'addMsg','addBtn','+ Save Movie',()=>{
     clearForm(['aTitle','aYear','aPostedDate','aPoster','aMmTelegram','aMmStream','aMmDood','aMmMegaUp','aMmUserDrive','aThTelegram','aThStream','aThDood','aThMegaUp','aThUserDrive','aEnTelegram','aEnStream','aEnDood','aEnMegaUp','aEnUserDrive','aDescMM','aDescTH']);
     initCatGrid('aCatGrid','aGenre',[]);initTagGrid('aTagGrid','aTags',[]);initTagsFixed('aActorsWrap','aActorInp','aActors',[]);initTagsFixed('aActressesWrap','aActressInp','aActresses',[]);setStatus('public');setSubType('mm');
     setTimeout(()=>moClose('moAdd'),2000);
